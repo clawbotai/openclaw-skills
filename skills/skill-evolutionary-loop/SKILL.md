@@ -355,6 +355,7 @@ Reflection runs automatically when:
 | A gate fails >3 times | Failure reflection (deeper analysis) |
 | The user corrects the agent | Correction reflection (highest priority) |
 | Session ends or context compacts | Boundary reflection |
+| Runtime monitor exports repair tickets | Monitor-driven reflection (automated) |
 
 ### The Reflection Process
 
@@ -367,6 +368,7 @@ Collect the raw material for analysis:
 - PROGRESS.md (what actually happened)
 - Any user corrections or feedback during the session
 - Gate failure logs (what went wrong mechanically)
+- **`memory/repair-tickets.md`** (from skill-runtime-monitor, if it exists)
 
 **Step 2: Signal Detection**
 
@@ -487,6 +489,66 @@ Format additions to SOUL.md as behavioral rules:
 
 ---
 
+## Integration: Skill Runtime Monitor → Phase 3
+
+The `skill-runtime-monitor` skill continuously observes all skill executions and generates RepairTickets when deterministic errors accumulate. These tickets are a high-value input to Phase 3 reflection.
+
+### Monitor-Driven Reflection
+
+When `memory/repair-tickets.md` exists and contains tickets, Phase 3 should process them alongside normal reflection:
+
+1. **Read** `memory/repair-tickets.md`
+2. **For each ticket**, treat it as a HIGH confidence signal:
+   - The error is verified (it happened in production, with real inputs)
+   - The input that triggers it is captured
+   - The source code is attached (if locatable)
+   - A fix suggestion is provided
+3. **Generate fixes** using the same Phase 2 build loop:
+   - Create a branch or working copy
+   - Apply the suggested fix
+   - Run backpressure gates to validate
+   - If gates pass → commit the fix
+   - If gates fail → log as BLOCKED, escalate
+4. **Record lessons** from each fix in `memory/lessons.md`
+5. **Clear processed tickets** from `memory/repair-tickets.md`
+
+### Ticket Priority Handling
+
+| Priority | Evolutionary Loop Action |
+|----------|--------------------------|
+| CRITICAL | Immediate fix cycle — skill is quarantined and unusable |
+| HIGH | Fix in next available iteration |
+| MEDIUM | Queue for batch processing |
+| LOW | Log only, fix if convenient |
+
+### Generating Tickets from the Monitor
+
+```python
+# In your agent or heartbeat check:
+from skills.skill_runtime_monitor.scripts.monitor import SkillMonitor
+
+monitor = SkillMonitor(workspace="/path/to/workspace")
+payload = monitor.export_evolution_payload()
+
+if "No repair tickets pending" not in payload:
+    Path("memory/repair-tickets.md").write_text(payload)
+    # Trigger evolutionary loop Phase 3
+```
+
+### Closing the Loop
+
+After the Evolutionary Loop fixes a skill:
+
+1. The fix is committed and deployed
+2. The runtime monitor observes the skill succeeding on previously-failing inputs
+3. The error count stops incrementing
+4. The circuit breaker resets (OPEN → HALF_OPEN → CLOSED)
+5. The repair ticket is no longer generated
+
+This creates a **self-healing cycle**: Monitor detects → Loop fixes → Monitor verifies.
+
+---
+
 ## Sub-Agent Orchestration
 
 For complex tasks, the evolutionary loop can spawn sub-agents for Phase 2 iterations:
@@ -571,3 +633,5 @@ When the user invokes the evolutionary loop:
 | `memory/lessons.md` | Running log of all lessons learned | 3 |
 | `SOUL.md` | Permanent agent identity & behaviors | 3 |
 | `TOOLS.md` | Tool-specific notes & preferences | 3 |
+| `memory/repair-tickets.md` | Repair tickets from skill-runtime-monitor | 3 |
+| `memory/skill-errors.json` | Persistent error ledger (runtime monitor) | — |

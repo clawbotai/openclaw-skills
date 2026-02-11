@@ -65,6 +65,7 @@ INPUT FILES TO READ:
 - IMPLEMENTATION_PLAN.md (the task breakdown)
 - The original user request (from conversation history)
 - Any user corrections or feedback during the session
+- memory/repair-tickets.md (from skill-runtime-monitor, if exists)
 
 PROCESS:
 
@@ -81,6 +82,7 @@ PROCESS:
    - User said "never", "always", "wrong", "stop", "the rule is"
    - Same gate failed 3+ times (systemic issue)
    - A workaround was needed for documented behavior
+   - Runtime monitor repair ticket (verified failure with reproduction input)
 
    MEDIUM CONFIDENCE (propose to user):
    - User approved a pattern ("perfect", "exactly right")
@@ -165,6 +167,43 @@ CLASSIFY THE FAILURE:
 
 OUTPUT: Diagnosis + lesson + proposed fix.
 Then return to Phase 2 with the fix applied.
+```
+
+---
+
+## Monitor-Driven Reflection Prompt (Triggered by repair-tickets.md)
+
+```
+You are processing REPAIR TICKETS from the Skill Runtime Monitor.
+
+These are high-confidence, verified failures. Each ticket includes:
+- The exact error and traceback
+- The input arguments that reproduce the failure
+- How many times it has occurred
+- The source code of the failing skill (if available)
+- A suggested fix approach
+
+FOR EACH TICKET (process in priority order: CRITICAL → HIGH → MEDIUM → LOW):
+
+1. READ the ticket completely. Understand the error.
+2. LOCATE the skill source code (path is in the ticket, or search skills/).
+3. ANALYZE: What code path causes this error with the given input?
+4. GENERATE a fix:
+   - Must handle the specific failing input
+   - Must not break other functionality
+   - Must include a test case that reproduces and validates
+5. VALIDATE: Run backpressure gates (test/lint/typecheck) on the fix.
+6. If gates PASS: Commit the fix, log the lesson.
+7. If gates FAIL after 3 retries: Log as BLOCKED, move to next ticket.
+
+AFTER PROCESSING ALL TICKETS:
+- Clear processed tickets from memory/repair-tickets.md
+- Append lessons to memory/lessons.md
+- If a pattern emerges (e.g., "3 skills all failed on null input"),
+  encode that pattern in SOUL.md as a preventive rule
+
+IMPORTANT: Repair tickets are production evidence, not theory.
+The error DID happen. The input DID cause it. Trust the data.
 ```
 
 ---
