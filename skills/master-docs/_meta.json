@@ -1,0 +1,7 @@
+{
+  "slug": "master-docs",
+  "version": "2.0.0",
+  "name": "Master Documentation",
+  "description": "Documentation engine with Diátaxis scaffolding, GitHub Gold Standard templates, strict quality scoring, and active documentation generation. Scaffolds README, CONTRIBUTING, CHANGELOG, and docs/ with tutorials, how-to, reference, and explanations.",
+  "tags": ["documentation", "diataxis", "readme", "changelog", "contributing", "scaffold", "quality-audit", "dx", "developer-experience"]
+}
