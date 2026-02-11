@@ -1,0 +1,12 @@
+{
+  "slug": "master-docs",
+  "version": "1.0.0",
+  "name": "Master Documentation",
+  "description": "Auto-generates layperson-friendly inline documentation, CLI help systems, reference docs, and documentation quality audits for any codebase.",
+  "tags": ["documentation", "inline-docs", "help-system", "cli", "quality-audit", "reference", "jsdoc", "docstrings"],
+  "scripts": {
+    "document": "scripts/document.sh",
+    "inject-help": "scripts/inject-help.sh",
+    "score-docs": "scripts/score-docs.sh"
+  }
+}

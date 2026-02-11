@@ -1,0 +1,11 @@
+{
+  "slug": "project-structure",
+  "version": "1.0.0",
+  "name": "Project Structure Standards",
+  "description": "Defines, organizes, and enforces file/folder structure standards for all skills and projects. Includes validation scripts, scaffolding, and templates.",
+  "tags": ["structure", "standards", "scaffolding", "validation", "conventions"],
+  "scripts": {
+    "validate": "scripts/validate-structure.sh",
+    "scaffold": "scripts/scaffold.sh"
+  }
+}

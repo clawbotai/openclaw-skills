@@ -1,0 +1,7 @@
+{
+  "slug": "master-qa",
+  "version": "1.0.0",
+  "name": "Master QA",
+  "description": "Comprehensive QA engineering and leadership — test strategy, automation (Playwright/Cypress/Vitest/pytest), contract/mutation/visual/accessibility testing, CI orchestration, test observability, and AI-assisted testing.",
+  "tags": ["qa", "testing", "automation", "playwright", "ci"]
+}
