@@ -309,6 +309,42 @@ def _call_openai(
 #  PHASE 1 — Research
 # =========================================================================
 
+def _extract_constraints(prompt: str) -> str:
+    """Extract explicit constraints from the user prompt.
+
+    Scans for keywords like 'stdlib-only', 'no dependencies', 'Python 3.9',
+    etc. and returns a constraint block to inject into system prompts.
+
+    Args:
+        prompt: The user's original prompt.
+
+    Returns:
+        A string block of constraints, or empty string if none found.
+    """
+    constraints = []  # type: List[str]
+    prompt_lower = prompt.lower()
+
+    # Dependency constraints
+    if "stdlib-only" in prompt_lower or "stdlib only" in prompt_lower or "no dependencies" in prompt_lower:
+        constraints.append("MUST use Python standard library ONLY — no pip packages, no external dependencies.")
+    if "no pip" in prompt_lower or "no external" in prompt_lower:
+        constraints.append("No external pip packages allowed.")
+
+    # Python version constraints
+    for ver in ["3.9", "3.10", "3.11", "3.12", "3.13"]:
+        if f"python {ver}" in prompt_lower or f"python{ver}" in prompt_lower:
+            constraints.append(f"Must be compatible with Python {ver}+.")
+            break
+
+    # Output format constraints
+    if "json output" in prompt_lower or "structured json" in prompt_lower:
+        constraints.append("All output must be structured JSON to stdout.")
+
+    if not constraints:
+        return ""
+    return "\n\n**HARD CONSTRAINTS (non-negotiable):**\n" + "\n".join(f"• {c}" for c in constraints)
+
+
 def phase_research(
     client: OpenAI,
     model: str,
@@ -337,14 +373,20 @@ def phase_research(
     # --- Web search via DuckDuckGo -----------------------------------------
     search_results_text = ""
     try:
-        from duckduckgo_search import DDGS
+        # Try the new package name first, fall back to legacy
+        try:
+            from ddgs import DDGS
+        except ImportError:
+            from duckduckgo_search import DDGS
 
         with Status("[cyan]Searching the web…[/cyan]", console=console, spinner="dots"):
             ddgs = DDGS()
-            # Build two queries: one broad, one Python-specific
+            # Extract a short search query from the prompt (first 80 chars
+            # or first sentence) — full prompts are too long for search engines
+            short_query = prompt.split(".")[0][:120].strip()
             queries = [
-                prompt,
-                f"Python libraries for {prompt}",
+                short_query,
+                f"Python libraries {short_query}",
             ]
             all_results: List[Dict[str, Any]] = []
             for query in queries:
@@ -375,8 +417,10 @@ def phase_research(
         search_results_text = f"(web search error: {exc})"
 
     # --- LLM synthesis -----------------------------------------------------
+    constraints_block = _extract_constraints(prompt)
     user_message = (
         f"## User's Skill Idea\n\n{prompt}\n\n"
+        f"{constraints_block}\n\n"
         f"## Web Search Results\n\n{search_results_text}\n\n"
         "Produce a structured research report covering libraries, patterns, "
         "risks, and recommendations for building this as an OpenClaw skill."
@@ -396,8 +440,7 @@ def phase_research(
     # Display summary
     console.print(f"  [green]✓[/green] Research complete — {len(report.libraries)} libraries, "
                   f"{len(report.patterns)} patterns, {len(report.risks)} risks identified")
-    if verbose:
-        console.print(Panel(report.summary, title="Research Summary", border_style="dim"))
+    console.print(Panel(report.summary, title="Research Summary", border_style="dim"))
 
     return report
 
@@ -447,12 +490,14 @@ def phase_architecture(
         + "\n".join(f"- {r}" for r in research.recommendations)
     )
 
+    constraints_block = _extract_constraints(prompt)
     user_message = (
         f"## Original Prompt\n\n{prompt}\n\n"
+        f"{constraints_block}\n\n"
         f"{research_block}\n\n"
         "Design the complete OpenClaw skill. Choose the best architecture type, "
-        "produce a full SKILL.md (with YAML frontmatter containing `name` and "
-        "`description`), and list all script and reference files needed."
+        "produce a full SKILL.md (with YAML frontmatter containing ONLY `name` and "
+        "`description` — no other frontmatter keys), and list all script and reference files needed."
     )
 
     with Status("[magenta]Designing architecture…[/magenta]", console=console, spinner="dots"):
@@ -494,11 +539,13 @@ def _scaffold_skill(skill_name: str, output_path: Path) -> Path:
     
     if INIT_SKILL_PATH.exists():
         # Use the official scaffold tool
+        # CLI: init_skill.py <skill-name> --path <parent-dir> --resources scripts,references
         cmd = [
             sys.executable,
             str(INIT_SKILL_PATH),
-            "--name", skill_name,
-            "--output", str(output_path),
+            skill_name,
+            "--path", str(output_path),
+            "--resources", "scripts,references",
         ]
         try:
             result = subprocess.run(
@@ -575,12 +622,14 @@ def phase_implementation(
 
     for i, spec in enumerate(plan.script_files, 1):
         file_label = f"[{i}/{len(plan.script_files)}] {spec.filename}"
+        constraints_block = _extract_constraints(prompt)
         with Status(f"[green]Generating {file_label}…[/green]", console=console, spinner="dots"):
             user_message = (
                 f"## Skill Context\n\n"
                 f"Skill name: {plan.skill_name}\n"
                 f"Architecture: {plan.architecture_type}\n"
                 f"User prompt: {prompt}\n\n"
+                f"{constraints_block}\n\n"
                 f"## File Specification\n\n"
                 f"Filename: {spec.filename}\n"
                 f"Description: {spec.description}\n"
@@ -611,17 +660,44 @@ def phase_implementation(
         console.print(f"  [green]✓[/green] {file_label} ({len(generated.code_content)} chars, "
                       f"{len(generated.dependencies)} deps)")
 
-    # --- Step 4: generate reference files ----------------------------------
+    # --- Step 4: generate reference files via LLM --------------------------
     references_dir = skill_dir / "references"
     references_dir.mkdir(exist_ok=True)
 
     for i, ref in enumerate(plan.reference_files, 1):
-        ref_path = references_dir / ref.filename
-        # Reference files are documentation — create with description as content.
-        # For .md files we generate a structured stub.
-        content = f"# {ref.filename}\n\n{ref.description}\n"
-        ref_path.write_text(content, encoding="utf-8")
-        console.print(f"  [green]✓[/green] Reference: {ref.filename}")
+        ref_label = f"[{i}/{len(plan.reference_files)}] {ref.filename}"
+        with Status(f"[green]Generating reference {ref_label}…[/green]", console=console, spinner="dots"):
+            ref_message = (
+                f"## Skill Context\n\n"
+                f"Skill name: {plan.skill_name}\n"
+                f"User prompt: {prompt}\n\n"
+                f"## Reference File Specification\n\n"
+                f"Filename: {ref.filename}\n"
+                f"Description: {ref.description}\n\n"
+                f"Write a comprehensive markdown reference document (200-500 lines) "
+                f"covering this topic in detail. Include practical examples, "
+                f"diagrams where helpful (as ASCII/text), and actionable guidance. "
+                f"This will be loaded into an AI agent's context when needed."
+            )
+            try:
+                gen_ref: GeneratedCode = _call_openai(
+                    client=client,
+                    model=model,
+                    system_prompt="You are a technical writer creating detailed reference documentation for an OpenClaw skill. Write comprehensive, practical markdown content.",
+                    user_message=ref_message,
+                    response_model=GeneratedCode,
+                    max_retries=max_retries,
+                    verbose=verbose,
+                )
+                ref_path = references_dir / ref.filename
+                ref_path.write_text(gen_ref.code_content, encoding="utf-8")
+                console.print(f"  [green]✓[/green] Reference: {ref.filename} ({len(gen_ref.code_content)} chars)")
+            except RuntimeError as exc:
+                # Fallback to stub if LLM call fails
+                ref_path = references_dir / ref.filename
+                content = f"# {ref.filename}\n\n{ref.description}\n"
+                ref_path.write_text(content, encoding="utf-8")
+                console.print(f"  [yellow]⚠[/yellow] Reference: {ref.filename} (stub — LLM failed: {exc})")
 
     # --- Step 5: aggregate requirements.txt --------------------------------
     # Deduplicate while preserving order
