@@ -154,8 +154,8 @@ Audits a project's documentation health and outputs a score (0–100):
 Full inline + reference documentation for a skill directory:
 
 ```bash
-bash skills/master-docs/scripts/document.sh ./skills/my-skill inline
-bash skills/master-docs/scripts/document.sh ./skills/my-skill reference
+bash skills/docs-engine/scripts/document.sh ./skills/my-skill inline
+bash skills/docs-engine/scripts/document.sh ./skills/my-skill reference
 ```
 
 ### "Document this project"
@@ -163,9 +163,9 @@ bash skills/master-docs/scripts/document.sh ./skills/my-skill reference
 Full project documentation (overview + inline + reference):
 
 ```bash
-bash skills/master-docs/scripts/document.sh ./my-project overview
-bash skills/master-docs/scripts/document.sh ./my-project inline
-bash skills/master-docs/scripts/document.sh ./my-project reference
+bash skills/docs-engine/scripts/document.sh ./my-project overview
+bash skills/docs-engine/scripts/document.sh ./my-project inline
+bash skills/docs-engine/scripts/document.sh ./my-project reference
 ```
 
 ### "Add help to scripts"
@@ -173,9 +173,9 @@ bash skills/master-docs/scripts/document.sh ./my-project reference
 Inject `--help` into all shell scripts:
 
 ```bash
-bash skills/master-docs/scripts/inject-help.sh ./scripts/
+bash skills/docs-engine/scripts/inject-help.sh ./scripts/
 # Or a single file:
-bash skills/master-docs/scripts/inject-help.sh ./scripts/deploy.sh
+bash skills/docs-engine/scripts/inject-help.sh ./scripts/deploy.sh
 ```
 
 ### "Score documentation"
@@ -183,7 +183,7 @@ bash skills/master-docs/scripts/inject-help.sh ./scripts/deploy.sh
 Quality audit with improvement suggestions:
 
 ```bash
-bash skills/master-docs/scripts/score-docs.sh ./my-project
+bash skills/docs-engine/scripts/score-docs.sh ./my-project
 ```
 
 ### "Generate README"

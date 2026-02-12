@@ -42,7 +42,7 @@ EXAMPLES
     score-docs.sh ./my-project
         Full documentation audit with suggestions.
 
-    score-docs.sh -q ./skills/auth
+    score-docs.sh -q ./skills/auth-patterns
         Just the score number, useful for scripting.
 
 EXIT STATUS

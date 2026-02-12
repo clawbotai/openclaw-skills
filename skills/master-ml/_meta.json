@@ -1,7 +1,0 @@
-{
-  "slug": "master-ml",
-  "version": "1.0.0",
-  "name": "Master ML",
-  "description": "Complete ML/MLOps engineer — model development, experiment tracking, feature engineering, ML pipelines, model serving, monitoring, responsible AI, LLMOps, and production ML infrastructure.",
-  "tags": ["ml", "mlops", "deep-learning", "llmops", "model-serving"]
-}

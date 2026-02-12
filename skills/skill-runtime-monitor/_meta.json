@@ -1,7 +1,0 @@
-{
-  "slug": "skill-runtime-monitor",
-  "version": "1.0.0",
-  "name": "Skill Runtime Monitor",
-  "description": "AIOps observability layer for skill execution. Intercepts failures, classifies errors (transient vs deterministic), maintains a deduplicated error ledger with circuit breaker logic, surfaces reliability analytics, and exports LLM-optimized repair tickets for the Evolutionary Loop.",
-  "tags": ["aiops", "observability", "monitoring", "error-tracking", "circuit-breaker", "self-healing", "autonomous"]
-}

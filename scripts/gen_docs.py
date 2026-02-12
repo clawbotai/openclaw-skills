@@ -188,7 +188,7 @@ cat SKILL.md
 2. Never remove existing SKILL.md content — only improve
 3. Test all script changes locally
 4. Update CHANGELOG.md with your changes
-5. Verify docs quality: `bash skills/master-docs/scripts/score-docs.sh skills/{name}`
+5. Verify docs quality: `bash skills/docs-engine/scripts/score-docs.sh skills/{name}`
 
 ## Commits
 

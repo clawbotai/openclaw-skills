@@ -1,7 +1,0 @@
-{
-  "slug": "master-payments",
-  "version": "1.0.0",
-  "name": "Master Payments",
-  "description": "Complete payment processing, billing automation, and revenue management — Stripe, subscriptions, usage-based billing, dunning, invoicing, tax automation, PCI DSS v4.0, fraud prevention, and revenue recognition (ASC 606).",
-  "tags": ["payments", "stripe", "billing", "subscriptions", "fintech"]
-}

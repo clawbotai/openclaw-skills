@@ -1,5 +1,5 @@
 {
-  "slug": "master-docs",
+  "slug": "docs-engine",
   "version": "1.0.0",
   "name": "Master Documentation",
   "description": "Auto-generates layperson-friendly inline documentation, CLI help systems, reference docs, and documentation quality audits for any codebase.",

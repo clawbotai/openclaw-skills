@@ -37,7 +37,7 @@ sveltekit-webapp/
 2. Never remove existing SKILL.md content
 3. Test all script changes locally
 4. Update CHANGELOG.md with your changes
-5. Verify docs: `bash skills/master-docs/scripts/score-docs.sh skills/sveltekit-webapp`
+5. Verify docs: `bash skills/docs-engine/scripts/score-docs.sh skills/sveltekit-webapp`
 
 ## Commits
 

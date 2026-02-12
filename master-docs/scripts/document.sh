@@ -60,7 +60,7 @@ EXAMPLES
     document.sh ./my-project score
         Run a documentation quality audit on my-project.
 
-    document.sh ./skills/auth inline
+    document.sh ./skills/auth-patterns inline
         Analyze the auth skill for inline documentation coverage.
 
     document.sh -o docs/reference.md ./src reference
