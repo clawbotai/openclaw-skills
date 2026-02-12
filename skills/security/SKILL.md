@@ -993,3 +993,55 @@ jobs:
 | **Compliance** | Vanta, Drata, AWS Config |
 | **Network** | nmap, sslscan, testssl.sh |
 | **Auth** | bcrypt, argon2, jose (JWT), passport.js, speakeasy (TOTP) |
+
+---
+
+## 12. Authentication Patterns Quick Reference
+
+### Session vs Token
+- **Server sessions**: simpler, instant revocation, requires session store — good for traditional web apps
+- **Stateless tokens (JWT)**: scalable, no shared state — good for APIs, microservices, mobile
+- **Hybrid**: session for web, tokens for API — often the practical choice
+- Session cookies: `httpOnly` + `Secure` + `SameSite=Lax` for CSRF protection
+
+### Password Handling
+- Hash with **bcrypt** (cost 10-12), **Argon2id**, or **scrypt** — never MD5, SHA1, or plain SHA256
+- Never store plaintext, encrypted passwords, or reversible hashes
+- Timing-safe comparison for verification — prevents timing attacks
+
+### MFA Strategy
+- **TOTP** (authenticator apps): good balance of security and usability
+- **SMS**: weak (SIM swapping) — avoid for high-security apps
+- **WebAuthn/Passkeys**: strongest, phishing-resistant — offer when possible
+- **Recovery codes**: generate on MFA setup, store hashed, single-use
+
+### Passwordless Options
+- **Magic links**: email link with short-lived token
+- **WebAuthn**: biometric or security key — best UX when supported
+- **Social login**: viable for consumer apps, reduces friction
+
+### When to Use What
+| Context | Pattern |
+|---------|---------|
+| Internal tools | SSO with company IdP (Okta, Azure AD, Google Workspace) |
+| Consumer apps | Social login + email/password fallback; passwordless for modern UX |
+| B2B SaaS | SAML/OIDC for enterprise clients |
+| API-only | API keys for service accounts, OAuth for user-delegated access |
+| High security | Require MFA, prefer WebAuthn, step-up auth for sensitive ops |
+
+### Session Management
+- Regenerate session ID on login (prevent session fixation)
+- Absolute timeout (24h-7d) + idle timeout (30min-2h)
+- Show active sessions to users — allow remote logout
+- Invalidate all sessions on password change
+
+### Account Recovery
+- Password reset via email link — token expires in 1h max, single-use
+- Never send passwords in email
+- Notify user of password changes via alternative channel
+
+### Login Security
+- Rate limit by IP and by account — 3-5 attempts then delay or CAPTCHA
+- Progressive delays over hard lockout (prevents denial of service)
+- Don't reveal if email exists — "Invalid credentials" for both cases
+- Log all auth events with IP, user agent, timestamp

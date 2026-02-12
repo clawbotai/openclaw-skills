@@ -1,0 +1,9 @@
+{
+  "name": "web-builder",
+  "slug": "web-builder",
+  "version": "1.0.0",
+  "description": "Full web development lifecycle — scaffold SvelteKit PWAs, bundle single-file HTML apps, and deploy to GitHub Pages or Vercel. Use when building any web application, static site, or HTML artifact.",
+  "author": "clawbotai",
+  "tags": ["web", "svelte", "deployment", "bundling", "github-pages", "vercel"],
+  "os": ["linux", "darwin"]
+}

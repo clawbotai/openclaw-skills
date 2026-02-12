@@ -221,3 +221,80 @@ When generating IaC, build **one component at a time** to prevent context overlo
 | `latest` tags everywhere | Can't reproduce or rollback | Git SHA or semver tags |
 | Shared long-lived branches | Merge hell, stale code | Trunk-based dev or short-lived branches |
 | Secrets in `.env` files in git | Credential leaks | Vault, sealed secrets, CI secrets |
+
+---
+
+## 9. Production Readiness
+
+A meta-checklist that orchestrates all DevOps concerns into a single go/no-go assessment. Use before first deploy, major releases, quarterly reviews, or after incidents.
+
+### When to Run
+| Trigger | Context |
+|---------|---------|
+| Before first deploy | New service going to production |
+| Before major release | Significant feature or architecture change |
+| Quarterly review | Scheduled audit of existing services |
+| After incident | Post-incident hardening |
+| Dependency upgrade | Major framework or runtime change |
+| Team handoff | Transferring service ownership |
+
+### Production Readiness Checklist
+
+**Health & Lifecycle**
+- [ ] Health check endpoint (`/healthz`) returns dependency status
+- [ ] Readiness probe distinguishes "starting" from "ready"
+- [ ] Liveness probe detects deadlocks and unrecoverable states
+- [ ] Graceful shutdown drains in-flight requests
+- [ ] Startup probe allows slow initialization
+
+**Resilience**
+- [ ] Circuit breakers on all external service calls
+- [ ] Retry with exponential backoff + jitter on transient failures
+- [ ] Rate limiting per endpoint and per client
+- [ ] Timeouts on every outbound call (HTTP, DB, queue)
+- [ ] Bulkhead isolation for critical vs non-critical paths
+
+**Configuration & Secrets**
+- [ ] All config externalized (env vars, config service, feature flags)
+- [ ] No secrets in code, images, or env var defaults
+- [ ] Secrets from vault (AWS SM, HashiCorp Vault)
+- [ ] Config changes don't require redeployment
+
+**Data Safety**
+- [ ] Backup strategy defined and tested (RPO/RTO documented)
+- [ ] Restore verified in non-production
+- [ ] DB migrations backward-compatible and reversible
+- [ ] Data retention policies enforced
+
+**Operational Readiness**
+- [ ] Runbooks for top 5 failure scenarios
+- [ ] SLOs defined (availability, latency, error rate) with error budgets
+- [ ] On-call rotation staffed, escalation path documented
+- [ ] Dashboards show golden signals (latency, traffic, errors, saturation)
+- [ ] Alerting rules with appropriate thresholds and severity
+
+### Maturity Levels
+
+| Level | Name | Key Requirements |
+|-------|------|-----------------|
+| **L1** MVP | Health check, basic logging, error handling, manual deploy, unit tests |
+| **L2** Stable | Structured logging, metrics, graceful shutdown, CI/CD, runbooks |
+| **L3** Resilient | Distributed tracing, circuit breakers, auto-scaling, SLOs, on-call |
+| **L4** Optimized | Canary deploys, predictive alerting, error budgets, chaos testing |
+
+### Incident Response
+
+**Escalation Matrix**
+| Severity | Response | Escalation | Notify |
+|----------|----------|------------|--------|
+| SEV-1 (outage) | 15 min | 30 min | Exec + customers |
+| SEV-2 (degraded) | 30 min | 1 hour | Eng lead |
+| SEV-3 (minor) | 4 hours | Next biz day | Standup |
+| SEV-4 (cosmetic) | Next sprint | N/A | Backlog |
+
+### NEVER Do
+1. Skip health checks — every service needs them
+2. Store secrets in code or images
+3. Deploy without a rollback plan (< 5 min rollback or don't ship)
+4. Ignore error budget violations — freeze features, fix reliability
+5. Go to production without runbooks

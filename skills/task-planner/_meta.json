@@ -1,5 +1,5 @@
 {
-  "description": "OpenClaw skill for natural language planner workflows and automation.",
+  "description": "OpenClaw skill for natural language task/project management (Kanban) and Manus-style file-based planning workflows.",
   "ownerId": "kn71r0d0c780m06m88r15cap1d80vanx",
   "slug": "task-planner",
   "version": "0.1.0",

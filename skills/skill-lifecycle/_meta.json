@@ -1,0 +1,19 @@
+{
+  "name": "skill-lifecycle",
+  "version": "1.0.0",
+  "description": "Unified skill lifecycle management: Research\u2192Build\u2192Reflect evolutionary loop with AIOps runtime monitoring, error classification, circuit breakers, and self-healing repair tickets.",
+  "author": "clawbotai",
+  "tags": [
+    "autonomous-development",
+    "observability",
+    "evolutionary-loop",
+    "runtime-monitoring",
+    "self-healing",
+    "aiops"
+  ],
+  "os": [
+    "linux",
+    "darwin"
+  ],
+  "slug": "skill-lifecycle"
+}

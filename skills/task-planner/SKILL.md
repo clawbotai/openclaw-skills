@@ -3,9 +3,11 @@ slug: natural-language-planner
 displayName: Natural Language Planner
 name: natural-language-planner
 description: >
-  Natural language task and project management. Use when the user talks about
-  things they need to do, projects they're working on, tasks, deadlines, or
-  asks for a project overview / dashboard. Captures tasks from conversation,
+  Natural language task and project management with file-based planning support.
+  Use when the user talks about things they need to do, projects they're working
+  on, tasks, deadlines, or asks for a project overview / dashboard. Also use for
+  complex multi-step tasks requiring Manus-style file-based planning with
+  task_plan.md, findings.md, and progress.md. Captures tasks from conversation,
   organises them into projects, tracks progress, and serves a local Kanban
   dashboard.
 license: Complete terms in LICENSE.txt
@@ -927,3 +929,80 @@ The dashboard HTML/CSS/JS are in `templates/dashboard/`.
 
 All file paths use `pathlib` for cross-platform compatibility. The skill
 works on Windows, macOS, and Linux.
+
+---
+
+## File-Based Planning Mode
+
+For complex multi-step tasks (3+ steps, research projects, or anything requiring >5 tool calls), use Manus-style file-based planning alongside or instead of the Kanban workflow.
+
+### Core Concept
+
+```
+Context Window = RAM (volatile, limited)
+Filesystem = Disk (persistent, unlimited)
+
+→ Anything important gets written to disk.
+```
+
+### Planning Files
+
+Create these in your **project directory** (not the skill directory):
+
+| File | Purpose | When to Update |
+|------|---------|----------------|
+| `task_plan.md` | Phases, progress, decisions | After each phase |
+| `findings.md` | Research, discoveries | After ANY discovery |
+| `progress.md` | Session log, test results | Throughout session |
+
+### Quick Start
+
+1. **Create `task_plan.md`** — Define phases, goals, and success criteria
+2. **Create `findings.md`** — Store research and discoveries
+3. **Create `progress.md`** — Log session activity and test results
+4. **Re-read plan before decisions** — Refreshes goals in attention window
+5. **Update after each phase** — Mark complete, log errors
+
+### Critical Rules
+
+1. **Create Plan First** — Never start a complex task without `task_plan.md`.
+2. **The 2-Action Rule** — After every 2 view/browser/search operations, save key findings to files immediately.
+3. **Read Before Decide** — Before major decisions, read the plan file.
+4. **Update After Act** — Mark phases complete, log errors, note files modified.
+5. **Log ALL Errors** — Every error goes in the plan file.
+6. **Never Repeat Failures** — Track attempts, mutate the approach.
+
+### The 3-Strike Error Protocol
+
+```
+ATTEMPT 1: Diagnose & Fix → targeted fix
+ATTEMPT 2: Alternative Approach → different method/tool
+ATTEMPT 3: Broader Rethink → question assumptions, search for solutions
+AFTER 3 FAILURES: Escalate to User
+```
+
+### Session Recovery
+
+Check for previous session context before starting work:
+
+```bash
+python3 scripts/session-catchup.py "$(pwd)"
+```
+
+If catchup shows unsynced context: run `git diff --stat`, read planning files, update, then proceed.
+
+### Helper Scripts
+
+- `scripts/init-session.sh` — Initialize all planning files from templates
+- `scripts/check-complete.sh` — Verify all phases are complete
+- `scripts/session-catchup.py` — Recover context from a previous session
+
+### When to Use File-Based Planning vs Kanban
+
+| Scenario | Use |
+|----------|-----|
+| Ongoing tasks, deadlines, project tracking | Kanban (main workflow) |
+| Complex multi-step implementation task | File-based planning |
+| Research project with many discoveries | File-based planning |
+| Quick one-off tasks | Kanban |
+| Both long-term tracking AND complex execution | Both together |
