@@ -1,140 +1,169 @@
+#!/usr/bin/env python3
+"""Cloudflare Pages project management.
+
+Usage:
+    python projects.py list
+    python projects.py create <name> [--production-branch main]
+    python projects.py delete <name>
+    python projects.py info <name>
+    python projects.py domains <name>
+    python projects.py add-domain <name> <domain>
+
+Requires: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID env vars.
+Python 3.9+ stdlib only.
+"""
 from __future__ import annotations
+
+import argparse
+import json
 import os
 import sys
-import json
-import logging
-import urllib.request
-import urllib.parse
-import urllib.error
-from typing import Optional
-import argparse
+from typing import Any, Dict, Optional
+from urllib import error, request
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-
-# Constants
-API_BASE_URL = "https://api.cloudflare.com/client/v4/accounts/"
-
-# Environment variables
-API_TOKEN = os.getenv('CLOUDFLARE_API_TOKEN')
-ACCOUNT_ID = os.getenv('CLOUDFLARE_ACCOUNT_ID')
+API_BASE = "https://api.cloudflare.com/client/v4"
 
 
-def request_cloudflare_api(endpoint: str, method: str = 'GET', data: Optional[dict] = None) -> Optional[dict]:
-    """
-    Make a request to the Cloudflare API.
+class ProjectError(Exception):
+    pass
 
-    Args:
-        endpoint: The API endpoint to be accessed.
-        method: HTTP method to be used for the request.
-        data: Data to send with the request (for POST, PUT, etc.).
 
-    Returns:
-        The JSON response as a dictionary if successful, or None if there was an error.
-    """
-    if API_TOKEN is None or ACCOUNT_ID is None:
-        logging.error("Environment variables CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set.")
-        return None
+def _get_credentials():
+    token = os.environ.get("CLOUDFLARE_API_TOKEN")
+    account = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
+    if not token or not account:
+        raise ProjectError(
+            "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set"
+        )
+    return token, account
 
-    url = f"{API_BASE_URL}{ACCOUNT_ID}{endpoint}"
+
+def _api(
+    endpoint: str,
+    method: str = "GET",
+    data: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    token, account_id = _get_credentials()
+    url = "%s/accounts/%s%s" % (API_BASE, account_id, endpoint)
     headers = {
-        'Authorization': f'Bearer {API_TOKEN}',
-        'Content-Type': 'application/json'
+        "Authorization": "Bearer %s" % token,
+        "Content-Type": "application/json",
     }
+    body = json.dumps(data).encode() if data else None
+    req = request.Request(url, data=body, headers=headers, method=method)
+    try:
+        with request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode())
+    except error.HTTPError as e:
+        err_body = e.read().decode() if e.fp else ""
+        raise ProjectError("HTTP %d: %s\n%s" % (e.code, e.reason, err_body))
+    except error.URLError as e:
+        raise ProjectError("URL error: %s" % e.reason)
 
-    if data:
-        data = json.dumps(data).encode('utf-8')
 
-    req = urllib.request.Request(url, data=data, headers=headers, method=method)
+def list_projects() -> list:
+    result = _api("/pages/projects")
+    return result.get("result", [])
+
+
+def create_project(name: str, production_branch: str = "main") -> Dict[str, Any]:
+    data = {
+        "name": name,
+        "production_branch": production_branch,
+    }
+    result = _api("/pages/projects", method="POST", data=data)
+    if not result.get("success"):
+        raise ProjectError("Create failed: %s" % json.dumps(result.get("errors", [])))
+    return result.get("result", {})
+
+
+def get_project(name: str) -> Dict[str, Any]:
+    result = _api("/pages/projects/%s" % name)
+    return result.get("result", {})
+
+
+def delete_project(name: str) -> bool:
+    _api("/pages/projects/%s" % name, method="DELETE")
+    return True
+
+
+def list_domains(project_name: str) -> list:
+    result = _api("/pages/projects/%s/domains" % project_name)
+    return result.get("result", [])
+
+
+def add_domain(project_name: str, domain: str) -> Dict[str, Any]:
+    result = _api(
+        "/pages/projects/%s/domains" % project_name,
+        method="POST",
+        data={"name": domain},
+    )
+    return result.get("result", {})
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Manage Cloudflare Pages projects")
+    sub = parser.add_subparsers(dest="command")
+
+    sub.add_parser("list", help="List all projects")
+
+    p_create = sub.add_parser("create", help="Create a project")
+    p_create.add_argument("name", help="Project name")
+    p_create.add_argument("--production-branch", default="main")
+
+    p_info = sub.add_parser("info", help="Get project details")
+    p_info.add_argument("name", help="Project name")
+
+    p_del = sub.add_parser("delete", help="Delete a project")
+    p_del.add_argument("name", help="Project name")
+
+    p_domains = sub.add_parser("domains", help="List custom domains")
+    p_domains.add_argument("name", help="Project name")
+
+    p_add = sub.add_parser("add-domain", help="Add custom domain")
+    p_add.add_argument("name", help="Project name")
+    p_add.add_argument("domain", help="Domain to add")
+
+    args = parser.parse_args()
 
     try:
-        with urllib.request.urlopen(req) as response:
-            result = json.load(response)
-            return result
-    except urllib.error.HTTPError as e:
-        logging.error(f"HTTP error occurred: {e.code} {e.reason}")
-    except urllib.error.URLError as e:
-        logging.error(f"URL error occurred: {e.reason}")
-    except Exception as e:
-        logging.error(f"Unexpected error: {str(e)}")
+        if args.command == "list":
+            projects = list_projects()
+            for p in projects:
+                print("%-30s %s" % (p.get("name", "?"), p.get("subdomain", "")))
+            if not projects:
+                print("No projects found.")
 
-    return None
+        elif args.command == "create":
+            proj = create_project(args.name, args.production_branch)
+            print(json.dumps(proj, indent=2))
 
+        elif args.command == "info":
+            proj = get_project(args.name)
+            print(json.dumps(proj, indent=2))
 
-def create_project(project_name: str, subdomain: str) -> None:
-    """
-    Create a new Cloudflare Pages project.
+        elif args.command == "delete":
+            delete_project(args.name)
+            print("Deleted: %s" % args.name)
 
-    Args:
-        project_name: The name of the project to create.
-        subdomain: The subdomain for the project.
-    """
-    data = {
-        'name': project_name,
-        'subdomain': subdomain
-    }
-    result = request_cloudflare_api("/pages/projects", method='POST', data=data)
-    if result:
-        print(json.dumps(result))
-    else:
-        logging.error("Failed to create the project.")
+        elif args.command == "domains":
+            domains = list_domains(args.name)
+            for d in domains:
+                print("%-40s %s" % (d.get("name", "?"), d.get("status", "")))
+            if not domains:
+                print("No custom domains.")
 
+        elif args.command == "add-domain":
+            result = add_domain(args.name, args.domain)
+            print(json.dumps(result, indent=2))
 
-def list_projects() -> None:
-    """
-    List all Cloudflare Pages projects for the account.
-    """
-    result = request_cloudflare_api("/pages/projects")
-    if result:
-        print(json.dumps(result))
-    else:
-        logging.error("Failed to list projects.")
+        else:
+            parser.print_help()
 
-
-def delete_project(project_id: str) -> None:
-    """
-    Delete a Cloudflare Pages project.
-
-    Args:
-        project_id: The ID of the project to be deleted.
-    """
-    result = request_cloudflare_api(f"/pages/projects/{project_id}", method='DELETE')
-    if result:
-        print(json.dumps(result))
-    else:
-        logging.error("Failed to delete the project.")
-
-
-def main(args: list[str]) -> None:
-    """
-    Main entry point for the script, handling command-line arguments.
-    """
-    parser = argparse.ArgumentParser(description="Manage Cloudflare Projects: create, list, delete.")
-    subparsers = parser.add_subparsers(dest='command')
-
-    # Sub-parser for create command
-    parser_create = subparsers.add_parser('create', help='Create a new project.')
-    parser_create.add_argument('project_name', help='The name of the project to create.')
-    parser_create.add_argument('subdomain', help='The subdomain for the project.')
-
-    # Sub-parser for list command
-    subparsers.add_parser('list', help='List all projects.')
-
-    # Sub-parser for delete command
-    parser_delete = subparsers.add_parser('delete', help='Delete the specified project.')
-    parser_delete.add_argument('project_id', help='The ID of the project to delete.')
-
-    parsed_args = parser.parse_args(args)
-
-    if parsed_args.command == 'create':
-        create_project(parsed_args.project_name, parsed_args.subdomain)
-    elif parsed_args.command == 'list':
-        list_projects()
-    elif parsed_args.command == 'delete':
-        delete_project(parsed_args.project_id)
-    else:
-        parser.print_help()
+    except ProjectError as e:
+        print(json.dumps({"success": False, "error": str(e)}))
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()

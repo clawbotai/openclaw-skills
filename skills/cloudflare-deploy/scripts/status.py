@@ -1,116 +1,128 @@
+#!/usr/bin/env python3
+"""Cloudflare Pages deployment status, logs, and rollback.
+
+Usage:
+    python status.py list <project_name>
+    python status.py info <project_name> <deployment_id>
+    python status.py logs <project_name> <deployment_id>
+    python status.py rollback <project_name> <deployment_id>
+
+Requires: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID env vars.
+Python 3.9+ stdlib only.
+"""
 from __future__ import annotations
-import os
-import json
-import urllib.request
-import urllib.error
-import sys
-import logging
-from typing import Optional
+
 import argparse
+import json
+import os
+import sys
+from typing import Any, Dict, Optional
+from urllib import error, request
 
-# Setting up logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
-
-API_BASE_URL = "https://api.cloudflare.com/client/v4"
+API_BASE = "https://api.cloudflare.com/client/v4"
 
 
-def get_auth_headers() -> dict[str, str]:
-    """
-    Retrieve authentication headers required for Cloudflare API requests.
+class StatusError(Exception):
+    pass
 
-    Returns:
-        dict[str, str]: Dictionary containing authorization headers.
-    Throws:
-        EnvironmentError: If necessary environment variables are not set.
-    """
-    api_token = os.getenv("CLOUDFLARE_API_TOKEN")
-    account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID")
 
-    if not api_token or not account_id:
-        raise EnvironmentError(
-            "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set as environment variables."
+def _api(endpoint: str, method: str = "GET") -> Dict[str, Any]:
+    token = os.environ.get("CLOUDFLARE_API_TOKEN")
+    account = os.environ.get("CLOUDFLARE_ACCOUNT_ID")
+    if not token or not account:
+        raise StatusError(
+            "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set"
         )
-
-    return {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
+    url = "%s/accounts/%s%s" % (API_BASE, account, endpoint)
+    headers = {
+        "Authorization": "Bearer %s" % token,
+        "Content-Type": "application/json",
     }
-
-
-def check_deployment_status(deployment_id: str) -> None:
-    """
-    Check the status of a specific deployment by its ID and output JSON with the status information.
-
-    Args:
-        deployment_id (str): The ID of the deployment to check.
-    """
-    url = f"{API_BASE_URL}/accounts/{os.getenv('CLOUDFLARE_ACCOUNT_ID')}/pages/deployments/{deployment_id}"
-
+    req = request.Request(url, headers=headers, method=method)
     try:
-        req = urllib.request.Request(url, headers=get_auth_headers())
-        with urllib.request.urlopen(req) as response:
-            data = json.load(response)
-            print(json.dumps(data, indent=2))  # Returns formatted JSON to stdout
-    except urllib.error.HTTPError as e:
-        logger.error(f"HTTP error occurred: {e.reason}")
-        print(json.dumps({"error": e.reason}, indent=2))
-    except urllib.error.URLError as e:
-        logger.error(f"URL error occurred: {e.reason}")
-        print(json.dumps({"error": e.reason}, indent=2))
-    except Exception as e:
-        logger.error(f"Unexpected error occurred: {str(e)}")
-        print(json.dumps({"error": str(e)}, indent=2))
+        with request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode())
+    except error.HTTPError as e:
+        body = e.read().decode() if e.fp else ""
+        raise StatusError("HTTP %d: %s\n%s" % (e.code, e.reason, body))
+    except error.URLError as e:
+        raise StatusError("URL error: %s" % e.reason)
 
 
-def rollback_deployment(deployment_id: str) -> None:
-    """
-    Rollback a deployment given its ID.
+def list_deployments(project: str) -> list:
+    result = _api("/pages/projects/%s/deployments" % project)
+    return result.get("result", [])
 
-    Args:
-        deployment_id (str): The ID of the deployment to rollback.
-    """
-    url = f"{API_BASE_URL}/accounts/{os.getenv('CLOUDFLARE_ACCOUNT_ID')}/pages/deployments/{deployment_id}/rollback"
 
-    try:
-        req = urllib.request.Request(url, headers=get_auth_headers(), method='POST')
-        with urllib.request.urlopen(req) as response:
-            data = json.load(response)
-            print(json.dumps(data, indent=2))  # Returns formatted JSON to stdout
-    except urllib.error.HTTPError as e:
-        logger.error(f"HTTP error occurred: {e.reason}")
-        print(json.dumps({"error": e.reason}, indent=2))
-    except urllib.error.URLError as e:
-        logger.error(f"URL error occurred: {e.reason}")
-        print(json.dumps({"error": e.reason}, indent=2))
-    except Exception as e:
-        logger.error(f"Unexpected error occurred: {str(e)}")
-        print(json.dumps({"error": str(e)}, indent=2))
+def get_deployment(project: str, deploy_id: str) -> Dict[str, Any]:
+    result = _api("/pages/projects/%s/deployments/%s" % (project, deploy_id))
+    return result.get("result", {})
+
+
+def get_logs(project: str, deploy_id: str) -> list:
+    result = _api("/pages/projects/%s/deployments/%s/history/logs" % (project, deploy_id))
+    return result.get("result", [])
+
+
+def rollback(project: str, deploy_id: str) -> Dict[str, Any]:
+    result = _api(
+        "/pages/projects/%s/deployments/%s/rollback" % (project, deploy_id),
+        method="POST",
+    )
+    if not result.get("success"):
+        raise StatusError("Rollback failed: %s" % json.dumps(result.get("errors", [])))
+    return result.get("result", {})
 
 
 def main() -> None:
-    """
-    Main function to handle command-line arguments and trigger the appropriate functions.
-    """
-    parser = argparse.ArgumentParser(description="Cloudflare Pages Deployment Status and Rollback")
-    subparsers = parser.add_subparsers(dest="command")
-    
-    # Sub-parser for checking status
-    status_parser = subparsers.add_parser("status", help="Check deployment status")
-    status_parser.add_argument("deployment_id", type=str, help="Deployment ID to check status for")
+    parser = argparse.ArgumentParser(description="CF Pages deployment status & rollback")
+    sub = parser.add_subparsers(dest="command")
 
-    # Sub-parser for rollback
-    rollback_parser = subparsers.add_parser("rollback", help="Rollback a deployment")
-    rollback_parser.add_argument("deployment_id", type=str, help="Deployment ID to be rolled back")
+    p_list = sub.add_parser("list", help="List deployments")
+    p_list.add_argument("project", help="Project name")
+
+    p_info = sub.add_parser("info", help="Deployment details")
+    p_info.add_argument("project", help="Project name")
+    p_info.add_argument("deployment_id", help="Deployment ID")
+
+    p_logs = sub.add_parser("logs", help="Deployment logs")
+    p_logs.add_argument("project", help="Project name")
+    p_logs.add_argument("deployment_id", help="Deployment ID")
+
+    p_rb = sub.add_parser("rollback", help="Rollback deployment")
+    p_rb.add_argument("project", help="Project name")
+    p_rb.add_argument("deployment_id", help="Deployment ID")
 
     args = parser.parse_args()
 
-    if args.command == "status":
-        check_deployment_status(args.deployment_id)
-    elif args.command == "rollback":
-        rollback_deployment(args.deployment_id)
-    else:
-        parser.print_help()
+    try:
+        if args.command == "list":
+            deps = list_deployments(args.project)
+            for d in deps:
+                status = d.get("latest_stage", {}).get("status", "?")
+                print("%-36s %-10s %s" % (d.get("id", "?"), status, d.get("url", "")))
+            if not deps:
+                print("No deployments found.")
+
+        elif args.command == "info":
+            dep = get_deployment(args.project, args.deployment_id)
+            print(json.dumps(dep, indent=2))
+
+        elif args.command == "logs":
+            logs = get_logs(args.project, args.deployment_id)
+            for entry in logs:
+                print(entry if isinstance(entry, str) else json.dumps(entry))
+
+        elif args.command == "rollback":
+            result = rollback(args.project, args.deployment_id)
+            print("Rolled back: %s" % result.get("id", "done"))
+
+        else:
+            parser.print_help()
+
+    except StatusError as e:
+        print(json.dumps({"success": False, "error": str(e)}))
+        sys.exit(1)
 
 
 if __name__ == "__main__":

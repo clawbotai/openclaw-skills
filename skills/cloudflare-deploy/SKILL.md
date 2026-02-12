@@ -3,52 +3,43 @@ name: cloudflare-deploy
 description: Deploy static websites and web apps to Cloudflare Pages using Python's standard library. Includes project management, deployment operations, rollback capabilities, and domain management.
 ---
 
-## Introduction
-
-The `cloudflare-deploy` skill facilitates deployment to Cloudflare Pages using the standard Python library. This skill allows users to manage projects, create new deployments, check the status, and perform rollbacks—all through Cloudflare's REST API.
-
-## Features
-- **Deploy directories to Cloudflare Pages**: Upload content as a tarball to deploy.
-- **Project Management**: Create, list, and delete Cloudflare projects effortlessly.
-- **Deployment Status and Logs**: Check ongoing deployment status and retrieve logs.
-- **Rollback Functionality**: Revert to previous successful deployments if needed.
-- **Domain and Environment Management**: Manage custom domains and environment variables for more personalized web app configurations.
-
 ## Prerequisites
+
 - Python 3.9+
-- Ensure the environment variables `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set for authentication with Cloudflare's API.
+- Environment variables: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
 
-## Usage
+## Scripts
 
-### Deploying a Directory
-Run `deploy.py` with the path to your deployment directory:
-```
-python deploy.py /path/to/your/directory
-```
+### `scripts/deploy.py` — Deploy a directory
 
-### Managing Projects
-- **Create a Project**: Run `projects.py create` with required project details.
-- **List Projects**: Run `projects.py list` to see all existing projects.
-- **Delete a Project**: Run `projects.py delete [project_id]`.
-
-### Checking Deployment Status
-Run `status.py` and pass the deployment ID:
-```
-python status.py status [deployment_id]
+```bash
+python scripts/deploy.py <project_name> <directory> [--branch main] [--json]
 ```
 
-### Rolling Back a Deployment
-Use `status.py rollback` to revert:
+Implements CF Pages Direct Upload: hashes files, deduplicates, uploads via multipart, creates deployment in one request.
+
+### `scripts/projects.py` — Project management
+
+```bash
+python scripts/projects.py list
+python scripts/projects.py create <name> [--production-branch main]
+python scripts/projects.py info <name>
+python scripts/projects.py delete <name>
+python scripts/projects.py domains <name>
+python scripts/projects.py add-domain <name> <domain>
 ```
-python status.py rollback [deployment_id]
+
+### `scripts/status.py` — Deployment status & rollback
+
+```bash
+python scripts/status.py list <project>
+python scripts/status.py info <project> <deployment_id>
+python scripts/status.py logs <project> <deployment_id>
+python scripts/status.py rollback <project> <deployment_id>
 ```
 
-### Debugging and Logs
-All scripts will output structured JSON to facilitate integration with logging systems or onward processing.
+## Security
 
-## Security Notes
-- Do not expose your `CLOUDFLARE_API_TOKEN` in logs or error messages.
-- Ensure environment variables are secured and not accessible to unauthorized systems.
-
-## Conclusion
-The `cloudflare-deploy` provides a convenient interface to manage deployments on Cloudflare, leveraging the power of Python's standard library for minimalistic and efficient operations.
+- Never log or print `CLOUDFLARE_API_TOKEN`
+- All scripts use exception-based error handling with `sys.exit()` only at CLI boundary
+- Structured JSON output on `--json` flag or errors
