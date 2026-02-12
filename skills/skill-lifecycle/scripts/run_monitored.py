@@ -88,6 +88,18 @@ def parse_args(argv: list) -> tuple:
     return skill_name, timeout, command_parts
 
 
+def _memory_log(text: str) -> None:
+    """Log to agent-memory if available (non-fatal)."""
+    try:
+        workspace = detect_workspace()
+        if str(workspace) not in sys.path:
+            sys.path.insert(0, str(workspace))
+        from lib.memory_client import remember
+        remember(text, memory_type="episodic")
+    except Exception:
+        pass  # Integration is optional
+
+
 def main():
     skill_name, timeout, command_parts = parse_args(sys.argv)
     command_str = " ".join(command_parts)
@@ -158,6 +170,8 @@ def main():
                 monitor._save_ledger()
             if VERBOSE:
                 print(f"[monitor] ❌ {skill_name} failed (exit {result.returncode})", file=sys.stderr)
+            # Integration: log failure to agent-memory
+            _memory_log(f"Skill {skill_name} failed (exit {result.returncode}): {error_message[:200]}")
 
         sys.exit(result.returncode)
 

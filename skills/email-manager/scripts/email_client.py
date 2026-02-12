@@ -44,6 +44,78 @@ logger = logging.getLogger("email-manager")
 
 
 # ---------------------------------------------------------------------------
+# Cross-skill integration (optional — gracefully degrades if unavailable)
+# ---------------------------------------------------------------------------
+
+def _try_import_integration():
+    """Attempt to import shared integration clients.
+
+    Returns (memory_client, guardrails_client) — either may be None.
+    """
+    _mem = None  # type: Any
+    _guard = None  # type: Any
+    try:
+        # Add workspace root to path for lib/ imports
+        workspace = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+        if workspace not in sys.path:
+            sys.path.insert(0, workspace)
+        from lib import memory_client as _mem
+    except ImportError:
+        pass
+    try:
+        from lib import guardrails_client as _guard
+    except ImportError:
+        pass
+    return _mem, _guard
+
+
+def _guardrails_check_send(to: str, subject: str) -> None:
+    """Check send_email action against guardrails before sending.
+
+    Raises EmailError if the action is denied. Silently passes if
+    guardrails is unavailable.
+    """
+    _, guard = _try_import_integration()
+    if guard is None:
+        return
+    try:
+        result = guard.check_action(
+            "send_email",
+            target=to,
+            context=f"Subject: {subject}",
+        )
+        if not result.get("allowed", True):
+            raise EmailError(
+                f"Guardrails blocked send to {to}: {result.get('reasons', [])}",
+                code="GUARDRAILS_DENIED",
+            )
+        if result.get("requires_confirmation", False):
+            logger.warning(
+                "Guardrails: send to %s is %s risk — %s",
+                to, result.get("tier_label", "?"), result.get("reasons", [])
+            )
+    except RuntimeError as exc:
+        logger.debug("Guardrails check unavailable: %s", exc)
+
+
+def _memory_log_email(action: str, to: str, subject: str, **extra: Any) -> None:
+    """Log an email action to agent-memory for future recall.
+
+    Silently no-ops if agent-memory is unavailable.
+    """
+    mem, _ = _try_import_integration()
+    if mem is None:
+        return
+    try:
+        text = f"Email {action}: to={to}, subject={subject}"
+        if extra:
+            text += ", " + ", ".join(f"{k}={v}" for k, v in extra.items())
+        mem.remember(text, memory_type="episodic")
+    except Exception as exc:
+        logger.debug("Memory log failed (non-fatal): %s", exc)
+
+
+# ---------------------------------------------------------------------------
 # Exceptions
 # ---------------------------------------------------------------------------
 
@@ -667,7 +739,10 @@ def _send_message(config: dict, msg: email_lib.mime.multipart.MIMEMultipart, to:
 
 
 def cmd_send(args: argparse.Namespace, config: dict) -> None:
-    """Send an email."""
+    """Send an email (with guardrails pre-check and memory logging)."""
+    # Integration: check guardrails before sending
+    _guardrails_check_send(args.to, args.subject)
+
     msg = _build_message(
         config,
         to=args.to,
@@ -677,6 +752,10 @@ def cmd_send(args: argparse.Namespace, config: dict) -> None:
         attachments=getattr(args, "attach", None),
     )
     _send_message(config, msg, args.to)
+
+    # Integration: log to memory
+    _memory_log_email("sent", args.to, args.subject)
+
     output_ok(f"Email sent to {args.to}", to=args.to, subject=args.subject, from_addr=config["default_from"])
 
 
@@ -910,6 +989,15 @@ def cmd_triage(args: argparse.Namespace, config: dict) -> None:
     summary = {"urgent": 0, "important": 0, "normal": 0, "low": 0}
     for t in triaged:
         summary[t["priority"]] = summary.get(t["priority"], 0) + 1
+
+    # Integration: remember urgent/important emails in agent-memory
+    for t in triaged:
+        if t["priority"] in ("urgent", "important"):
+            _memory_log_email(
+                f"received ({t['priority']})",
+                t["from"],
+                t["subject"],
+            )
 
     output({
         "status": "ok",
