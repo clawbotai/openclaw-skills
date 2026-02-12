@@ -396,8 +396,8 @@ def analyze_security_regex(source: str, filename: str = "") -> List[SecurityFlag
 # malicious commands) or supply-chain attacks via "prerequisite" instructions.
 MARKDOWN_SHELL_PATTERNS: List[Tuple[str, str, str]] = [
     # (regex, label, severity)
-    (r"curl\s+[^\s]+\s*\|\s*(?:ba)?sh", "Pipe to shell (curl|sh)", "critical"),
-    (r"wget\s+[^\s]+\s*[;&|]\s*(?:ba)?sh", "Pipe to shell (wget)", "critical"),
+    (r"curl\s+[^\s|]+(?:\s+[^\s|]+)*\s*\|\s*(?:ba)?sh", "Pipe to shell (curl|sh)", "critical"),
+    (r"wget\s+[^\s|]+(?:\s+[^\s|]+)*\s*[;&|]\s*(?:ba)?sh", "Pipe to shell (wget)", "critical"),
     (r"curl\s+-[sS]*o\s", "Silent download (curl -o)", "high"),
     (r"wget\s+-q", "Silent download (wget -q)", "high"),
     (r"chmod\s+\+x\s", "Make executable (chmod +x)", "high"),
@@ -994,8 +994,11 @@ def _score_compatibility(files: Dict[str, str]) -> DimensionScore:
 
     unique_imports = set(all_imports)
     non_stdlib = unique_imports - STDLIB_MODULES
-    # Filter out relative imports and common non-stdlib that might be local
-    non_stdlib = {i for i in non_stdlib if not i.startswith("_") and i != "common"}
+    # Filter out relative imports and local sibling modules.
+    # Skills commonly have scripts/ with multiple .py files that import each other.
+    local_modules = {Path(f).stem for f in py_files.keys()}
+    non_stdlib = {i for i in non_stdlib
+                  if not i.startswith("_") and i not in local_modules}
 
     if not non_stdlib:
         dim.score += 3
@@ -1004,10 +1007,19 @@ def _score_compatibility(files: Dict[str, str]) -> DimensionScore:
         dim.details.append(f"+0: Non-stdlib imports: {non_stdlib}")
 
     # Check for modern syntax incompatible with 3.9
+    # Only check actual code lines (skip comments and string literals)
+    union_re = re.compile(r"(?::\s*\w+\s*\|\s*\w+|->.*\w+\s*\|\s*None)")
     for fname, source in py_files.items():
-        if re.search(r":\s*\w+\s*\|\s*\w+", source) or re.search(r"->\s*\w+\s*\|\s*None", source):
-            dim.details.append(f"+0: {fname} uses X|Y union syntax (3.10+)")
-            return dim
+        for line in source.splitlines():
+            stripped = line.strip()
+            # Skip comments, strings, and regex patterns
+            if (stripped.startswith("#") or stripped.startswith('"') or
+                    stripped.startswith("'") or "re.search" in stripped or
+                    "re.compile" in stripped or "re.match" in stripped):
+                continue
+            if union_re.search(stripped):
+                dim.details.append(f"+0: {fname} uses X|Y union syntax (3.10+)")
+                return dim
 
     dim.score += 2
     dim.details.append("+2: Python 3.9 compatible syntax")

@@ -181,10 +181,13 @@ Need a new capability?
 
 1. **Never install without running the security scan**
 2. **Never auto-install flagged skills** — present flags to user
-3. **AST analysis** catches: eval(), exec(), os.system(), subprocess(shell=True), pickle.loads(), network library imports
-4. **Regex detection** catches: AWS keys, OpenAI keys, GitHub PATs, hardcoded passwords, private keys
-5. **Critical flags block installation** — no exceptions
-6. **Tier cap:** Any skill with critical flags is capped at tier C
+3. **Quarantine first:** Skills download to `_quarantine/`, get evaluated there, and only move to `skills/` after passing all gates
+4. **AST analysis** catches: eval(), exec(), os.system(), subprocess(shell=True), pickle.loads(), network library imports
+5. **AST evasion detection** catches: `__import__()`, `importlib.import_module()`, `getattr(os, ...)`, `compile()` with dynamic args
+6. **Markdown security scanner** catches: `curl|sh`, `wget`, `chmod +x`, `base64 -d`, inline Python exec, global npm/pip installs, raw IP URLs, URL shorteners, paste service links, obfuscated payloads
+7. **Regex detection** catches: AWS keys, OpenAI keys, GitHub PATs, hardcoded passwords, private keys
+8. **Critical flags block installation** — no exceptions
+9. **Tier cap:** Any skill with critical flags is capped at tier C
 
 ---
 

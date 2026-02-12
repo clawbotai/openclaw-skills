@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Optional
 from common import (
     SCOUT_DATA_DIR,
     SKILLS_DIR,
+    WORKSPACE_ROOT,
     ShellError,
     check_tool,
     db_read,
@@ -30,6 +31,8 @@ from common import (
     run_shell,
     utcnow,
 )
+
+QUARANTINE_DIR = WORKSPACE_ROOT / "_quarantine"
 
 # ---------------------------------------------------------------------------
 # Developer ranking
@@ -284,10 +287,11 @@ def acquire_skill(slug: str, install: bool = False) -> Dict[str, Any]:
     """Evaluate and optionally install a skill with security gates.
 
     Workflow:
-    1. Evaluate quality (must be >= 60)
-    2. Run security scan (must have 0 critical flags)
-    3. If --install: run ``clawhub install`` or ``gh repo clone``
-    4. Validate installed skill structure
+    1. Download to quarantine directory (never directly to skills/)
+    2. Evaluate quality from quarantine (must be >= 60)
+    3. Run security scan from quarantine (must have 0 critical flags)
+    4. If --install and gates pass: move from quarantine to skills/
+    5. Validate installed skill structure
 
     Args:
         slug: Skill slug to acquire.
@@ -296,25 +300,71 @@ def acquire_skill(slug: str, install: bool = False) -> Dict[str, Any]:
     Returns:
         Dict with evaluation results, security findings, and install status.
     """
-    from evaluate import evaluate_skill
+    import shutil
+    from evaluate import evaluate_skill, collect_local_files
 
-    logger.info("Evaluating %s for acquisition...", slug)
-    result = evaluate_skill(slug)
+    safe_slug = slug.replace("/", "__")
+    quarantine_path = QUARANTINE_DIR / safe_slug
+    final_path = SKILLS_DIR / safe_slug
 
     output: Dict[str, Any] = {
         "slug": slug,
-        "quality_score": result.overall_score,
-        "tier": result.tier,
-        "security_flags": [asdict(f) for f in result.security_flags],
-        "critical_flags": sum(1 for f in result.security_flags if f.severity == "critical"),
         "install_requested": install,
         "installed": False,
         "gate_passed": False,
+        "quarantine_path": str(quarantine_path),
     }
+
+    # Step 1: Download to quarantine
+    QUARANTINE_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Clean previous quarantine for this slug
+    if quarantine_path.exists():
+        shutil.rmtree(quarantine_path)
+
+    downloaded = False
+    download_method = "none"
+
+    if check_tool("clawhub"):
+        try:
+            run_shell(["clawhub", "install", slug, "--path", str(quarantine_path)],
+                      timeout=60)
+            downloaded = True
+            download_method = "clawhub"
+        except ShellError as e:
+            logger.warning("clawhub install to quarantine failed: %s", e)
+
+    if not downloaded:
+        skill_data = db_read("SELECT source_url FROM skills WHERE slug=?", (slug,))
+        if skill_data and skill_data[0].get("source_url"):
+            url = skill_data[0]["source_url"]
+            try:
+                run_shell(["gh", "repo", "clone", url, str(quarantine_path)],
+                          timeout=120)
+                downloaded = True
+                download_method = "gh_clone"
+            except ShellError as e:
+                logger.error("GitHub clone to quarantine failed: %s", e)
+
+    if not downloaded:
+        output["rejection_reason"] = "Download failed — neither clawhub nor gh succeeded"
+        return output
+
+    output["download_method"] = download_method
+
+    # Step 2: Evaluate FROM quarantine (not from remote)
+    logger.info("Evaluating %s from quarantine at %s...", slug, quarantine_path)
+    result = evaluate_skill(slug, path=quarantine_path)
+
+    output["quality_score"] = result.overall_score
+    output["tier"] = result.tier
+    output["security_flags"] = [asdict(f) for f in result.security_flags]
+    output["critical_flags"] = sum(1 for f in result.security_flags if f.severity == "critical")
 
     # Quality gate
     if result.overall_score < 60:
         output["rejection_reason"] = f"Quality score {result.overall_score} < 60 minimum"
+        logger.warning("REJECTED %s: quality score %s < 60", slug, result.overall_score)
         return output
 
     # Security gate
@@ -322,55 +372,42 @@ def acquire_skill(slug: str, install: bool = False) -> Dict[str, Any]:
     if critical:
         output["rejection_reason"] = (
             f"{len(critical)} critical security flag(s) — BLOCKED. "
-            "Review security_flags before proceeding."
+            "Review security_flags before proceeding. "
+            f"Quarantined at: {quarantine_path}"
         )
+        logger.warning("REJECTED %s: %d critical security flags", slug, len(critical))
         return output
 
     output["gate_passed"] = True
 
     if not install:
-        output["note"] = "Dry run — gates passed. Use --install to proceed."
+        output["note"] = (
+            "Dry run — gates passed. Use --install to proceed. "
+            f"Quarantined at: {quarantine_path}"
+        )
         return output
 
-    # Install
-    installed = False
-    install_method = "none"
+    # Step 3: Move from quarantine to skills/
+    if final_path.exists():
+        # Back up existing
+        backup_path = SKILLS_DIR / f"{safe_slug}.bak"
+        if backup_path.exists():
+            shutil.rmtree(backup_path)
+        final_path.rename(backup_path)
+        logger.info("Backed up existing skill to %s", backup_path)
 
-    if check_tool("clawhub"):
-        try:
-            run_shell(["clawhub", "install", slug], timeout=60)
-            installed = True
-            install_method = "clawhub"
-        except ShellError as e:
-            logger.warning("clawhub install failed: %s", e)
+    shutil.move(str(quarantine_path), str(final_path))
+    logger.info("Moved %s from quarantine to %s", slug, final_path)
 
-    if not installed:
-        # Fallback: check if we have a GitHub URL
-        skill_data = db_read("SELECT source_url FROM skills WHERE slug=?", (slug,))
-        if skill_data and skill_data[0].get("source_url"):
-            url = skill_data[0]["source_url"]
-            try:
-                run_shell(["gh", "repo", "clone", url,
-                           str(SKILLS_DIR / slug.replace("/", "__"))],
-                          timeout=120)
-                installed = True
-                install_method = "gh_clone"
-            except ShellError as e:
-                logger.error("GitHub clone failed: %s", e)
+    # Validate structure
+    skill_md = final_path / "SKILL.md"
+    output["installed"] = True
+    output["install_method"] = download_method
+    output["install_path"] = str(final_path)
+    output["has_skill_md"] = skill_md.exists()
 
-    if installed:
-        # Validate structure
-        install_path = SKILLS_DIR / slug.replace("/", "__")
-        skill_md = install_path / "SKILL.md"
-        output["installed"] = True
-        output["install_method"] = install_method
-        output["install_path"] = str(install_path)
-        output["has_skill_md"] = skill_md.exists()
-
-        # Update DB
-        db_write("UPDATE skills SET installed=1 WHERE slug=?", (slug,))
-    else:
-        output["rejection_reason"] = "Installation failed — neither clawhub nor gh succeeded"
+    # Update DB
+    db_write("UPDATE skills SET installed=1 WHERE slug=?", (slug,))
 
     return output
 

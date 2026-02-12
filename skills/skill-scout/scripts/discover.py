@@ -368,6 +368,8 @@ def parse_awesome_list(refresh: bool = False) -> Dict[str, Any]:
     #   - [name](url) - description — skill entries
     # We parse both patterns with regex rather than importing a markdown
     # library, keeping our zero-dependency constraint.
+    batch_params = []  # Collect for batch insert
+
     for line in readme.splitlines():
         # Detect category headers (### Category Name)
         header_match = re.match(r"^###\s+(.+?)(?:\s*\(.*\))?\s*$", line)
@@ -399,15 +401,21 @@ def parse_awesome_list(refresh: bool = False) -> Dict[str, Any]:
                 "slug": slug, "name": name, "url": url, "description": desc,
             })
 
-            db_write(
-                """INSERT INTO skills (slug, source, source_url, author, description,
-                        category, first_seen)
-                   VALUES (?, 'awesome-list', ?, ?, ?, ?, ?)
-                   ON CONFLICT(slug) DO UPDATE SET
-                        source_url=excluded.source_url, category=excluded.category,
-                        description=excluded.description""",
-                (slug, url, author, desc, current_category, now),
+            batch_params.append(
+                (slug, url, author, desc, current_category, now)
             )
+
+    # Batch write all awesome list entries at once
+    if batch_params:
+        db_write_many(
+            """INSERT INTO skills (slug, source, source_url, author, description,
+                    category, first_seen)
+               VALUES (?, 'awesome-list', ?, ?, ?, ?, ?)
+               ON CONFLICT(slug) DO UPDATE SET
+                    source_url=excluded.source_url, category=excluded.category,
+                    description=excluded.description""",
+            batch_params,
+        )
 
     result = {
         "total_skills": sum(len(v) for v in categories.values()),
@@ -553,6 +561,10 @@ def sweep_categories(categories: List[str], limit_per: int = 10) -> Dict[str, An
     def _search_category(cat: str) -> Tuple[str, int]:
         """Search a single category across available sources.
 
+        Runs inside a ThreadPoolExecutor worker. All exceptions are caught
+        to prevent a single category failure from poisoning the thread or
+        leaving DB connections in a bad state.
+
         Args:
             cat: Category keyword.
 
@@ -560,19 +572,23 @@ def sweep_categories(categories: List[str], limit_per: int = 10) -> Dict[str, An
             Tuple of (category, result_count).
         """
         count = 0
-        if has_clawhub:
-            try:
-                r = search_clawhub(cat, limit=limit_per)
-                count += len(r)
-            except Exception as e:
-                logger.error("ClawHub sweep error for '%s': %s", cat, e)
+        try:
+            if has_clawhub:
+                try:
+                    r = search_clawhub(cat, limit=limit_per)
+                    count += len(r)
+                except Exception as e:
+                    logger.error("ClawHub sweep error for '%s': %s", cat, e)
 
-        if has_gh:
-            try:
-                r = search_github(f"openclaw {cat} skill", limit=limit_per)
-                count += len(r)
-            except Exception as e:
-                logger.error("GitHub sweep error for '%s': %s", cat, e)
+            if has_gh:
+                try:
+                    r = search_github(f"openclaw {cat} skill", limit=limit_per)
+                    count += len(r)
+                except Exception as e:
+                    logger.error("GitHub sweep error for '%s': %s", cat, e)
+        except Exception as e:
+            # Catch-all: prevent thread from dying with uncaught exception
+            logger.error("Unexpected error in sweep worker for '%s': %s", cat, e)
 
         return cat, count
 
