@@ -1,33 +1,41 @@
 ---
 name: skill-lifecycle
 version: 1.0.0
-description: "Unified skill lifecycle management — Research→Build→Reflect evolutionary loop with AIOps runtime monitoring, error classification, circuit breakers, and self-healing repair tickets. Use for autonomous skill development, quality assurance, and operational observability."
+description: "Unified skill lifecycle management combining the Research→Build→Reflect evolutionary loop with AIOps runtime monitoring, error classification, circuit breakers, and self-healing repair tickets."
 triggers:
-  - skill development
-  - build skill
-  - skill quality
-  - skill monitoring
-  - skill errors
-  - self-healing
+  - evo loop
   - evolutionary loop
   - research and build
+  - ralph mode
+  - deep build
+  - autonomous build
+  - skill monitor
+  - skill health
+  - skill errors
+  - reliability report
+  - error report
+  - quarantined skills
+  - skill lifecycle
+metadata:
+  openclaw:
+    emoji: "🧬🔭"
+    category: "autonomous-development"
 ---
 
-# Skill Lifecycle Management
+# Skill Lifecycle 🧬🔭
 
-Unified system for autonomous skill development and operational monitoring. Two integrated subsystems:
+A unified skill that fuses **autonomous development** with **runtime observability** into a single self-healing system.
 
-1. **Evolutionary Loop** — Research→Build→Reflect helix for creating and improving skills
-2. **Runtime Monitor** — AIOps observability layer that intercepts failures, classifies errors, and generates repair tickets
+Two halves, one purpose:
 
-Together they form a self-healing cycle: the monitor detects problems, the evolutionary loop fixes them.
+- **Part 1: Evolutionary Loop** — Research→Build→Reflect helix for autonomous development
+- **Part 2: Runtime Monitor** — AIOps observability that intercepts failures, classifies errors, and generates repair tickets
+
+Together they form a closed loop: the monitor detects problems → the evolutionary loop fixes them → the monitor verifies the fix.
 
 ---
 
-# Part 1: Evolutionary Loop
-
-
-# Evolutionary Loop 🧬
+# PART 1: EVOLUTIONARY LOOP 🧬
 
 A unified autonomous development skill that fuses three capabilities into a single helix:
 
@@ -380,7 +388,7 @@ Collect the raw material for analysis:
 - PROGRESS.md (what actually happened)
 - Any user corrections or feedback during the session
 - Gate failure logs (what went wrong mechanically)
-- **`memory/repair-tickets.md`** (from skill-runtime-monitor, if it exists)
+- **`memory/repair-tickets.md`** (from the Runtime Monitor, if it exists)
 
 **Step 2: Signal Detection**
 
@@ -501,66 +509,6 @@ Format additions to SOUL.md as behavioral rules:
 
 ---
 
-## Integration: Skill Runtime Monitor → Phase 3
-
-The `skill-runtime-monitor` skill continuously observes all skill executions and generates RepairTickets when deterministic errors accumulate. These tickets are a high-value input to Phase 3 reflection.
-
-### Monitor-Driven Reflection
-
-When `memory/repair-tickets.md` exists and contains tickets, Phase 3 should process them alongside normal reflection:
-
-1. **Read** `memory/repair-tickets.md`
-2. **For each ticket**, treat it as a HIGH confidence signal:
-   - The error is verified (it happened in production, with real inputs)
-   - The input that triggers it is captured
-   - The source code is attached (if locatable)
-   - A fix suggestion is provided
-3. **Generate fixes** using the same Phase 2 build loop:
-   - Create a branch or working copy
-   - Apply the suggested fix
-   - Run backpressure gates to validate
-   - If gates pass → commit the fix
-   - If gates fail → log as BLOCKED, escalate
-4. **Record lessons** from each fix in `memory/lessons.md`
-5. **Clear processed tickets** from `memory/repair-tickets.md`
-
-### Ticket Priority Handling
-
-| Priority | Evolutionary Loop Action |
-|----------|--------------------------|
-| CRITICAL | Immediate fix cycle — skill is quarantined and unusable |
-| HIGH | Fix in next available iteration |
-| MEDIUM | Queue for batch processing |
-| LOW | Log only, fix if convenient |
-
-### Generating Tickets from the Monitor
-
-```python
-# In your agent or heartbeat check:
-from skills.skill_runtime_monitor.scripts.monitor import SkillMonitor
-
-monitor = SkillMonitor(workspace="/path/to/workspace")
-payload = monitor.export_evolution_payload()
-
-if "No repair tickets pending" not in payload:
-    Path("memory/repair-tickets.md").write_text(payload)
-    # Trigger evolutionary loop Phase 3
-```
-
-### Closing the Loop
-
-After the Evolutionary Loop fixes a skill:
-
-1. The fix is committed and deployed
-2. The runtime monitor observes the skill succeeding on previously-failing inputs
-3. The error count stops incrementing
-4. The circuit breaker resets (OPEN → HALF_OPEN → CLOSED)
-5. The repair ticket is no longer generated
-
-This creates a **self-healing cycle**: Monitor detects → Loop fixes → Monitor verifies.
-
----
-
 ## Sub-Agent Orchestration
 
 For complex tasks, the evolutionary loop can spawn sub-agents for Phase 2 iterations:
@@ -614,7 +562,7 @@ sessions_spawn(
 
 ---
 
-## Quick Start
+## Quick Start (Evolutionary Loop)
 
 When the user invokes the evolutionary loop:
 
@@ -626,7 +574,7 @@ When the user invokes the evolutionary loop:
 6. **Execute Phase 3** — Reflect, extract lessons, update memory
 7. **Report** — Final summary with what was built, what was learned, what changed
 
-## Examples
+### Examples
 
 ```
 "Use the evolutionary loop to build me a CLI tool that converts CSV to JSON"
@@ -635,25 +583,9 @@ When the user invokes the evolutionary loop:
 "Research-build-reflect: set up a CI/CD pipeline for this Python project"
 ```
 
-## File Reference
-
-| File | Purpose | Phase |
-|------|---------|-------|
-| `SPECIFICATION.md` | Research output, requirements | 1 |
-| `IMPLEMENTATION_PLAN.md` | Prioritized task list | 2 |
-| `PROGRESS.md` | Iteration-by-iteration build log | 2 |
-| `memory/lessons.md` | Running log of all lessons learned | 3 |
-| `SOUL.md` | Permanent agent identity & behaviors | 3 |
-| `TOOLS.md` | Tool-specific notes & preferences | 3 |
-| `memory/repair-tickets.md` | Repair tickets from skill-runtime-monitor | 3 |
-| `memory/skill-errors.json` | Persistent error ledger (runtime monitor) | — |
-
 ---
 
-# Part 2: Runtime Monitor
-
-
-# Skill Runtime Monitor 🔭
+# PART 2: RUNTIME MONITOR 🔭
 
 The observability layer between the AI agent and its skills. Every skill execution passes through this monitor. When things break, we don't just log a stack trace — we diagnose, deduplicate, quarantine repeat offenders, and generate repair tickets that the Evolutionary Loop can act on.
 
@@ -808,7 +740,7 @@ Logic failures that will ALWAYS fail for the same input:
 - Import: missing modules, broken dependencies
 - Logic: assertion failures, permission errors
 
-**Agent action:** Generate a repair ticket. Feed to Evolutionary Loop.
+**Agent action:** Generate a repair ticket. Feed to Evolutionary Loop Phase 3.
 
 ### Classification Strategy
 
@@ -915,7 +847,7 @@ The monitor's primary output for self-healing. A RepairTicket contains everythin
 
 ### Feeding into the Evolutionary Loop
 
-The monitor exports repair tickets in a format designed for `skill-evolutionary-loop` Phase 3:
+The monitor exports repair tickets in a format designed for Phase 3 reflection:
 
 ```python
 # Generate the payload
@@ -925,19 +857,17 @@ payload = monitor.export_evolution_payload()
 Path("memory/repair-tickets.md").write_text(payload)
 ```
 
-The Evolutionary Loop's Phase 3 (Reflection) reads this file and creates concrete fixes for each ticket. See the integration section below.
+The Evolutionary Loop's Phase 3 (Reflection) reads this file and creates concrete fixes for each ticket.
 
 ---
 
-## Integration with Evolutionary Loop
-
-The `skill-evolutionary-loop` skill reads repair tickets from this monitor as an additional input to its Phase 3 reflection process.
+## Integration: Monitor ↔ Evolutionary Loop
 
 ### Data Flow
 
 ```
-skill-runtime-monitor                    skill-evolutionary-loop
-─────────────────────                    ───────────────────────
+Runtime Monitor                          Evolutionary Loop
+───────────────                          ─────────────────
                                          Phase 1: Research
                                               │
                                          Phase 2: Build
@@ -948,24 +878,58 @@ Ledger → Analyst → RepairTickets ──────→ Phase 3: Reflect
                                          Fixes  → Skill code
 ```
 
-### How to Trigger
+### Monitor-Driven Reflection
 
-When the agent detects accumulated errors (via reliability report or heartbeat check):
+When `memory/repair-tickets.md` exists and contains tickets, Phase 3 should process them alongside normal reflection:
 
-1. Run `monitor.export_evolution_payload()` to generate tickets
-2. Write the payload to `memory/repair-tickets.md`
-3. Invoke the Evolutionary Loop with the repair context:
+1. **Read** `memory/repair-tickets.md`
+2. **For each ticket**, treat it as a HIGH confidence signal:
+   - The error is verified (it happened in production, with real inputs)
+   - The input that triggers it is captured
+   - The source code is attached (if locatable)
+   - A fix suggestion is provided
+3. **Generate fixes** using the same Phase 2 build loop:
+   - Create a branch or working copy
+   - Apply the suggested fix
+   - Run backpressure gates to validate
+   - If gates pass → commit the fix
+   - If gates fail → log as BLOCKED, escalate
+4. **Record lessons** from each fix in `memory/lessons.md`
+5. **Clear processed tickets** from `memory/repair-tickets.md`
 
+### Ticket Priority Handling
+
+| Priority | Evolutionary Loop Action |
+|----------|--------------------------|
+| CRITICAL | Immediate fix cycle — skill is quarantined and unusable |
+| HIGH | Fix in next available iteration |
+| MEDIUM | Queue for batch processing |
+| LOW | Log only, fix if convenient |
+
+### Generating Tickets from the Monitor
+
+```python
+from scripts.monitor import SkillMonitor
+
+monitor = SkillMonitor(workspace="/path/to/workspace")
+payload = monitor.export_evolution_payload()
+
+if "No repair tickets pending" not in payload:
+    Path("memory/repair-tickets.md").write_text(payload)
+    # Trigger evolutionary loop Phase 3
 ```
-"Start evolutionary loop Phase 3 (Reflection).
-Read memory/repair-tickets.md for repair tickets from the runtime monitor.
-For each CRITICAL/HIGH ticket:
-  1. Locate the failing skill source
-  2. Analyze the error + failing input
-  3. Generate a fix
-  4. Validate with backpressure gates
-  5. Record lessons in memory/lessons.md"
-```
+
+### Closing the Loop
+
+After the Evolutionary Loop fixes a skill:
+
+1. The fix is committed and deployed
+2. The runtime monitor observes the skill succeeding on previously-failing inputs
+3. The error count stops incrementing
+4. The circuit breaker resets (OPEN → HALF_OPEN → CLOSED)
+5. The repair ticket is no longer generated
+
+This creates a **self-healing cycle**: Monitor detects → Loop fixes → Monitor verifies.
 
 ---
 
@@ -1003,32 +967,6 @@ This tells the Evolutionary Loop exactly what edge case to handle.
 
 ---
 
-## File Structure
-
-```
-skill-runtime-monitor/
-├── SKILL.md                    # This file — agent instructions
-├── _meta.json                  # ClawHub-compatible metadata
-└── scripts/
-    ├── schemas.py              # Pydantic models (ErrorLog, SkillHealth,
-    │                           #   RepairTicket, ReliabilityReport, MonitorConfig)
-    ├── monitor.py              # Core engine (interceptor, aggregator,
-    │                           #   analyst, bridge) + CLI
-    └── usage_example.py        # Full demo: broken skill → quarantine →
-                                #   report → repair ticket export
-```
-
-### Runtime Files (created automatically)
-
-```
-workspace/
-└── memory/
-    ├── skill-errors.json       # Persistent error ledger
-    └── repair-tickets.md       # Export for Evolutionary Loop (on demand)
-```
-
----
-
 ## Configuration Reference
 
 | Parameter | Default | Description |
@@ -1057,3 +995,53 @@ workspace/
 5. **Thread safety is non-negotiable.** Agents may invoke multiple skills concurrently. All ledger I/O is lock-protected.
 
 6. **Self-maintaining.** Rolling windows and max counts prevent unbounded growth. Corrupted ledger auto-recovers.
+
+---
+
+## File Structure
+
+```
+skill-lifecycle/
+├── SKILL.md                    # This file — agent instructions
+├── _meta.json                  # Metadata
+├── scripts/
+│   ├── loop_manager.py         # Evolutionary loop orchestration
+│   ├── monitor.py              # Runtime monitor engine + CLI
+│   ├── schemas.py              # Pydantic models for monitor
+│   └── usage_example.py        # Monitor demo
+├── prompts/
+│   └── research_and_reflect.md # System prompts for Phase 1 & 3
+├── templates/
+│   └── SPECIFICATION.md        # Template for Phase 1 output
+└── docs/
+    ├── tutorials/
+    │   └── getting-started.md
+    ├── how-to/
+    ├── explanations/
+    └── reference/
+```
+
+### Runtime Files (created automatically)
+
+```
+workspace/
+└── memory/
+    ├── skill-errors.json       # Persistent error ledger
+    ├── repair-tickets.md       # Export for Evolutionary Loop (on demand)
+    └── lessons.md              # Running log of lessons learned
+```
+
+---
+
+## File Reference
+
+| File | Purpose | Component |
+|------|---------|-----------|
+| `SPECIFICATION.md` | Research output, requirements | Evo Loop Phase 1 |
+| `IMPLEMENTATION_PLAN.md` | Prioritized task list | Evo Loop Phase 2 |
+| `PROGRESS.md` | Iteration-by-iteration build log | Evo Loop Phase 2 |
+| `memory/lessons.md` | Running log of all lessons learned | Evo Loop Phase 3 |
+| `SOUL.md` | Permanent agent identity & behaviors | Evo Loop Phase 3 |
+| `TOOLS.md` | Tool-specific notes & preferences | Evo Loop Phase 3 |
+| `memory/repair-tickets.md` | Repair tickets from runtime monitor | Monitor → Evo Loop |
+| `memory/skill-errors.json` | Persistent error ledger | Monitor |

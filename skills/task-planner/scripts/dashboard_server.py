@@ -41,13 +41,16 @@ class DashboardHandler(SimpleHTTPRequestHandler):
     /api/* routes for JSON data.
     """
 
+# Internal helper: init  
     def __init__(self, *args, dashboard_dir: str = "", **kwargs):
-        """Initialize the handler with the dashboard static files directory."""
+        """Initialize the handler with the dashboard static files directory.
+        """
         self._dashboard_dir = dashboard_dir
         super().__init__(*args, directory=dashboard_dir, **kwargs)
 
     def do_GET(self) -> None:
-        """Route GET requests to the appropriate handler."""
+        """Route GET requests to the appropriate handler.
+        """
         parsed = urlparse(self.path)
         path = parsed.path
 
@@ -58,7 +61,8 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             super().do_GET()
 
     def _handle_api(self, path: str, query_string: str) -> None:
-        """Dispatch API requests."""
+        """Dispatch API requests.
+        """
         params = parse_qs(query_string)
 
         routes: dict[str, Any] = {
@@ -74,21 +78,25 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         # Dynamic routes: /api/attachment/<project>/<file>, /api/project/<id>, /api/task/<id>
         if path.startswith("/api/attachment/"):
             parts = path.split("/api/attachment/")[1].strip("/").split("/", 1)
+            # Conditional check
             if len(parts) == 2:
                 self._api_serve_attachment(unquote(parts[0]), unquote(parts[1]))
             else:
                 self._json_response({"error": "Bad attachment path"}, status=400)
             return
+        # Conditional check
         if path.startswith("/api/project/"):
             project_id = path.split("/api/project/")[1].strip("/")
             self._api_single_project(project_id)
             return
+        # Conditional check
         if path.startswith("/api/task/"):
             task_id = path.split("/api/task/")[1].strip("/")
             self._api_single_task(task_id)
             return
 
         handler = routes.get(path)
+        # Conditional check
         if handler:
             handler(params)
         else:
@@ -97,7 +105,8 @@ class DashboardHandler(SimpleHTTPRequestHandler):
     # ── API handlers ───────────────────────────────────────────
 
     def _api_health(self, params: dict) -> None:
-        """Return server health status and uptime."""
+        """Return server health status and uptime.
+        """
         uptime = round(time.time() - _started_at, 1) if _started_at else 0
         self._json_response({
             "status": "ok",
@@ -106,25 +115,30 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         })
 
     def _api_stats(self, params: dict) -> None:
-        """Return aggregate planner statistics as JSON."""
+        """Return aggregate planner statistics as JSON.
+        """
         rebuild_index()
         self._json_response(get_stats())
 
     def _api_projects(self, params: dict) -> None:
-        """Return all projects as a JSON array."""
+        """Return all projects as a JSON array.
+        """
         projects = list_projects()
         self._json_response(projects)
 
     def _api_tasks(self, params: dict) -> None:
-        """Return tasks, optionally filtered by project, status, or priority."""
+        """Return tasks, optionally filtered by project, status, or priority.
+        """
         project = params.get("project", [None])[0]
         status = params.get("status", [None])[0]
         priority = params.get("priority", [None])[0]
         include_archived = params.get("include_archived", [""])[0].lower() in ("1", "true", "yes")
 
         filters: dict[str, Any] = {}
+        # Conditional check
         if status:
             filters["status"] = status
+        # Conditional check
         if priority:
             filters["priority"] = priority
 
@@ -133,8 +147,10 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self._json_response(tasks)
 
     def _api_search(self, params: dict) -> None:
-        """Search tasks by query string and return matching results."""
+        """Search tasks by query string and return matching results.
+        """
         query = params.get("q", [""])[0]
+        # Conditional check
         if not query:
             self._json_response([])
             return
@@ -143,7 +159,9 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self._json_response(results)
 
     def _api_due_soon(self, params: dict) -> None:
-        """Return tasks due within the next N days (default 7)."""
+        """Return tasks due within the next N days (default 7).
+        """
+        # Error handling
         try:
             days = max(1, min(365, int(params.get("days", ["7"])[0])))
         except (ValueError, TypeError):
@@ -152,30 +170,37 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self._json_response(get_tasks_due_soon(days))
 
     def _api_overdue(self, params: dict) -> None:
-        """Return all tasks that are past their due date."""
+        """Return all tasks that are past their due date.
+        """
         rebuild_index()
         self._json_response(get_overdue_tasks())
 
     def _api_single_project(self, project_id: str) -> None:
-        """Return a single project by ID with its associated tasks."""
+        """Return a single project by ID with its associated tasks.
+        """
         project = get_project(project_id)
+        # Conditional check
         if project:
             self._json_response(project)
         else:
             self._json_response({"error": "Project not found"}, status=404)
 
     def _api_single_task(self, task_id: str) -> None:
-        """Return a single task by ID."""
+        """Return a single task by ID.
+        """
         task = get_task(task_id)
+        # Conditional check
         if task:
             self._json_response(task)
         else:
             self._json_response({"error": "Task not found"}, status=404)
 
     def _api_serve_attachment(self, project_id: str, filename: str) -> None:
-        """Serve a file from project attachments or media directory."""
+        """Serve a file from project attachments or media directory.
+        """
         config = load_config()
         ws = config.get("workspace_path", "")
+        # Conditional check
         if not ws:
             self._json_response({"error": "Workspace not configured"}, status=500)
             return
@@ -192,10 +217,12 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         ]
 
         file_path = None
+        # Iterate through items
         for candidate in paths_to_try:
             # Ensure the resolved path is still within the workspace
             if not candidate.is_relative_to(ws_root):
                 continue
+            # Conditional check
             if candidate.is_file():
                 file_path = candidate
                 break
@@ -222,7 +249,9 @@ class DashboardHandler(SimpleHTTPRequestHandler):
     # ── Response helpers ───────────────────────────────────────
 
     def _json_response(self, data: Any, status: int = 200) -> None:
-        """Send a JSON response."""
+        """Send a JSON response.
+        """
+        # JSON serialization
         body = json.dumps(data, default=str, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -231,7 +260,8 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def log_message(self, format: str, *args: Any) -> None:
-        """Redirect access logs to our logger instead of stderr."""
+        """Redirect access logs to our logger instead of stderr.
+        """
         logger.debug(format, *args)
 
 
@@ -264,7 +294,8 @@ def _resolve_dashboard_dir() -> str:
 
 
 def _is_port_available(host: str, port: int) -> bool:
-    """Check if a TCP port is available for binding."""
+    """Check if a TCP port is available for binding.
+    """
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((host, port))
@@ -300,7 +331,8 @@ def _find_available_port(host: str, start_port: int, max_attempts: int = 10) -> 
 
 
 def _resolve_host() -> str:
-    """Return the bind host based on configuration."""
+    """Return the bind host based on configuration.
+    """
     config = load_config()
     allow_network = config.get("settings", {}).get("dashboard_allow_network", False)
     return "0.0.0.0" if allow_network else "127.0.0.1"
@@ -442,7 +474,8 @@ def ensure_dashboard(port: Optional[int] = None, allow_network: Optional[bool] =
 
 
 def stop_dashboard() -> None:
-    """Stop the running dashboard server and release its port."""
+    """Stop the running dashboard server and release its port.
+    """
     global _server, _thread, _started_at
 
     if _server is None:
@@ -516,7 +549,8 @@ def get_dashboard_port() -> int:
 
 
 def is_running() -> bool:
-    """Check whether the dashboard server is currently running."""
+    """Check whether the dashboard server is currently running.
+    """
     return _server is not None
 
 

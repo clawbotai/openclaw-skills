@@ -68,6 +68,7 @@ echo ""
 mkdir -p "$PROJECT_DIR"
 
 # --- Helper functions ---
+# Create a file with content at the given project-relative path
 create_file() {
   local path="$1"
   local content="$2"
@@ -76,6 +77,7 @@ create_file() {
 }
 
 
+# Generate a .gitignore for Node.js projects
 create_gitignore_node() {
   cat > "$PROJECT_DIR/.gitignore" << 'EOF'
 node_modules/
@@ -90,6 +92,7 @@ EOF
 }
 
 
+# Generate a .gitignore for Python projects
 create_gitignore_python() {
   cat > "$PROJECT_DIR/.gitignore" << 'EOF'
 __pycache__/

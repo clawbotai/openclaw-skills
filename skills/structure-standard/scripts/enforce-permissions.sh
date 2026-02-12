@@ -10,6 +10,7 @@ WORKSPACE="${HOME_DIR}/openclaw/workspace"
 OPENCLAW="${HOME_DIR}/.openclaw"
 
 
+# Display usage information and permission standards
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -43,6 +44,7 @@ done
 CHANGES=0
 
 
+# Set permissions on a path if they differ from expected
 set_perm() {
     local path="$1" perm="$2"
     [ -e "$path" ] || return 0

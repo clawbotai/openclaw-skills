@@ -12,10 +12,12 @@ import argparse
 
 # --- Class definition ---
 class RICECalculator:
-    """Calculate RICE scores for feature prioritization"""
+    """Calculate RICE scores for feature prioritization
+    """
     
     def __init__(self):
-        """Initialize with empty feature list and default RICE weights."""
+        """Initialize with empty feature list and default RICE weights.
+        """
         self.impact_map = {
             'massive': 3.0,
             'high': 2.0,
@@ -168,7 +170,8 @@ class RICECalculator:
         return quarters
 
 def format_output(features: List[Dict], analysis: Dict, roadmap: List[Dict]) -> str:
-    """Format the results for display"""
+    """Format the results for display
+    """
     output = ["=" * 60]
     output.append("RICE PRIORITIZATION RESULTS")
     output.append("=" * 60)
@@ -207,7 +210,8 @@ def format_output(features: List[Dict], analysis: Dict, roadmap: List[Dict]) -> 
     return "\n".join(output)
 
 def load_features_from_csv(filepath: str) -> List[Dict]:
-    """Load features from CSV file"""
+    """Load features from CSV file
+    """
     features = []
     with open(filepath, 'r') as f:
         reader = csv.DictReader(f)
@@ -224,7 +228,8 @@ def load_features_from_csv(filepath: str) -> List[Dict]:
     return features
 
 def create_sample_csv(filepath: str):
-    """Create a sample CSV file for testing"""
+    """Create a sample CSV file for testing
+    """
     sample_features = [
         ['name', 'reach', 'impact', 'confidence', 'effort', 'description'],
         ['User Dashboard Redesign', '5000', 'high', 'high', 'l', 'Complete redesign of user dashboard'],
@@ -246,7 +251,8 @@ def create_sample_csv(filepath: str):
     print(f"Sample CSV created at: {filepath}")
 
 def main():
-    """CLI entry point: parse args and run RICE prioritization."""
+    """CLI entry point: parse args and run RICE prioritization.
+    """
     parser = argparse.ArgumentParser(description='RICE Framework for Feature Prioritization')
     parser.add_argument('input', nargs='?', help='CSV file with features or "sample" to create sample')
     parser.add_argument('--capacity', type=int, default=10, help='Team capacity per quarter (person-months)')

@@ -25,3 +25,9 @@ User mentioned wanting a modern, clean look. Prefers minimal design with bold ty
 - Use Figma for mockups
 
 ## Attachments
+
+## Example Update
+```bash
+# Mark task complete
+update_task "$TASK_ID" status=done
+```

@@ -16,6 +16,7 @@ VERSION="1.0.0"
 # =============================================================================
 
 
+# Display usage information for the help injector
 show_help() {
     cat <<'EOF'
 NAME
@@ -93,6 +94,7 @@ fi
 # =============================================================================
 
 
+# Inject --help flag handling into a script file
 inject_help_into_file() {
     local file="$1"
     local basename_script

@@ -14,6 +14,7 @@ set -euo pipefail
 VERSION="2.0.0"
 
 
+# Display usage information and scoring criteria
 show_help() {
     cat <<'EOF'
 NAME
@@ -102,8 +103,10 @@ _SUGGESTIONS=$(mktemp)
 trap 'rm -f "$_DETAILS" "$_SUGGESTIONS"' EXIT
 
 
+# Append a detail line to the scoring report
 add_detail() { echo "$1" >> "$_DETAILS"; }
 
+# Append a suggestion to the scoring report
 add_suggest() { echo "$1" >> "$_SUGGESTIONS"; }
 
 # Helper: safe grep -c that always returns a clean integer

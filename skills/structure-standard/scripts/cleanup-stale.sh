@@ -10,6 +10,7 @@ OPENCLAW="${HOME_DIR}/.openclaw"
 REMOVED=0
 
 
+# Display usage information and cleanup targets
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -39,6 +40,7 @@ for arg in "$@"; do
 done
 
 
+# Remove a single file with dry-run support
 remove_file() {
     local path="$1" reason="$2"
     REMOVED=$((REMOVED + 1))
@@ -51,6 +53,7 @@ remove_file() {
 }
 
 
+# Remove a directory recursively with dry-run support
 remove_dir() {
     local path="$1" reason="$2"
     REMOVED=$((REMOVED + 1))

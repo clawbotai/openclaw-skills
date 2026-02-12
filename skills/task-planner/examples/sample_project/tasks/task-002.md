@@ -26,3 +26,9 @@ Analytics show 60% of traffic is mobile but the current site has poor mobile UX.
 - Test touch targets are at least 44px
 
 ## Attachments
+
+## Example Update
+```bash
+# Mark task complete
+update_task "$TASK_ID" status=done
+```

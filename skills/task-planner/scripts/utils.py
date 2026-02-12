@@ -15,6 +15,7 @@ from typing import Any, Optional
 logger = logging.getLogger("nlplanner")
 
 
+# Generate slug
 def generate_slug(text: str, max_length: int = 50) -> str:
     """
     Generate a URL/filesystem-safe slug from text.
@@ -53,6 +54,7 @@ def generate_id(prefix: str = "") -> str:
         'task-a1b2c3d4'
     """
     short_uuid = uuid.uuid4().hex[:8]
+    # Conditional check
     if prefix:
         return f"{prefix}-{short_uuid}"
     return short_uuid
@@ -104,17 +106,22 @@ def parse_frontmatter(content: str) -> tuple[dict[str, Any], str]:
         import yaml
     except ImportError:
         logger.error("PyYAML is required. Install with: pip install pyyaml")
+        # Build and return result
         return {}, content
 
     pattern = r"^---\s*\n(.*?)\n---\s*\n?(.*)"
     match = re.match(pattern, content, re.DOTALL)
+    # Conditional check
     if not match:
+        # Build and return result
         return {}, content
 
+    # Error handling
     try:
         frontmatter = yaml.safe_load(match.group(1)) or {}
     except yaml.YAMLError as e:
         logger.warning("Failed to parse YAML frontmatter: %s", e)
+        # Initialize data structure
         frontmatter = {}
 
     body = match.group(2).strip()
@@ -141,6 +148,7 @@ def serialize_frontmatter(metadata: dict[str, Any], body: str) -> str:
         <BLANKLINE>
         World
     """
+    # Error handling
     try:
         import yaml
     except ImportError:
@@ -149,7 +157,8 @@ def serialize_frontmatter(metadata: dict[str, Any], body: str) -> str:
 
     # Custom representer for dates — keep them as plain strings
     def date_representer(dumper: yaml.Dumper, data: date) -> yaml.ScalarNode:
-        """YAML representer that serializes date objects as plain ISO strings."""
+        """YAML representer that serializes date objects as plain ISO strings.
+        """
         return dumper.represent_scalar("tag:yaml.org,2002:str", data.isoformat())
 
     dumper = yaml.Dumper
@@ -168,12 +177,14 @@ def serialize_frontmatter(metadata: dict[str, Any], body: str) -> str:
 
 
 def today_str() -> str:
-    """Return today's date as an ISO-formatted string (YYYY-MM-DD)."""
+    """Return today's date as an ISO-formatted string (YYYY-MM-DD).
+    """
     return date.today().isoformat()
 
 
 def now_str() -> str:
-    """Return current datetime as an ISO-formatted string."""
+    """Return current datetime as an ISO-formatted string.
+    """
     return datetime.now().isoformat(timespec="seconds")
 
 
@@ -187,6 +198,7 @@ def ensure_directory(path: Path) -> bool:
     Returns:
         True if the directory exists (or was created), False on error.
     """
+    # Error handling
     try:
         path.mkdir(parents=True, exist_ok=True)
         return True
@@ -205,6 +217,7 @@ def safe_read_file(path: Path) -> Optional[str]:
     Returns:
         File contents as a string, or None if the file can't be read.
     """
+    # Error handling
     try:
         return path.read_text(encoding="utf-8")
     except (OSError, UnicodeDecodeError) as e:
@@ -223,6 +236,7 @@ def safe_write_file(path: Path, content: str) -> bool:
     Returns:
         True if the file was written successfully, False on error.
     """
+    # Error handling
     try:
         ensure_directory(path.parent)
         path.write_text(content, encoding="utf-8")
@@ -247,6 +261,7 @@ def safe_child_path(root: Path, *segments: str) -> Optional[Path]:
     Returns:
         Resolved ``Path`` inside *root*, or ``None`` on traversal.
     """
+    # Error handling
     try:
         target = root.joinpath(*segments).resolve()
         # is_relative_to is available in Python 3.9+
@@ -259,12 +274,14 @@ def safe_child_path(root: Path, *segments: str) -> Optional[Path]:
 
 
 def validate_status(status: str) -> bool:
-    """Check if a status value is valid for tasks."""
+    """Check if a status value is valid for tasks.
+    """
     return status in ("todo", "in-progress", "done", "archived")
 
 
 def validate_priority(priority: str) -> bool:
-    """Check if a priority value is valid."""
+    """Check if a priority value is valid.
+    """
     return priority in ("low", "medium", "high")
 
 
@@ -282,5 +299,6 @@ def setup_logging(level: int = logging.INFO) -> None:
     )
     root = logging.getLogger("nlplanner")
     root.setLevel(level)
+    # Conditional check
     if not root.handlers:
         root.addHandler(handler)

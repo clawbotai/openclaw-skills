@@ -25,7 +25,8 @@ from scripts.index_manager import (
 
 @pytest.fixture
 def workspace(tmp_path):
-    """Create a workspace with sample data for index tests."""
+    """Create a workspace with sample data for index tests.
+    """
     ws = tmp_path / "index_workspace"
     ws.mkdir()
     init_workspace(str(ws))
@@ -60,9 +61,13 @@ def workspace(tmp_path):
 # --- Class definition ---
 class TestRebuildIndex:
     def test_rebuild_succeeds(self, workspace):
+        """test_rebuild_succeeds.
+        """
         assert rebuild_index()
 
     def test_stats_after_rebuild(self, workspace):
+        """test_stats_after_rebuild.
+        """
         rebuild_index()
         stats = get_stats()
         assert stats["total_tasks"] == 4
@@ -72,22 +77,30 @@ class TestRebuildIndex:
 
 class TestSearch:
     def test_search_by_title(self, workspace):
+        """test_search_by_title.
+        """
         rebuild_index()
         results = search_tasks("API endpoints")
         assert len(results) >= 1
         assert any("API" in r["title"] for r in results)
 
     def test_search_by_tag(self, workspace):
+        """test_search_by_tag.
+        """
         rebuild_index()
         results = search_tasks("devops")
         assert len(results) >= 1
 
     def test_search_by_description(self, workspace):
+        """test_search_by_description.
+        """
         rebuild_index()
         results = search_tasks("REST")
         assert len(results) >= 1
 
     def test_search_no_results(self, workspace):
+        """test_search_no_results.
+        """
         rebuild_index()
         results = search_tasks("xyznonexistent")
         assert len(results) == 0
@@ -95,12 +108,16 @@ class TestSearch:
 
 class TestDueSoon:
     def test_due_soon_includes_overdue(self, workspace):
+        """test_due_soon_includes_overdue.
+        """
         rebuild_index()
         # "Deploy to staging" is overdue (due 2026-01-01)
         results = get_tasks_due_soon(days=365)
         assert any("Deploy" in t.get("title", "") for t in results)
 
     def test_due_soon_respects_window(self, workspace):
+        """test_due_soon_respects_window.
+        """
         rebuild_index()
         # With a very small window, may not include future tasks
         results = get_tasks_due_soon(days=0)
@@ -111,12 +128,16 @@ class TestDueSoon:
 
 class TestOverdue:
     def test_overdue_detection(self, workspace):
+        """test_overdue_detection.
+        """
         rebuild_index()
         overdue = get_overdue_tasks()
         assert len(overdue) >= 1
         assert any("Deploy" in t.get("title", "") for t in overdue)
 
     def test_overdue_has_days_count(self, workspace):
+        """test_overdue_has_days_count.
+        """
         rebuild_index()
         overdue = get_overdue_tasks()
         if overdue:
@@ -126,7 +147,8 @@ class TestOverdue:
 
 class TestCheckin:
     def test_needing_checkin(self, workspace):
-        """All newly created tasks should need check-in after some time."""
+        """All newly created tasks should need check-in after some time.
+        """
         rebuild_index()
         # With default 24h frequency, tasks created "today" might not need
         # check-in yet — but this tests the mechanism works
@@ -138,6 +160,8 @@ class TestCheckin:
 
 class TestStats:
     def test_stats_structure(self, workspace):
+        """test_stats_structure.
+        """
         rebuild_index()
         stats = get_stats()
         assert "total_tasks" in stats
@@ -149,6 +173,8 @@ class TestStats:
         assert "active_projects" in stats
 
     def test_stats_counts_are_correct(self, workspace):
+        """test_stats_counts_are_correct.
+        """
         rebuild_index()
         stats = get_stats()
         assert stats["total_tasks"] == 4

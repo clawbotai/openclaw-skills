@@ -24,3 +24,9 @@ The current about page hasn't been updated in over a year. Several team members 
 - Add company timeline section
 
 ## Attachments
+
+## Example Update
+```bash
+# Mark task complete
+update_task "$TASK_ID" status=done
+```

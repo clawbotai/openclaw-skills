@@ -28,7 +28,8 @@ from scripts.config_manager import (
 
 @pytest.fixture
 def workspace(tmp_path):
-    """Create a temporary workspace for config tests."""
+    """Create a temporary workspace for config tests.
+    """
     ws = tmp_path / "config_workspace"
     ws.mkdir()
     (ws / ".nlplanner").mkdir()
@@ -40,11 +41,15 @@ def workspace(tmp_path):
 # --- Class definition ---
 class TestLoadSaveConfig:
     def test_load_returns_defaults_when_no_file(self, workspace):
+        """Verify load_config returns DEFAULT_CONFIG when no file exists.
+        """
         config = load_config(str(workspace))
         assert config["version"] == DEFAULT_CONFIG["version"]
         assert "settings" in config
 
     def test_save_and_load_roundtrip(self, workspace):
+        """Ensure saved config can be loaded back identically.
+        """
         config = load_config(str(workspace))
         config["workspace_path"] = str(workspace)
         config["settings"]["dashboard_port"] = 9090
@@ -55,7 +60,8 @@ class TestLoadSaveConfig:
         assert loaded["settings"]["dashboard_port"] == 9090
 
     def test_load_merges_with_defaults(self, workspace):
-        """New default keys should appear even if config file is old."""
+        """New default keys should appear even if config file is old.
+        """
         # Write a minimal config
         config_path = workspace / ".nlplanner" / "config.json"
         config_path.write_text(json.dumps({"version": "0.9.0"}), encoding="utf-8")
@@ -66,6 +72,8 @@ class TestLoadSaveConfig:
         assert "checkin_frequency_hours" in loaded["settings"]
 
     def test_load_handles_invalid_json(self, workspace):
+        """Gracefully return defaults when config file has invalid JSON.
+        """
         config_path = workspace / ".nlplanner" / "config.json"
         config_path.write_text("not valid json {{{", encoding="utf-8")
 
@@ -74,8 +82,11 @@ class TestLoadSaveConfig:
         assert config["version"] == DEFAULT_CONFIG["version"]
 
 
+# Class definition
 class TestSettings:
     def test_get_set_setting(self, workspace):
+        """Round-trip a setting through set_setting and get_setting.
+        """
         # Save a baseline config
         config = load_config(str(workspace))
         save_config(config, str(workspace))
@@ -84,6 +95,8 @@ class TestSettings:
         assert get_setting("dashboard_port") == 3000
 
     def test_get_setting_missing_key(self, workspace):
+        """Return None for a key that does not exist in settings.
+        """
         config = load_config(str(workspace))
         save_config(config, str(workspace))
         assert get_setting("nonexistent_key") is None
@@ -91,17 +104,23 @@ class TestSettings:
 
 class TestCheckinFrequency:
     def test_default_frequency(self, workspace):
+        """Default check-in frequency should be 24 hours.
+        """
         config = load_config(str(workspace))
         save_config(config, str(workspace))
         assert get_checkin_frequency() == 24
 
     def test_set_frequency(self, workspace):
+        """Setting frequency should persist and be retrievable.
+        """
         config = load_config(str(workspace))
         save_config(config, str(workspace))
         assert set_checkin_frequency(48)
         assert get_checkin_frequency() == 48
 
     def test_minimum_frequency(self, workspace):
+        """Frequency of 0 should be clamped to minimum of 1.
+        """
         config = load_config(str(workspace))
         save_config(config, str(workspace))
         assert set_checkin_frequency(0)  # Should clamp to 1
@@ -110,11 +129,15 @@ class TestCheckinFrequency:
 
 class TestPreferences:
     def test_get_preference(self, workspace):
+        """Known preference key returns its default value.
+        """
         config = load_config(str(workspace))
         save_config(config, str(workspace))
         assert get_preference("default_project") == "inbox"
 
     def test_get_missing_preference(self, workspace):
+        """Missing preference key returns None.
+        """
         config = load_config(str(workspace))
         save_config(config, str(workspace))
         assert get_preference("nonexistent") is None

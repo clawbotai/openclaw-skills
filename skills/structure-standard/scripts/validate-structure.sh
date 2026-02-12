@@ -42,19 +42,20 @@ ERRORS=0
 WARNINGS=0
 
 
+# Print red error message
 red()    { echo -e "\033[31m✗ $1\033[0m"; }
-
+# Print yellow warning message
 yellow() { echo -e "\033[33m⚠ $1\033[0m"; }
-
+# Print green success message
 green()  { echo -e "\033[32m✓ $1\033[0m"; }
-
+# Print blue info message
 blue()   { echo -e "\033[34mℹ $1\033[0m"; }
 
-
+# Record an error and increment error count
 error()   { red "$1"; ((ERRORS++)); }
-
+# Record a warning and increment warning count
 warn()    { yellow "$1"; ((WARNINGS++)); }
-
+# Record a passing check
 pass()    { green "$1"; }
 
 echo "═══════════════════════════════════════════"

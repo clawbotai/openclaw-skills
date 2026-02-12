@@ -4,6 +4,12 @@
 ## Objective
 [What we're building, in one paragraph]
 
+Example usage:
+```bash
+# Generate a specification from research findings
+openclaw run skill-lifecycle --trigger "build spec" --output SPECIFICATION.md
+```
+
 ## Requirements
 
 ### Functional

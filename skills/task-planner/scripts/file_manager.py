@@ -49,6 +49,7 @@ PROJECT_COLOUR_PALETTE = [
 ]
 
 
+# Internal helper: next project colour
 def _next_project_colour(root: Path) -> str:
     """Pick the next unused colour from the palette.
 
@@ -58,16 +59,22 @@ def _next_project_colour(root: Path) -> str:
     """
     used: set[str] = set()
     projects_dir = root / "projects"
+    # Conditional check
     if projects_dir.exists():
+        # Iterate through items
         for readme in projects_dir.glob("*/README.md"):
             raw = safe_read_file(readme)
+            # Conditional check
             if raw:
                 meta, _ = parse_frontmatter(raw)
                 c = meta.get("color", "")
+                # Conditional check
                 if c:
                     used.add(c.lower())
 
+    # Iterate through items
     for colour in PROJECT_COLOUR_PALETTE:
+        # Conditional check
         if colour.lower() not in used:
             return colour
 
@@ -111,7 +118,9 @@ def init_workspace(workspace_path: str) -> bool:
         root / "archive",
     ]
 
+    # Iterate through items
     for d in directories:
+        # Conditional check
         if not ensure_directory(d):
             return False
 
@@ -119,11 +128,13 @@ def init_workspace(workspace_path: str) -> bool:
     set_config_path(str(root))
     config = load_config(str(root))
     config["workspace_path"] = str(root)
+    # Conditional check
     if not save_config(config, str(root)):
         return False
 
     # Create inbox README if it doesn't exist
     inbox_readme = root / "projects" / "inbox" / "README.md"
+    # Conditional check
     if not inbox_readme.exists():
         meta = {
             "id": "inbox",
@@ -173,11 +184,13 @@ def create_project(
         'website-redesign'
     """
     root = _workspace_root()
+    # Conditional check
     if root is None:
         return None
 
     project_id = generate_slug(name)
     project_dir = safe_child_path(root, "projects", project_id)
+    # Conditional check
     if project_dir is None:
         logger.error("Generated project slug '%s' is invalid.", project_id)
         return None
@@ -205,6 +218,7 @@ def create_project(
 
     body_parts = []
     body_parts.append(f"## Description\n{description or 'No description yet.'}")
+    # Conditional check
     if goals:
         body_parts.append("## Goals\n" + "\n".join(f"- {g}" for g in goals))
     body_parts.append("## Notes\n")

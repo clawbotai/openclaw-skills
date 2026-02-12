@@ -39,7 +39,9 @@ def detect_tunnel_tool() -> Optional[str]:
         >>> print(tool)
         'cloudflared'
     """
+    # Iterate through items
     for tool in ["cloudflared", "ngrok", "lt"]:
+        # Conditional check
         if shutil.which(tool):
             logger.info("Tunnel tool found: %s", tool)
             return tool
@@ -103,7 +105,9 @@ def start_tunnel(port: int, tool: Optional[str] = None) -> str:
         print(get_install_instructions())
         return ""
 
+    # Error handling
     try:
+        # Conditional check
         if tool == "cloudflared":
             return _start_cloudflared(port)
         elif tool == "ngrok":
@@ -119,13 +123,15 @@ def start_tunnel(port: int, tool: Optional[str] = None) -> str:
 
 
 def stop_tunnel() -> None:
-    """Stop the running tunnel process."""
+    """Stop the running tunnel process.
+    """
     global _process, _tunnel_url, _monitor_thread
 
     if _process is None:
         logger.info("No tunnel is running.")
         return
 
+    # Error handling
     try:
         _process.terminate()
         _process.wait(timeout=5)
@@ -151,7 +157,9 @@ def get_tunnel_url() -> str:
 
 
 def is_tunnel_running() -> bool:
-    """Check if a tunnel is currently active."""
+    """Check if a tunnel is currently active.
+    """
+    # Conditional check
     if _process is None:
         return False
     return _process.poll() is None
@@ -160,7 +168,8 @@ def is_tunnel_running() -> bool:
 # ── Tool-specific launchers ────────────────────────────────────────
 
 def _start_cloudflared(port: int) -> str:
-    """Start a Cloudflare quick tunnel."""
+    """Start a Cloudflare quick tunnel.
+    """
     global _process, _tunnel_url
 
     cmd = ["cloudflared", "tunnel", "--url", f"http://localhost:{port}"]
@@ -191,7 +200,8 @@ def _start_cloudflared(port: int) -> str:
 
 
 def _start_ngrok(port: int) -> str:
-    """Start an ngrok tunnel."""
+    """Start an ngrok tunnel.
+    """
     global _process, _tunnel_url
 
     cmd = ["ngrok", "http", str(port), "--log", "stdout"]
@@ -221,7 +231,8 @@ def _start_ngrok(port: int) -> str:
 
 
 def _start_localtunnel(port: int) -> str:
-    """Start a localtunnel (lt) tunnel."""
+    """Start a localtunnel (lt) tunnel.
+    """
     global _process, _tunnel_url
 
     cmd = ["lt", "--port", str(port)]
@@ -264,11 +275,14 @@ def _capture_url_from_output(
     url = ""
     deadline = time.time() + timeout
 
+    # Loop processing
     while time.time() < deadline:
+        # Conditional check
         if proc.stdout is None:
             break
         # Use a short readline with the deadline in mind
         line = proc.stdout.readline()
+        # Conditional check
         if not line:
             if proc.poll() is not None:
                 break
@@ -283,7 +297,8 @@ def _capture_url_from_output(
     # Drain remaining output in background to prevent pipe blocking
     if proc.stdout:
         def _drain():
-            """Read and discard stdout to prevent pipe buffer deadlocks."""
+            """Read and discard stdout to prevent pipe buffer deadlocks.
+            """
             try:
                 for _ in proc.stdout:
                     pass

@@ -20,3 +20,15 @@ Modernise the company website with new branding, improved UX, and mobile-first r
 ## Notes
 - Stakeholder meeting scheduled for Feb 12
 - Brand guidelines document available in shared drive
+
+## Quick Start
+
+```bash
+# View project tasks
+python3 -m scripts list --project sample-project
+```
+
+## Usage
+```bash
+ls tasks/
+```

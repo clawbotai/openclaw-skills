@@ -20,6 +20,7 @@ REPORTS_DIR="$BD_DIR/reports"
 mkdir -p "$REPORTS_DIR"
 
 
+# Generate a weekly BD pipeline report markdown file
 generate_weekly() {
     local date=$(date +%Y-%m-%d)
     local report_file="${REPORTS_DIR}/weekly-${date}.md"
@@ -81,6 +82,7 @@ EOF
 }
 
 
+# Generate a quarterly BD review report markdown file
 generate_quarterly() {
     local date=$(date +%Y-%m-%d)
     local quarter=$(( ($(date +%-m) - 1) / 3 + 1 ))

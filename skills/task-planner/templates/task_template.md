@@ -22,3 +22,16 @@ dependencies: []
 ## Attachments
 
 ## Agent Tips
+
+```yaml
+# Example task entry
+title: Implement feature X
+status: todo
+priority: medium
+assignee: dev-1
+```
+
+## Usage
+```bash
+create_task "My Task" --project inbox
+```

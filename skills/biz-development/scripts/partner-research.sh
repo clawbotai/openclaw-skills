@@ -22,6 +22,7 @@ TEMPLATE="$BD_DIR/templates/partner-profile.md"
 mkdir -p "$PARTNERS_DIR"
 
 
+# Display usage instructions and examples
 show_help() {
     echo "Partner Research Tool"
     echo "====================="
@@ -36,6 +37,7 @@ show_help() {
 }
 
 
+# Print a structured research checklist for the given company
 research_checklist() {
     local company="$1"
     
@@ -72,6 +74,7 @@ research_checklist() {
 }
 
 
+# Create a partner profile markdown file from template or defaults
 create_profile() {
     local company="$1"
     local filename=$(echo "$company" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')

@@ -38,6 +38,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
 _config_path: Optional[Path] = None
 
 
+# Internal helper: get config path
 def _get_config_path(workspace_path: Optional[str] = None) -> Path:
     """
     Resolve the path to config.json.
@@ -60,6 +61,7 @@ def _get_config_path(workspace_path: Optional[str] = None) -> Path:
     return _config_path
 
 
+# Update  config path
 def set_config_path(workspace_path: str) -> None:
     """
     Set the workspace path used by the config manager.
@@ -74,6 +76,7 @@ def set_config_path(workspace_path: str) -> None:
     logger.info("Config path set to %s", _config_path)
 
 
+# Load config
 def load_config(workspace_path: Optional[str] = None) -> dict[str, Any]:
     """
     Load the configuration file.
@@ -98,11 +101,14 @@ def load_config(workspace_path: Optional[str] = None) -> dict[str, Any]:
         return _deep_copy_config(DEFAULT_CONFIG)
 
     raw = safe_read_file(path)
+    # Conditional check
     if raw is None:
         logger.warning("Could not read config — using defaults.")
         return _deep_copy_config(DEFAULT_CONFIG)
 
+    # Error handling
     try:
+        # JSON serialization
         config = json.loads(raw)
         # Merge with defaults so new keys are always present
         merged = _merge_config(DEFAULT_CONFIG, config)
@@ -112,6 +118,7 @@ def load_config(workspace_path: Optional[str] = None) -> dict[str, Any]:
         return _deep_copy_config(DEFAULT_CONFIG)
 
 
+# Save config
 def save_config(config: dict[str, Any], workspace_path: Optional[str] = None) -> bool:
     """
     Persist the configuration dictionary to disk.
@@ -126,6 +133,7 @@ def save_config(config: dict[str, Any], workspace_path: Optional[str] = None) ->
     path = _get_config_path(workspace_path)
     ensure_directory(path.parent)
 
+    # Error handling
     try:
         content = json.dumps(config, indent=2, ensure_ascii=False)
         return safe_write_file(path, content)
@@ -236,7 +244,8 @@ def get_preference(key: str) -> Any:
 # ── Internal helpers ────────────────────────────────────────────────
 
 def _deep_copy_config(source: dict) -> dict:
-    """Return a deep copy of a config dict via JSON round-trip."""
+    """Return a deep copy of a config dict via JSON round-trip.
+    """
     return json.loads(json.dumps(source))
 
 
@@ -248,7 +257,9 @@ def _merge_config(defaults: dict, overrides: dict) -> dict:
     are preserved so that newly added settings always appear.
     """
     merged = _deep_copy_config(defaults)
+    # Iterate through items
     for key, value in overrides.items():
+        # Conditional check
         if key in merged and isinstance(merged[key], dict) and isinstance(value, dict):
             merged[key] = _merge_config(merged[key], value)
         else:

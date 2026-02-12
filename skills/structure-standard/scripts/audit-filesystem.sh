@@ -14,6 +14,7 @@ WORKSPACE="${HOME_DIR}/openclaw/workspace"
 OPENCLAW="${HOME_DIR}/.openclaw"
 
 
+# Display usage information and available options
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -46,13 +47,14 @@ for arg in "$@"; do
 done
 
 
+# Record a passing check and increment score
 pass() {
     TOTAL=$((TOTAL + 1))
     SCORE=$((SCORE + 1))
     $QUIET || echo "  ✅ $1"
 }
 
-
+# Record a failing check and store the issue message
 fail() {
     TOTAL=$((TOTAL + 1))
     ISSUES+=("$1")
@@ -61,6 +63,7 @@ fail() {
 }
 
 
+# Print a section header for organized output
 section() {
     echo ""
     echo "━━━ $1 ━━━"
@@ -116,6 +119,7 @@ fi
 section "Permissions"
 
 
+# Check file/directory permissions against expected value
 check_perm() {
     local path="$1" expected="$2" label="$3"
     if [ ! -e "$path" ]; then return; fi

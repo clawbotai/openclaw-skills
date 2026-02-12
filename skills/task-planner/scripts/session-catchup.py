@@ -19,8 +19,10 @@ PLANNING_FILES = ['task_plan.md', 'progress.md', 'findings.md']
 
 
 def get_project_dir(project_path: str) -> Path:
-    """Convert project path to Claude's storage path format."""
+    """Convert project path to Claude's storage path format.
+    """
     sanitized = project_path.replace('/', '-')
+    # Conditional check
     if not sanitized.startswith('-'):
         sanitized = '-' + sanitized
     sanitized = sanitized.replace('_', '-')
@@ -28,17 +30,22 @@ def get_project_dir(project_path: str) -> Path:
 
 
 def get_sessions_sorted(project_dir: Path) -> List[Path]:
-    """Get all session files sorted by modification time (newest first)."""
+    """Get all session files sorted by modification time (newest first).
+    """
     sessions = list(project_dir.glob('*.jsonl'))
     main_sessions = [s for s in sessions if not s.name.startswith('agent-')]
     return sorted(main_sessions, key=lambda p: p.stat().st_mtime, reverse=True)
 
 
 def parse_session_messages(session_file: Path) -> List[Dict]:
-    """Parse all messages from a session file, preserving order."""
+    """Parse all messages from a session file, preserving order.
+    """
     messages = []
+    # Context manager
     with open(session_file, 'r') as f:
+        # Iterate through items
         for line_num, line in enumerate(f):
+            # Error handling
             try:
                 data = json.loads(line)
                 data['_line_num'] = line_num
@@ -56,6 +63,7 @@ def find_last_planning_update(messages: List[Dict]) -> Tuple[int, Optional[str]]
     last_update_line = -1
     last_update_file = None
 
+    # Iterate through items
     for msg in messages:
         msg_type = msg.get('type')
 
@@ -78,7 +86,8 @@ def find_last_planning_update(messages: List[Dict]) -> Tuple[int, Optional[str]]
 
 
 def extract_messages_after(messages: List[Dict], after_line: int) -> List[Dict]:
-    """Extract conversation messages after a certain line number."""
+    """Extract conversation messages after a certain line number.
+    """
     result = []
     for msg in messages:
         if msg['_line_num'] <= after_line:
@@ -139,6 +148,8 @@ def extract_messages_after(messages: List[Dict], after_line: int) -> List[Dict]:
 
 
 def main():
+    """main.
+    """
     project_path = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     project_dir = get_project_dir(project_path)
 

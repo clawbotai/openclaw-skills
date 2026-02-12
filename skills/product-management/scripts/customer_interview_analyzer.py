@@ -10,10 +10,12 @@ from collections import Counter, defaultdict
 import json
 
 class InterviewAnalyzer:
-    """Analyze customer interviews for insights and patterns"""
+    """Analyze customer interviews for insights and patterns
+    """
     
     def __init__(self):
-        """Initialize with empty data structures."""
+        """Initialize with empty data structures.
+        """
         # Pain point indicators
         self.pain_indicators = [
             'frustrat', 'annoy', 'difficult', 'hard', 'confus', 'slow',
@@ -47,7 +49,8 @@ class InterviewAnalyzer:
         ]
     
     def analyze_interview(self, text: str) -> Dict:
-        """Analyze a single interview transcript"""
+        """Analyze a single interview transcript
+        """
         text_lower = text.lower()
         sentences = self._split_sentences(text)
         
@@ -66,13 +69,15 @@ class InterviewAnalyzer:
         return analysis
     
     def _split_sentences(self, text: str) -> List[str]:
-        """Split text into sentences"""
+        """Split text into sentences
+        """
         # Simple sentence splitting
         sentences = re.split(r'[.!?]+', text)
         return [s.strip() for s in sentences if s.strip()]
     
     def _extract_pain_points(self, sentences: List[str]) -> List[Dict]:
-        """Extract pain points from sentences"""
+        """Extract pain points from sentences
+        """
         pain_points = []
         
         for sentence in sentences:
@@ -90,7 +95,8 @@ class InterviewAnalyzer:
         return pain_points[:10]  # Return top 10
     
     def _extract_delights(self, sentences: List[str]) -> List[Dict]:
-        """Extract positive feedback"""
+        """Extract positive feedback
+        """
         delights = []
         
         for sentence in sentences:
@@ -107,7 +113,8 @@ class InterviewAnalyzer:
         return delights[:10]
     
     def _extract_requests(self, sentences: List[str]) -> List[Dict]:
-        """Extract feature requests and suggestions"""
+        """Extract feature requests and suggestions
+        """
         requests = []
         
         for sentence in sentences:
@@ -124,7 +131,8 @@ class InterviewAnalyzer:
         return requests[:10]
     
     def _extract_jtbd(self, text: str) -> List[Dict]:
-        """Extract Jobs to Be Done patterns"""
+        """Extract Jobs to Be Done patterns
+        """
         jobs = []
         
         for pattern in self.jtbd_patterns:
@@ -143,7 +151,8 @@ class InterviewAnalyzer:
         return jobs[:5]
     
     def _calculate_sentiment(self, text: str) -> Dict:
-        """Calculate overall sentiment of the interview"""
+        """Calculate overall sentiment of the interview
+        """
         positive_count = sum(1 for ind in self.delight_indicators if ind in text)
         negative_count = sum(1 for ind in self.pain_indicators if ind in text)
         
@@ -168,7 +177,8 @@ class InterviewAnalyzer:
         }
     
     def _extract_themes(self, text: str) -> List[str]:
-        """Extract key themes using word frequency"""
+        """Extract key themes using word frequency
+        """
         # Remove common words
         stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at',
                      'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is',
@@ -190,7 +200,8 @@ class InterviewAnalyzer:
         return themes
     
     def _extract_key_quotes(self, sentences: List[str]) -> List[str]:
-        """Extract the most insightful quotes"""
+        """Extract the most insightful quotes
+        """
         scored_sentences = []
         
         for sentence in sentences:
@@ -220,7 +231,8 @@ class InterviewAnalyzer:
         return [s[1] for s in scored_sentences[:5]]
     
     def _extract_metrics(self, text: str) -> List[str]:
-        """Extract any metrics or numbers mentioned"""
+        """Extract any metrics or numbers mentioned
+        """
         metrics = []
         
         # Find percentages
@@ -244,7 +256,8 @@ class InterviewAnalyzer:
         return list(set(metrics))[:10]
     
     def _extract_competitors(self, text: str) -> List[str]:
-        """Extract competitor mentions"""
+        """Extract competitor mentions
+        """
         # Common competitor indicators
         competitor_patterns = [
             r'(?:use|used|using|tried|trying|switch from|switched from|instead of)\s+(\w+)',
@@ -266,7 +279,8 @@ class InterviewAnalyzer:
         return list(competitors)[:5]
     
     def _assess_severity(self, text: str) -> str:
-        """Assess severity of pain point"""
+        """Assess severity of pain point
+        """
         if any(word in text for word in ['very', 'extremely', 'really', 'totally', 'completely']):
             return 'high'
         elif any(word in text for word in ['somewhat', 'bit', 'little', 'slightly']):
@@ -274,13 +288,15 @@ class InterviewAnalyzer:
         return 'medium'
     
     def _assess_strength(self, text: str) -> str:
-        """Assess strength of positive feedback"""
+        """Assess strength of positive feedback
+        """
         if any(word in text for word in ['absolutely', 'definitely', 'really', 'very']):
             return 'strong'
         return 'moderate'
     
     def _classify_request(self, text: str) -> str:
-        """Classify the type of request"""
+        """Classify the type of request
+        """
         if any(word in text for word in ['ui', 'design', 'look', 'color', 'layout']):
             return 'ui_improvement'
         elif any(word in text for word in ['feature', 'add', 'new', 'build']):
@@ -292,7 +308,8 @@ class InterviewAnalyzer:
         return 'general'
     
     def _assess_request_priority(self, text: str) -> str:
-        """Assess priority of request"""
+        """Assess priority of request
+        """
         if any(word in text for word in ['critical', 'urgent', 'asap', 'immediately', 'blocking']):
             return 'critical'
         elif any(word in text for word in ['need', 'important', 'should', 'must']):
@@ -302,7 +319,8 @@ class InterviewAnalyzer:
         return 'medium'
 
 def aggregate_interviews(interviews: List[Dict]) -> Dict:
-    """Aggregate insights from multiple interviews"""
+    """Aggregate insights from multiple interviews
+    """
     aggregated = {
         'total_interviews': len(interviews),
         'common_pain_points': defaultdict(list),
@@ -357,7 +375,8 @@ def aggregate_interviews(interviews: List[Dict]) -> Dict:
     return aggregated
 
 def format_single_interview(analysis: Dict) -> str:
-    """Format single interview analysis"""
+    """Format single interview analysis
+    """
     output = ["=" * 60]
     output.append("CUSTOMER INTERVIEW ANALYSIS")
     output.append("=" * 60)
@@ -412,7 +431,8 @@ def format_single_interview(analysis: Dict) -> str:
     return "\n".join(output)
 
 def main():
-    """CLI entry point: parse args and run the interview analysis pipeline."""
+    """CLI entry point: parse args and run the interview analysis pipeline.
+    """
     import sys
     
     if len(sys.argv) < 2:

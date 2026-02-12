@@ -17,6 +17,7 @@ VERSION="2.0.0"
 # =============================================================================
 
 
+# Display usage information and available commands
 show_help() {
     cat <<'EOF'
 NAME
@@ -124,6 +125,7 @@ TARGET="$(cd "$TARGET" 2>/dev/null && pwd || realpath "$TARGET")"
 # =============================================================================
 
 
+# Detect programming languages in the project directory
 detect_languages() {
     local dir="$1"
     find "$dir" -type f \( -name "*.sh" -o -name "*.bash" -o -name "*.js" -o -name "*.ts" \
@@ -134,6 +136,7 @@ detect_languages() {
 }
 
 
+# Calculate the comment-to-code ratio for a file
 comment_ratio() {
     local file="$1"
     local ext="${file##*.}"
@@ -152,6 +155,7 @@ comment_ratio() {
 }
 
 
+# Begin formatted output section with a header
 output_start() {
     if [[ -n "$OUTPUT" ]]; then
         exec 3>&1
@@ -160,6 +164,7 @@ output_start() {
 }
 
 
+# Close formatted output section
 output_end() {
     if [[ -n "$OUTPUT" ]]; then
         exec >&3
@@ -172,6 +177,7 @@ output_end() {
 # =============================================================================
 
 
+# Scaffold Gold Standard documentation files for a project
 mode_scaffold() {
     local project_name
     project_name=$(basename "$TARGET")
@@ -281,6 +287,7 @@ mode_scaffold() {
 # =============================================================================
 
 
+# Generate inline documentation suggestions for source files
 mode_inline() {
     output_start
     echo "# Inline Documentation Analysis"
@@ -330,6 +337,7 @@ mode_inline() {
 # =============================================================================
 
 
+# Generate API reference documentation from source code
 mode_reference() {
     output_start
     echo "# Function Reference"
@@ -417,6 +425,7 @@ mode_reference() {
 # =============================================================================
 
 
+# Inject --help support into scripts lacking it
 mode_help() {
     echo "Injecting --help support into shell scripts in: $TARGET"
     echo ""
@@ -428,6 +437,7 @@ mode_help() {
 # =============================================================================
 
 
+# Generate a project overview document
 mode_overview() {
     output_start
     local project_name
@@ -486,6 +496,7 @@ mode_overview() {
 # =============================================================================
 
 
+# Score documentation quality (delegates to score-docs.sh)
 mode_score() {
     bash "$SCRIPT_DIR/score-docs.sh" "$TARGET"
 }

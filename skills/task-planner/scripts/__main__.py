@@ -30,7 +30,8 @@ from .export import export_dashboard
 
 
 def main() -> None:
-    """Parse CLI arguments and dispatch to the appropriate planner subcommand."""
+    """Parse CLI arguments and dispatch to the appropriate planner subcommand.
+    """
     setup_logging()
 
     parser = argparse.ArgumentParser(
@@ -211,7 +212,8 @@ def main() -> None:
 
 
 def _ensure_workspace(args: argparse.Namespace) -> None:
-    """Point the config manager at the workspace, if provided."""
+    """Point the config manager at the workspace, if provided.
+    """
     ws = getattr(args, "workspace_path", None)
     if ws:
         set_config_path(ws)

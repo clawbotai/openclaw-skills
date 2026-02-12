@@ -98,7 +98,8 @@ def export_dashboard(output_dir: Optional[str] = None) -> Optional[str]:
 
 
 def _read_file(path: Path) -> Optional[str]:
-    """Read a text file, returning None on error."""
+    """Read a text file, returning None on error.
+    """
     try:
         return path.read_text(encoding="utf-8")
     except OSError as e:

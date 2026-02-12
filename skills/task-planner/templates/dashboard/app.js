@@ -94,6 +94,7 @@
 
   // ── Theme ───────────────────────────────────────────────────────
 
+  /** initTheme */
   function initTheme() {
     const saved = localStorage.getItem("nlp-theme");
     if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -101,6 +102,7 @@
     }
   }
 
+  /** toggleTheme */
   function toggleTheme() {
     els.body.classList.toggle("dark");
     localStorage.setItem("nlp-theme", els.body.classList.contains("dark") ? "dark" : "light");
@@ -108,6 +110,7 @@
 
   // ── API helpers ─────────────────────────────────────────────────
 
+  /** api */
   async function api(endpoint) {
     try {
       const resp = await fetch(`${API_BASE}${endpoint}`);
@@ -121,6 +124,7 @@
 
   // ── Data loading ────────────────────────────────────────────────
 
+  /** loadAll */
   async function loadAll() {
     const [s, p, t, a] = await Promise.all([
       api("/api/stats"),
@@ -183,6 +187,7 @@
     return `<span class="tag">${esc(tagName)}</span>`;
   }
 
+  /** loadTaskDetail */
   async function loadTaskDetail(taskId) {
     // Always fetch fresh detail — don't serve stale cache
     const detail = await api(`/api/task/${encodeURIComponent(taskId)}`);
@@ -192,6 +197,7 @@
 
   // ── Rendering ───────────────────────────────────────────────────
 
+  /** render */
   function render() {
     renderStats();
     renderWeekFocus();
@@ -201,6 +207,7 @@
     renderArchive();
   }
 
+  /** renderStats */
   function renderStats() {
     els.statTotal.textContent = stats.total_tasks ?? "—";
     els.statTodo.textContent = stats.by_status?.todo ?? "—";
@@ -212,6 +219,7 @@
 
   // ── This Week Focus ─────────────────────────────────────────────
 
+  /** getWeekBounds */
   function getWeekBounds() {
     const now = new Date();
     const day = now.getDay();
@@ -225,6 +233,7 @@
     return { monday, sunday };
   }
 
+  /** renderWeekFocus */
   function renderWeekFocus() {
     const { monday, sunday } = getWeekBounds();
 
@@ -282,6 +291,7 @@
     });
   }
 
+  /** focusCardHTML */
   function focusCardHTML(task) {
     const isOverdue = task.due && new Date(task.due + "T23:59:59") < new Date();
     const dueLabel = task.due ? formatDate(task.due) : "";
@@ -322,6 +332,7 @@
 
   // ── Board ───────────────────────────────────────────────────────
 
+  /** renderBoard */
   function renderBoard() {
     const buckets = { todo: [], "in-progress": [], done: [] };
     for (const task of allTasks) {
@@ -340,6 +351,7 @@
     attachCardClicks();
   }
 
+  /** taskCardHTML */
   function taskCardHTML(task) {
     const dueClass = task.due && new Date(task.due) < new Date() ? "overdue" : "";
     const dueLabel = task.due ? formatDate(task.due) : "";
@@ -368,6 +380,7 @@
       </div>`;
   }
 
+  /** attachCardClicks */
   function attachCardClicks() {
     $$(".task-card").forEach((card) => {
       card.addEventListener("click", () => openModal(card.dataset.id));
@@ -376,6 +389,7 @@
 
   // ── Projects ────────────────────────────────────────────────────
 
+  /** renderProjects */
   function renderProjects() {
     if (!allProjects.length) {
       els.projectsGrid.innerHTML =
@@ -418,6 +432,7 @@
 
   // ── Timeline ────────────────────────────────────────────────────
 
+  /** renderTimeline */
   function renderTimeline() {
     const withDue = allTasks
       .filter((t) => t.due && t.status !== "done" && t.status !== "archived")
@@ -468,6 +483,7 @@
 
   // ── Archive ─────────────────────────────────────────────────────
 
+  /** renderArchive */
   function renderArchive() {
     if (!archivedTasks.length) {
       els.archiveCount.textContent = "";
@@ -516,6 +532,7 @@
     });
   }
 
+  /** archiveItemHTML */
   function archiveItemHTML(task) {
     const tags = (task.tags || [])
       .slice(0, 4)
@@ -536,6 +553,7 @@
       </div>`;
   }
 
+  /** formatMonth */
   function formatMonth(iso) {
     if (!iso) return "Unknown";
     try {
@@ -550,6 +568,7 @@
 
   let searchDebounce = null;
 
+  /** handleSearch */
   function handleSearch() {
     const query = els.searchInput.value.trim();
     if (!query) {
@@ -563,6 +582,7 @@
     }, 300);
   }
 
+  /** showSearch */
   function showSearch(results) {
     els.views.forEach((v) => v.classList.remove("active"));
     els.viewSearch.style.display = "block";
@@ -578,6 +598,7 @@
     attachCardClicks();
   }
 
+  /** hideSearch */
   function hideSearch() {
     els.viewSearch.style.display = "none";
     els.viewSearch.classList.remove("active");
@@ -586,6 +607,7 @@
 
   // ── Modal (with full detail, context, and gallery) ──────────────
 
+  /** openModal */
   async function openModal(taskId) {
     // Start with list data for instant display (check active tasks, then archive)
     const listTask = allTasks.find((t) => t.id === taskId)
@@ -601,6 +623,7 @@
     }
   }
 
+  /** populateModal */
   function populateModal(task, detail) {
     const statusClass = `badge-${task.status || "todo"}`;
     const priorityClass = `badge-priority-${task.priority || "medium"}`;
@@ -656,6 +679,7 @@
     renderAgentTips(detail);
   }
 
+  /** renderGallery */
   function renderGallery(task, detail) {
     // Collect attachment paths from the body
     const attachments = [];
@@ -732,6 +756,7 @@
     });
   }
 
+  /** parseBodySections */
   function parseBodySections(body) {
     const sections = { description: "", context: "", notes: "", attachments: "", agentTips: [] };
     const parts = body.split(/^## /m);
@@ -761,12 +786,14 @@
     return sections;
   }
 
+  /** closeModal */
   function closeModal() {
     els.modalOverlay.classList.remove("open");
   }
 
   // ── Agent Tips ──────────────────────────────────────────────────
 
+  /** renderAgentTips */
   function renderAgentTips(detail) {
     if (!detail || !detail.body) {
       els.modalAgentTips.style.display = "none";
@@ -797,6 +824,7 @@
     els.agentTipsChevron.classList.add("open");
   }
 
+  /** toggleAgentTips */
   function toggleAgentTips() {
     els.agentTipsBody.classList.toggle("open");
     els.agentTipsChevron.classList.toggle("open");
@@ -804,11 +832,13 @@
 
   // ── Lightbox ────────────────────────────────────────────────────
 
+  /** openLightbox */
   function openLightbox(src) {
     els.lightboxImg.src = src;
     els.lightboxOverlay.classList.add("open");
   }
 
+  /** closeLightbox */
   function closeLightbox() {
     els.lightboxOverlay.classList.remove("open");
     els.lightboxImg.src = "";
@@ -816,6 +846,7 @@
 
   // ── View switching ──────────────────────────────────────────────
 
+  /** switchView */
   function switchView(name) {
     currentView = name;
     els.tabs.forEach((tab) => {
@@ -830,12 +861,14 @@
 
   // ── Utilities ───────────────────────────────────────────────────
 
+  /** buildBannerUrl */
   function buildBannerUrl(task) {
     if (!task.thumbnail) return "";
     const project = task.project || "inbox";
     return `${API_BASE}/api/attachment/${encodeURIComponent(project)}/${encodeURIComponent(task.thumbnail)}`;
   }
 
+  /** esc */
   function esc(str) {
     if (!str) return "";
     const div = document.createElement("div");
@@ -857,6 +890,7 @@
       .replace(/~~(.+?)~~/g, "$1");       // ~~strikethrough~~
   }
 
+  /** formatDate */
   function formatDate(iso) {
     if (!iso) return "";
     try {
@@ -871,10 +905,12 @@
     }
   }
 
+  /** formatDateShort */
   function formatDateShort(date) {
     return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
   }
 
+  /** isOverdue */
   function isOverdue(iso) {
     if (!iso) return false;
     try {
@@ -886,6 +922,7 @@
 
   // ── Event binding ───────────────────────────────────────────────
 
+  /** init */
   function init() {
     // Theme
     initTheme();

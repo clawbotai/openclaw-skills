@@ -22,6 +22,7 @@ _index: dict[str, Any] = {"tasks": {}, "projects": {}, "built_at": ""}
 
 # ── Public API ─────────────────────────────────────────────────────
 
+# Rebuild index
 def rebuild_index() -> bool:
     """
     Rebuild the in-memory index by scanning all markdown files.
@@ -38,17 +39,22 @@ def rebuild_index() -> bool:
         3
     """
     root = _workspace_root()
+    # Conditional check
     if root is None:
         return False
 
     global _index
+    # Initialize data structure
     _index = {"tasks": {}, "projects": {}, "built_at": datetime.now().isoformat()}
 
     # Index projects
     projects_dir = root / "projects"
+    # Conditional check
     if projects_dir.exists():
+        # Iterate through items
         for readme in projects_dir.glob("*/README.md"):
             raw = safe_read_file(readme)
+            # Conditional check
             if raw is None:
                 continue
             meta, body = parse_frontmatter(raw)
@@ -62,6 +68,7 @@ def rebuild_index() -> bool:
     # Index tasks
     for task_file in projects_dir.glob("*/tasks/task-*.md"):
         raw = safe_read_file(task_file)
+        # Conditional check
         if raw is None:
             continue
         meta, body = parse_frontmatter(raw)
@@ -74,9 +81,12 @@ def rebuild_index() -> bool:
 
     # Also index archived tasks for search
     archive_dir = root / "archive"
+    # Conditional check
     if archive_dir.exists():
+        # Iterate through items
         for task_file in archive_dir.glob("*/tasks/task-*.md"):
             raw = safe_read_file(task_file)
+            # Conditional check
             if raw is None:
                 continue
             meta, body = parse_frontmatter(raw)
@@ -122,6 +132,7 @@ def search_tasks(query: str, include_archived: bool = False) -> list[dict[str, A
     title_matches = []
     other_matches = []
 
+    # Iterate through items
     for tid, task in _index["tasks"].items():
         if not include_archived and task.get("_archived"):
             continue
@@ -310,7 +321,8 @@ def get_stats() -> dict[str, Any]:
 # ── Internal helpers ───────────────────────────────────────────────
 
 def _workspace_root() -> Optional[Path]:
-    """Get workspace root from config."""
+    """Get workspace root from config.
+    """
     config = load_config()
     ws = config.get("workspace_path", "")
     if not ws:
@@ -320,18 +332,21 @@ def _workspace_root() -> Optional[Path]:
 
 
 def _ensure_index() -> None:
-    """Rebuild the index if it hasn't been built yet."""
+    """Rebuild the index if it hasn't been built yet.
+    """
     if not _index["tasks"] and not _index["projects"]:
         rebuild_index()
 
 
 def _clean_task(task: dict[str, Any]) -> dict[str, Any]:
-    """Return a copy of task metadata without internal fields."""
+    """Return a copy of task metadata without internal fields.
+    """
     return {k: v for k, v in task.items() if not k.startswith("_")}
 
 
 def _persist_index(root: Path) -> None:
-    """Save the index to disk for faster cold starts."""
+    """Save the index to disk for faster cold starts.
+    """
     index_path = root / ".nlplanner" / "index.json"
     ensure_directory(index_path.parent)
 

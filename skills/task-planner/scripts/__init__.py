@@ -1,5 +1,6 @@
 """
 Natural Language Planner - Python utilities for task and project management.
+# Task planner package initialization — part of the task-planner skill
 
 This package provides core functionality for the Natural Language Planner skill,
 including file operations, configuration management, search indexing, and a

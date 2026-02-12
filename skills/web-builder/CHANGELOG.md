@@ -1,5 +1,10 @@
 # Changelog
 
+```bash
+# Check current version
+cat skills/web-builder/_meta.json | grep version
+```
+
 ## 1.0.0 — 2026-02-11
 
 - Initial release: merged from `web-bundling`, `web-deploy-github`, and `sveltekit-webapp` skills

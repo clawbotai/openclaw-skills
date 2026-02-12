@@ -15,3 +15,10 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 - Initial skill scaffold
 - SKILL.md draft with core workflow
+
+## Upgrade Example
+```bash
+# Pull latest and verify
+git pull origin main
+bash skills/task-planner/scripts/init-session.sh
+```

@@ -149,3 +149,28 @@ natural conversation.
 >
 > It auto-refreshes every 5 seconds, so any changes I make will appear
 > right away.
+
+## Example CLI Usage
+
+```bash
+# Start the dashboard server
+python3 -m scripts --serve --port 8080
+
+# Create a new task from command line
+python3 -m scripts create "Fix login bug" --project web-app --priority high
+
+# List all tasks
+python3 -m scripts list --status active
+
+# Initialize a file-based planning session
+bash scripts/init-session.sh my-complex-task
+
+# Check planning session completion
+bash scripts/check-complete.sh
+```
+
+## Quick Start Example
+```
+User: Create a project called "Q1 Goals"
+Agent: Done — project q1-goals created with inbox task list.
+```
