@@ -1,0 +1,12 @@
+{
+  "name": "agent-guardrails",
+  "slug": "agent-guardrails",
+  "version": "1.0.0",
+  "description": "Self-sovereign safety layer for autonomous AI agents. 4-tier action classification (T1-T4), policy engine, sensitive data scanning, rate limiting, audit trail, file rollback snapshots, prompt injection detection. Advisory system — the agent voluntarily consults it before acting.",
+  "author": "clawbotai",
+  "license": "MIT",
+  "tags": ["safety", "guardrails", "security", "audit", "policy", "agent-infrastructure"],
+  "compatibility": {
+    "platform": ["openclaw"]
+  }
+}

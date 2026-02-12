@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "description": "Default guardrails policy for OpenClaw autonomous agents.",
+
+  "tiers": {
+    "T1": { "label": "Safe",   "description": "Read-only, no side effects" },
+    "T2": { "label": "Low",    "description": "Reversible workspace changes" },
+    "T3": { "label": "Medium", "description": "External comms, deletions, pushes", "rate_limit_per_minute": 5 },
+    "T4": { "label": "High",   "description": "Destructive, secrets, system config", "rate_limit_per_hour": 3, "requires_confirmation": true }
+  },
+
+  "rules": [
+    { "action": "file_read",        "tier": "T1" },
+    { "action": "web_search",       "tier": "T1" },
+    { "action": "web_fetch",        "tier": "T1" },
+    { "action": "browser_navigate", "tier": "T1" },
+    { "action": "memory_search",    "tier": "T1" },
+
+    { "action": "file_write",       "tier": "T2", "conditions": { "outside_workspace": "T3", "sensitive_path": "T4" } },
+    { "action": "file_edit",        "tier": "T2", "conditions": { "outside_workspace": "T3", "sensitive_path": "T4" } },
+    { "action": "pip_install",      "tier": "T2" },
+    { "action": "git_commit",       "tier": "T2" },
+    { "action": "exec_shell",       "tier": "T2", "conditions": { "contains_sudo": "T4", "contains_rm_rf": "T4", "outside_workspace": "T3" } },
+
+    { "action": "send_email",       "tier": "T3", "conditions": { "to_unknown": "T4" } },
+    { "action": "send_message",     "tier": "T3", "conditions": { "new_recipient": "T4" } },
+    { "action": "git_push",         "tier": "T3" },
+    { "action": "file_delete",      "tier": "T3", "conditions": { "outside_workspace": "T4" } },
+    { "action": "cron_add",         "tier": "T3" },
+    { "action": "cron_remove",      "tier": "T3" },
+    { "action": "credential_access","tier": "T3" },
+
+    { "action": "sudo_exec",        "tier": "T4" },
+    { "action": "system_config",    "tier": "T4" },
+    { "action": "ssh_connect",      "tier": "T4" },
+    { "action": "secrets_write",    "tier": "T4" }
+  ],
+
+  "sensitive_paths": [
+    ".env", ".ssh", ".gnupg", ".aws", ".config",
+    "/etc/", "/System/", "/usr/local/bin/",
+    "keychain", "credentials", "secrets",
+    "id_rsa", "id_ed25519", ".pem", ".key",
+    "openclaw.json"
+  ],
+
+  "sensitive_patterns": {
+    "aws_access_key":    "AKIA[0-9A-Z]{16}",
+    "aws_secret_key":    "[0-9a-zA-Z/+=]{40}",
+    "openai_key":        "sk-[a-zA-Z0-9_-]{20,}",
+    "github_token":      "ghp_[a-zA-Z0-9]{36}",
+    "github_oauth":      "gho_[a-zA-Z0-9]{36}",
+    "slack_token":       "xox[baprs]-[a-zA-Z0-9-]+",
+    "private_key_block": "-----BEGIN (?:RSA |EC |DSA )?PRIVATE KEY-----",
+    "bearer_token":      "Bearer [a-zA-Z0-9_.\\-]{20,}",
+    "basic_auth":        "Basic [a-zA-Z0-9+/=]{10,}",
+    "generic_secret":    "(?i)(?:password|passwd|secret|token|api_key)\\s*[=:]\\s*['\"]?[a-zA-Z0-9_.\\-/+=]{8,}",
+    "ssn":               "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+    "credit_card":       "\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13})\\b",
+    "phone_number":      "\\b\\+?1?[-.\\s]?\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}\\b",
+    "email_address":     "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+  },
+
+  "prompt_injection_patterns": [
+    "ignore (?:previous|all|above|prior) instructions",
+    "you are now",
+    "new instructions:",
+    "system:\\s",
+    "\\[INST\\]",
+    "<<SYS>>",
+    "forget (?:everything|your rules|your instructions)",
+    "disregard (?:all|your|the) (?:rules|instructions|guidelines)",
+    "override (?:your|safety|security)"
+  ],
+
+  "defaults": {
+    "unknown_action": "T3",
+    "quiet_hours": { "start": "23:00", "end": "08:00", "promote_tier": true },
+    "session_cache_seconds": 300,
+    "max_snapshot_size_mb": 100,
+    "snapshot_retention_days": 7
+  },
+
+  "known_contacts": []
+}
