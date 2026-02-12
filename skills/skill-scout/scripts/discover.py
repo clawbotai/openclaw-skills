@@ -35,6 +35,11 @@ from common import (
 # Circuit breaker — gives up after N consecutive failures per tool
 # ---------------------------------------------------------------------------
 
+# Circuit breaker pattern: if a CLI tool fails N times consecutively, stop
+# calling it and return cached DB results instead.  This prevents cascading
+# failures when a tool is down (e.g. GitHub rate limited, clawhub offline)
+# and avoids wasting time on retries that will likely fail.  The breaker
+# resets on any successful call, so transient failures self-heal.
 _BREAKER_THRESHOLD = 3
 _failure_counts: Dict[str, int] = {"clawhub": 0, "gh": 0}
 
@@ -76,6 +81,10 @@ def _breaker_open(tool: str) -> bool:
 # ClawHub discovery
 # ---------------------------------------------------------------------------
 
+# clawhub search outputs a text table, not JSON.  Each result line looks like:
+#   calendar v1.0.0  Calendar  (0.520)
+# The first line is always a spinner ("- Searching") which we skip.
+# We capture: slug, version, display name, and relevance score.
 _CLAWHUB_LINE_RE = re.compile(
     r"^(\S+)\s+v([\d.]+)\s+(.+?)\s+\(([\d.]+)\)\s*$"
 )
@@ -354,6 +363,11 @@ def parse_awesome_list(refresh: bool = False) -> Dict[str, Any]:
     current_category = "Uncategorized"
     now = utcnow()
 
+    # The awesome list README is structured markdown with:
+    #   ### Category Name (count)   — section headers
+    #   - [name](url) - description — skill entries
+    # We parse both patterns with regex rather than importing a markdown
+    # library, keeping our zero-dependency constraint.
     for line in readme.splitlines():
         # Detect category headers (### Category Name)
         header_match = re.match(r"^###\s+(.+?)(?:\s*\(.*\))?\s*$", line)
@@ -533,6 +547,9 @@ def sweep_categories(categories: List[str], limit_per: int = 10) -> Dict[str, An
 
     results: Dict[str, int] = {}
 
+    # Each category is searched independently in its own thread.
+    # We search both ClawHub (vector search, fast, curated) and GitHub
+    # (broader, catches non-registry repos) for maximum coverage.
     def _search_category(cat: str) -> Tuple[str, int]:
         """Search a single category across available sources.
 

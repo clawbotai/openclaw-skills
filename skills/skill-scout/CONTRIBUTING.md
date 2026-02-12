@@ -27,6 +27,14 @@ python3 -m unittest discover -s tests -v  # Run all tests
 | `scripts/scout.py` | Orchestrator: ranking, gaps, acquisition, watch, reports |
 | `tests/test_*.py` | Unit tests (stdlib unittest) |
 
+## Example: Evaluating a Local Skill
+
+```bash
+cd skills/skill-scout/scripts
+python3 evaluate.py score --path ../../agent-guardrails
+# Output: JSON with 100-point score, 7 dimensions, security flags
+```
+
 ## Adding a New Scoring Dimension
 
 1. In `evaluate.py`, create `_score_<name>(files) -> DimensionScore`

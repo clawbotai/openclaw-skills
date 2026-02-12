@@ -63,7 +63,10 @@ def rank_developers(min_skills: int = 1, limit: int = 20) -> List[Dict[str, Any]
         avg_q = dev.get("avg_skill_quality") or 0
         quality_component = avg_q  # Already 0-100 scale
 
-        # Volume log-scaled (15%) — caps at 20 skills
+        # Volume log-scaled (15%) — caps at 20 skills.
+        # Log scaling prevents gaming: publishing 50 trivial skills won't
+        # outscore someone with 5 excellent ones.  log2(21) ≈ 4.39 is the
+        # denominator, so 20 skills = 100%, 5 skills ≈ 58%, 1 skill ≈ 23%.
         skill_count = dev.get("skill_count", 0)
         volume_component = (math.log2(1 + skill_count) / math.log2(1 + 20)) * 100
 

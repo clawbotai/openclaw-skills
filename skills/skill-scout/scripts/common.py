@@ -101,7 +101,15 @@ CREATE INDEX IF NOT EXISTS idx_skills_author ON skills(author);
 CREATE INDEX IF NOT EXISTS idx_evaluations_slug ON evaluations(slug);
 """
 
+# Global write lock: SQLite WAL allows concurrent reads but serializes writes.
+# We use a Python-level lock rather than relying solely on SQLite's busy_timeout
+# because the Python sqlite3 module's internal locking is per-connection, and
+# our thread-local pattern means each thread has its own connection.
 _write_lock = threading.Lock()
+
+# Thread-local storage for database connections.  Each thread gets its own
+# sqlite3 connection to avoid the "ProgrammingError: SQLite objects created
+# in a thread can only be used in that same thread" restriction.
 _local = threading.local()
 
 

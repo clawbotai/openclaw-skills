@@ -38,6 +38,11 @@ from common import (
 # Known Python 3.9 stdlib modules (for compatibility checking)
 # ---------------------------------------------------------------------------
 
+# Hardcoded set of Python 3.9 stdlib top-level module names.  We use this
+# to check whether a skill depends only on the standard library (which means
+# zero pip installs needed).  Any import not in this set is flagged as a
+# third-party dependency, which hurts the compatibility score.
+# Source: https://docs.python.org/3.9/py-modindex.html
 STDLIB_MODULES = frozenset({
     "abc", "aifc", "argparse", "array", "ast", "asynchat", "asyncio",
     "asyncore", "atexit", "audioop", "base64", "bdb", "binascii",
@@ -80,6 +85,11 @@ STDLIB_MODULES = frozenset({
 # Credential patterns (regex)
 # ---------------------------------------------------------------------------
 
+# Regex patterns for detecting hardcoded credentials in source code.
+# Each tuple is (pattern, human-readable label).  Patterns are designed
+# for high precision: they match specific key formats (e.g. AWS keys
+# start with AKIA, GitHub PATs start with ghp_) rather than generic
+# "long string near keyword" heuristics, to minimize false positives.
 CREDENTIAL_PATTERNS: List[Tuple[str, str]] = [
     (r"AKIA[0-9A-Z]{16}", "AWS Access Key"),
     (r"sk-[a-zA-Z0-9]{20,}", "OpenAI API Key"),
@@ -171,6 +181,11 @@ class SecurityVisitor(ast.NodeVisitor):
     def __init__(self, filename: str = ""):
         self.flags: List[SecurityFlag] = []
         self.filename = filename
+
+    # The core challenge of AST security analysis is resolving the target of
+    # a function call.  Python's AST represents `os.system("cmd")` as a
+    # nested Attribute → Name chain, not a simple string.  We walk backwards
+    # through the chain to reconstruct the dotted name for pattern matching.
 
     def _get_call_name(self, node: ast.Call) -> str:
         """Extract the dotted name of a function call.
@@ -1051,7 +1066,11 @@ def evaluate_skill(
     overall = sum(d.score for d in dims)
     tier = _assign_tier(overall)
 
-    # If critical security flags exist, cap tier at C
+    # Security tier cap: a skill with eval() or hardcoded credentials
+    # should NEVER be rated as high quality, regardless of how well-
+    # documented or popular it is.  This prevents social engineering
+    # attacks where a malicious skill pads its stars and docs to appear
+    # trustworthy while hiding dangerous code.
     critical_flags = [f for f in sec_flags if f.severity == "critical"]
     if critical_flags and tier in ("S", "A", "B"):
         tier = "C"
