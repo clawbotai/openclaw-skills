@@ -1,0 +1,44 @@
+{
+  "email-manager": {
+    "total_calls": 1,
+    "total_failures": 1,
+    "total_successes": 0,
+    "transient_errors": 0,
+    "deterministic_errors": 1,
+    "last_success": null,
+    "last_failure": "2026-02-12T11:07:46.050384+00:00",
+    "circuit": {
+      "state": "closed",
+      "failure_count": 1,
+      "last_failure": null,
+      "opened_at": null,
+      "half_open_at": null,
+      "probe_success": null
+    },
+    "errors": [
+      {
+        "fingerprint": "910de33927ddd195",
+        "skill_name": "email-manager",
+        "error_class": "deterministic",
+        "error_type": "SubprocessError",
+        "error_message": "{\n  \"status\": \"error\",\n  \"code\": \"AUTH_FAILED\",\n  \"message\": \"Authentication failed. iCloud requires an app-specific password. Go to https://appleid.apple.com \u2192 Sign-In and Security \u2192 App-Specific Passwords \u2192 Generate one \u2192 then update keychain: security add-generic-password -a 'clawbotai@icloud.com' -s 'icloud-email' -w '<new-app-password>' -U\"\n}",
+        "traceback": "",
+        "input_args": {
+          "command": "python3 scripts/email_client.py count",
+          "cwd": "/Users/clawai/openclaw/workspace/skills/email-manager"
+        },
+        "environment": {
+          "cwd": "/Users/clawai/openclaw/workspace",
+          "python": "3.9.6",
+          "platform": "macOS-26.2-arm64-arm-64bit",
+          "user": "clawai",
+          "timestamp": "2026-02-12T11:07:46.069877+00:00"
+        },
+        "count": 1,
+        "first_seen": "2026-02-12T11:07:46.050384Z",
+        "last_seen": "2026-02-12T11:07:46.050384Z",
+        "exit_code": 1
+      }
+    ]
+  }
+}
