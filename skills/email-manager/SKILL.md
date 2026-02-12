@@ -32,7 +32,7 @@ iCloud (and Gmail with 2FA) require **app-specific passwords**:
 3. Store it:
 
 ```bash
-security add-generic-password -a "clawbotai@icloud.com" -s "icloud-email" -w '<app-specific-password>' -U
+security add-generic-password -a "clawaibot@icloud.com" -s "icloud-email" -w '<app-specific-password>' -U
 ```
 
 ### 2. Verify Access
@@ -187,8 +187,8 @@ Stored in `scripts/config.json`. Defaults:
 |-----|---------|-------------|
 | `provider` | `icloud` | Email provider preset |
 | `keychain_service` | `icloud-email` | macOS Keychain service name |
-| `keychain_account` | `clawbotai@icloud.com` | Keychain account |
-| `default_from` | `clawbotai@icloud.com` | Sender address |
+| `keychain_account` | `clawaibot@icloud.com` | Keychain account |
+| `default_from` | `clawaibot@icloud.com` | Sender address |
 | `signature` | `""` | Appended to outgoing emails |
 | `max_body_chars` | `10000` | Body truncation limit |
 | `triage_keywords_urgent` | `[...]` | Keywords that trigger "urgent" |

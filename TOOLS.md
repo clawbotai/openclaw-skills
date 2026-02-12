@@ -15,9 +15,9 @@ Things like:
 
 ## Email
 
-- **Address:** clawbotai@icloud.com
-- **Credentials:** macOS Keychain → service: `icloud-email`, account: `clawbotai@icloud.com`
-- **Retrieve:** `security find-generic-password -a "clawbotai@icloud.com" -s "icloud-email" -w`
+- **Address:** clawaibot@icloud.com
+- **Credentials:** macOS Keychain → service: `icloud-email`, account: `clawaibot@icloud.com`
+- **Retrieve:** `security find-generic-password -a "clawaibot@icloud.com" -s "icloud-email" -w`
 
 ## Monitored Skill Execution
 

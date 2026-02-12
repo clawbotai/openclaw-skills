@@ -175,8 +175,8 @@ PROVIDERS = {
 DEFAULT_CONFIG = {
     "provider": "icloud",
     "keychain_service": "icloud-email",
-    "keychain_account": "clawbotai@icloud.com",
-    "default_from": "clawbotai@icloud.com",
+    "keychain_account": "clawaibot@icloud.com",
+    "default_from": "clawaibot@icloud.com",
     "signature": "",
     "max_body_chars": 10000,
     "connect_timeout": 30,
