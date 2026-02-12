@@ -1,0 +1,7 @@
+{
+  "slug": "email-manager",
+  "version": "1.0.0",
+  "name": "Email Manager",
+  "description": "Full IMAP/SMTP email client optimized for autonomous AI agents. Structured JSON output, priority detection, smart triage, threaded conversations, and batch operations.",
+  "tags": ["email", "imap", "smtp", "icloud", "autonomous", "triage", "communication"]
+}

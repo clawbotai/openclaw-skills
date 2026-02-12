@@ -1,0 +1,7 @@
+{
+  "slug": "master-performance",
+  "version": "1.0.0",
+  "name": "Master Performance",
+  "description": "Unified performance engineering and FinOps — profiling, load testing, Core Web Vitals, multi-tier caching, database optimization, cloud cost optimization, auto-scaling, and carbon-aware computing.",
+  "tags": ["performance", "finops", "load-testing", "caching", "cost-optimization"]
+}

@@ -1,0 +1,7 @@
+task_id: "qhu_auto_update"
+type: "recurring"
+schedule: "*/2 * * * *"  # Run every 2 minutes (cron syntax)
+command: "python3 scripts/cerebro_tick.py"
+cwd: "skills/quarter-hour-updates"
+env:
+  PYTHONUNBUFFERED: "1"

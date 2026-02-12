@@ -1,0 +1,16 @@
+{
+  "type": "go-app",
+  "description": "Go application template with standard project layout",
+  "files": {
+    "go.mod": "Go module definition",
+    "cmd/{app}/main.go": "Application entry point",
+    "internal/handler/": "HTTP/gRPC handlers (private)",
+    "internal/service/": "Business logic (private)",
+    "internal/model/": "Data models (private)",
+    "pkg/": "Public reusable packages",
+    "api/": "API definitions (OpenAPI, protobuf)",
+    "scripts/": "Build and utility scripts",
+    "docs/": "Documentation"
+  },
+  "required": ["go.mod", "cmd/", "README.md", ".gitignore"]
+}

@@ -1,0 +1,7 @@
+{
+  "slug": "master-security",
+  "version": "2.0.0",
+  "name": "Master Security",
+  "description": "Unified security skill — application security, vulnerability management, compliance, host hardening, zero-trust operations, incident response, DevSecOps, and threat modeling.",
+  "tags": ["security", "owasp", "devsecops", "compliance", "vulnerability", "zero-trust"]
+}
