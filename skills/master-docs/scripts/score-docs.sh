@@ -13,6 +13,7 @@ set -euo pipefail
 
 VERSION="2.0.0"
 
+# show_help — handles show help operation
 show_help() {
     cat <<'EOF'
 NAME
@@ -100,7 +101,9 @@ _DETAILS=$(mktemp)
 _SUGGESTIONS=$(mktemp)
 trap 'rm -f "$_DETAILS" "$_SUGGESTIONS"' EXIT
 
+# add_detail — handles add detail operation
 add_detail() { echo "$1" >> "$_DETAILS"; }
+# add_suggest — handles add suggest operation
 add_suggest() { echo "$1" >> "$_SUGGESTIONS"; }
 
 # Helper: safe grep -c that always returns a clean integer

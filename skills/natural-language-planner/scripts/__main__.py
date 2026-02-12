@@ -30,6 +30,7 @@ from .export import export_dashboard
 
 
 def main() -> None:
+    """Handle this operation."""
     setup_logging()
 
     parser = argparse.ArgumentParser(

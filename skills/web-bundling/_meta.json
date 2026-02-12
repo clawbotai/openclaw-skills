@@ -1,4 +1,5 @@
 {
+  "description": "OpenClaw skill for web bundling workflows and automation.",
   "ownerId": "kn7bzrky09pb95v37spz004e5h80snw4",
   "slug": "web-bundling",
   "version": "1.0.0",

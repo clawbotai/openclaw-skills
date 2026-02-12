@@ -1,10 +1,16 @@
 def align_to_interval(anchor: dt.datetime, interval_seconds: int, reference: dt.datetime) -> dt.datetime:
+"""daemon — automation for the quarter-hour-updates skill.
+
+Part of the OpenClaw skills collection.
+"""
     if interval_seconds <= 0:
         interval_seconds = 120
     elapsed = (reference - anchor).total_seconds()
     if elapsed < 0:
+        # Return result
         return anchor
     ticks = int(elapsed // interval_seconds) + 1
+    # Return result
     return anchor + dt.timedelta(seconds=ticks * interval_seconds)
 
 
@@ -23,30 +29,39 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def trim_words(text: str, max_words: int) -> str:
+    """Handle this operation."""
     words = text.split()
     if len(words) <= max_words:
+        # Return result
         return text
+    # Return result
     return " ".join(words[:max_words]) + "…"
 
 
 def format_update(timestamp: dt.datetime, synopsis: str, next_steps: List[str]) -> str:
+    """Handle this operation."""
     lines = [
         f"### Quarter-Hour Update — {timestamp:%Y-%m-%d %H:%M}",
         f"Synopsis: {synopsis}",
         "Next steps:",
     ]
+    # Iterate over items
     for idx, step in enumerate(next_steps[:2], start=1):
         lines.append(f"  {idx}. {step}")
+    # Return result
     return "\n".join(lines) + "\n"
 
 
 def write_progress(progress_path: Path, entry: str) -> None:
+    """Handle this operation."""
     progress_path.parent.mkdir(parents=True, exist_ok=True)
+    # Context manager
     with progress_path.open("a", encoding="utf-8") as fh:
         fh.write("\n" + entry + "\n")
 
 
 def run_daemon(simulation_speed: float = 1.0) -> None:
+    """Handle this operation."""
     state = load_state()
     if not state.get("active"):
         print("[quarter-hour-updates] No active task; exiting daemon.")
@@ -107,6 +122,7 @@ def run_daemon(simulation_speed: float = 1.0) -> None:
 
 
 def main() -> None:
+    """Handle this operation."""
     parser = argparse.ArgumentParser(description="Quarter-hour updates daemon")
     parser.add_argument("--simulation-speed", type=float, default=1.0,
                         help="Speed multiplier for tests (1.0 = real time)")

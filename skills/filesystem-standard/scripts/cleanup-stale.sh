@@ -9,6 +9,7 @@ HOME_DIR="${HOME:-/Users/clawai}"
 OPENCLAW="${HOME_DIR}/.openclaw"
 REMOVED=0
 
+# usage — handles usage operation
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -37,6 +38,7 @@ for arg in "$@"; do
     esac
 done
 
+# remove_file — handles remove file operation
 remove_file() {
     local path="$1" reason="$2"
     REMOVED=$((REMOVED + 1))
@@ -48,6 +50,7 @@ remove_file() {
     fi
 }
 
+# remove_dir — handles remove dir operation
 remove_dir() {
     local path="$1" reason="$2"
     REMOVED=$((REMOVED + 1))

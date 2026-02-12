@@ -5,6 +5,7 @@ Provides common functions used across all modules: slug generation,
 YAML frontmatter parsing/serializing, date handling, and ID generation.
 """
 
+# Module imports
 import re
 import uuid
 import logging
@@ -35,6 +36,7 @@ def generate_slug(text: str, max_length: int = 50) -> str:
     slug = re.sub(r"[\s_]+", "-", slug)
     slug = re.sub(r"-+", "-", slug)
     slug = slug.strip("-")
+    # Return result
     return slug[:max_length]
 
 
@@ -54,7 +56,9 @@ def generate_id(prefix: str = "") -> str:
     """
     short_uuid = uuid.uuid4().hex[:8]
     if prefix:
+        # Return result
         return f"{prefix}-{short_uuid}"
+    # Return result
     return short_uuid
 
 
@@ -72,6 +76,7 @@ def generate_task_id(counter: int) -> str:
         >>> generate_task_id(42)
         'task-042'
     """
+    # Return result
     return f"task-{counter:03d}"
 
 
@@ -100,24 +105,31 @@ def parse_frontmatter(content: str) -> tuple[dict[str, Any], str]:
         'World'
     """
     # Lazy import to avoid import-time dependency issues
+    # Error handling block
     try:
         import yaml
+    # Handle exception
     except ImportError:
         logger.error("PyYAML is required. Install with: pip install pyyaml")
+        # Return result
         return {}, content
 
     pattern = r"^---\s*\n(.*?)\n---\s*\n?(.*)"
     match = re.match(pattern, content, re.DOTALL)
     if not match:
+        # Return result
         return {}, content
 
+    # Error handling block
     try:
         frontmatter = yaml.safe_load(match.group(1)) or {}
+    # Handle exception
     except yaml.YAMLError as e:
         logger.warning("Failed to parse YAML frontmatter: %s", e)
         frontmatter = {}
 
     body = match.group(2).strip()
+    # Return result
     return frontmatter, body
 
 
@@ -149,6 +161,7 @@ def serialize_frontmatter(metadata: dict[str, Any], body: str) -> str:
 
     # Custom representer for dates — keep them as plain strings
     def date_representer(dumper: yaml.Dumper, data: date) -> yaml.ScalarNode:
+        """Handle this operation."""
         return dumper.represent_scalar("tag:yaml.org,2002:str", data.isoformat())
 
     dumper = yaml.Dumper

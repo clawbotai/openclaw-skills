@@ -9,6 +9,7 @@ HOME_DIR="${HOME:-/Users/clawai}"
 WORKSPACE="${HOME_DIR}/openclaw/workspace"
 OPENCLAW="${HOME_DIR}/.openclaw"
 
+# usage — handles usage operation
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -41,6 +42,7 @@ done
 
 CHANGES=0
 
+# set_perm — handles set perm operation
 set_perm() {
     local path="$1" perm="$2"
     [ -e "$path" ] || return 0

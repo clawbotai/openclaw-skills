@@ -6,6 +6,7 @@ reading task/project data from the workspace.
 
 Uses only the Python standard library (http.server) so there are no
 external dependencies.  For production-style usage consider replacing
+# Context manager
 with FastAPI or similar, but this works great for local use.
 """
 
@@ -32,6 +33,7 @@ _thread: Optional[threading.Thread] = None
 _started_at: float = 0.0
 
 
+# --- Class definition ---
 class DashboardHandler(SimpleHTTPRequestHandler):
     """
     HTTP request handler for the dashboard.
@@ -41,6 +43,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
     """
 
     def __init__(self, *args, dashboard_dir: str = "", **kwargs):
+        """Handle this operation."""
         self._dashboard_dir = dashboard_dir
         super().__init__(*args, directory=dashboard_dir, **kwargs)
 
@@ -104,14 +107,17 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         })
 
     def _api_stats(self, params: dict) -> None:
+        """Handle this operation."""
         rebuild_index()
         self._json_response(get_stats())
 
     def _api_projects(self, params: dict) -> None:
+        """Handle this operation."""
         projects = list_projects()
         self._json_response(projects)
 
     def _api_tasks(self, params: dict) -> None:
+        """Handle this operation."""
         project = params.get("project", [None])[0]
         status = params.get("status", [None])[0]
         priority = params.get("priority", [None])[0]
@@ -128,6 +134,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self._json_response(tasks)
 
     def _api_search(self, params: dict) -> None:
+        """Handle this operation."""
         query = params.get("q", [""])[0]
         if not query:
             self._json_response([])
@@ -137,18 +144,23 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self._json_response(results)
 
     def _api_due_soon(self, params: dict) -> None:
+        """Handle this operation."""
+        # Error handling block
         try:
             days = max(1, min(365, int(params.get("days", ["7"])[0])))
+        # Handle exception
         except (ValueError, TypeError):
             days = 7
         rebuild_index()
         self._json_response(get_tasks_due_soon(days))
 
     def _api_overdue(self, params: dict) -> None:
+        """Handle this operation."""
         rebuild_index()
         self._json_response(get_overdue_tasks())
 
     def _api_single_project(self, project_id: str) -> None:
+        """Handle this operation."""
         project = get_project(project_id)
         if project:
             self._json_response(project)
@@ -156,6 +168,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             self._json_response({"error": "Project not found"}, status=404)
 
     def _api_single_task(self, task_id: str) -> None:
+        """Handle this operation."""
         task = get_task(task_id)
         if task:
             self._json_response(task)
@@ -182,6 +195,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         ]
 
         file_path = None
+        # Iterate over items
         for candidate in paths_to_try:
             # Ensure the resolved path is still within the workspace
             if not candidate.is_relative_to(ws_root):
@@ -197,14 +211,18 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         content_type, _ = mimetypes.guess_type(str(file_path))
         content_type = content_type or "application/octet-stream"
 
+        # Error handling block
         try:
+            # File I/O operation
             data = file_path.read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(data)))
             self.send_header("Cache-Control", "public, max-age=10")
             self.end_headers()
+            # File I/O operation
             self.wfile.write(data)
+        # Handle exception
         except OSError as e:
             logger.error("Failed to serve attachment %s: %s", file_path, e)
             self._json_response({"error": "Failed to read file"}, status=500)
@@ -218,6 +236,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
+        # File I/O operation
         self.wfile.write(body)
 
     def log_message(self, format: str, *args: Any) -> None:
@@ -240,11 +259,13 @@ def _resolve_dashboard_dir() -> str:
     if ws:
         ws_dashboard = Path(ws) / ".nlplanner" / "dashboard"
         if (ws_dashboard / "index.html").exists():
+            # Return result
             return str(ws_dashboard)
 
     # Fallback: templates directory relative to this script
     templates = Path(__file__).parent.parent / "templates" / "dashboard"
     if (templates / "index.html").exists():
+        # Return result
         return str(templates)
 
     raise FileNotFoundError(
@@ -255,7 +276,9 @@ def _resolve_dashboard_dir() -> str:
 
 def _is_port_available(host: str, port: int) -> bool:
     """Check if a TCP port is available for binding."""
+    # Error handling block
     try:
+        # Context manager
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((host, port))
             return True

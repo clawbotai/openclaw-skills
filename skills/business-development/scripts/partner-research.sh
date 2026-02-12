@@ -2,12 +2,26 @@
 # partner-research.sh - Quick partner research and profile generation
 # Usage: ./partner-research.sh <company_name> [--profile]
 
+
+# --help support
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    echo "NAME"
+    echo "    partner-research.sh — business-development skill script"
+    echo ""
+    echo "USAGE"  
+    echo "    bash skills/business-development/scripts/partner-research.sh [OPTIONS]"
+    echo ""
+    echo "OPTIONS"
+    echo "    -h, --help    Show this help"
+    exit 0
+fi
 BD_DIR="${HOME}/.openclaw/workspace/business-development"
 PARTNERS_DIR="$BD_DIR/partners"
 TEMPLATE="$BD_DIR/templates/partner-profile.md"
 
 mkdir -p "$PARTNERS_DIR"
 
+# show_help — handles show help operation
 show_help() {
     echo "Partner Research Tool"
     echo "====================="
@@ -21,6 +35,7 @@ show_help() {
     echo "  $0 'Acme Corp' --profile"
 }
 
+# research_checklist — handles research checklist operation
 research_checklist() {
     local company="$1"
     
@@ -56,6 +71,7 @@ research_checklist() {
     echo "  - Google News: https://news.google.com/search?q=$company"
 }
 
+# create_profile — handles create profile operation
 create_profile() {
     local company="$1"
     local filename=$(echo "$company" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')

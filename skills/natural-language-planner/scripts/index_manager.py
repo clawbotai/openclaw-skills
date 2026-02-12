@@ -5,6 +5,7 @@ Builds an in-memory index from the markdown files so that queries,
 due-date checks, and check-in lookups are fast even with many tasks.
 """
 
+# Module imports
 import json
 import logging
 from datetime import date, datetime, timedelta
@@ -39,6 +40,7 @@ def rebuild_index() -> bool:
     """
     root = _workspace_root()
     if root is None:
+        # Return result
         return False
 
     global _index
@@ -47,6 +49,7 @@ def rebuild_index() -> bool:
     # Index projects
     projects_dir = root / "projects"
     if projects_dir.exists():
+        # Iterate over items
         for readme in projects_dir.glob("*/README.md"):
             raw = safe_read_file(readme)
             if raw is None:
@@ -60,6 +63,7 @@ def rebuild_index() -> bool:
             }
 
     # Index tasks
+    # Iterate over items
     for task_file in projects_dir.glob("*/tasks/task-*.md"):
         raw = safe_read_file(task_file)
         if raw is None:
@@ -75,6 +79,7 @@ def rebuild_index() -> bool:
     # Also index archived tasks for search
     archive_dir = root / "archive"
     if archive_dir.exists():
+        # Iterate over items
         for task_file in archive_dir.glob("*/tasks/task-*.md"):
             raw = safe_read_file(task_file)
             if raw is None:
@@ -94,6 +99,7 @@ def rebuild_index() -> bool:
     task_count = len(_index["tasks"])
     project_count = len(_index["projects"])
     logger.info("Index rebuilt: %d tasks, %d projects.", task_count, project_count)
+    # Return result
     return True
 
 
@@ -122,6 +128,7 @@ def search_tasks(query: str, include_archived: bool = False) -> list[dict[str, A
     title_matches = []
     other_matches = []
 
+    # Iterate over items
     for tid, task in _index["tasks"].items():
         if not include_archived and task.get("_archived"):
             continue
@@ -140,6 +147,7 @@ def search_tasks(query: str, include_archived: bool = False) -> list[dict[str, A
         elif query_lower in searchable:
             other_matches.append(_clean_task(task))
 
+    # Return result
     return title_matches + other_matches
 
 
@@ -163,12 +171,14 @@ def get_tasks_due_soon(days: int = 7) -> list[dict[str, Any]]:
     horizon = today + timedelta(days=days)
     results = []
 
+    # Iterate over items
     for tid, task in _index["tasks"].items():
         if task.get("status") in ("done", "archived"):
             continue
         due_str = task.get("due", "")
         if not due_str:
             continue
+        # Error handling block
         try:
             due_date = date.fromisoformat(str(due_str))
         except (ValueError, TypeError):

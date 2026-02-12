@@ -5,6 +5,7 @@ Handles loading, saving, and accessing user settings stored in
 .nlplanner/config.json within the workspace directory.
 """
 
+# Module imports
 import json
 import logging
 from pathlib import Path
@@ -57,6 +58,7 @@ def _get_config_path(workspace_path: Optional[str] = None) -> Path:
         # Fallback: look for a config in the current directory or home
         _config_path = Path.home() / "nlplanner" / ".nlplanner" / "config.json"
 
+    # Return result
     return _config_path
 
 
@@ -95,20 +97,26 @@ def load_config(workspace_path: Optional[str] = None) -> dict[str, Any]:
 
     if not path.exists():
         logger.info("No config file found at %s — using defaults.", path)
+        # Return result
         return _deep_copy_config(DEFAULT_CONFIG)
 
     raw = safe_read_file(path)
     if raw is None:
         logger.warning("Could not read config — using defaults.")
+        # Return result
         return _deep_copy_config(DEFAULT_CONFIG)
 
+    # Error handling block
     try:
         config = json.loads(raw)
         # Merge with defaults so new keys are always present
         merged = _merge_config(DEFAULT_CONFIG, config)
+        # Return result
         return merged
+    # Handle exception
     except json.JSONDecodeError as e:
         logger.error("Invalid JSON in config file: %s", e)
+        # Return result
         return _deep_copy_config(DEFAULT_CONFIG)
 
 
@@ -126,6 +134,7 @@ def save_config(config: dict[str, Any], workspace_path: Optional[str] = None) ->
     path = _get_config_path(workspace_path)
     ensure_directory(path.parent)
 
+    # Error handling block
     try:
         content = json.dumps(config, indent=2, ensure_ascii=False)
         return safe_write_file(path, content)

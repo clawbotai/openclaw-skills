@@ -3,6 +3,19 @@
 # Always exits 0 — uses stdout for status reporting
 # Used by Stop hook to report task completion status
 
+
+# --help support
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    echo "NAME"
+    echo "    check-complete.sh — planning-with-files skill script"
+    echo ""
+    echo "USAGE"  
+    echo "    bash skills/planning-with-files/scripts/check-complete.sh [OPTIONS]"
+    echo ""
+    echo "OPTIONS"
+    echo "    -h, --help    Show this help"
+    exit 0
+fi
 PLAN_FILE="${1:-task_plan.md}"
 
 if [ ! -f "$PLAN_FILE" ]; then

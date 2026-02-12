@@ -1,79 +1,60 @@
-# Production Readiness
+# production-readiness
 
-Meta-skill that orchestrates logging, monitoring, error handling, performance, security, deployment, and testing skills to ensure a service is fully production-ready before launch.
-
-## What's Inside
-
-- Orchestration flow (logging & observability → error handling → performance → security → deployment → testing → documentation)
-- Skill routing table for each concern
-- Production readiness checklist (health & lifecycle, resilience, configuration & secrets, data safety, operational readiness)
-- Maturity levels (L1 MVP → L2 Stable → L3 Resilient → L4 Optimized)
-- Incident response (on-call rotation, escalation matrix, postmortem template)
-
-## When to Use
-
-- Before first deploy — new service going to production
-- Before major release — significant feature or architectural change shipping
-- Quarterly production review — scheduled audit of existing services
-- After incident — post-incident hardening to prevent recurrence
-- Dependency upgrade — major framework, runtime, or infrastructure change
-- Team handoff — transferring ownership of a service to another team
-
-## Installation
-
-```bash
-npx add https://github.com/wpank/ai/tree/main/skills/meta/production-readiness
-```
-
-### OpenClaw / Moltbot / Clawbot
-
-```bash
-npx clawhub@latest install production-readiness
-```
-
-### Manual Installation
-
-#### Cursor (per-project)
-
-From your project root:
-
-```bash
-mkdir -p .cursor/skills
-cp -r ~/.ai-skills/skills/meta/production-readiness .cursor/skills/production-readiness
-```
-
-#### Cursor (global)
-
-```bash
-mkdir -p ~/.cursor/skills
-cp -r ~/.ai-skills/skills/meta/production-readiness ~/.cursor/skills/production-readiness
-```
-
-#### Claude Code (per-project)
-
-From your project root:
-
-```bash
-mkdir -p .claude/skills
-cp -r ~/.ai-skills/skills/meta/production-readiness .claude/skills/production-readiness
-```
-
-#### Claude Code (global)
-
-```bash
-mkdir -p ~/.claude/skills
-cp -r ~/.ai-skills/skills/meta/production-readiness ~/.claude/skills/production-readiness
-```
-
-## Related Skills
-
-- `logging-observability` — Structured logging, metrics, tracing
-- `error-handling-patterns` — Error boundaries, retry policies
-- `security-review` — Comprehensive security audit
-- `docker-expert` — Container hardening
-- `testing-workflow` — Test coverage and strategy
-- `rate-limiting-patterns` — Rate limiting configuration
+> Meta-skill that orchestrates logging, monitoring, error handling, performance, security, deployment, and testing skills to ensure a service is fully production-ready before launch. Use before first deploy, major releases, quarterly reviews, or after incidents.
 
 ---
 
-Part of the [Meta](..) skill category.
+## Quick Start
+
+### Prerequisites
+
+- OpenClaw gateway running (`openclaw gateway status`)
+- Workspace with skills directory
+
+### Installation
+
+Part of the OpenClaw skills collection — no separate install needed.
+
+```bash
+ls skills/production-readiness/SKILL.md
+```
+
+## Usage
+
+This skill activates when the agent detects relevant user intent. See SKILL.md for triggers.
+
+```bash
+cat skills/production-readiness/SKILL.md
+```
+## Key Features
+
+- **Installation**
+- **Purpose**
+- **When to Use**
+- **Orchestration Flow**
+- **Skill Routing Table**
+- **Production Readiness Checklist**
+## Configuration
+
+Configured via `SKILL.md` frontmatter. Review and customize per deployment.
+
+## Documentation
+
+| Section | Description | Link |
+|---------|-------------|------|
+| **Tutorials** | Step-by-step learning | [docs/tutorials/](docs/tutorials/) |
+| **How-To Guides** | Task solutions | [docs/how-to/](docs/how-to/) |
+| **Reference** | Technical specs | [docs/reference/](docs/reference/) |
+| **Explanations** | Design decisions | [docs/explanations/](docs/explanations/) |
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development workflow.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history.
+
+## License
+
+Part of the OpenClaw project.

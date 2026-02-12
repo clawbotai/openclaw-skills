@@ -4,6 +4,7 @@ Tests for scripts.index_manager — search and lookup.
 Run with:  python -m pytest tests/test_index_manager.py -v
 """
 
+# Module imports
 import sys
 import os
 
@@ -52,9 +53,11 @@ def workspace(tmp_path):
         "tags": ["cleanup"],
     })
 
+    # Return result
     return ws
 
 
+# --- Class definition ---
 class TestRebuildIndex:
     def test_rebuild_succeeds(self, workspace):
         assert rebuild_index()

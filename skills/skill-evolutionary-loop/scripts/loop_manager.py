@@ -369,6 +369,7 @@ def print_json(data: dict) -> None:
 
 
 def main():
+    """Handle this operation."""
     if len(sys.argv) < 3:
         print("Usage: loop_manager.py <command> <project_dir> [args...]", file=sys.stderr)
         print("Commands: init, gate, status, iterate, complete, reflect", file=sys.stderr)

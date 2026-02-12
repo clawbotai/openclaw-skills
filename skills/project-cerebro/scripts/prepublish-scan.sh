@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# --help support
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    echo "NAME"
+    echo "    prepublish-scan.sh — project-cerebro skill script"
+    echo ""
+    echo "USAGE"
+    echo "    bash skills/project-cerebro/scripts/prepublish-scan.sh [OPTIONS]"
+    echo ""
+    echo "OPTIONS"
+    echo "    -h, --help    Show this help"
+    exit 0
+fi
+
 # Prepublish secret scan for Project Cerebro.
 # Fails if we detect likely secrets or personal identifiers in tracked source.
 

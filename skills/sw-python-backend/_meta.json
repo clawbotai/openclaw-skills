@@ -1,4 +1,5 @@
 {
+  "description": "OpenClaw skill for sw python backend workflows and automation.",
   "ownerId": "kn79pcx2785nmnwzy4d6sc0vnn802c2w",
   "slug": "sw-python-backend",
   "version": "1.0.0",

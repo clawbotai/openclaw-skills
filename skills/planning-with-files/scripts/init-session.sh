@@ -4,6 +4,19 @@
 
 set -e
 
+# --help support
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    echo "NAME"
+    echo "    init-session.sh — planning-with-files skill script"
+    echo ""
+    echo "USAGE"
+    echo "    bash skills/planning-with-files/scripts/init-session.sh [OPTIONS]"
+    echo ""
+    echo "OPTIONS"
+    echo "    -h, --help    Show this help"
+    exit 0
+fi
+
 PROJECT_NAME="${1:-project}"
 DATE=$(date +%Y-%m-%d)
 

@@ -9,6 +9,7 @@ Steps:
 2. Patch data/state.json to record the new scheduler.
 """
 
+# Module imports
 import json
 import os
 import signal
@@ -30,16 +31,22 @@ def _kill_daemon() -> bool:
 
     if not _PID_FILE.exists():
         print("[migrate] No daemon.pid file found — skipping kill step.")
+        # Return result
         return False
 
+    # Error handling block
     try:
+        # File I/O operation
         pid_text = _PID_FILE.read_text(encoding="utf-8").strip()
         pid = int(pid_text)
+    # Handle exception
     except (ValueError, OSError) as exc:
         print(f"[migrate] Could not read PID file: {exc}")
         _cleanup_pid_file()
+        # Return result
         return False
 
+    # Error handling block
     try:
         os.kill(pid, 0)
     except ProcessLookupError:
@@ -64,6 +71,7 @@ def _kill_daemon() -> bool:
 
 
 def _cleanup_pid_file() -> None:
+    """Handle this operation."""
     try:
         _PID_FILE.unlink(missing_ok=True)
         print("[migrate] Removed daemon.pid.")
@@ -72,6 +80,7 @@ def _cleanup_pid_file() -> None:
 
 
 def _patch_state() -> None:
+    """Handle this operation."""
     state = load_state()
     state["scheduler"] = "cerebro"
     state["status"] = "idle"
@@ -80,6 +89,7 @@ def _patch_state() -> None:
 
 
 def main() -> int:
+    """Handle this operation."""
     print("=" * 60)
     print(" Quarter-Hour Updates — Migration to Project Cerebro")
     print("=" * 60)

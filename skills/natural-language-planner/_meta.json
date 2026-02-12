@@ -1,4 +1,5 @@
 {
+  "description": "OpenClaw skill for natural language planner workflows and automation.",
   "ownerId": "kn71r0d0c780m06m88r15cap1d80vanx",
   "slug": "natural-language-planner",
   "version": "0.1.0",

@@ -4,6 +4,7 @@ Tests for scripts.file_manager — core CRUD operations.
 Run with:  python -m pytest tests/test_file_manager.py -v
 """
 
+# Module imports
 import sys
 import os
 import tempfile
@@ -39,9 +40,11 @@ def workspace(tmp_path):
     ws = tmp_path / "test_workspace"
     ws.mkdir()
     init_workspace(str(ws))
+    # Return result
     return ws
 
 
+# --- Class definition ---
 class TestInitWorkspace:
     def test_creates_directory_structure(self, workspace):
         assert (workspace / ".nlplanner" / "config.json").exists()
@@ -55,6 +58,7 @@ class TestInitWorkspace:
         assert (workspace / ".nlplanner" / "config.json").exists()
 
 
+# --- Class definition ---
 class TestProjects:
     def test_create_project(self, workspace):
         pid = create_project("My Project", description="A test project")
@@ -98,6 +102,7 @@ class TestProjects:
         assert pid1 == pid2
 
 
+# --- Class definition ---
 class TestTasks:
     def test_create_task_in_inbox(self, workspace):
         tid = create_task("My first task")
@@ -178,6 +183,7 @@ class TestTasks:
         assert t3 == "task-003"
 
 
+# --- Class definition ---
 class TestTaskDependencies:
     def test_link_tasks(self, workspace):
         t1 = create_task("Prerequisite")

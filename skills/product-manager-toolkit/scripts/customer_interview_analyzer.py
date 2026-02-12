@@ -13,6 +13,7 @@ class InterviewAnalyzer:
     """Analyze customer interviews for insights and patterns"""
     
     def __init__(self):
+        """Handle this operation."""
         # Pain point indicators
         self.pain_indicators = [
             'frustrat', 'annoy', 'difficult', 'hard', 'confus', 'slow',
@@ -411,6 +412,7 @@ def format_single_interview(analysis: Dict) -> str:
     return "\n".join(output)
 
 def main():
+    """Handle this operation."""
     import sys
     
     if len(sys.argv) < 2:

@@ -30,6 +30,7 @@ from schemas import MonitorConfig
 
 
 def main():
+    """Handle this operation."""
     # Use a temp directory so we don't pollute the real workspace
     with tempfile.TemporaryDirectory() as tmpdir:
         workspace = Path(tmpdir)

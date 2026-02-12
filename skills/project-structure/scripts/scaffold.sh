@@ -75,6 +75,7 @@ create_file() {
   echo "$content" > "$PROJECT_DIR/$path"
 }
 
+# create_gitignore_node — handles create gitignore node operation
 create_gitignore_node() {
   cat > "$PROJECT_DIR/.gitignore" << 'EOF'
 node_modules/
@@ -88,6 +89,7 @@ coverage/
 EOF
 }
 
+# create_gitignore_python — handles create gitignore python operation
 create_gitignore_python() {
   cat > "$PROJECT_DIR/.gitignore" << 'EOF'
 __pycache__/

@@ -12,6 +12,7 @@ Models:
     MonitorConfig     — Runtime configuration with sensible defaults
 """
 
+# Module imports
 from __future__ import annotations
 
 import hashlib
@@ -26,6 +27,7 @@ from pydantic import BaseModel, Field, computed_field
 # Enums
 # ---------------------------------------------------------------------------
 
+# --- Class definition ---
 class ErrorClass(str, Enum):
     """
     Two-class error taxonomy optimized for autonomous remediation.
@@ -41,6 +43,7 @@ class ErrorClass(str, Enum):
     DETERMINISTIC = "deterministic"
 
 
+# --- Class definition ---
 class CircuitBreakerState(str, Enum):
     """
     Three-state circuit breaker (Nygard, "Release It!" pattern):
@@ -54,6 +57,7 @@ class CircuitBreakerState(str, Enum):
     HALF_OPEN = "half_open"
 
 
+# --- Class definition ---
 class TicketPriority(str, Enum):
     """Repair urgency for the Evolutionary Loop."""
     CRITICAL = "critical"   # Skill completely broken, 100% failure rate
@@ -66,6 +70,7 @@ class TicketPriority(str, Enum):
 # Core Models
 # ---------------------------------------------------------------------------
 
+# --- Class definition ---
 class ErrorLog(BaseModel):
     """
     A single deduplicated error entry.

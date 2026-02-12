@@ -5,6 +5,7 @@ Reads recent activity from progress.md and produces a structured payload
 containing a synopsis (capped at 150 words) and next steps.
 """
 
+# Module imports
 import re
 from pathlib import Path
 
@@ -18,11 +19,16 @@ _TAIL_LINES = 10
 def _read_tail(path: Path, n: int) -> list[str]:
     """Return the last *n* non-empty lines from *path*."""
 
+    # Error handling block
     try:
+        # File I/O operation
         all_lines = path.read_text(encoding="utf-8").splitlines()
         meaningful = [ln for ln in all_lines if ln.strip()]
+        # Return result
         return meaningful[-n:]
+    # Handle exception
     except (FileNotFoundError, OSError):
+        # Return result
         return []
 
 

@@ -7,6 +7,7 @@ using Cloudflare Tunnel (cloudflared), ngrok, or localtunnel.
 No external Python dependencies — these tools are invoked as subprocesses.
 """
 
+# Module imports
 import logging
 import re
 import shutil
@@ -17,6 +18,7 @@ from typing import Optional
 
 logger = logging.getLogger("nlplanner.tunnel")
 
+# Execute subprocess
 _process: Optional[subprocess.Popen] = None
 _tunnel_url: str = ""
 _monitor_thread: Optional[threading.Thread] = None
@@ -38,12 +40,15 @@ def detect_tunnel_tool() -> Optional[str]:
         >>> print(tool)
         'cloudflared'
     """
+    # Iterate over items
     for tool in ["cloudflared", "ngrok", "lt"]:
         if shutil.which(tool):
             logger.info("Tunnel tool found: %s", tool)
+            # Return result
             return tool
 
     logger.info("No tunnel tool found on PATH.")
+    # Return result
     return None
 
 
@@ -54,6 +59,7 @@ def get_install_instructions() -> str:
     Returns:
         A human-readable string with install commands for each platform.
     """
+    # Return result
     return (
         "To expose your dashboard remotely, install one of these tools:\n"
         "\n"
@@ -92,6 +98,7 @@ def start_tunnel(port: int, tool: Optional[str] = None) -> str:
 
     if _process is not None:
         logger.info("Tunnel is already running at %s", _tunnel_url)
+        # Return result
         return _tunnel_url
 
     if tool is None:
@@ -100,10 +107,13 @@ def start_tunnel(port: int, tool: Optional[str] = None) -> str:
     if tool is None:
         logger.error("No tunnel tool available.")
         print(get_install_instructions())
+        # Return result
         return ""
 
+    # Error handling block
     try:
         if tool == "cloudflared":
+            # Return result
             return _start_cloudflared(port)
         elif tool == "ngrok":
             return _start_ngrok(port)
@@ -282,6 +292,7 @@ def _capture_url_from_output(
     # Drain remaining output in background to prevent pipe blocking
     if proc.stdout:
         def _drain():
+            """Handle this operation."""
             try:
                 for _ in proc.stdout:
                     pass

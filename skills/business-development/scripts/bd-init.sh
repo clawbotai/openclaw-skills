@@ -2,6 +2,19 @@
 # bd-init.sh - Initialize business development workspace
 # Usage: ./bd-init.sh
 
+
+# --help support
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    echo "NAME"
+    echo "    bd-init.sh — business-development skill script"
+    echo ""
+    echo "USAGE"  
+    echo "    bash skills/business-development/scripts/bd-init.sh [OPTIONS]"
+    echo ""
+    echo "OPTIONS"
+    echo "    -h, --help    Show this help"
+    exit 0
+fi
 BD_DIR="${HOME}/.openclaw/workspace/business-development"
 
 echo "🚀 Initializing Business Development Workspace"

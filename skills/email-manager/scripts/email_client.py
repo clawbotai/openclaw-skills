@@ -1000,6 +1000,7 @@ def cmd_config(args, config):
 # ---------------------------------------------------------------------------
 
 def main():
+    """Handle this operation."""
     parser = argparse.ArgumentParser(
         description="Email Manager — Autonomous AI Email Client",
         formatter_class=argparse.RawDescriptionHelpFormatter,

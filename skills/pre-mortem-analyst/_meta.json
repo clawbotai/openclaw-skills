@@ -1,4 +1,5 @@
 {
+  "description": "OpenClaw skill for pre mortem analyst workflows and automation.",
   "ownerId": "kn7fwtehcd0cybt38sbtsd3ab97zw59s",
   "slug": "pre-mortem-analyst",
   "version": "1.0.0",

@@ -1,0 +1,7 @@
+{
+  "description": "OpenClaw skill for hipaa compliance workflows and automation.",
+  "ownerId": "openclaw",
+  "slug": "hipaa-compliance",
+  "version": "1.0.0",
+  "publishedAt": 1770857285000
+}

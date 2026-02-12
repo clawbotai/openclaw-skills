@@ -1,4 +1,5 @@
 {
+  "slug": "filesystem-standard",
   "name": "filesystem-standard",
   "version": "1.0.0",
   "description": "Defines and enforces a standardized filesystem layout for OpenClaw AI autonomous systems",

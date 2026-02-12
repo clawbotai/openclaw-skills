@@ -10,6 +10,7 @@ Features:
 - Alert thresholds
 """
 
+# Module imports
 import argparse
 import json
 import sqlite3
@@ -18,6 +19,7 @@ from typing import List, Dict, Optional
 from datetime import datetime, timedelta
 
 # Configuration
+# File I/O operation
 DB_PATH = Path.home() / ".openclaw" / "workspace" / "agent-observability" / "metrics.db"
 DEFAULT_ALERTS = {
     'latency_ms': 5000,
@@ -26,6 +28,7 @@ DEFAULT_ALERTS = {
 }
 
 
+# --- Class definition ---
 class MetricsRecord:
     """Single metric record."""
     
@@ -40,10 +43,12 @@ class MetricsRecord:
         self.timestamp = datetime.utcnow()
 
 
+# --- Class definition ---
 class ObservabilityStore:
     """Metrics storage and analytics."""
     
     def __init__(self, db_path: Path = DB_PATH):
+        """Handle this operation."""
         self.db_path = db_path
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self.conn = sqlite3.connect(str(db_path))
@@ -112,6 +117,7 @@ class ObservabilityStore:
         """, (session_id,))
         
         trace = []
+        # Iterate over items
         for row in cursor.fetchall():
             trace.append({
                 'tool': row[0],
@@ -122,6 +128,7 @@ class ObservabilityStore:
                 'timestamp': row[5]
             })
         
+        # Return result
         return trace
     
     def get_aggregates(self, period: str = "24h") -> Dict:
@@ -152,11 +159,13 @@ class ObservabilityStore:
         
         row = cursor.fetchone()
         if not row or row[0] == 0:
+            # Return result
             return {'period': period, 'total_calls': 0}
         
         total, successful, avg_latency, total_tokens, sessions = row
         success_rate = successful / total if total > 0 else 0
         
+        # Return result
         return {
             'period': period,
             'total_calls': total,
@@ -210,6 +219,7 @@ class ObservabilityStore:
         if row and row[0] > thresholds['error_count']:
             alerts.append(f"⚠️ High error count: {row[0]} (threshold: {thresholds['error_count']})")
         
+        # Return result
         return alerts
     
     def export_metrics(self, output_file: str = "metrics.json"):
@@ -219,6 +229,7 @@ class ObservabilityStore:
         
         rows = cursor.fetchall()
         metrics = []
+        # Iterate over items
         for row in rows:
             metrics.append({
                 'id': row[0],
@@ -231,6 +242,7 @@ class ObservabilityStore:
                 'timestamp': row[7]
             })
         
+        # Context manager
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(metrics, f, indent=2)
         
@@ -247,13 +259,16 @@ class ObservabilityStore:
             'generated_at': datetime.utcnow().isoformat()
         }
         
+        # Return result
         return report
     
     def close(self):
+        """Handle this operation."""
         self.conn.close()
 
 
 def main():
+    """Handle this operation."""
     parser = argparse.ArgumentParser(description="Agent Observability Dashboard v0.1")
     parser.add_argument("--record", action="store_true", help="Record a metric interactively")
     parser.add_argument("--session", type=str, help="Session ID for recording")

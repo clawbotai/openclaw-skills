@@ -6,6 +6,7 @@ data/state.json. Uses write-temp-move pattern to prevent corruption from
 concurrent access or mid-write crashes.
 """
 
+# Module imports
 import json
 import os
 from datetime import datetime, timezone
@@ -45,12 +46,16 @@ def load_state() -> dict:
     """
 
     _ensure_data_dir()
+    # Error handling block
     try:
+        # File I/O operation
         raw = _STATE_FILE.read_text(encoding="utf-8")
         state = json.loads(raw)
         if not isinstance(state, dict):
             raise ValueError("State root is not a JSON object")
+        # Return result
         return state
+    # Handle exception
     except (FileNotFoundError, json.JSONDecodeError, ValueError, OSError):
         return _DEFAULT_STATE.copy()
 

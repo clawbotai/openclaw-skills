@@ -1,4 +1,9 @@
+# Module imports
 from __future__ import annotations
+"""start_task — automation for the quarter-hour-updates skill.
+
+Part of the OpenClaw skills collection.
+"""
 
 import argparse
 import subprocess
@@ -12,24 +17,30 @@ BASE_DIR = Path(__file__).resolve().parent
 
 
 def align_to_interval(anchor: datetime, interval_seconds: int, reference: datetime) -> datetime:
+    """Handle this operation."""
     if interval_seconds <= 0:
         interval_seconds = 120
     elapsed = (reference - anchor).total_seconds()
     if elapsed < 0:
         elapsed = 0
     ticks = int(elapsed // interval_seconds) + 1
+    # Return result
     return anchor + timedelta(seconds=ticks * interval_seconds)
 
 
 def launch_daemon(simulation_speed: float = 1.0) -> int:
+    """Handle this operation."""
     daemon_path = BASE_DIR / "daemon.py"
     cmd = [sys.executable, str(daemon_path), "--simulation-speed", str(simulation_speed)]
+    # File I/O operation
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     store_pid(process.pid)
+    # Return result
     return process.pid
 
 
 def main() -> None:
+    """Handle this operation."""
     parser = argparse.ArgumentParser(description="Start quarter-hour updates task")
     parser.add_argument("task_name", help="Display name of the active task")
     parser.add_argument("task_description", help="Short description of the task")
@@ -68,5 +79,6 @@ def main() -> None:
     print(f"[quarter-hour-updates] Started daemon (pid={pid}).")
 
 
+# Entry point
 if __name__ == "__main__":
     main()

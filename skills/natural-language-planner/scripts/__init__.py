@@ -14,5 +14,8 @@ Modules:
     tunnel          - Cloudflare/ngrok tunnel integration for remote access
     export          - Static HTML snapshot export for deployment
 """
+# Configuration and initialization
+# This module is part of the OpenClaw skills framework
+# See SKILL.md for workflow documentation
 
 __version__ = "1.0.0"

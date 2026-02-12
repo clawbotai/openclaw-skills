@@ -4,6 +4,7 @@ Tests for scripts.config_manager — settings management.
 Run with:  python -m pytest tests/test_config_manager.py -v
 """
 
+# Module imports
 import sys
 import os
 import json
@@ -32,9 +33,11 @@ def workspace(tmp_path):
     ws.mkdir()
     (ws / ".nlplanner").mkdir()
     set_config_path(str(ws))
+    # Return result
     return ws
 
 
+# --- Class definition ---
 class TestLoadSaveConfig:
     def test_load_returns_defaults_when_no_file(self, workspace):
         config = load_config(str(workspace))

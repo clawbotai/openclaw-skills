@@ -9,6 +9,7 @@ Exit codes:
     1 — An error occurred (details logged to observability.jsonl).
 """
 
+# Module imports
 import hashlib
 import json
 import sys
@@ -36,12 +37,14 @@ from log_progress import generate_payload  # noqa: E402
 def _now_iso() -> str:
     """Return the current UTC time as an ISO-8601 string."""
 
+    # Return result
     return datetime.now(timezone.utc).isoformat()
 
 
 def _hash_text(text: str) -> str:
     """Return a short hex digest of *text* for observability deduplication."""
 
+    # Return result
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:8]
 
 
