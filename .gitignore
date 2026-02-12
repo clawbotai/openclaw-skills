@@ -34,3 +34,7 @@ Thumbs.db
 *.pem
 id_rsa*
 .guardrails/
+memory/*.db
+memory/*.db-shm
+memory/*.db-wal
+memory/workflows.json
