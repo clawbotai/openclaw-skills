@@ -52,6 +52,16 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
 
+## Sub-Agents
+
+Sub-agents run in a **sandbox** — they write to `/workspace/` not the real host filesystem. Key rules:
+
+- **Never rely on sub-agents for file writes** to the host. Their changes don't persist. Do file-heavy work yourself, or copy results from sandbox after.
+- **No git access** from sub-agents. Always commit/push from the main session.
+- **Single depth only** — sub-agents cannot spawn their own sub-agents.
+- **Concurrent sub-agents can conflict** — avoid having multiple sub-agents edit the same files. Either serialize or partition the work.
+- **Python 3.9 compat** — use `typing.Optional[X]` not `X | None` in any generated code.
+
 ## External vs Internal
 
 **Safe to do freely:**
