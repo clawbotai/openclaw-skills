@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Convenience wrapper for monitored skill execution.
+# Usage: skillrun <skill-name> [--timeout N] -- <command...>
+exec python3 "$(dirname "$0")/../skills/skill-lifecycle/scripts/run_monitored.py" "$@"

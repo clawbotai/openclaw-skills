@@ -24,7 +24,7 @@ Usage:
 
     @monitor_skill(monitor)
     def my_skill(arg1, arg2):
-        """Example skill function."""
+        'Example skill function.'
         ...
 
     # Or wrap any callable at runtime:
@@ -852,12 +852,12 @@ def monitor_skill(monitor: SkillMonitor, skill_name: Optional[str] = None):
 
         @monitor_skill(monitor)
         def my_tool(arg1, arg2):
-            """Example tool function."""
+            'Example tool function.'
             ...
 
         @monitor_skill(monitor, skill_name="custom-name")
         def another_tool():
-            """Example with custom name."""
+            'Example with custom name.'
             ...
     """
     def decorator(fn: Callable) -> Callable:

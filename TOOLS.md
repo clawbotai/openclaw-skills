@@ -19,6 +19,23 @@ Things like:
 - **Credentials:** macOS Keychain → service: `icloud-email`, account: `clawbotai@icloud.com`
 - **Retrieve:** `security find-generic-password -a "clawbotai@icloud.com" -s "icloud-email" -w`
 
+## Monitored Skill Execution
+
+All skill script invocations should go through the monitored runner so errors are logged, classified, and fed into the evolutionary loop's repair pipeline.
+
+```bash
+# Via convenience wrapper
+bin/skillrun <skill-name> [--timeout N] -- <command...>
+
+# Direct
+python3 skills/skill-lifecycle/scripts/run_monitored.py <skill-name> -- <command...>
+```
+
+- Exit code 98 = skill is quarantined (circuit breaker OPEN)
+- Errors auto-logged to `memory/skill-errors.json`
+- Check health: `OPENCLAW_WORKSPACE=. python3 skills/skill-lifecycle/scripts/monitor.py status`
+- View repair tickets: `OPENCLAW_WORKSPACE=. python3 skills/skill-lifecycle/scripts/monitor.py tickets`
+
 ## Examples
 
 ```markdown
