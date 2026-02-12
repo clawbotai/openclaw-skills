@@ -269,6 +269,41 @@ class SecurityVisitor(ast.NodeVisitor):
                 file=self.filename, line=line,
             ))
 
+        # __import__() — dynamic import, common evasion technique
+        elif name == "__import__":
+            self.flags.append(SecurityFlag(
+                severity="high", category="dynamic_import",
+                detail="__import__() — dynamic module loading (evasion technique)",
+                file=self.filename, line=line,
+            ))
+
+        # importlib.import_module() — another evasion path
+        elif name in ("importlib.import_module", "importlib.__import__"):
+            self.flags.append(SecurityFlag(
+                severity="high", category="dynamic_import",
+                detail=f"{name}() — dynamic module loading (evasion technique)",
+                file=self.filename, line=line,
+            ))
+
+        # getattr on dangerous modules: getattr(os, 'system')
+        elif name == "getattr" and len(node.args) >= 2:
+            if (isinstance(node.args[0], ast.Name) and
+                    node.args[0].id in ("os", "subprocess", "shutil", "ctypes")):
+                self.flags.append(SecurityFlag(
+                    severity="high", category="dynamic_access",
+                    detail=f"getattr({node.args[0].id}, ...) — dynamic attribute access on dangerous module",
+                    file=self.filename, line=line,
+                ))
+
+        # compile() + exec() pattern
+        elif name == "compile" and len(node.args) >= 1:
+            if not isinstance(node.args[0], ast.Constant):
+                self.flags.append(SecurityFlag(
+                    severity="medium", category="code_generation",
+                    detail="compile() with dynamic argument — potential code generation",
+                    file=self.filename, line=line,
+                ))
+
         self.generic_visit(node)
 
     def visit_Import(self, node: ast.Import) -> None:
@@ -349,6 +384,98 @@ def analyze_security_regex(source: str, filename: str = "") -> List[SecurityFlag
                 detail=f"{label}: {redacted}",
                 file=filename, line=line_num,
             ))
+    return flags
+
+
+# ---------------------------------------------------------------------------
+# Markdown security scanning (SKILL.md / README.md)
+# ---------------------------------------------------------------------------
+
+# Shell command patterns that should never appear in skill documentation.
+# These indicate either prompt injection (tricking the agent into running
+# malicious commands) or supply-chain attacks via "prerequisite" instructions.
+MARKDOWN_SHELL_PATTERNS: List[Tuple[str, str, str]] = [
+    # (regex, label, severity)
+    (r"curl\s+[^\s]+\s*\|\s*(?:ba)?sh", "Pipe to shell (curl|sh)", "critical"),
+    (r"wget\s+[^\s]+\s*[;&|]\s*(?:ba)?sh", "Pipe to shell (wget)", "critical"),
+    (r"curl\s+-[sS]*o\s", "Silent download (curl -o)", "high"),
+    (r"wget\s+-q", "Silent download (wget -q)", "high"),
+    (r"chmod\s+\+x\s", "Make executable (chmod +x)", "high"),
+    (r"base64\s+-[dD]", "Base64 decode", "high"),
+    (r"xxd\s+-r", "Hex decode (xxd -r)", "high"),
+    (r"python3?\s+-c\s+['\"].*(?:import|exec|eval)", "Inline Python execution", "high"),
+    (r"npm\s+install\s+-g\s", "Global npm install", "medium"),
+    (r"pip3?\s+install\s+(?!-r)", "Direct pip install (not requirements)", "medium"),
+    (r"brew\s+install\s", "Homebrew install", "low"),
+]
+
+# URL patterns that suggest untrusted external resources
+SUSPICIOUS_URL_PATTERNS: List[Tuple[str, str, str]] = [
+    (r"https?://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", "Raw IP address URL", "critical"),
+    (r"https?://(?:glot\.io|repl\.it|pastebin\.com|hastebin\.com)", "Code-paste service URL", "high"),
+    (r"https?://bit\.ly|tinyurl\.com|t\.co|goo\.gl", "URL shortener", "high"),
+    (r"https?://[^\s\"']+\.(?:zip|tar\.gz|exe|dmg|pkg|sh|bat)\b", "Direct binary/archive download", "medium"),
+]
+
+
+def analyze_markdown_security(content: str, filename: str = "") -> List[SecurityFlag]:
+    """Scan markdown content for embedded shell commands and suspicious URLs.
+
+    SKILL.md files are read by AI agents and executed as instructions. Attackers
+    can embed malicious commands disguised as "setup prerequisites" or "quick start"
+    steps. This scanner catches those patterns.
+
+    Args:
+        content: Markdown text content.
+        filename: Original filename for error reporting.
+
+    Returns:
+        List of SecurityFlag instances found.
+    """
+    flags: List[SecurityFlag] = []
+
+    # Check for shell command patterns
+    for pattern, label, severity in MARKDOWN_SHELL_PATTERNS:
+        for match in re.finditer(pattern, content, re.IGNORECASE):
+            line_num = content[:match.start()].count("\n") + 1
+            context = content[max(0, match.start() - 20):match.end() + 20].strip()
+            flags.append(SecurityFlag(
+                severity=severity,
+                category="markdown_injection",
+                detail=f"{label}: ...{context}...",
+                file=filename,
+                line=line_num,
+            ))
+
+    # Check for suspicious URLs
+    for pattern, label, severity in SUSPICIOUS_URL_PATTERNS:
+        for match in re.finditer(pattern, content, re.IGNORECASE):
+            line_num = content[:match.start()].count("\n") + 1
+            flags.append(SecurityFlag(
+                severity=severity,
+                category="suspicious_url",
+                detail=f"{label}: {match.group(0)[:80]}",
+                file=filename,
+                line=line_num,
+            ))
+
+    # Check for obfuscation patterns (encoded strings in markdown)
+    obfuscation_patterns = [
+        (r"\\x[0-9a-fA-F]{2}(?:\\x[0-9a-fA-F]{2}){3,}", "Hex-encoded string"),
+        (r"[A-Za-z0-9+/]{40,}={0,2}", "Possible base64 blob (40+ chars)"),
+    ]
+    for pattern, label in obfuscation_patterns:
+        for match in re.finditer(pattern, content):
+            # Only flag if it's NOT inside a code block that looks like normal code
+            line_num = content[:match.start()].count("\n") + 1
+            flags.append(SecurityFlag(
+                severity="medium",
+                category="obfuscation",
+                detail=f"{label} at line {line_num}",
+                file=filename,
+                line=line_num,
+            ))
+
     return flags
 
 
@@ -716,6 +843,11 @@ def _score_security(files: Dict[str, str]) -> Tuple[DimensionScore, List[Securit
         # AST analysis for Python files
         if fname.endswith(".py"):
             flags = analyze_security_ast(content, fname)
+            all_flags.extend(flags)
+
+        # Markdown security scanning (SKILL.md, README.md)
+        if fname.endswith(".md"):
+            flags = analyze_markdown_security(content, fname)
             all_flags.extend(flags)
 
         # Regex credential scan for all files

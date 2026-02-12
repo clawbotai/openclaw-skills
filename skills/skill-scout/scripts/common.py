@@ -263,12 +263,12 @@ def check_tool(name: str) -> bool:
         True if the tool exists, False otherwise.
     """
     try:
-        subprocess.run(
+        result = subprocess.run(
             ["which", name],
             capture_output=True,
             timeout=5,
         )
-        return True
+        return result.returncode == 0
     except (FileNotFoundError, subprocess.TimeoutExpired):
         return False
 
