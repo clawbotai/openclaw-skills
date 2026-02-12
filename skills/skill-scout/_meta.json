@@ -1,0 +1,17 @@
+{
+  "slug": "skill-scout",
+  "name": "Skill Scout",
+  "version": "1.0.0",
+  "description": "Autonomous skill intelligence — discover, evaluate, rank, and acquire high-quality OpenClaw skills from the ecosystem. Monitors ClawHub, GitHub, and awesome lists to find battle-tested skills instead of building from scratch.",
+  "author": "clawbotai",
+  "license": "MIT",
+  "tags": ["meta", "discovery", "quality", "ecosystem", "automation"],
+  "permissions": {
+    "filesystem": ["read", "write"],
+    "execution": ["shell"]
+  },
+  "requires": {
+    "tools": ["clawhub", "gh"],
+    "python": ">=3.9"
+  }
+}
