@@ -1,0 +1,11 @@
+# agent-memory: Hybrid Vector-Graph Memory System
+# Install: pip3 install -r requirements.txt
+
+# Embeddings — local sentence transformer (~22MB model, 384-dim vectors)
+sentence-transformers>=2.2.0,<4.0.0
+
+# Numerical operations — cosine similarity, embedding serialization
+numpy>=1.21.0,<2.0.0
+
+# Pydantic for structured output validation
+pydantic>=1.10.0,<3.0.0

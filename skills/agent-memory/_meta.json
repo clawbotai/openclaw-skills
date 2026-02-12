@@ -1,0 +1,12 @@
+{
+  "name": "agent-memory",
+  "slug": "agent-memory",
+  "version": "1.0.0",
+  "description": "Hybrid Vector-Graph Memory System for autonomous AI agents. Replaces flat-file memory with semantic vector search (sentence-transformers) and a lightweight SQLite knowledge graph. Supports remember, recall, reflect, relate, timeline, and import/export operations.",
+  "author": "clawbotai",
+  "license": "MIT",
+  "tags": ["memory", "embeddings", "knowledge-graph", "sqlite", "agent-infrastructure"],
+  "compatibility": {
+    "platform": ["openclaw"]
+  }
+}
