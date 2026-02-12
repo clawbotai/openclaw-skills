@@ -38,3 +38,4 @@ memory/*.db
 memory/*.db-shm
 memory/*.db-wal
 memory/workflows.json
+skills/memory/
