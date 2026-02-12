@@ -1,9 +1,0 @@
-{
-  "slug": "structure-standard",
-  "name": "structure-standard",
-  "version": "1.0.0",
-  "description": "Unified structure enforcement — project scaffolding, validation, filesystem auditing, and workspace organization. Use for new project setup, structure validation, or workspace cleanup.",
-  "author": "clawbotai",
-  "tags": ["structure", "validation", "scaffolding", "filesystem", "organization"],
-  "os": ["linux", "darwin"]
-}
