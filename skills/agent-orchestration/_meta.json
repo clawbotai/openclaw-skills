@@ -1,0 +1,13 @@
+{
+  "name": "agent-orchestration",
+  "slug": "agent-orchestration",
+  "version": "1.0.0",
+  "description": "Multi-agent workflow orchestration for OpenClaw. Implements 5 patterns (Fan-Out, Pipeline, Supervisor, Expert Panel, Map-Reduce) with a stateless JSON ledger, structured task templates with parseable output interfaces, and CLI-driven workflow lifecycle management. Based on arXiv 2510.25445 Agentic AI architecture.",
+  "author": "clawbotai",
+  "license": "MIT",
+  "tags": ["orchestration", "multi-agent", "workflow", "sub-agent", "agent-infrastructure"],
+  "permissions": ["filesystem", "execution"],
+  "compatibility": {
+    "platform": ["openclaw"]
+  }
+}
