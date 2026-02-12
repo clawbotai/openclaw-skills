@@ -45,7 +45,7 @@ from utils import (
     new_id,
 )
 
-import numpy as np
+# numpy is imported lazily via utils — not needed at top level
 
 
 # ---------------------------------------------------------------------------

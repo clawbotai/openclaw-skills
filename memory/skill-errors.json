@@ -58,5 +58,47 @@
       "probe_success": null
     },
     "errors": []
+  },
+  "agent-memory": {
+    "total_calls": 3,
+    "total_failures": 1,
+    "total_successes": 2,
+    "transient_errors": 0,
+    "deterministic_errors": 1,
+    "last_success": "2026-02-12T12:16:13.307115+00:00",
+    "last_failure": "2026-02-12T12:16:19.033280+00:00",
+    "circuit": {
+      "state": "closed",
+      "failure_count": 1,
+      "last_failure": null,
+      "opened_at": null,
+      "half_open_at": null,
+      "probe_success": null
+    },
+    "errors": [
+      {
+        "fingerprint": "2c385b5af5748889",
+        "skill_name": "agent-memory",
+        "error_class": "deterministic",
+        "error_type": "SubprocessError",
+        "error_message": "usage: memory.py [-h] [--db DB]\n                 {remember,recall,forget,relate,reflect,timeline,stats,import-md,export}\n                 ...\nmemory.py: error: unrecognized arguments: email-manager with connection retries, context managers, and UID mode. Committed as 2f725d8.",
+        "traceback": "usage: memory.py [-h] [--db DB]\n                 {remember,recall,forget,relate,reflect,timeline,stats,import-md,export}\n                 ...\nmemory.py: error: unrecognized arguments: email-manager with connection retries, context managers, and UID mode. Committed as 2f725d8.\n",
+        "input_args": {
+          "command": "python3 scripts/memory.py remember Rebuilt email-manager with connection retries, context managers, and UID mode. Committed as 2f725d8. --type episodic",
+          "cwd": "/Users/clawai/openclaw/workspace/skills/agent-memory"
+        },
+        "environment": {
+          "cwd": "/Users/clawai/openclaw/workspace",
+          "python": "3.9.6",
+          "platform": "macOS-26.2-arm64-arm-64bit",
+          "user": "clawai",
+          "timestamp": "2026-02-12T12:16:19.041421+00:00"
+        },
+        "count": 1,
+        "first_seen": "2026-02-12T12:16:19.033280Z",
+        "last_seen": "2026-02-12T12:16:19.033280Z",
+        "exit_code": 2
+      }
+    ]
   }
 }

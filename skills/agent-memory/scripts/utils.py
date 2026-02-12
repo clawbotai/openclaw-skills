@@ -36,12 +36,14 @@ import numpy as np
 EMBEDDING_DIM: int = 384
 MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"
 
-# Default DB location — resolved relative to the workspace memory/ dir
+# Default DB location — resolved relative to the workspace root.
+# Script is at: skills/agent-memory/scripts/utils.py
+# Workspace is: 3 levels up → skills/agent-memory/scripts → skills/agent-memory → skills → workspace
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_WORKSPACE_ROOT = os.path.realpath(os.path.join(_SCRIPT_DIR, "..", "..", ".."))
 _DEFAULT_DB_DIR = os.environ.get(
     "AGENT_MEMORY_DIR",
-    os.path.realpath(os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "..", "memory")),
+    os.path.join(_WORKSPACE_ROOT, "memory"),
 )
 DEFAULT_DB_PATH: str = os.path.join(_DEFAULT_DB_DIR, "agent_memory.db")
 
