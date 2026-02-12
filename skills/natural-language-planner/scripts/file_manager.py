@@ -5,7 +5,6 @@ Handles creation, reading, updating, listing, and archiving of projects
 and tasks stored as Markdown files with YAML frontmatter.
 """
 
-# Module imports
 import re
 import shutil
 import logging
@@ -60,7 +59,6 @@ def _next_project_colour(root: Path) -> str:
     used: set[str] = set()
     projects_dir = root / "projects"
     if projects_dir.exists():
-        # Iterate over items
         for readme in projects_dir.glob("*/README.md"):
             raw = safe_read_file(readme)
             if raw:
@@ -69,14 +67,11 @@ def _next_project_colour(root: Path) -> str:
                 if c:
                     used.add(c.lower())
 
-    # Iterate over items
     for colour in PROJECT_COLOUR_PALETTE:
         if colour.lower() not in used:
-            # Return result
             return colour
 
     # All taken — cycle based on total project count
-    # Return result
     return PROJECT_COLOUR_PALETTE[len(used) % len(PROJECT_COLOUR_PALETTE)]
 
 
@@ -116,10 +111,8 @@ def init_workspace(workspace_path: str) -> bool:
         root / "archive",
     ]
 
-    # Iterate over items
     for d in directories:
         if not ensure_directory(d):
-            # Return result
             return False
 
     # Write initial config
@@ -127,7 +120,6 @@ def init_workspace(workspace_path: str) -> bool:
     config = load_config(str(root))
     config["workspace_path"] = str(root)
     if not save_config(config, str(root)):
-        # Return result
         return False
 
     # Create inbox README if it doesn't exist
@@ -150,7 +142,6 @@ def init_workspace(workspace_path: str) -> bool:
         safe_write_file(inbox_readme, serialize_frontmatter(meta, body))
 
     logger.info("Workspace initialised at %s", root)
-    # Return result
     return True
 
 
@@ -183,20 +174,17 @@ def create_project(
     """
     root = _workspace_root()
     if root is None:
-        # Return result
         return None
 
     project_id = generate_slug(name)
     project_dir = safe_child_path(root, "projects", project_id)
     if project_dir is None:
         logger.error("Generated project slug '%s' is invalid.", project_id)
-        # Return result
         return None
 
     if project_dir.exists():
         logger.warning("Project directory '%s' already exists.", project_id)
         # Return existing ID so callers can still reference it
-        # Return result
         return project_id
 
     ensure_directory(project_dir / "tasks")
@@ -223,11 +211,9 @@ def create_project(
 
     content = serialize_frontmatter(meta, "\n\n".join(body_parts))
     if not safe_write_file(project_dir / "README.md", content):
-        # Return result
         return None
 
     logger.info("Created project '%s' (%s)", name, project_id)
-    # Return result
     return project_id
 
 

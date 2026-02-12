@@ -16,7 +16,7 @@ VERSION="2.0.0"
 # Help
 # =============================================================================
 
-# show_help — handles show help operation
+
 show_help() {
     cat <<'EOF'
 NAME
@@ -123,7 +123,7 @@ TARGET="$(cd "$TARGET" 2>/dev/null && pwd || realpath "$TARGET")"
 # Utility Functions
 # =============================================================================
 
-# detect_languages — handles detect languages operation
+
 detect_languages() {
     local dir="$1"
     find "$dir" -type f \( -name "*.sh" -o -name "*.bash" -o -name "*.js" -o -name "*.ts" \
@@ -133,7 +133,7 @@ detect_languages() {
         | sed 's/.*\.//' | sort | uniq -c | sort -rn
 }
 
-# comment_ratio — handles comment ratio operation
+
 comment_ratio() {
     local file="$1"
     local ext="${file##*.}"
@@ -151,7 +151,7 @@ comment_ratio() {
     echo "$((comment_lines * 100 / total))"
 }
 
-# output_start — handles output start operation
+
 output_start() {
     if [[ -n "$OUTPUT" ]]; then
         exec 3>&1
@@ -159,7 +159,7 @@ output_start() {
     fi
 }
 
-# output_end — handles output end operation
+
 output_end() {
     if [[ -n "$OUTPUT" ]]; then
         exec >&3
@@ -171,7 +171,7 @@ output_end() {
 # Mode: scaffold — Create Gold Standard documentation structure
 # =============================================================================
 
-# mode_scaffold — handles mode scaffold operation
+
 mode_scaffold() {
     local project_name
     project_name=$(basename "$TARGET")
@@ -280,7 +280,7 @@ mode_scaffold() {
 # Mode: inline — Analyze inline documentation coverage
 # =============================================================================
 
-# mode_inline — handles mode inline operation
+
 mode_inline() {
     output_start
     echo "# Inline Documentation Analysis"
@@ -329,7 +329,7 @@ mode_inline() {
 # Mode: reference — Generate function reference skeleton
 # =============================================================================
 
-# mode_reference — handles mode reference operation
+
 mode_reference() {
     output_start
     echo "# Function Reference"
@@ -416,7 +416,7 @@ mode_reference() {
 # Mode: help — Inject --help into shell scripts
 # =============================================================================
 
-# mode_help — handles mode help operation
+
 mode_help() {
     echo "Injecting --help support into shell scripts in: $TARGET"
     echo ""
@@ -427,7 +427,7 @@ mode_help() {
 # Mode: overview — Generate project overview skeleton
 # =============================================================================
 
-# mode_overview — handles mode overview operation
+
 mode_overview() {
     output_start
     local project_name
@@ -485,7 +485,7 @@ mode_overview() {
 # Mode: score — Documentation quality audit (v2.0)
 # =============================================================================
 
-# mode_score — handles mode score operation
+
 mode_score() {
     bash "$SCRIPT_DIR/score-docs.sh" "$TARGET"
 }

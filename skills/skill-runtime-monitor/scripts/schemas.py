@@ -12,7 +12,6 @@ Models:
     MonitorConfig     — Runtime configuration with sensible defaults
 """
 
-# Module imports
 from __future__ import annotations
 
 import hashlib

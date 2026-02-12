@@ -30,7 +30,7 @@ from .export import export_dashboard
 
 
 def main() -> None:
-    """Handle this operation."""
+    """Parse CLI arguments and dispatch to the appropriate planner subcommand."""
     setup_logging()
 
     parser = argparse.ArgumentParser(

@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+/**
+ * Quick market scanner — fetches current perpetual prices from Hyperliquid
+ * and displays major assets plus the first 20 available perps.
+ */
 import { Hyperliquid } from 'hyperliquid';
 
 const sdk = new Hyperliquid({ enableWs: false });

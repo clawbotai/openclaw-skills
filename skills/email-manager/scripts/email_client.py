@@ -1000,7 +1000,7 @@ def cmd_config(args, config):
 # ---------------------------------------------------------------------------
 
 def main():
-    """Handle this operation."""
+    """CLI entry point: parse arguments and dispatch to the appropriate email command."""
     parser = argparse.ArgumentParser(
         description="Email Manager — Autonomous AI Email Client",
         formatter_class=argparse.RawDescriptionHelpFormatter,

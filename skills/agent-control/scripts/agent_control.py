@@ -2,7 +2,6 @@
 """
 Utility helpers for managing OpenClaw agent sessions and model defaults directly from skill workflows.
 """
-# Module imports
 from __future__ import annotations
 
 import argparse
@@ -12,28 +11,33 @@ import sys
 from pathlib import Path
 from typing import Any
 
-# File I/O operation
+# Path to the main OpenClaw configuration file
 CONFIG_PATH = Path.home() / ".openclaw" / "openclaw.json"
-# File I/O operation
+# Root directory containing per-agent session and config data
 AGENTS_ROOT = Path.home() / ".openclaw" / "agents"
 
 
 def load_config() -> dict[str, Any]:
-    """Handle this operation."""
+    """Load and parse the OpenClaw JSON config file.
+
+    Returns:
+        dict: The parsed configuration.
+
+    Raises:
+        FileNotFoundError: If the config file does not exist.
+    """
     if not CONFIG_PATH.exists():
         raise FileNotFoundError(f"Config not found at {CONFIG_PATH}")
-    # Return result
     return json.loads(CONFIG_PATH.read_text())
 
 
 def write_config(data: dict[str, Any]) -> None:
-    """Handle this operation."""
-    # File I/O operation
+    """Serialize and persist the config back to disk."""
     CONFIG_PATH.write_text(json.dumps(data, indent=2) + "\n")
 
 
 def cmd_status(_: argparse.Namespace) -> None:
-    """Handle this operation."""
+    """Print a JSON summary of default and per-agent model assignments to stdout."""
     data = load_config()
     defaults = data.get("agents", {}).get("defaults", {})
     primary = defaults.get("model", {}).get("primary")
@@ -45,12 +49,11 @@ def cmd_status(_: argparse.Namespace) -> None:
         "agent_models": agents,
     }
     json.dump(payload, sys.stdout, indent=2)
-    # File I/O operation
     sys.stdout.write("\n")
 
 
 def cmd_set_model(args: argparse.Namespace) -> None:
-    """Handle this operation."""
+    """Update the primary model (and optional fallbacks) for an agent in the config file."""
     data = load_config()
     agents_blob = data.setdefault("agents", {})
     defaults = agents_blob.setdefault("defaults", {})
@@ -62,7 +65,7 @@ def cmd_set_model(args: argparse.Namespace) -> None:
     models_map.setdefault(args.model, {})
 
     target_agent = None
-    # Iterate over items
+    # Locate the agent entry by id and patch its model field
     for agent in agents_blob.get("list", []):
         if agent.get("id") == args.agent:
             agent["model"] = args.model
@@ -76,13 +79,12 @@ def cmd_set_model(args: argparse.Namespace) -> None:
 
 
 def cmd_stop_session(args: argparse.Namespace) -> None:
-    """Handle this operation."""
+    """Remove a session entry and its backing files to force a fresh session on next connect."""
     agent_dir = AGENTS_ROOT / args.agent
     sessions_dir = agent_dir / "sessions"
     store_path = sessions_dir / "sessions.json"
     if not store_path.exists():
         raise FileNotFoundError(f"Session store not found at {store_path}")
-    # File I/O operation
     store = json.loads(store_path.read_text())
     entry = store.pop(args.key, None)
     if entry is None:
@@ -99,7 +101,7 @@ def cmd_stop_session(args: argparse.Namespace) -> None:
 
 
 def cmd_restart_gateway(_: argparse.Namespace) -> None:
-    """Handle this operation."""
+    """Invoke ``openclaw gateway restart`` and relay its output."""
     result = subprocess.run([
         "openclaw",
         "gateway",
@@ -117,7 +119,7 @@ def cmd_restart_gateway(_: argparse.Namespace) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Handle this operation."""
+    """Construct the argparse CLI with all subcommands and their options."""
     parser = argparse.ArgumentParser(description="Agent control helpers")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -142,7 +144,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> None:
-    """Handle this operation."""
+    """Parse arguments and dispatch to the appropriate subcommand handler."""
     parser = build_parser()
     args = parser.parse_args(argv)
     args.func(args)

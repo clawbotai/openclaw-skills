@@ -13,7 +13,7 @@ HOME_DIR="${HOME:-/Users/clawai}"
 WORKSPACE="${HOME_DIR}/openclaw/workspace"
 OPENCLAW="${HOME_DIR}/.openclaw"
 
-# usage — handles usage operation
+
 usage() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
@@ -45,14 +45,14 @@ for arg in "$@"; do
     esac
 done
 
-# pass — handles pass operation
+
 pass() {
     TOTAL=$((TOTAL + 1))
     SCORE=$((SCORE + 1))
     $QUIET || echo "  ✅ $1"
 }
 
-# fail — handles fail operation
+
 fail() {
     TOTAL=$((TOTAL + 1))
     ISSUES+=("$1")
@@ -60,7 +60,7 @@ fail() {
     [ -n "${2:-}" ] && echo "     💡 $2"
 }
 
-# section — handles section operation
+
 section() {
     echo ""
     echo "━━━ $1 ━━━"
@@ -115,7 +115,7 @@ fi
 # ── Permissions ──
 section "Permissions"
 
-# check_perm — handles check perm operation
+
 check_perm() {
     local path="$1" expected="$2" label="$3"
     if [ ! -e "$path" ]; then return; fi

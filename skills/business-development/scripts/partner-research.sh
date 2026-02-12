@@ -21,7 +21,7 @@ TEMPLATE="$BD_DIR/templates/partner-profile.md"
 
 mkdir -p "$PARTNERS_DIR"
 
-# show_help — handles show help operation
+
 show_help() {
     echo "Partner Research Tool"
     echo "====================="
@@ -35,7 +35,7 @@ show_help() {
     echo "  $0 'Acme Corp' --profile"
 }
 
-# research_checklist — handles research checklist operation
+
 research_checklist() {
     local company="$1"
     
@@ -71,7 +71,7 @@ research_checklist() {
     echo "  - Google News: https://news.google.com/search?q=$company"
 }
 
-# create_profile — handles create profile operation
+
 create_profile() {
     local company="$1"
     local filename=$(echo "$company" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')

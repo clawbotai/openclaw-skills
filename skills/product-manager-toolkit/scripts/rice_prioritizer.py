@@ -5,7 +5,6 @@ Calculates RICE scores for feature prioritization
 RICE = (Reach x Impact x Confidence) / Effort
 """
 
-# Module imports
 import json
 import csv
 from typing import List, Dict, Tuple
@@ -16,7 +15,7 @@ class RICECalculator:
     """Calculate RICE scores for feature prioritization"""
     
     def __init__(self):
-        """Handle this operation."""
+        """Initialize with empty feature list and default RICE weights."""
         self.impact_map = {
             'massive': 3.0,
             'high': 2.0,
@@ -54,7 +53,6 @@ class RICECalculator:
         effort_score = self.effort_map.get(effort.lower(), 5)
         
         if effort_score == 0:
-            # Return result
             return 0
         
         rice_score = (reach * impact_score * confidence_score) / effort_score
@@ -248,7 +246,7 @@ def create_sample_csv(filepath: str):
     print(f"Sample CSV created at: {filepath}")
 
 def main():
-    """Handle this operation."""
+    """CLI entry point: parse args and run RICE prioritization."""
     parser = argparse.ArgumentParser(description='RICE Framework for Feature Prioritization')
     parser.add_argument('input', nargs='?', help='CSV file with features or "sample" to create sample')
     parser.add_argument('--capacity', type=int, default=10, help='Team capacity per quarter (person-months)')

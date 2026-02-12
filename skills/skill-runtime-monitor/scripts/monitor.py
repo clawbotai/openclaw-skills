@@ -24,7 +24,7 @@ Usage:
 
     @monitor_skill(monitor)
     def my_skill(arg1, arg2):
-        """Handle this operation."""
+        """Example skill function."""
         ...
 
     # Or wrap any callable at runtime:
@@ -172,7 +172,7 @@ class SkillMonitor:
     """
 
     def __init__(self, config: Optional[MonitorConfig] = None, workspace: Optional[str] = None):
-        """Handle this operation."""
+        """Initialize the monitor with config, workspace path, and ledger location."""
         self.config = config or MonitorConfig()
         self.workspace = Path(workspace) if workspace else Path.cwd()
         self.ledger_path = self.workspace / self.config.ledger_path
@@ -852,21 +852,21 @@ def monitor_skill(monitor: SkillMonitor, skill_name: Optional[str] = None):
 
         @monitor_skill(monitor)
         def my_tool(arg1, arg2):
-            """Handle this operation."""
+            """Example tool function."""
             ...
 
         @monitor_skill(monitor, skill_name="custom-name")
         def another_tool():
-            """Handle this operation."""
+            """Example with custom name."""
             ...
     """
     def decorator(fn: Callable) -> Callable:
-        """Handle this operation."""
+        """Wrap the target function with monitoring instrumentation."""
         name = skill_name or fn.__name__
 
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
-            """Handle this operation."""
+            """Instrumented wrapper that records execution metrics via the monitor."""
             return monitor.execute(name, fn, args, kwargs)
 
         # Attach metadata for introspection

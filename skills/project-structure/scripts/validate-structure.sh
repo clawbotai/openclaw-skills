@@ -41,20 +41,20 @@ PROJECT_TYPE="${2:-generic}"
 ERRORS=0
 WARNINGS=0
 
-# red — handles red operation
+
 red()    { echo -e "\033[31m✗ $1\033[0m"; }
-# yellow — handles yellow operation
+
 yellow() { echo -e "\033[33m⚠ $1\033[0m"; }
-# green — handles green operation
+
 green()  { echo -e "\033[32m✓ $1\033[0m"; }
-# blue — handles blue operation
+
 blue()   { echo -e "\033[34mℹ $1\033[0m"; }
 
-# error — handles error operation
+
 error()   { red "$1"; ((ERRORS++)); }
-# warn — handles warn operation
+
 warn()    { yellow "$1"; ((WARNINGS++)); }
-# pass — handles pass operation
+
 pass()    { green "$1"; }
 
 echo "═══════════════════════════════════════════"

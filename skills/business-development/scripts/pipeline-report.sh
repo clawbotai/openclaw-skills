@@ -19,7 +19,7 @@ BD_DIR="${HOME}/.openclaw/workspace/business-development"
 REPORTS_DIR="$BD_DIR/reports"
 mkdir -p "$REPORTS_DIR"
 
-# generate_weekly — handles generate weekly operation
+
 generate_weekly() {
     local date=$(date +%Y-%m-%d)
     local report_file="${REPORTS_DIR}/weekly-${date}.md"
@@ -80,7 +80,7 @@ EOF
     echo "✅ Weekly BD report created: $report_file"
 }
 
-# generate_quarterly — handles generate quarterly operation
+
 generate_quarterly() {
     local date=$(date +%Y-%m-%d)
     local quarter=$(( ($(date +%-m) - 1) / 3 + 1 ))

@@ -15,7 +15,7 @@ VERSION="1.0.0"
 # Help
 # =============================================================================
 
-# show_help — handles show help operation
+
 show_help() {
     cat <<'EOF'
 NAME
@@ -92,7 +92,7 @@ fi
 # Core: Inject help into a single script
 # =============================================================================
 
-# inject_help_into_file — handles inject help into file operation
+
 inject_help_into_file() {
     local file="$1"
     local basename_script

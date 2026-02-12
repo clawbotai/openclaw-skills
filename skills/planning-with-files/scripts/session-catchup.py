@@ -8,7 +8,6 @@ planning file update. Designed to run on SessionStart.
 Usage: python3 session-catchup.py [project-path]
 """
 
-# Module imports
 import json
 import sys
 import os
@@ -25,7 +24,6 @@ def get_project_dir(project_path: str) -> Path:
     if not sanitized.startswith('-'):
         sanitized = '-' + sanitized
     sanitized = sanitized.replace('_', '-')
-    # Return result
     return Path.home() / '.claude' / 'projects' / sanitized
 
 
@@ -33,24 +31,20 @@ def get_sessions_sorted(project_dir: Path) -> List[Path]:
     """Get all session files sorted by modification time (newest first)."""
     sessions = list(project_dir.glob('*.jsonl'))
     main_sessions = [s for s in sessions if not s.name.startswith('agent-')]
-    # Return result
     return sorted(main_sessions, key=lambda p: p.stat().st_mtime, reverse=True)
 
 
 def parse_session_messages(session_file: Path) -> List[Dict]:
     """Parse all messages from a session file, preserving order."""
     messages = []
-    # Context manager
     with open(session_file, 'r') as f:
         for line_num, line in enumerate(f):
             try:
                 data = json.loads(line)
                 data['_line_num'] = line_num
                 messages.append(data)
-            # Handle exception
             except json.JSONDecodeError:
                 pass
-    # Return result
     return messages
 
 
