@@ -1,7 +1,0 @@
-{
-  "slug": "api-design",
-  "version": "1.0.0",
-  "name": "Master API",
-  "description": "Comprehensive API design, documentation, and management across REST, GraphQL, gRPC, and AsyncAPI. Covers the full API lifecycle from design to deprecation.",
-  "tags": ["api", "rest", "graphql", "grpc", "openapi", "documentation"]
-}

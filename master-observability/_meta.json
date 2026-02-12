@@ -1,7 +1,0 @@
-{
-  "slug": "observability",
-  "version": "2.0.0",
-  "name": "Master Observability",
-  "description": "Complete observability engineering — OpenTelemetry-first instrumentation, structured logging, distributed tracing, metrics (RED/USE/Four Golden Signals), Prometheus/Grafana/Loki/Tempo stack, SLIs/SLOs/error budgets, alert design, dashboard patterns, and cost-aware operations.",
-  "tags": ["observability", "opentelemetry", "logging", "tracing", "grafana", "prometheus"]
-}

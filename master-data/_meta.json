@@ -1,7 +1,0 @@
-{
-  "slug": "data-engineering",
-  "version": "1.0.0",
-  "name": "Master Data",
-  "description": "Comprehensive data engineering covering database design, PostgreSQL operations, schema management, migrations, backup/recovery, and modern data patterns (CQRS, CDC, event sourcing).",
-  "tags": ["database", "postgresql", "schema", "migrations", "data-engineering"]
-}

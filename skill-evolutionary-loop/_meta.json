@@ -1,7 +1,0 @@
-{
-  "slug": "skill-evolver",
-  "version": "1.0.0",
-  "name": "Evolutionary Loop",
-  "description": "Autonomous Research-Build-Reflect helix. Fuses deep research, iterative development with backpressure gates, and self-reflection into a single evolutionary workflow. The agent researches before coding, validates through gates, and permanently encodes lessons learned.",
-  "tags": ["autonomous", "research", "development", "reflection", "learning", "iteration", "backpressure"]
-}
