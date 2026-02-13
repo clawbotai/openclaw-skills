@@ -1,51 +1,100 @@
 ---
 name: web-builder
-description: Full web development lifecycle — scaffold SvelteKit PWAs, bundle single-file HTML apps, and deploy to GitHub Pages or Vercel. Use when building any web application, static site, or HTML artifact.
+description: Full web development lifecycle — from PRD to live URL. Scaffold SvelteKit apps, bundle single-file HTML, deploy to GitHub Pages, Vercel, or Cloudflare. Use when building any web application, static site, or HTML artifact.
 ---
 
 # Web Builder
 
-Full web development lifecycle skill covering three main use cases: SvelteKit full-stack apps, single-file HTML bundling, and static site deployment to GitHub Pages or Vercel.
+Web apps are the most common deliverable an AI agent builds. This skill covers the full lifecycle from "I want a thing" to "here's the live URL" — scaffolding, building, testing, and deploying. It encodes opinionated defaults so you spend time on the product, not on tooling decisions.
 
-## Overview
+Every web project follows the same arc: understand what's needed, choose the right architecture, build it, make it look right, and ship it somewhere people can use it. Most failures happen at the first and last steps — a vague spec produces a vague app, and a project that only works on localhost is unfinished.
 
-Use this skill when:
-- Building a new web application (SvelteKit PWA)
-- Creating a self-contained single HTML file (games, demos, artifacts)
-- Deploying a static site to GitHub Pages
-- Deploying any web app to Vercel
+---
 
-**Choose your path:**
+## Choosing Your Path
 
-| Use Case | Section |
-|----------|---------|
-| Full web app with routing, state, DB | [SvelteKit Apps](#sveltekit-apps) |
-| Single-file HTML game/demo/artifact | [Single HTML Bundling](#single-html-bundling) |
-| Deploy static site to GitHub Pages | [GitHub Pages Deploy](#github-pages-deploy) |
-| Deploy SvelteKit app to Vercel | [Vercel Deploy](#vercel-deploy) |
+Before writing any code, decide the architecture. This is the single most consequential decision.
+
+| Signal | Path | Why |
+|--------|------|-----|
+| Multiple pages, routing, server-side logic, database, auth | **SvelteKit App** | Full framework with SSR, API routes, middleware |
+| Single interaction: calculator, game, demo, visualization | **Single HTML File** | Zero infrastructure, instant sharing, works offline |
+| Documentation, landing page, portfolio, blog | **Static Site** | Minimal JS, fast loads, GitHub Pages or Cloudflare |
+| Telegram Mini App, itch.io game, embedded widget | **Single HTML Bundle** | Must be one file, all assets inlined |
+
+### Decision Tree
+
+```
+Does it need routing between pages?
+  YES → Does it need a database or auth?
+    YES → SvelteKit App (full stack)
+    NO  → SvelteKit App (static adapter) or Static Site
+  NO  → Is it a single interaction/screen?
+    YES → Will it be distributed as a file?
+      YES → Single HTML Bundle
+      NO  → Single HTML (can host normally)
+    NO  → Static Site
+```
+
+**The 5-minute rule:** If you can describe the entire UI in one sentence with no "and then the user goes to..." — it's a single HTML file.
+
+---
+
+## Phase 0: The PRD
+
+This is where most web projects fail. A bad spec produces a bad app. Spend the time here.
+
+### Gathering Requirements
+
+Start with: "What do you want to build?"
+
+Then fill gaps systematically:
+
+| Gap | Question | Why It Matters |
+|-----|----------|----------------|
+| Users unclear | "Who's the primary user?" | Determines complexity, auth needs |
+| Core action unclear | "What's the ONE thing they must do?" | Prevents scope creep |
+| Design unclear | "Show me 1-3 sites you like the feel of" | Anchors visual decisions |
+| Data unclear | "What data exists? What needs to persist?" | Determines database needs |
+| Deploy unclear | "Where should this live?" | Affects architecture choices |
+
+### Writing the PRD
+
+The PRD is a `prd.json` containing user stories. Each story must fit in one context window. Standard sequence:
+
+1. **Scaffold** — Project creation, dependencies
+2. **Configure** — Tailwind, component library, adapters
+3. **Mock Data** — Seed data for development
+4. **Foundation** — Index page, layout, navigation → **CHECKPOINT: pause for user review**
+5. **Features** — Core functionality, one story per feature
+6. **Infrastructure** — Auth, database, API routes
+7. **Polish** — Responsive design, loading states, error pages
+8. **Tests** — Unit + E2E tests
+
+**The checkpoint at step 4 is non-negotiable.** Show the user a working shell before building features. Changing direction after the foundation is cheap; changing direction after features is expensive.
+
+### Design Preferences
+
+Capture these early and enforce them throughout:
+
+| Preference | Options | Default |
+|------------|---------|---------|
+| Color scheme | Light / Dark / System-adaptive | System-adaptive |
+| Visual density | Spacious / Balanced / Compact | Balanced |
+| Style | Minimalist / Rich / Playful | Minimalist |
+| Component library | Skeleton / shadcn-svelte / Custom | Skeleton |
+
+Store design decisions in the PRD. Reference them in every feature story: "Use the established design system. Do not add new colors or spacing values."
 
 ---
 
 ## SvelteKit Apps
 
-Scaffold production-ready SvelteKit PWAs with opinionated defaults and autonomous execution.
-
-### Quick Start
-
-1. **Describe your app** — Tell me what you want to build
-2. **Review the PRD** — I'll generate a plan with user stories
-3. **Approve** — I build, test, and deploy autonomously
-4. **Done** — Get a live URL + admin documentation
-
-> "Build me a task tracker with due dates and priority labels"
-
-That's all I need to start.
-
 ### Prerequisites
 
 | CLI | Purpose | Install |
 |-----|---------|---------|
-| `sv` | SvelteKit scaffolding | `npm i -g sv` (or use via `pnpx`) |
+| `sv` | SvelteKit scaffolding | `npm i -g sv` (or `pnpx`) |
 | `pnpm` | Package manager | `npm i -g pnpm` |
 | `gh` | GitHub repo creation | [cli.github.com](https://cli.github.com) |
 | `vercel` | Deployment | `npm i -g vercel` |
@@ -56,46 +105,15 @@ That's all I need to start.
 - **Package manager:** pnpm
 - **Deployment:** Vercel
 - **Add-ons:** ESLint, Prettier, Vitest, Playwright, mdsvex, MCP
-- **State:** Svelte 5 runes ($state, $derived, $effect)
+- **State:** Svelte 5 runes (`$state`, `$derived`, `$effect`)
+- **Adapter:** `adapter-auto` (detects Vercel, Cloudflare, Netlify, falls back to adapter-node)
 
-All defaults can be overridden via `SKILL-CONFIG.json`.
+All defaults can be overridden via `SKILL-CONFIG.json`. Check `~/.openclaw/workspace/SKILL-CONFIG.json` for user-specific overrides before using skill defaults.
 
-### User Configuration
+### Technical Stack
 
-Check `~/.openclaw/workspace/SKILL-CONFIG.json` for user-specific defaults before using skill defaults. User config overrides skill defaults for:
-- Deployment provider (e.g., vercel, cloudflare, netlify)
-- Package manager (pnpm, npm, yarn)
-- Add-ons to always include
-- MCP IDE configuration
-- Component library preferences
-
-### Workflow
-
-1. **Gather**: Freeform description + design references + targeted follow-ups
-2. **Plan**: Generate complete PRD (scaffold, configure, features, tests as stories)
-3. **Iterate**: Refine PRD with user until confirmed
-4. **Preflight**: Verify all required auths and credentials
-5. **Execute**: Autonomous build-deploy-verify cycle (development → staging → production)
-
-#### Phase 1: Gather Project Description
-
-Start with an open question: "What do you want to build?"
-
-Ask for design inspiration (1–3 reference sites). Then fill gaps with targeted follow-ups:
-
-| Gap | Question |
-|-----|----------|
-| Users unclear | "Who's the primary user?" |
-| Core action unclear | "What's the ONE thing they must be able to do?" |
-| Scale unknown | "How many users do you expect?" |
-
-Confirm understanding with a structured summary before proceeding.
-
-#### Phase 2: Generate PRD
-
-**Technical Stack (always included):**
 ```
-CLI:              pnpx sv
+CLI:              pnpx sv create [name]
 Template:         minimal
 TypeScript:       yes
 Package manager:  pnpm
@@ -110,54 +128,38 @@ Post-scaffold:
   ✓ vite-plugin-pwa
   ✓ Svelte 5 runes mode
   ✓ adapter-auto
+
+Inferred from description:
+  drizzle  → if needs database
+  lucia    → if needs auth
+  paraglide → if needs i18n
 ```
 
-**Inferred from description:**
-- `drizzle` → if needs database
-- `lucia` → if needs auth
-- `paraglide` → if needs i18n
+### Execution Workflow
 
-**User stories** in `prd.json` — each story must fit in one context window. Standard sequence:
-1. Scaffold → 2. Configure → 3. Mock Data → 4. Foundation (INDEX PAGE CHECKPOINT — pause for user review) → 5. Features → 6. Infrastructure → 7. Polish → 8. Tests
-
-#### Phase 3: Iterate Until Confirmed
-
-Present PRD, refine until user explicitly approves.
-
-#### Phase 4: Preflight
-
+**Preflight:**
 ```bash
 gh auth status 2>/dev/null && echo "✓ GitHub" || echo "✗ GitHub"
 command -v pnpm &>/dev/null && echo "✓ pnpm" || echo "⚠ pnpm (will use npm)"
 vercel whoami 2>/dev/null && echo "✓ Vercel" || echo "✗ Vercel"
 ```
 
-Development can start with mocks; staging needs real credentials.
+**Three stages:**
+1. **Development** — Local, dev branch, mock data. Execute stories via sub-agents in parallel waves. Exit: `pnpm check && pnpm test && pnpm test:e2e`
+2. **Staging** — Main branch, Vercel preview URL, real data. Smart retry (3 attempts) for environment issues.
+3. **Production** — `vercel --prod`, final E2E verification.
 
-#### Phase 5: Execute
+**Handoff:** Generate `ADMIN.md` with local dev instructions, env vars, project structure, adding pages, DB migrations, deployment workflow, troubleshooting.
 
-Three stages:
-- **Stage 1: Development** — Local, dev branch, mock data. Execute stories via sub-agents in parallel waves. Exit criteria: `pnpm check && pnpm test && pnpm test:e2e`
-- **Stage 2: Staging** — Main branch, Vercel preview URL, real data. Fix environment issues with smart retry (3 attempts).
-- **Stage 3: Production** — `vercel --prod`, final E2E verification.
-
-#### Phase 6: Handoff
-
-Generate `ADMIN.md` with: local dev instructions, env vars, project structure, adding pages, DB migrations, deployment workflow, troubleshooting.
-
-### State Management
+### Code Patterns
 
 - `$state()` runes for reactive state
 - `$derived()` for computed values
 - Context API (`setContext`/`getContext`) for cross-component state
 - Server state through `load` functions → `data` prop
 - **Never** store user-specific state in module-level variables
-
-### Code Style
-
 - Prefer `bind:` over callbacks
 - `$effect()` over `onMount`
-- Runes everywhere
 - ~200 line soft limit per component
 
 ### Directory Structure
@@ -175,28 +177,8 @@ static/
 └── icons/               # PWA icons
 ```
 
-### Error Handling
-
-1. Diagnose → 2. Categorize (dependency/type/test/network) → 3. Retry (up to 3) → 4. Escalate to user
-
-**Never leave the project broken.** If Stage 2/3 fails, dev branch still works.
-
-### Quick Reference
-
-```bash
-pnpx sv create [name]   # Scaffold
-pnpx sv add [addon]     # Add functionality
-pnpm check              # TypeScript check
-pnpm test               # Unit tests
-pnpm test:e2e           # E2E tests
-pnpm build              # Production build
-```
-
-### Default Adapter
-
-`adapter-auto` detects: Vercel, Cloudflare, Netlify, or falls back to adapter-node.
-
 ### Database Options (drizzle)
+
 - PostgreSQL + postgres.js or neon
 - SQLite + better-sqlite3 or libsql
 - Turso + @libsql/client
@@ -204,8 +186,6 @@ pnpm build              # Production build
 ---
 
 ## Single HTML Bundling
-
-Bundle web applications into a single self-contained HTML file for distribution.
 
 ### When to Use
 
@@ -217,25 +197,12 @@ Bundle web applications into a single self-contained HTML file for distribution.
 
 ### Bundling Patterns
 
-#### Simple (No Framework)
+**Simple (no framework):** Inline everything — CSS in `<style>`, JS in `<script>`, images as base64 data URIs.
 
-If already a single HTML file, just inline everything:
-- CSS inside `<style>` tags
-- JS inside `<script>` tags
-- Images as base64 data URIs
-
-#### React/Vite App → Single HTML
-
-**Stack:** React 18 + TypeScript + Vite + Parcel + Tailwind CSS
-
+**React/Vite → Single HTML:**
 ```bash
-# 1. Build with Vite
 npm run build
-
-# 2. Bundle into single file with Parcel
 npx parcel build dist/index.html --no-source-maps
-
-# 3. Inline all assets
 npx html-inline dist/index.html -o bundle.html
 ```
 
@@ -253,153 +220,159 @@ npx html-inline dist/index.html -o bundle.html
 }
 </style>
 
-<!-- Audio → base64 (small sound effects only) -->
+<!-- Audio → base64 (small effects only, <500KB) -->
 <audio src="data:audio/mp3;base64,..."></audio>
 ```
 
 ### Distribution Checklist
 
-- [ ] Bundled into single HTML file
-- [ ] No external CDN dependencies (works offline)
-- [ ] Mobile touch support (for Telegram Mini App)
-- [ ] Safe-area considerations (WebView environments)
-- [ ] File size optimized (compressed images, minified code)
+- [ ] Single HTML file, no external dependencies
+- [ ] Works offline (no CDN links)
+- [ ] Mobile touch support
+- [ ] Safe-area insets (WebView environments)
+- [ ] File size optimized
 - [ ] No console errors
-
-### Distribution Channels
-
-1. **Telegram Mini App** — Host on your domain
-2. **itch.io** — Upload HTML file directly
-3. **GitHub Pages** — Push to repo (see [GitHub Pages Deploy](#github-pages-deploy))
-4. **CrazyGames/Poki** — Check platform requirements
 
 ---
 
 ## GitHub Pages Deploy
 
-Create and deploy static websites to GitHub Pages with automated workflows.
-
 ### Quick Workflow
 
 ```bash
-# 1. Initialize project structure
 bash scripts/init_project.sh <project-name>
-
-# 2. Build your site (see templates in assets/templates/)
-
-# 3. Deploy to GitHub Pages
+# Build your site
 bash scripts/deploy_github_pages.sh <project-name> <github-username>
 ```
 
-### Project Structure (generated)
-
-```
-project-name/
-├── index.html
-├── styles.css
-├── script.js
-├── README.md
-└── .github/
-    └── workflows/
-        └── deploy.yml
-```
-
-### Templates
-
-Available in `assets/templates/`:
-- `base-html/` — Minimal HTML5 boilerplate
-- `portfolio/` — Portfolio/CV template with sections
-- `landing/` — Landing page with hero and CTA
-
-### Development Principles
-
-- **Single-page first**: One-page layouts unless multiple pages explicitly required
-- **No dependencies**: Pure HTML/CSS/JS when possible
-- **Modern CSS**: Flexbox, Grid, responsive design, dark mode support
-- **Semantic HTML5**: Proper elements, meta tags for SEO/social sharing
-- **Performance**: Optimized images, minified assets, lazy loading
-
-### Deployment
-
-GitHub Actions automatically deploys on push to main:
-- Deploys to `gh-pages` branch
-- Live at `https://<username>.github.io/<project-name>/`
+GitHub Actions deploys on push to main → live at `https://<username>.github.io/<project-name>/`
 
 ### Troubleshooting
 
-- **Not deploying**: Check Settings → Pages → Source is `gh-pages` branch
-- **Permission errors**: Run `gh auth status` to verify authentication
-- **Build failures**: Review Actions logs, verify workflow YAML syntax
-
-### Scripts
-
-- `scripts/init_project.sh` — Initialize project structure with GitHub Actions workflow
-- `scripts/deploy_github_pages.sh` — Create GitHub repo and deploy to Pages
-
-### References
-
-- `references/workflow.md` — Detailed workflow documentation
-- `references/design-patterns.md` — Design best practices
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| Site not deploying | Pages source wrong | Settings → Pages → Source = `gh-pages` branch |
+| 404 on all pages | Base path missing | Set `base` in svelte.config.js to `/<repo-name>` |
+| 404 on refresh (SPA) | No fallback for client routes | Add `404.html` that redirects to `index.html` |
+| Permission errors | Auth expired | `gh auth status`, re-login if needed |
+| Assets not loading | Relative paths broken | Use absolute paths from base: `{base}/img/logo.png` |
+| Build failures | YAML syntax | Check Actions logs, validate workflow file |
 
 ---
 
 ## Vercel Deploy
 
-Deploy SvelteKit apps (or any static site) to Vercel.
-
-### Prerequisites
-
-```bash
-npm i -g vercel
-vercel login
-```
-
 ### Deploy Flow
 
 ```bash
-# Link project to Vercel
-vercel link
-
-# Deploy to preview
-vercel
-
-# Deploy to production
-vercel --prod
-
-# Custom domain (optional)
-vercel domains add <domain>
+npm i -g vercel && vercel login
+vercel link          # Link project
+vercel               # Preview deploy
+vercel --prod        # Production deploy
+vercel domains add <domain>  # Custom domain
 ```
 
 ### Environment Variables
 
-Set in Vercel dashboard or via CLI:
 ```bash
 vercel env add DATABASE_URL production
 ```
 
-### Common Issues
+### Troubleshooting
 
-- **OAuth callbacks**: Must match deployed domain
-- **CORS**: Configure for deployed environment
-- **Env vars**: Ensure all are set in Vercel dashboard
-- **API endpoints**: Don't use localhost in production
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| Build fails | Missing env vars | Check Vercel dashboard → Settings → Environment Variables |
+| Build fails | Node version mismatch | Set `engines.node` in package.json, or use Vercel settings |
+| OAuth callbacks broken | Wrong redirect URI | Update OAuth provider with deployed domain |
+| CORS errors | API on different origin | Configure CORS in server hooks or API routes |
+| Functions timeout | Cold start or heavy computation | Increase `maxDuration` in vercel.json, optimize code |
+| `adapter-auto` not detected | Missing vercel.json | Usually works without it; if not, `npm i @sveltejs/adapter-vercel` explicitly |
 
-### SvelteKit Adapter
+---
 
-Use `adapter-auto` — automatically detects Vercel and uses `adapter-vercel`. No manual configuration needed.
+## Anti-Patterns
+
+### The Framework Overkill
+
+**Pattern:** User asks for a calculator. You scaffold a SvelteKit app with routing, a database, and auth.
+
+**Reality:** A single HTML file with 50 lines of JavaScript is the correct answer. The user gets their calculator in 2 minutes instead of 20.
+
+**Fix:** Use the decision tree. If it fits on one screen with no persistence, it's a single HTML file. Always.
+
+### The Infinite PRD
+
+**Pattern:** Spending 30 minutes refining user stories for a weekend project. Asking 15 clarifying questions before writing a line of code.
+
+**Reality:** Some projects need a one-line spec: "Build a pomodoro timer, dark theme, deploys to GitHub Pages." Done.
+
+**Fix:** Scale PRD effort to project complexity. Toy project = 1-paragraph spec. Production app = full PRD with stories. If in doubt, scaffold the foundation and show it — feedback on a working prototype beats feedback on a document.
+
+### The Deployment Afterthought
+
+**Pattern:** Building everything locally, then discovering the app can't deploy because it depends on local file paths, localhost URLs, or missing environment variables.
+
+**Reality:** If it doesn't deploy, it doesn't exist.
+
+**Fix:** Deploy the scaffold (empty app) in Stage 1 before building features. Catch deployment issues when they're cheap to fix. Every feature story should work in the deployed environment, not just localhost.
+
+### The Style Drift
+
+**Pattern:** Start with a clean design system. Skeleton components, consistent spacing, design tokens. By feature 5, there are inline styles, hardcoded colors, and three different button variants.
+
+**Reality:** Every new component is an opportunity to break visual consistency.
+
+**Fix:** Define the design system in the PRD. Reference it in every feature story. When adding a component, check if an existing component already handles this pattern. Never add a new color or spacing value without updating the design tokens.
+
+---
+
+## Error Handling
+
+1. **Diagnose** — Read the actual error, don't guess
+2. **Categorize** — dependency / type / test / network / deploy
+3. **Retry** — Up to 3 attempts with targeted fixes
+4. **Escalate** — Show the user the error and what was tried
+
+**Never leave the project broken.** If staging or production fails, the dev branch still works.
+
+---
+
+## Quick Reference Card
+
+```
+DECIDE:    One screen, no persistence? → Single HTML
+           Multiple pages or server logic? → SvelteKit
+           Docs/landing/portfolio? → Static site
+
+SCAFFOLD:  pnpx sv create [name]
+           pnpx sv add [addon]
+           pnpm install
+
+BUILD:     pnpm dev          # Local server
+           pnpm check        # TypeScript
+           pnpm test         # Unit tests
+           pnpm test:e2e     # E2E tests
+           pnpm build        # Production build
+
+DEPLOY:    vercel             # Preview
+           vercel --prod      # Production
+           gh-pages branch    # GitHub Pages
+
+PRD:       Gather → Plan → Iterate → Preflight → Execute → Handoff
+           CHECKPOINT at foundation (step 4) — always pause for review
+
+DESIGN:    Capture preferences early. Enforce throughout.
+           Never add colors/spacing outside the design system.
+
+BUNDLE:    npx html-inline dist/index.html -o bundle.html
+           All assets base64-inlined. No CDN dependencies.
+```
 
 ## Cross-Skill Integration
 
-### Safety Gate
-- **Before deploy**: `guardrails.py check --action deploy_site --target {url}`
-
-### Memory Protocol
-- **After scaffold**: `memory.py remember "[web-builder] Scaffolded {framework} app: {name}"`
-- **After deploy**: `memory.py remember "[web-builder] Deployed {name} to {url}"`
-
-### Connected Skills
-- **cloudflare-deploy** → push static builds to CF Pages
+- **cloudflare-deploy** → Push static builds to CF Pages
 - **devops** → CI/CD pipeline for automated builds
-- **security** → CSP headers, dependency audit, OWASP checks
-- **task-planner** → generates Kanban HTML dashboard
-- **data-analysis** → generates self-contained HTML dashboards
+- **security** → CSP headers, dependency audit
+- **task-planner** → Kanban HTML dashboard generation
+- **data-analysis** → Self-contained HTML dashboards
