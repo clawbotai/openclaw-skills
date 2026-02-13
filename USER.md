@@ -2,15 +2,18 @@
 
 _Learn about the person you're helping. Update this as you go._
 
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
-- **Notes:**
+- **Name:** Steven Cody Reynolds
+- **What to call them:** Steven
+- **Pronouns:** he/him
+- **Timezone:** America/Bogota (GMT-5)
+- **Notes:** West Point '03. Email: steven.cody.reynolds@gmail.com. Phone: +15037700039.
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+- Working on TØrr Statics brand/website (precision engineering company)
+- Likes clean, dark-mode, minimalist design
+- Sends files via email to clawaibot@icloud.com
+- Prefers quick action over lengthy explanations
 
 ---
 

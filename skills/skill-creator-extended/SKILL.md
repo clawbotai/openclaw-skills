@@ -59,6 +59,31 @@ The tool automatically extracts constraints from your prompt and enforces them a
 - "Python 3.9" → enforces version compatibility
 - "JSON output" / "structured JSON" → enforces output format
 
+## Skill Composition Patterns
+
+When combining skills for cross-functional workflows, use these patterns:
+
+- **Sequential**: Skill A output feeds skill B (e.g., research → architecture)
+- **Parallel**: Multiple skills process different aspects of same request
+- **Conditional**: Route to different skills based on request type
+- **Hierarchical**: Meta-skill orchestrates sub-skills
+
+**Cross-functional examples:**
+- **Deal Review**: Legal (contract) + Sales (strategy) + Finance (revenue recognition)
+- **Product Launch**: PM (spec/roadmap) + Marketing (campaign) + Support (KB prep) + Sales (battlecard)
+- **Incident Response**: Legal (compliance) + Support (comms) + Search (context) + Productivity (tasks)
+
+## Skill Validation Checklist
+
+When validating a generated or existing skill:
+- [ ] YAML frontmatter has `name` and `description` (nothing else)
+- [ ] Activation triggers defined
+- [ ] At least one command with workflow
+- [ ] Configuration schema present
+- [ ] Degraded mode behavior documented
+- [ ] No vendor-specific assumptions in core logic
+- [ ] No compiled code or proprietary formats
+
 ## Known Limitations
 
 - Output quality depends on the model — GPT-4o produces ~300 LOC per script, which may be insufficient for complex systems

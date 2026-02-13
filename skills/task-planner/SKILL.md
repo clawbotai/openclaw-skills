@@ -1006,3 +1006,31 @@ If catchup shows unsynced context: run `git diff --stat`, read planning files, u
 | Research project with many discoveries | File-based planning |
 | Quick one-off tasks | Kanban |
 | Both long-term tracking AND complex execution | Both together |
+
+---
+
+## Workplace Memory (Integrated from Productivity Skill)
+
+Maintain persistent understanding of the user's work context using a two-tier system:
+
+### Tier 1 — Core Memory
+- **People**: Names, roles, nicknames, relationships (e.g., "Todd" → Todd Martinez, Finance lead)
+- **Projects**: Names, status, key stakeholders
+- **Terminology**: Company jargon, acronyms, product names (e.g., "PSR" → Pipeline Status Report)
+
+### Tier 2 — Extended Memory
+- **Preferences**: Communication style, working hours, tool preferences
+- **History**: Past decisions, recurring patterns, known constraints
+
+This enables natural interaction where the user says "ask Todd about the PSR for Oracle" and the system resolves all references from memory.
+
+## Daily Planning Commands
+
+### `/productivity:plan-day`
+Generate daily plan from tasks, calendar, and priorities. Factor in energy management, meeting prep time, and focus blocks.
+
+### `/productivity:weekly-review`
+Weekly review: what was completed, what slipped, upcoming priorities, inbox/task cleanup.
+
+### `/productivity:delegate`
+Draft delegation message with full context, specific ask, deadline, and success criteria.

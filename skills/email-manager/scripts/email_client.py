@@ -546,12 +546,17 @@ def uid_search(conn: imaplib.IMAP4_SSL, criteria: str) -> List[bytes]:
     return data[0].split()
 
 
-def uid_fetch(conn: imaplib.IMAP4_SSL, uid: bytes, parts: str) -> Optional[tuple]:
-    """Fetch a message by UID. Returns the data tuple or None."""
+def uid_fetch(conn: imaplib.IMAP4_SSL, uid: bytes, parts: str) -> Optional[list]:
+    """Fetch a message by UID. Returns the data list or None.
+
+    Filters out non-tuple entries (e.g. closing paren bytes) that
+    imaplib sometimes includes in the response.
+    """
     typ, data = conn.uid("FETCH", uid, parts)
     if typ != "OK" or not data or not data[0]:
         return None
-    return data
+    # Filter: IMAP responses can include bare ints or bytes like b')'
+    return [item for item in data if isinstance(item, tuple)]
 
 
 # ---------------------------------------------------------------------------
@@ -661,7 +666,7 @@ def cmd_read(args: argparse.Namespace, config: dict) -> None:
     """Read full message content."""
     uid = str(args.uid).encode()
     with imap_connection(config) as conn:
-        data = uid_fetch(conn, uid, "(RFC822)")
+        data = uid_fetch(conn, uid, "(BODY.PEEK[])")
         if not data:
             raise NotFoundError(str(args.uid))
 
@@ -763,7 +768,7 @@ def cmd_reply(args: argparse.Namespace, config: dict) -> None:
     """Reply to a message."""
     uid = str(args.uid).encode()
     with imap_connection(config, readonly=True) as conn:
-        data = uid_fetch(conn, uid, "(RFC822)")
+        data = uid_fetch(conn, uid, "(BODY.PEEK[])")
         if not data:
             raise NotFoundError(str(args.uid))
         original = email_lib.message_from_bytes(data[0][1])
@@ -784,7 +789,7 @@ def cmd_forward(args: argparse.Namespace, config: dict) -> None:
     """Forward a message."""
     uid = str(args.uid).encode()
     with imap_connection(config, readonly=True) as conn:
-        data = uid_fetch(conn, uid, "(RFC822)")
+        data = uid_fetch(conn, uid, "(BODY.PEEK[])")
         if not data:
             raise NotFoundError(str(args.uid))
         original = email_lib.message_from_bytes(data[0][1])
@@ -1011,7 +1016,7 @@ def cmd_thread(args: argparse.Namespace, config: dict) -> None:
     """Get full conversation thread for a message."""
     uid = str(args.uid).encode()
     with imap_connection(config, readonly=True) as conn:
-        data = uid_fetch(conn, uid, "(RFC822)")
+        data = uid_fetch(conn, uid, "(BODY.PEEK[])")
         if not data:
             raise NotFoundError(str(args.uid))
 
