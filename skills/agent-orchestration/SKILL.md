@@ -5,13 +5,11 @@ description: Multi-agent coordination — task routing, handoff protocols, fan-o
 
 # agent-orchestration — Multi-Agent Workflow Playbook
 
-## What This Is
+## Why This Exists
 
-A structured system for decomposing complex tasks into sub-agent workflows. You are the **Orchestrator** — you create plans, spawn workers, track progress, and aggregate results. This skill gives you the patterns, tools, and discipline to do it well.
+Some tasks exceed what a single agent can do well in one session. A 30-skill documentation sweep, a multi-domain deal review, a full incident response — these require decomposition into parallel or sequential work streams. But naive parallelism creates chaos. Sub-agents share no memory with you or each other. They can't ask clarifying questions. They don't know what the other workers are doing. Without structure, you get redundant work, incompatible outputs, and silent failures.
 
-**Core primitive:** `sessions_spawn(task=..., label=..., runTimeoutSeconds=...)`
-
-**Core constraint:** Sub-agents share NO memory with you. Everything they need must be in the task prompt.
+This skill provides that structure: five proven patterns for decomposing work, a tracking ledger so nothing gets lost, task templates so sub-agents get exactly the context they need (and no more), and failure recovery protocols for when things go wrong. You are the **Orchestrator** — you plan, spawn, monitor, and synthesize. The patterns keep you from reinventing coordination logic every time.
 
 ---
 
@@ -19,7 +17,7 @@ A structured system for decomposing complex tasks into sub-agent workflows. You 
 
 ### 1. Fan-Out / Fan-In (Parallel)
 
-**When:** Multiple independent subtasks with no dependencies.
+**When:** Multiple independent subtasks with no data dependencies between them.
 
 ```
 You (Orchestrator)
@@ -30,22 +28,22 @@ You (Orchestrator)
 ```
 
 **Example:** "Document all 30 skills" → 5 workers, 6 skills each.
-**Sweet spot:** 3–6 parallel workers. Each runs 5–15 min.
+**Sweet spot:** 3–6 parallel workers. Each runs 5–15 min. More than 6 causes resource contention and monitoring overhead that exceeds the parallelism benefit.
 
 ### 2. Pipeline (Sequential)
 
 **When:** Each step depends on the previous step's output.
 
 ```
-You → spawn Step 1 → get result → spawn Step 2(result) → get result → spawn Step 3(result) → done
+You → spawn Step 1 → get result → spawn Step 2(result) → get result → Step 3(result) → done
 ```
 
 **Example:** "Research → outline → draft → review → publish"
-**Key:** Pass ONLY the needed output between stages. Keep it compact.
+**Key:** Pass ONLY the needed output between stages. If you pass everything, later stages drown in irrelevant context.
 
 ### 3. Supervisor / Worker
 
-**When:** Complex task needing ongoing coordination and judgment calls.
+**When:** Complex task needing ongoing coordination and judgment calls mid-stream.
 
 ```
 You (Supervisor)
@@ -61,7 +59,7 @@ You (Supervisor)
 
 ### 4. Expert Panel (Consensus)
 
-**When:** Decision quality matters more than speed. Need multiple perspectives.
+**When:** Decision quality matters more than speed. Multiple perspectives needed.
 
 ```
 You → spawn Security Expert
@@ -71,7 +69,7 @@ You → spawn Security Expert
 ```
 
 **Example:** "Review this system design for production readiness"
-**Key:** Use ConsensusCheckTemplate with different expert_role values.
+**Key:** Give each expert a distinct `expert_role`. Use ConsensusCheckTemplate.
 
 ### 5. Map-Reduce
 
@@ -83,14 +81,14 @@ Reduce: You → collect all outputs → aggregate into final result
 ```
 
 **Example:** "Analyze all skill scripts for comment quality"
-**Key:** Partition data evenly. The reduce step is YOUR job (don't spawn for it).
+**Key:** Partition data evenly. The reduce step is YOUR job — don't spawn for it.
 
 ---
 
 ## Decision Tree: Which Pattern?
 
 ```
-Is the task a single unit of work?
+Is the task a single unit of work (<5 min)?
   YES → Don't orchestrate. Do it inline.
   NO  ↓
 
@@ -106,7 +104,7 @@ Do you need multiple expert opinions?
   YES → Expert Panel
   NO  ↓
 
-Is it a large dataset that needs processing + aggregation?
+Is it a large dataset needing processing + aggregation?
   YES → Map-Reduce
   NO  ↓
 
@@ -114,149 +112,171 @@ Is it complex with ongoing judgment needed?
   YES → Supervisor
 ```
 
-**Rule of thumb:** If a task takes <5 minutes, do it inline. If >15 minutes, consider orchestrating.
+**Rule of thumb:** <5 minutes → inline. 5–15 minutes → maybe orchestrate. >15 minutes → definitely orchestrate.
 
 ---
 
-## Operational Guide: Step by Step
+## Context Minimization — The #1 Orchestration Skill
 
-### Step 1: Decompose the Request
+Sub-agents share **no memory** with you. No conversation history, no file state, no implicit knowledge. Everything they need must be in the task prompt, and everything they don't need wastes tokens and creates confusion.
 
-Break the user's request into discrete subtasks. Ask:
-- Can these run in parallel?
-- What's the minimum context each worker needs?
-- What does "done" look like for each subtask?
+This is the single most common source of orchestration failures. Not pattern selection, not monitoring — context.
+
+### What to Include
+
+- **The specific task** — one sentence, unambiguous
+- **Input data** — the actual content to work on (not a file path they can't access)
+- **Constraints** — time limits, scope boundaries, don't-touch rules
+- **Output format** — exact structure (JSON schema preferred) with `<result>` wrapper tags
+- **Role** — one sentence establishing expertise
+
+### What to Exclude
+
+- Your conversation history with the user
+- Other subtasks' descriptions (they don't need to know)
+- Project-wide context unrelated to their specific task
+- Explanations of why you're orchestrating
+
+### The Context Budget
+
+Every word in a task prompt costs tokens across every sub-agent that receives it. 500 words × 5 workers = 2500 words of prompt cost. 2000 words × 10 workers = 20,000 words. Trim ruthlessly. If a sub-agent doesn't need a piece of information to complete its specific task, cut it.
+
+---
+
+## Anti-Patterns
+
+### The Context Dump
+
+**Pattern:** Pasting your entire conversation, project README, and multiple file contents into every sub-agent's task prompt.
+
+**Reality:** Sub-agents drown in irrelevant context. They latch onto wrong details. Token costs multiply. Responses get unfocused because the agent can't determine what matters.
+
+**Fix:** Write task prompts from scratch for each sub-agent. Include only what's needed for their specific subtask. If you can't summarize the needed context in under 500 words, the task isn't decomposed enough.
+
+### The Recursive Dream
+
+**Pattern:** Designing workflows where sub-agents spawn their own sub-agents.
+
+**Reality:** Sub-agents cannot spawn sub-agents (single depth enforced by the platform). Even if they could, recursive orchestration creates untraceable execution trees, duplicated work, and impossible failure recovery.
+
+**Fix:** All decomposition happens at your level. If a subtask is too complex for one sub-agent, break it into smaller subtasks in YOUR plan. You are the only orchestrator.
+
+### Fire and Forget
+
+**Pattern:** Spawning sub-agents without tracking them in the ledger. Assuming they'll complete. Moving on.
+
+**Reality:** Sub-agents fail silently. They time out. They produce malformed output. Without tracking, you discover this only when the user asks "where are my results?" and you have no answer.
+
+**Fix:** Always use the orchestrator ledger. Update status on spawn, on completion, on failure. Check `orchestrator.py status` periodically. For workflows >10 minutes, give the user a progress update.
+
+### The Monolith Spawn
+
+**Pattern:** Creating one giant sub-agent with a massive task instead of decomposing into multiple focused workers.
+
+**Reality:** A single sub-agent with a 30-minute task and 2000-word prompt is just a slower, less reliable version of doing it yourself. It gets no parallelism benefit and has a single point of failure.
+
+**Fix:** If the task prompt exceeds ~500 words or the expected runtime exceeds ~15 minutes, decompose further. Each sub-agent should have one clear deliverable.
+
+---
+
+## Failure Recovery
+
+Orchestration failures are not exceptions — they're expected. Plan for them.
+
+### Single Worker Failure
+
+```
+Worker times out or returns error
+  → Update ledger: status=failed, result=<error>
+  → Retry with error context in prompt (max 2 retries)
+  → If retry fails → mark as failed, continue with other workers
+  → Note the gap in final synthesis
+```
+
+### Multiple Worker Failure (≥3 in same workflow)
+
+```
+3+ subtasks failed
+  → STOP spawning new workers
+  → Aggregate what succeeded
+  → Report to user: "X of Y tasks completed. Failed tasks: [list]. Partial results available."
+  → Ask user whether to retry failed tasks, adjust approach, or accept partial results
+```
+
+### Whole Workflow Stall
+
+```
+No workers completing for >2× expected runtime
+  → Check sessions_list for running sub-agents
+  → If agents are running → likely slow, not stuck. Wait longer.
+  → If agents have terminated with no result → ledger is stale. 
+  → Collect whatever results exist
+  → Report to user with honest assessment
+```
+
+### Cascade Failure in Pipelines
+
+```
+Pipeline step N fails
+  → Steps N+1, N+2, ... cannot proceed (they depend on N's output)
+  → Retry step N (max 2 retries with error context)
+  → If retry fails → report to user with results from steps 1 through N-1
+  → Never skip a pipeline step or fabricate intermediate output
+```
+
+---
+
+## Operational Guide
+
+### Step 1: Decompose
+
+Break the request into discrete subtasks. For each, determine: Can it run in parallel? What's the minimum context needed? What does "done" look like?
 
 ### Step 2: Register the Plan
 
 ```bash
 python3 skills/agent-orchestration/scripts/orchestrator.py create \
   --type fan_out \
-  --subtasks '[
-    {"id": "t1", "label": "Review auth module"},
-    {"id": "t2", "label": "Review API module"},
-    {"id": "t3", "label": "Review data module"}
-  ]'
+  --subtasks '[{"id":"t1","label":"Review auth"},{"id":"t2","label":"Review API"},{"id":"t3","label":"Review data"}]'
 ```
 
-This returns a `workflow_id`. Save it.
+Returns a `workflow_id`.
 
 ### Step 3: Generate Task Prompts
 
-Use task_templates.py to build structured prompts:
-
-```python
-# In your reasoning (or via CLI preview):
+```bash
 python3 skills/agent-orchestration/scripts/task_templates.py preview code_review --files "src/auth.py"
 ```
 
-Or reference the templates programmatically in your tool calls. Each template produces a self-contained prompt with an **Output Interface** section.
+Each template produces a self-contained prompt with Role, Task, Constraints, Output Format, and Output Interface sections.
 
-### Step 4: Spawn Sub-Agents
-
-For each subtask, call `sessions_spawn`:
+### Step 4: Spawn
 
 ```
-sessions_spawn(
-    task=<rendered template prompt>,
-    label="wf_abc123_t1_auth_review",
-    runTimeoutSeconds=600
-)
+sessions_spawn(task=<rendered prompt>, label="wf_<id>_<task>_<desc>", runTimeoutSeconds=600)
 ```
 
-**Labeling convention:** `wf_<workflow_id>_<task_id>_<description>`
+Update ledger: `orchestrator.py update --id X --task-id Y --status in_progress --session-key <key>`
 
-Update the ledger:
-```bash
-python3 orchestrator.py update --id wf_abc123 --task-id t1 --status in_progress --session-key <key>
-```
-
-### Step 5: Monitor Progress
-
-Periodically check:
-```bash
-python3 orchestrator.py status --id wf_abc123
-```
-
-Also use `sessions_list` to see which sub-agents are still running.
-
-For long workflows (>10 min), give the user a progress update.
-
-### Step 6: Collect Results
-
-When a sub-agent announces its result, parse it:
-
-The sub-agent wraps its answer in `<result>...</result>` tags (enforced by the template's Output Interface). Extract the content between tags.
-
-Update the ledger:
-```bash
-python3 orchestrator.py update --id wf_abc123 --task-id t1 --status completed --result "<parsed output>"
-```
-
-### Step 7: Handle Failures
-
-If a sub-agent fails or times out:
-```bash
-python3 orchestrator.py update --id wf_abc123 --task-id t1 --status failed --result "Timed out after 600s"
-```
-
-**Retry policy:**
-- Max 2 retries per subtask
-- On retry, include the error in the new task prompt
-- If 3+ subtasks fail in the same workflow → stop and ask the user
-
-### Step 8: Aggregate and Deliver
+### Step 5: Monitor
 
 ```bash
-python3 orchestrator.py aggregate --id wf_abc123
+python3 skills/agent-orchestration/scripts/orchestrator.py status --id <workflow_id>
 ```
 
-This collects all completed results. Synthesize them into a coherent response for the user. Don't just paste outputs — summarize and integrate.
+Also `sessions_list` to check running agents. For >10 min workflows, update the user.
 
----
+### Step 6: Collect
 
-## Task Prompt Engineering
+Sub-agents wrap output in `<result>...</result>` tags. Parse and update ledger with `--status completed --result "<output>"`.
 
-Every sub-agent prompt should follow this structure (enforced by templates):
+### Step 7: Aggregate
 
-```markdown
-## Role
-[Who the sub-agent is — one sentence]
-
-## Task
-[What to do — specific, unambiguous]
-
-## Constraints
-[Boundaries — time, scope, don't-touch rules]
-
-## Expected Output Format
-[Exact format — JSON schema preferred]
-
-## Output Interface
-[<result>...</result> wrapper instructions]
+```bash
+python3 skills/agent-orchestration/scripts/orchestrator.py aggregate --id <workflow_id>
 ```
 
-**Critical rules:**
-- Give MINIMUM context — don't dump the whole project
-- Define "done" explicitly
-- Specify output format so you can parse it
-- Include `<result>` tags so extraction is reliable
-
----
-
-## Anti-Patterns
-
-❌ **Spawning for trivial tasks** — If it takes <5 min, just do it yourself. The overhead of spawning + parsing + tracking costs more than the time saved.
-
-❌ **Context dumping** — Don't paste your entire conversation or project state into every task prompt. Sub-agents have their own context windows. Give them only what they need.
-
-❌ **No output format** — If you don't specify how the sub-agent should format its answer, you'll get free-form text you can't parse. Always use templates.
-
-❌ **Over-parallelization** — More than 6 concurrent sub-agents causes resource contention and makes monitoring hard. Batch instead.
-
-❌ **Recursive orchestration** — Sub-agents CANNOT spawn sub-agents (single depth). Don't try to work around this. If a subtask is too complex, break it down further in YOUR plan.
-
-❌ **Fire and forget** — Always track with the ledger. If you don't update status, you can't recover after a session reset.
+Synthesize into a coherent response. Don't paste raw outputs — summarize and integrate.
 
 ---
 
@@ -264,103 +284,73 @@ Every sub-agent prompt should follow this structure (enforced by templates):
 
 Each sub-agent has its own context window = its own token cost.
 
-| Decision | Token Impact |
-|----------|-------------|
-| 3 workers vs 10 workers | 3× vs 10× the base prompt cost |
-| 500-word task prompt vs 2000-word | Direct multiplier |
-| Using cheaper model for mechanical work | Significant savings |
+| Decision | Impact |
+|----------|--------|
+| 3 workers vs 10 workers | 3× vs 10× base prompt cost |
+| 500-word vs 2000-word task prompt | Direct multiplier per worker |
+| Cheap model for mechanical work | Significant savings |
 
-**Guideline:** Use the cheapest model that can handle the task. Save expensive models for judgment-heavy work (code review, architecture decisions).
-
----
-
-## Tools Reference
-
-| Tool | Command | Purpose |
-|------|---------|---------|
-| Create plan | `orchestrator.py create --type X --subtasks [...]` | Register workflow |
-| Update task | `orchestrator.py update --id X --task-id Y --status Z` | Track progress |
-| Check status | `orchestrator.py status --id X` | View progress |
-| Aggregate | `orchestrator.py aggregate --id X` | Combine results |
-| List workflows | `orchestrator.py list [--active]` | Overview |
-| Cleanup | `orchestrator.py cleanup [--days 7]` | Prune old data |
-| List templates | `task_templates.py list` | See available templates |
-| Preview template | `task_templates.py preview <name>` | See rendered prompt |
-
-All paths: `python3 skills/agent-orchestration/scripts/<script>`
+Use the cheapest model that handles the task. Save expensive models for judgment-heavy work.
 
 ---
 
 ## Pre-Built Compositions
 
-These are ready-to-use multi-skill orchestrations using the patterns above.
-
 ### Deal Review (Expert Panel)
-```
-Trigger: "Review the {company} deal before signing"
-Pattern: Expert Panel (3 experts)
-Spawn:
-  1. sessions_spawn(task="[legal] Review contract for {company}: {contract_text}", label="deal-legal")
-  2. sessions_spawn(task="[sales] Assess deal strategy for {company}: {deal_context}", label="deal-sales")  
-  3. sessions_spawn(task="[finance] Revenue recognition check for {company}: {deal_terms}", label="deal-finance")
-Merge: Unified Deal Review Brief with G/Y/R risk from each domain, conflicts highlighted
-```
+Spawn legal, sales, finance experts in parallel → merge into unified brief with G/Y/R risk per domain.
 
 ### Product Launch (Pipeline)
-```
-Trigger: "Plan the launch for {feature}"
-Pattern: Pipeline (4 stages)
-Step 1: PM writes spec → { features, audience, success_metrics }
-Step 2: Marketing receives spec → { campaign_plan, content_calendar, messaging }
-Step 3: Sales receives spec + campaign → { battlecard, outreach_templates }
-Step 4: Support receives spec → { KB_articles, FAQ, known_limitations }
-Final: task-planner creates launch project tracking all deliverables
-```
+PM spec → Marketing campaign → Sales battlecard → Support KB → Launch project tracker.
 
 ### Incident Response (Supervisor)
-```
-Trigger: Security incident detected or reported
-Pattern: Supervisor (you orchestrate)
-  1. security: threat assessment, containment recommendation
-  2. devops: execute containment (firewall, isolation)
-  3. observability: trace analysis, blast radius
-  4. legal: compliance obligations, notification deadlines
-  5. customer-support: draft customer communication
-  6. task-planner: create incident project with SLA deadlines
-  7. agent-memory: store incident details for future reference
-```
+Security assessment → containment → trace analysis → legal obligations → customer comms → incident project.
 
-### QBR Preparation (Fan-Out / Fan-In)
-```
-Trigger: "Prepare QBR for {period}"
-Pattern: Fan-Out (5 parallel) → Fan-In (merge)
-Spawn:
-  1. finance/financial-statements + variance-analysis
-  2. sales/pipeline-review + forecast  
-  3. product-management/roadmap-update
-  4. data-analysis/build-dashboard (KPI dashboard HTML)
-  5. marketing/performance-report
-Merge: Executive QBR package with sections from each domain
-```
+### QBR Preparation (Fan-Out)
+Finance, sales, product, data, marketing reports in parallel → executive package.
 
 ### Customer Research (Cascade)
-```
-Trigger: "/support:research {customer} {issue}"
-Pattern: Cascade (enterprise-search fan-out)
-  1. agent-memory recall "[customer-support] {customer}" → prior context
-  2. email-manager search "{customer}" → email history
-  3. task-planner search "{customer}" → open/past tickets
-  4. Synthesize with confidence scores
-  5. Feed into /support:draft-response
-```
+Memory recall → email search → ticket search → synthesize with confidence scores → draft response.
 
 ### Skill Factory (Pipeline)
+Scout → acquire/create → security scan → install → monitor → auto-repair on error.
+
+---
+
+## Integration
+
+- **agent-guardrails**: Sub-agents inherit T2-max. Design workflows so T3+ actions return to the parent for execution with guardrails.
+- **agent-memory**: Sub-agents can't access the memory store. Recall relevant context yourself and include it in task prompts.
+- **Heartbeat**: Use `orchestrator.py status` in heartbeats to check on long-running workflows.
+
+---
+
+## Tools Reference
+
 ```
-Trigger: User needs capability not in current skills
-Pattern: Pipeline
-  1. skill-scout discover "{capability}" → evaluate candidates
-  2. IF good external: acquire with quarantine → security scan → install
-  3. IF none found: skill-creator-extended generate from prompt
-  4. skill-lifecycle monitor: begin AIOps monitoring
-  5. ON ERROR: skill-lifecycle evo-loop auto-repair
+orchestrator.py create --type X --subtasks [...]     Register workflow
+orchestrator.py update --id X --task-id Y --status Z Track progress
+orchestrator.py status --id X                        View progress
+orchestrator.py aggregate --id X                     Combine results
+orchestrator.py list [--active]                      Overview
+orchestrator.py cleanup [--days 7]                   Prune old data
+task_templates.py list                               Available templates
+task_templates.py preview <name>                     Rendered prompt
+
+All: python3 skills/agent-orchestration/scripts/<script>
+```
+
+---
+
+## Quick Reference Card
+
+```
+PATTERNS: Fan-Out (parallel) | Pipeline (sequential) | Supervisor (adaptive) | Expert Panel (consensus) | Map-Reduce (data)
+DECIDE:   <5min→inline | independent→Fan-Out | sequential→Pipeline | opinions→Panel | data→Map-Reduce | complex→Supervisor
+CONTEXT:  Minimum viable. Role + Task + Constraints + Output Format + <result> tags. Cut everything else.
+SPAWN:    sessions_spawn(task=..., label="wf_<id>_<task>_<desc>", runTimeoutSeconds=N)
+TRACK:    Always use ledger. Update on spawn, complete, fail.
+RETRY:    Max 2 per task. Include error in retry prompt. 3+ failures → stop and ask user.
+WORKERS:  3-6 parallel max. Each 5-15 min. T2-max (no T3+ actions).
+COST:     Cheapest model that works. Prompt words × workers = total cost.
+RECOVER:  Partial results > no results. Report honestly what failed.
 ```
