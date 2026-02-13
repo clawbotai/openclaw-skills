@@ -19,7 +19,8 @@ Skills define _how_ tools work. This file is for _your_ specifics — the stuff 
 - **D1 database:** `torr-orders` (ID: `6f241383-60fb-45d9-a75b-b0d4ead7ee2a`, region: ENAM)
 - **KV namespace:** `ORDERS` (ID: `9fcb14464b6a4ee595e0226efa4eff97`)
 - **Secrets bound:** `XPUB`, `ETHERSCAN_KEY`, `ADMIN_KEY` (`761355...a2ec`)
-- **Deploy command:** `npx wrangler pages deploy torr-statics-site --project-name torr-statics --branch main --commit-dirty=true`
+- **Deploy command:** `./torr-statics-site/deploy.sh` (runs `npx wrangler pages deploy . --project-name torr-statics --commit-dirty true`)
+- **Deployment docs:** `torr-statics-site/DEPLOYMENT.md`
 - **⚠️ Pages Functions 405 issue:** After adding D1 binding, all Pages Functions return 405. Even old code returns 405. Under investigation — may need to redeploy without `wrangler.toml` or debug via `wrangler pages functions tail`.
 
 ## Crypto / Payments
