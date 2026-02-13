@@ -111,3 +111,17 @@ chart_library: "html"           # Output: html (self-contained), matplotlib, veg
 | Visualization (Grafana/Metabase) | Dashboard hosting | Generate self-contained HTML dashboards |
 | Notebook (Jupyter) | Interactive analysis | Python/SQL code blocks in conversation |
 | dbt | Model documentation, lineage | User provides schema docs |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/data:write-query`**: `memory.py recall "[data-analysis] {table_name} schema"` — cached schema info, past query patterns
+- **After `/data:explore-data`**: `memory.py remember "[data-analysis] {table}: {row_count} rows, {column_summary}" --type semantic`
+- **After validated query**: store as semantic memory for reuse (query + description)
+
+### Connected Skills
+- **finance** → data extraction for variance analysis, financial statement generation
+- **marketing** → campaign performance queries, attribution analysis
+- **product-management** → usage metrics, feature adoption, funnel analysis
+- **bio-research** → statistical analysis on genomics results, DE gene testing
+- **enterprise-search** → dataset profiles inform search scope

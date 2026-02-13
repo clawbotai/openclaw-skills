@@ -294,3 +294,20 @@ A meta-checklist that orchestrates all DevOps concerns into a single go/no-go as
 3. Deploy without a rollback plan (< 5 min rollback or don't ship)
 4. Ignore error budget violations — freeze features, fix reliability
 5. Go to production without runbooks
+
+## Cross-Skill Integration
+
+### Safety Gate
+- **Before infra changes**: `guardrails.py check --action infra_change --target {resource}` (T3-T4)
+- **Before production deployments**: `guardrails.py check --action deploy_production` (T4)
+
+### Memory Protocol
+- **After deployment**: `memory.py remember "[devops] Deployed {service} to {env}: {version}"`
+- **After incident**: `memory.py remember "[devops] Incident {id}: {summary}, resolution={action}" --importance 0.9`
+
+### Connected Skills
+- **security** → pre-deploy security gates, container scanning results
+- **observability** → post-deploy monitoring, SLO validation
+- **cloudflare-deploy** → CF Pages deployment execution
+- **web-builder** → build artifacts for deployment
+- **python-backend** → Dockerfile generation, CI/CD pipeline setup

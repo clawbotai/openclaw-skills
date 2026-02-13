@@ -101,3 +101,18 @@ python scripts/mailcow.py logs postfix --count 20
 - Store API keys in macOS Keychain, not in env files
 - TLS is enforced on all mailbox connections by default
 - The generated firewall only opens mail-related ports + SSH
+
+## Cross-Skill Integration
+
+### Safety Gate
+- **Before server provisioning**: `guardrails.py check --action provision_server` (T4 — costs money)
+- **Before DNS changes**: `guardrails.py check --action modify_dns --target {domain}` (T4)
+
+### Memory Protocol
+- **After provisioning**: `memory.py remember "[mailcow-manager] Provisioned {server} at {ip} for {domain}"`
+- **After mailbox created**: `memory.py remember "[mailcow-manager] Created {email} on {domain}"`
+
+### Connected Skills
+- **email-manager** → daily operations on provisioned mailboxes
+- **cloudflare-deploy** → DNS record management via CF API
+- **security** → DKIM/SPF/DMARC verification, TLS configuration

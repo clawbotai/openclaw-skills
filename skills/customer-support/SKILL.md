@@ -138,3 +138,20 @@ kb_duplicate_threshold: 3       # Tickets before triggering KB article
 | Knowledge Base (Notion/Confluence) | KB articles, internal docs | Maintain KB as markdown files |
 | Chat (Slack/Discord) | Internal escalation channels | Email escalation or task creation |
 | Analytics (Mixpanel/Amplitude) | Usage data for debugging | User describes customer behavior |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/support:research`**: `memory.py recall "[customer-support] {customer_name}"` — pull prior tickets, resolutions, customer context
+- **Before `/support:draft-response`**: recall similar past responses for tone/approach consistency
+- **After `/support:escalate`**: `memory.py remember "[customer-support] Escalated: {summary}" --importance 0.8`
+- **After resolution**: `memory.py remember "[customer-support] Resolved {customer} {issue}: {resolution}"`
+
+### Safety Gate
+- **Before sending response**: `guardrails.py scan --text "{response}"` for PII leaks
+- **Before escalation email**: `guardrails.py check --action send_email --target {engineering_channel}`
+
+### Connected Skills
+- **enterprise-search** → `/support:research` fans out to email-manager + memory + task-planner
+- **task-planner** → `/support:escalate` auto-creates tracked task with priority and deadline
+- **agent-memory** → all resolutions feed the knowledge base for future similar tickets

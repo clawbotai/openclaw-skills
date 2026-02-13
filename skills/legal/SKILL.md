@@ -136,3 +136,19 @@ Without connectors, the skill still functions by:
 - Using built-in clause analysis framework
 - Generating templates from internal knowledge
 - Asking user for context that would normally come from connectors
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/legal:review-contract`**: `memory.py recall "[legal] {vendor_name}"` — prior reviews, known issues, playbook deviations
+- **Before `/legal:triage-nda`**: recall prior NDAs with same counterparty for consistency
+- **After review**: `memory.py remember "[legal] Reviewed {vendor} {doc_type}: risk={G/Y/R}, key_issues={list}" --importance 0.8`
+- **After compliance check**: store regulatory findings as semantic memory
+
+### Safety Gate
+- **Before sharing legal analysis externally**: `guardrails.py scan` for confidential terms/clauses
+
+### Connected Skills
+- **sales** → deal review composition: legal risk assessment + sales strategy + finance rev rec
+- **finance** → contract financial terms feed into revenue recognition analysis
+- **enterprise-search** → pull prior correspondence with vendor from email

@@ -129,3 +129,21 @@ crm_connector: ""              # CRM system identifier
 | LinkedIn (Sales Navigator) | Prospect research, connections | Web search for prospects |
 | Enrichment (ZoomInfo/Apollo) | Contact and company data | Manual web research |
 | Calendar (Google/O365) | Meeting scheduling, call history | User provides schedule context |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/sales:call-prep`**: `memory.py recall "[sales] {company_name}"` — deal history, past interactions, stakeholder map
+- **After `/sales:call-debrief`**: `memory.py remember "[sales] Call with {company}: {outcome}, next={action}" --importance 0.7`
+- **After `/sales:pipeline-review`**: store stale deal flags and forecast snapshot
+- **After `/sales:battlecard`**: store as semantic memory for reuse
+
+### Safety Gate
+- **Before `/sales:draft-outreach`**: `guardrails.py scan --text "{email_body}"` for leaked pricing/terms
+- **Before sending outreach**: `guardrails.py check --action send_email --target {prospect}`
+
+### Connected Skills
+- **legal** → deal review: legal risk feeds into negotiation strategy
+- **finance** → revenue recognition check before committing deal terms
+- **enterprise-search** → pull all prior touchpoints with account from email + memory
+- **marketing** → battlecard competitive intel feeds marketing competitive briefs

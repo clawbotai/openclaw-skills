@@ -387,3 +387,19 @@ vercel env add DATABASE_URL production
 ### SvelteKit Adapter
 
 Use `adapter-auto` — automatically detects Vercel and uses `adapter-vercel`. No manual configuration needed.
+
+## Cross-Skill Integration
+
+### Safety Gate
+- **Before deploy**: `guardrails.py check --action deploy_site --target {url}`
+
+### Memory Protocol
+- **After scaffold**: `memory.py remember "[web-builder] Scaffolded {framework} app: {name}"`
+- **After deploy**: `memory.py remember "[web-builder] Deployed {name} to {url}"`
+
+### Connected Skills
+- **cloudflare-deploy** → push static builds to CF Pages
+- **devops** → CI/CD pipeline for automated builds
+- **security** → CSP headers, dependency audit, OWASP checks
+- **task-planner** → generates Kanban HTML dashboard
+- **data-analysis** → generates self-contained HTML dashboards

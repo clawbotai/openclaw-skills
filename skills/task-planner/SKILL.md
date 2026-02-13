@@ -1024,3 +1024,20 @@ Weekly review: what was completed, what slipped, upcoming priorities, inbox/task
 
 ### `/productivity:delegate`
 Draft delegation message with full context, specific ask, deadline, and success criteria.
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **After project completion**: `memory.py remember "[task-planner] Completed project: {name}, duration={days}d"`
+- **On task patterns**: recall similar past projects for estimation accuracy
+
+### Receives Tasks From
+- **customer-support** → escalations become P1/P2 tasks
+- **product-management** → roadmap items become project milestones
+- **docs-engine** → documentation debt tracked as tasks
+- **security** → remediation items from audits
+- **devops** → deployment checklists
+
+### Provides Data To
+- **enterprise-search** → task/project search as a source
+- **data-analysis** → project metrics for velocity tracking

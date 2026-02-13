@@ -133,3 +133,20 @@ email_platform: ""             # ESP identifier
 | Email (Mailchimp/ConvertKit) | Email campaigns, list management | Draft emails for manual send |
 | Social (Buffer/Hootsuite) | Social scheduling, analytics | Output content for manual posting |
 | Ads (Google Ads/Meta) | Paid campaign management | Campaign specs for manual setup |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/marketing:create-content`**: `memory.py recall "[marketing] {topic} brand voice"` — past content, voice examples, what performed well
+- **After content created**: `memory.py remember "[marketing] Created {type} for {channel}: {topic}"`
+- **After `/marketing:performance-report`**: store campaign results as semantic memory for future benchmarking
+
+### Safety Gate
+- **Before publishing externally**: `guardrails.py scan --text "{content}"` for leaked internal info
+- **Before email campaigns**: `guardrails.py check --action send_email --target {list_name}`
+
+### Connected Skills
+- **data-analysis** → SQL-backed performance metrics, attribution queries
+- **sales** → battlecard competitive intel informs competitive briefs
+- **product-management** → PRD value props feed messaging and content pillars
+- **enterprise-search** → pull past campaign assets from docs and email

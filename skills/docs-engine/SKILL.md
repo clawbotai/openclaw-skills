@@ -306,3 +306,15 @@ When writing docs that LLMs will consume (SKILL.md, AGENTS.md, prompts):
 4. **Explicit > implicit** — Don't rely on context outside the window
 5. **Front-load key info** — Purpose and usage first, theory after
 6. **Clear boundaries** — `---` separators, code fences, section breaks
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **After quality score**: `memory.py remember "[docs-engine] Scored {project}: {score}/100, gaps={list}"`
+- **After scaffold**: `memory.py remember "[docs-engine] Scaffolded docs for {project}"`
+
+### Connected Skills
+- **ALL skills** → periodic doc quality audit of SKILL.md files
+- **bio-research** → structure research reports using Diátaxis
+- **product-management** → PRD templates follow Gold Standard
+- **task-planner** → documentation debt tracked as tasks

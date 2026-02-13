@@ -146,3 +146,16 @@ pubmed_email: ""                 # Required for NCBI API access
 | ClinicalTrials.gov (API) | Trial data and landscape | Web search for trial info |
 | GEO/SRA (NCBI) | Public sequencing data | User provides FASTQ files |
 | Benchling (API) | Lab notebook, protocols | User provides protocols as text |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/bio:literature-review`**: `memory.py recall "[bio-research] {topic}"` — prior reviews, key papers, gaps identified
+- **After analysis**: `memory.py remember "[bio-research] {analysis_type} on {dataset}: {key_finding}" --importance 0.8`
+- **After `/bio:drug-discovery`**: store target scorecard as semantic memory
+
+### Connected Skills
+- **data-analysis** → statistical analysis on DE results, enrichment, clinical trial data
+- **data-analysis** → dashboard generation for gene expression, volcano plots
+- **enterprise-search** → pull prior lab communications and notes
+- **docs-engine** → structure research reports using Diátaxis framework

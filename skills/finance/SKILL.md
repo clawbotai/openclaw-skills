@@ -129,3 +129,17 @@ close_deadline_business_days: 5  # Days after month-end
 | Bank (Plaid/direct feeds) | Bank statements for reconciliation | User uploads statements |
 | Data Warehouse | Historical data for analysis | User provides extracts |
 | Expense (Expensify/Brex) | Expense reports and coding | Manual expense entry |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/finance:variance-analysis`**: `memory.py recall "[finance] {period} variance"` — prior period patterns, recurring explanations
+- **Before `/finance:close-checklist`**: recall prior close issues and timeline
+- **After close**: `memory.py remember "[finance] {period} close completed: {days}, issues={list}" --importance 0.8`
+- **After journal entry**: store unusual or complex entries for audit reference
+
+### Connected Skills
+- **data-analysis** → SQL query generation for budget vs actual data extraction
+- **data-analysis** → statistical significance testing on material variances
+- **legal** → revenue recognition guidance on complex contracts (ASC 606)
+- **sales** → pipeline data feeds forecast accuracy analysis

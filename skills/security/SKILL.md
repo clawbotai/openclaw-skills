@@ -1045,3 +1045,17 @@ jobs:
 - Progressive delays over hard lockout (prevents denial of service)
 - Don't reveal if email exists — "Invalid credentials" for both cases
 - Log all auth events with IP, user agent, timestamp
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **After audit**: `memory.py remember "[security] Audit {target}: {critical}/{high}/{medium} findings" --importance 0.9`
+- **Before audit**: recall prior audits for same codebase to track regression
+- **After remediation**: update memory with fix confirmation
+
+### Connected Skills
+- **devops** → CI/CD security gates, container scanning
+- **observability** → security event correlation, anomaly detection
+- **legal** → compliance obligations (GDPR breach notification, HIPAA)
+- **agent-guardrails** → security skill validates guardrails policy effectiveness
+- **All skills with scripts** → periodic security sweep of skill code

@@ -489,3 +489,15 @@ Every service must have:
 6. **NEVER log request/response bodies by default** — opt-in only with PII redaction
 7. **NEVER ignore log volume** — set budgets and alert on quota breach
 8. **NEVER skip context propagation in async flows** — broken traces are worse than none
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **After SLO breach**: `memory.py remember "[observability] SLO breach: {service} {sli} below target" --importance 0.9`
+- **After dashboard created**: `memory.py remember "[observability] Dashboard: {name} for {service}"`
+
+### Connected Skills
+- **devops** → deployment events correlate with metric changes
+- **security** → security events surface in observability pipeline
+- **python-backend** → instrumentation patterns injected during development
+- **data-analysis** → metric analysis and statistical anomaly detection

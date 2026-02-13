@@ -100,3 +100,20 @@ confidence_threshold: 0.3          # Minimum score to include
 | Documents (Notion/Confluence) | Wiki and doc search | User provides document links |
 | Tracker (Linear/Jira) | Issue and project search | User describes ticket status |
 | Files (local filesystem) | Search workspace files | `grep`/`find` on workspace |
+
+## Cross-Skill Integration
+
+### Fan-Out Sources
+`/search:search` queries these skills in parallel:
+1. **email-manager**: `email_client.py search "{query}" --limit 10` → email threads
+2. **agent-memory**: `memory.py recall "{query}" --limit 10` → stored memories
+3. **task-planner**: search active tasks/projects for matches
+
+### Memory Protocol
+- **After search with 3+ source results**: `memory.py remember "[enterprise-search] Cross-ref: {topic} found in {sources}"`
+- **After `/search:digest`**: store digest summary as semantic memory
+
+### Connected Skills
+- **customer-support** → `/support:research` uses enterprise-search for fan-out
+- **sales** → account research pulls from all sources via enterprise-search
+- **legal** → contract/vendor history pulls from email + memory

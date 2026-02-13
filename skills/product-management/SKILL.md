@@ -131,3 +131,17 @@ personas: []                  # User personas with descriptions
 | Research (Dovetail/UserTesting) | Interview notes, recordings | User provides research notes |
 | Design (Figma) | Wireframes, prototypes | Describe interactions in spec |
 | Docs (Notion/Confluence) | PRDs, roadmaps, meeting notes | Markdown files in workspace |
+
+## Cross-Skill Integration
+
+### Memory Protocol
+- **Before `/pm:write-spec`**: `memory.py recall "[product-management] {feature}"` — prior specs, research, decisions for this feature area
+- **After spec written**: `memory.py remember "[product-management] PRD: {feature} — {status}" --importance 0.7`
+- **After `/pm:synthesize-research`**: store key insights as semantic memory
+
+### Connected Skills
+- **data-analysis** → usage metrics, A/B test results, funnel analysis feed research synthesis
+- **marketing** → PRD value props and audience feed campaign planning
+- **sales** → customer feedback and deal blockers inform prioritization
+- **task-planner** → roadmap items create tracked projects with milestones
+- **enterprise-search** → pull all prior discussion of this feature across email, chat, docs

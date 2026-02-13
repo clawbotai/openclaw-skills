@@ -288,3 +288,79 @@ Each sub-agent has its own context window = its own token cost.
 | Preview template | `task_templates.py preview <name>` | See rendered prompt |
 
 All paths: `python3 skills/agent-orchestration/scripts/<script>`
+
+---
+
+## Pre-Built Compositions
+
+These are ready-to-use multi-skill orchestrations using the patterns above.
+
+### Deal Review (Expert Panel)
+```
+Trigger: "Review the {company} deal before signing"
+Pattern: Expert Panel (3 experts)
+Spawn:
+  1. sessions_spawn(task="[legal] Review contract for {company}: {contract_text}", label="deal-legal")
+  2. sessions_spawn(task="[sales] Assess deal strategy for {company}: {deal_context}", label="deal-sales")  
+  3. sessions_spawn(task="[finance] Revenue recognition check for {company}: {deal_terms}", label="deal-finance")
+Merge: Unified Deal Review Brief with G/Y/R risk from each domain, conflicts highlighted
+```
+
+### Product Launch (Pipeline)
+```
+Trigger: "Plan the launch for {feature}"
+Pattern: Pipeline (4 stages)
+Step 1: PM writes spec → { features, audience, success_metrics }
+Step 2: Marketing receives spec → { campaign_plan, content_calendar, messaging }
+Step 3: Sales receives spec + campaign → { battlecard, outreach_templates }
+Step 4: Support receives spec → { KB_articles, FAQ, known_limitations }
+Final: task-planner creates launch project tracking all deliverables
+```
+
+### Incident Response (Supervisor)
+```
+Trigger: Security incident detected or reported
+Pattern: Supervisor (you orchestrate)
+  1. security: threat assessment, containment recommendation
+  2. devops: execute containment (firewall, isolation)
+  3. observability: trace analysis, blast radius
+  4. legal: compliance obligations, notification deadlines
+  5. customer-support: draft customer communication
+  6. task-planner: create incident project with SLA deadlines
+  7. agent-memory: store incident details for future reference
+```
+
+### QBR Preparation (Fan-Out / Fan-In)
+```
+Trigger: "Prepare QBR for {period}"
+Pattern: Fan-Out (5 parallel) → Fan-In (merge)
+Spawn:
+  1. finance/financial-statements + variance-analysis
+  2. sales/pipeline-review + forecast  
+  3. product-management/roadmap-update
+  4. data-analysis/build-dashboard (KPI dashboard HTML)
+  5. marketing/performance-report
+Merge: Executive QBR package with sections from each domain
+```
+
+### Customer Research (Cascade)
+```
+Trigger: "/support:research {customer} {issue}"
+Pattern: Cascade (enterprise-search fan-out)
+  1. agent-memory recall "[customer-support] {customer}" → prior context
+  2. email-manager search "{customer}" → email history
+  3. task-planner search "{customer}" → open/past tickets
+  4. Synthesize with confidence scores
+  5. Feed into /support:draft-response
+```
+
+### Skill Factory (Pipeline)
+```
+Trigger: User needs capability not in current skills
+Pattern: Pipeline
+  1. skill-scout discover "{capability}" → evaluate candidates
+  2. IF good external: acquire with quarantine → security scan → install
+  3. IF none found: skill-creator-extended generate from prompt
+  4. skill-lifecycle monitor: begin AIOps monitoring
+  5. ON ERROR: skill-lifecycle evo-loop auto-repair
+```

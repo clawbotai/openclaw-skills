@@ -356,3 +356,32 @@ bio-research                    data-analysis
 4. **Configuration cross-references.** Skills can reference each other's config values. Example: finance's `chart_of_accounts` is available to data-analysis for column mapping.
 
 5. **Trace IDs for composition.** When multiple skills collaborate on a single user request, they share a `trace_id` so agent-memory can reconstruct the full workflow later.
+
+---
+
+## Implementation Status
+
+### Wired (code-level integration)
+- ✅ **email-manager** → guardrails (scan before send, check tier) + memory (log sends, store urgent triage)
+- ✅ **skill-lifecycle** → memory (store fix histories via run_monitored.py)
+- ✅ **lib/memory_client.py** → thin subprocess wrapper for agent-memory
+- ✅ **lib/guardrails_client.py** → thin subprocess wrapper for agent-guardrails
+- ✅ **lib/integration.py** → composed workflows (safe_send_email, unified_search, customer_research, deal_review_context)
+
+### Wired (instruction-level integration in SKILL.md)
+All 25 skills now have Cross-Skill Integration sections documenting:
+- Memory protocol (recall before, remember after)
+- Safety gate (scan/check before external actions)
+- Connected skills (which skills feed into/from this one)
+
+### Protocol
+See `lib/INTEGRATION-PROTOCOL.md` for the agent-followed integration protocol.
+
+### Pre-Built Compositions
+See `skills/agent-orchestration/SKILL.md` → Pre-Built Compositions section for:
+- Deal Review (Expert Panel)
+- Product Launch (Pipeline)
+- Incident Response (Supervisor)
+- QBR Preparation (Fan-Out/Fan-In)
+- Customer Research (Cascade)
+- Skill Factory (Pipeline)

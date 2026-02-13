@@ -43,3 +43,18 @@ python scripts/status.py rollback <project> <deployment_id>
 - Never log or print `CLOUDFLARE_API_TOKEN`
 - All scripts use exception-based error handling with `sys.exit()` only at CLI boundary
 - Structured JSON output on `--json` flag or errors
+
+## Cross-Skill Integration
+
+### Safety Gate
+- **Before deploy**: `guardrails.py check --action deploy_site --target {project_name}`
+- **Before secret changes**: `guardrails.py check --action modify_secrets --target {project_name}` (T4)
+
+### Memory Protocol
+- **After deploy**: `memory.py remember "[cloudflare-deploy] Deployed {project} at {url}, commit {hash}"`
+- **After rollback**: `memory.py remember "[cloudflare-deploy] Rolled back {project}: {reason}" --importance 0.9`
+
+### Connected Skills
+- **web-builder** → builds the site, cloudflare-deploy pushes it live
+- **devops** → CI/CD pipeline triggers deploy
+- **security** → pre-deploy security check
