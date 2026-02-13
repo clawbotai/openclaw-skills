@@ -1,60 +1,100 @@
-# Output Verification Checklist
+# Output Verification Protocol
 
-Run this before delivering any non-trivial output. The checks are ordered by impact — the first few catch the most common failures.
+## Purpose
 
-## Level 1: Delivery Match (Always Run)
+This is the final gate before delivery. Everything you've built passes through here.
+The goal is to catch what execution missed: fabrications, missing pieces, unspoken
+uncertainties, and irreversible actions.
 
-- [ ] **Re-read the original request.** Not your interpretation — the user's actual words.
-- [ ] **Enumerate what was asked for.** List each explicit deliverable.
-- [ ] **Check each off against your output.** Is every requested item present?
-- [ ] **Check for extras.** Is anything present that was NOT requested? If so, is it clearly marked as optional/bonus, or are you scope-creeping?
-- [ ] **Format check.** Did the user specify a format? (file type, structure, naming convention) Does your output match?
+## The Verification Checklist
 
-## Level 2: Factual Integrity (Always Run)
+### 1. Delivery Match Audit
 
-- [ ] **File references.** Every file path you mention — does it exist? Did you verify?
-- [ ] **Library/API references.** Every library, API, or tool you cited — is it real? Is the version current? Is the API signature correct?
-- [ ] **Numbers and versions.** Any specific version numbers, port numbers, config values — are they verified or generated from memory?
-- [ ] **Commands.** Every shell command, CLI invocation, or code snippet — would it actually run? Did you test it or are you assuming?
-- [ ] **URLs.** Every URL you included — is it valid? Does it point where you say it does?
+**Question:** Does the output actually satisfy the original request?
 
-## Level 3: Uncertainty Disclosure (Run for complex/high-stakes output)
+Walk through the user's request clause by clause:
+- For each thing they asked for → confirm it's present in the output
+- For each thing present in the output → confirm they asked for it
+- Any mismatch is either a gap (missing) or bloat (unrequested)
 
-- [ ] **Confidence inventory.** For each major claim or recommendation — how confident are you? (verified / high / moderate / guessing)
-- [ ] **Hedge where appropriate.** For moderate-confidence claims, add qualifiers: "I believe...", "This should work but verify...", "Based on my understanding..."
-- [ ] **Unknown unknowns.** Are there aspects of this problem you don't have enough context to evaluate? Say so.
-- [ ] **Edge cases.** What scenarios haven't you considered? Are there inputs, environments, or conditions that could break your solution?
+**Common miss:** The user asked for X "with" Y, and you delivered X but forgot Y.
+This happens when Y seemed like a minor qualifier but was actually important.
 
-## Level 4: Reversibility & Safety (Run when output involves actions)
+### 2. Hallucination Scan
 
-- [ ] **Reversibility.** Can the user undo everything you've done/proposed? If not, did you warn them?
-- [ ] **Destructive operations.** Did you use `trash` over `rm`? Did you back up before replacing?
-- [ ] **External side effects.** Does your output trigger anything external? (emails, API calls, deployments, notifications)
-- [ ] **Credential exposure.** Are there any secrets, tokens, or passwords in your output that shouldn't be there?
-- [ ] **Permission changes.** Did you modify any permissions, access controls, or security settings?
+This is the most critical check. Hallucinations are confident-sounding fabrications
+that the user has no reason to question.
 
-## Level 5: Completeness & Usability (Run for delivered artifacts)
+**Scan for these specific hallucination vectors:**
 
-- [ ] **Self-contained.** Can the user use your output without asking follow-up questions? If not, did you explain what's missing?
-- [ ] **Dependencies stated.** Are all prerequisites, dependencies, and setup steps documented?
-- [ ] **Error handling.** If this is code — what happens when things go wrong? Are errors handled or do they crash silently?
-- [ ] **Copy-paste ready.** If you provided commands or code — can the user copy-paste and run without editing? If not, are the placeholders obvious?
+| Vector | What to Check | How to Verify |
+|--------|--------------|---------------|
+| **Library/Package names** | Did I reference a real package? | Check the package exists (npm, pip, etc.) |
+| **API endpoints** | Did I use a real endpoint? | Check documentation or actual URL |
+| **Version numbers** | Did I cite a specific version? | Verify it exists |
+| **Configuration values** | Did I suggest specific config? | Verify against docs |
+| **File paths** | Did I reference files? | Verify they exist on the filesystem |
+| **Function signatures** | Did I use correct params? | Check actual API/docs |
+| **Statistics/Numbers** | Did I cite specific data? | Can I source it? |
+| **Historical claims** | Did I state something happened? | Can I verify it? |
+| **Error messages** | Did I predict specific errors? | Are they real error messages? |
+| **Compatibility claims** | Did I say X works with Y? | Is this verified? |
 
-## Quick Version (for simple tasks)
+**The Fabrication Test:** For each specific claim in your output, ask: "How do I know this?"
+- If the answer is "I read it in a file/doc" → Safe
+- If the answer is "I'm very confident from training" → Probably safe, note if high-stakes
+- If the answer is "It seems right" → **DANGER. Verify or qualify.**
+- If the answer is "I don't know, I just generated it" → **HALLUCINATION. Remove or fix.**
 
-When the task is straightforward, run the 4-question version:
+### 3. Uncertainty Disclosure
 
-1. Does this answer what was asked?
-2. Is everything I stated actually true?
-3. Am I uncertain about anything I didn't disclose?
-4. Can the user undo this if needed?
+Honest uncertainty is not a weakness — it's a feature. Users can handle "I'm not sure about X"
+far better than they can handle discovering X was wrong after relying on it.
 
-## Common Output Failures
+**Rules:**
+- If you're uncertain about something important → say so explicitly
+- If you've made a judgment call → flag it as your judgment, not fact
+- If there are multiple valid approaches → mention the alternatives briefly
+- If the output works but has known limitations → state them
 
-| Failure | Description | Prevention |
+**Format for uncertainty:**
+- "Note: I used [approach] here, but [alternative] might be better if [condition]."
+- "I haven't verified [specific thing] — please confirm before relying on it."
+- "This should work for [common case], but may need adjustment for [edge case]."
+
+### 4. Reversibility Assessment
+
+Before delivering, assess what happens if the output is wrong or unwanted.
+
+| Reversibility Level | Description | Action Required |
 |---|---|---|
-| **Phantom files** | Referencing files that don't exist | Verify every path with read/ls before citing |
-| **Stale APIs** | Using deprecated or changed API signatures | Check docs or verify with a test call |
-| **Wrong defaults** | Assuming default config values that differ by environment | State assumptions explicitly |
-| **Silent truncation** | Output is incomplete but looks complete | Check if you addressed every part of the request |
-| **Format mismatch** | Delivering markdown when they wanted JSON, or vice versa | Re-read the request for format cues |
+| **Fully reversible** | User can undo with no consequences | Deliver normally |
+| **Mostly reversible** | Undo is possible but requires effort | Note this to user |
+| **Partially reversible** | Some effects cannot be undone | Warn user explicitly |
+| **Irreversible** | Cannot be undone at all | Require explicit confirmation |
+
+**Examples of irreversible actions:**
+- Deleting files without backup
+- Publishing content to public platforms
+- Sending emails or messages
+- Modifying production databases
+- Overwriting files without preserving originals
+
+### 5. The Final Smell Test
+
+After all formal checks, do one gut check:
+
+- If a senior engineer reviewed this output, what would they question?
+- If this output causes a problem at 3 AM, is there enough context to debug it?
+- Am I proud of this work, or am I shipping it because I'm "done"?
+
+If anything feels off, investigate before delivering. The instinct that something
+isn't right is usually correct.
+
+## Post-Delivery Obligations
+
+After delivering output, you're not done caring about quality:
+
+- If the user reports issues, take them seriously — don't defend, diagnose
+- If you discover you made an error, proactively flag it
+- If you realize you were uncertain about something and didn't say so, say so now
