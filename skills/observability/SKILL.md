@@ -1,11 +1,108 @@
 ---
 name: master-observability
-description: Complete observability engineering — OpenTelemetry-first instrumentation, structured logging, distributed tracing, metrics (RED/USE/Four Golden Signals), Prometheus/Grafana/Loki/Tempo stack, SLIs/SLOs/error budgets, alert design, dashboard patterns, and cost-aware operations. Use for any logging, monitoring, tracing, alerting, or dashboard work.
+version: 2.0.0
+description: Complete observability engineering — OpenTelemetry-first instrumentation, structured logging, distributed tracing, metrics (RED/USE/Four Golden Signals), Prometheus/Grafana/Loki/Tempo stack, SLIs/SLOs/error budgets, alert design, dashboard patterns, and cost-aware operations.
 ---
 
 # Master Observability
 
-Everything needed to build, operate, and evolve observable systems — from a single service to planet-scale microservices.
+## Why This Exists
+
+You cannot fix what you cannot see. Observability is the difference between "the site is slow" and "the payment service P99 latency spiked to 2s at 14:03 due to a connection pool exhaustion on the orders database." Without it, debugging is guesswork. With it, you have a structured path from symptom to root cause.
+
+Observability is not monitoring. Monitoring tells you *when* something is broken. Observability lets you ask *why* — including questions you didn't anticipate when you built the system.
+
+---
+
+## The Observability Maturity Model
+
+Most teams are stuck at Level 1, think they're at Level 3, and need to be at Level 2 before attempting anything higher.
+
+| Level | Name | What It Looks Like | Risk |
+|-------|------|--------------------|------|
+| **0** | Printf Debugging | `console.log("here")`, SSH into prod to tail logs, no persistent storage | You're flying blind. Every incident is a manual archaeology expedition. |
+| **1** | Structured Logs | JSON logs shipped to a central store (Loki, CloudWatch). Searchable. | You can answer questions *after* you know what to search for. No trends, no flow visibility. |
+| **2** | Metrics + Alerts | RED/USE metrics in Prometheus, Grafana dashboards, PagerDuty alerts. | You know *when* things break. You still can't trace *why* across service boundaries. |
+| **3** | Distributed Traces | OpenTelemetry traces across all services, correlated with logs via `trace_id`. | You can follow a request end-to-end. But you're reactive — you find problems after users report them. |
+| **4** | Correlated Observability with SLOs | All three pillars linked. SLIs/SLOs with error budgets drive release decisions. Alerts fire on customer impact, not infrastructure noise. | You're proactive. You know you're burning error budget before customers complain. |
+
+**Where to start:** Get to Level 2 first. Structured logs + basic metrics + alerts on the golden signals. This alone eliminates 80% of debugging pain.
+
+---
+
+## What to Instrument First
+
+Decision framework for teams starting from scratch or adding observability to an existing system:
+
+```
+Step 1: Golden Signals (do this first — covers 80% of incidents)
+  ├─ Latency (request duration histogram)
+  ├─ Traffic (requests per second)
+  ├─ Errors (5xx rate, application error rate)
+  └─ Saturation (CPU, memory, connection pools, queue depth)
+
+Step 2: Business Metrics (do this when golden signals are stable)
+  ├─ Orders placed / revenue per minute
+  ├─ User signups / active sessions
+  ├─ Payment success rate
+  └─ Whatever your business cares about — if it's on a KPI dashboard, instrument it
+
+Step 3: Distributed Traces (do this when you have >2 services)
+  ├─ Auto-instrument with OTel SDK
+  ├─ Add custom spans for business-critical paths
+  ├─ Tail-sample errors at 100%, everything else at 1-10%
+  └─ Link traces to logs via trace_id
+
+Step 4: SLOs and Error Budgets (do this when you're mature enough to act on them)
+  ├─ Define SLIs from golden signals
+  ├─ Set SLO targets based on actual baseline (not wishful thinking)
+  ├─ Multi-window burn-rate alerts
+  └─ Error budget gates release decisions
+```
+
+---
+
+## Anti-Patterns
+
+### The Log Tsunami
+
+**Pattern:** Every function logs at DEBUG. Request bodies, response bodies, intermediate state — all of it, in production.
+
+**Reality:** Log volume hits 50GB/day. Storage costs explode. Searching for the one error log takes minutes because it's buried in millions of debug lines. The signal-to-noise ratio approaches zero.
+
+**Fix:** Production default = INFO. Log business events (order placed, payment failed, user authenticated), not data flow (entering function, exiting function). Make log level configurable at runtime so you can temporarily enable DEBUG for a specific service without redeploying.
+
+### The Dashboard Museum
+
+**Pattern:** Team creates a Grafana dashboard for every new feature. 47 dashboards exist. Nobody looks at any of them.
+
+**Reality:** Dashboards without viewers are maintenance debt. They break silently when metric names change. During incidents, nobody knows which dashboard matters.
+
+**Fix:** Maintain exactly these dashboards: War Room (overview), one per service, infrastructure, database, SLO. Delete everything else. If nobody opened a dashboard in 30 days, it shouldn't exist.
+
+### The Alert Storm
+
+**Pattern:** Every metric gets an alert. CPU > 70%? Alert. Memory > 60%? Alert. Pod restarted? Alert. Response time > 200ms? Alert.
+
+**Reality:** On-call gets 40 alerts per day. They start ignoring all of them. When a real outage happens, the critical alert is buried in noise. Alert fatigue is the #1 cause of slow incident response.
+
+**Fix:** Alert on symptoms, not causes. "Error rate > 5% for 5 minutes" is actionable. "CPU at 80%" is not (maybe that's normal). Every alert must have a runbook link. Review alerts monthly — if it never fires, delete it; if it always fires, raise the threshold or fix the underlying issue.
+
+### The Metric Without Context
+
+**Pattern:** Dashboard shows CPU at 80%. Team panics.
+
+**Reality:** Is 80% bad? If the baseline is 75%, this is noise. If the baseline is 30%, this is a crisis. A metric without a baseline is a number without meaning.
+
+**Fix:** Always display metrics with baselines. Use Grafana annotations to mark deployments and incidents. Show percentile trends (p50/p95/p99), not averages — averages hide outliers that kill user experience.
+
+### The Trace Gap
+
+**Pattern:** Tracing is set up for the API gateway and the main service. Traces stop at the database call or the message queue consumer.
+
+**Reality:** The bottleneck is always in the part you didn't trace. The database query that takes 3 seconds, the Kafka consumer that's lagging — invisible because context propagation wasn't carried across the boundary.
+
+**Fix:** Propagate trace context everywhere: HTTP headers, gRPC metadata, message queue payloads, background job arguments. Auto-instrument database clients and queue consumers with OTel. If a span has no children but represents a call to another system, you have a trace gap.
 
 ---
 
@@ -17,13 +114,19 @@ Everything needed to build, operate, and evolve observable systems — from a si
 | **Metrics** | How much / how fast | Is latency increasing? | `http_request_duration_seconds{route="/api/orders"} 0.342` |
 | **Traces** | Request flow | Where is the bottleneck? | `api-gateway → auth → order-service → db` |
 
-**Correlation is key:** Embed `trace_id` in every log line so you can jump from a log entry to the full distributed trace and from a trace span to matching log lines. Metrics link via exemplars.
+**Correlation is the multiplier.** Each pillar alone gives partial visibility. Connected, they give root-cause analysis in minutes instead of hours:
+
+- Embed `trace_id` in every log line → jump from log to full trace
+- Add exemplars to metrics → jump from a latency spike to the specific trace that caused it
+- Tag spans with the same correlation IDs as logs → unified search across pillars
+
+Without correlation, you have three separate data stores. With it, you have observability.
 
 ---
 
 ## 2 · Structured Logging
 
-Always emit logs as **structured JSON** — never free-text strings.
+Always emit logs as **structured JSON** — never free-text strings. Unstructured logs cannot be queried, aggregated, or alerted on. They're write-only data.
 
 ### 2.1 Required Fields
 
@@ -65,7 +168,7 @@ app.use((req, res, next) => {
 | **DEBUG** | Developer troubleshooting | Cache miss for key user:82:preferences |
 | **TRACE** | Very fine-grained (rarely in prod) | Entering validateAddress with payload |
 
-**Rules:** Production default = INFO+. Every ERROR should be actionable. Every FATAL must trigger an alert.
+**Rules:** Production default = INFO+. Every ERROR should be actionable. Every FATAL must trigger an alert. If you're logging at DEBUG in production "just in case," you're in The Log Tsunami.
 
 ### 2.4 Logger Recommendations
 
@@ -240,7 +343,7 @@ Latency · Traffic · Errors · Saturation — superset of RED that adds saturat
 | **SLA** | Contractual commitment | 99.5% availability or credits issued |
 | **Error Budget** | 100% − SLO | 0.1% = ~43 min/month of allowed downtime |
 
-**Multi-window, multi-burn-rate alerts** catch both sudden spikes and slow burns against SLOs.
+**Multi-window, multi-burn-rate alerts** catch both sudden spikes and slow burns against SLOs. This is the gold standard for alerting — it replaces static thresholds with alerts that fire based on how fast you're consuming your error budget.
 
 ---
 
@@ -306,6 +409,8 @@ services:
 ```
 
 ### 6.2 Standard Dashboard Set
+
+Keep exactly these. Delete the rest.
 
 | Dashboard | Key Panels |
 |-----------|------------|
@@ -432,6 +537,8 @@ Always-on, low-overhead CPU/memory profiling in production. Tools: **Pyroscope**
 
 ### 8.3 Cost-Aware Observability
 
+Observability has a cost curve that goes exponential if you're not deliberate:
+
 - **Log volume budgets** — alert when a service exceeds daily quota
 - **Metric cardinality limits** — never use user ID or request ID as label (Prometheus OOM)
 - **Trace sampling** — sample 1-10% in production; tail-sample errors at 100%
@@ -462,24 +569,7 @@ Every service must have:
 
 ---
 
-## 10 · Anti-Patterns
-
-| Anti-Pattern | Problem | Fix |
-|-------------|---------|-----|
-| Logging PII/secrets | Privacy/compliance violation | Mask or exclude; use token references |
-| Excessive logging | Cost explosion, signal drowns in noise | Log business events, not data flow |
-| Unstructured logs | Cannot query or alert on fields | Structured JSON with consistent schema |
-| String interpolation in logs | Breaks structured fields, injection risk | Pass fields as metadata |
-| Missing correlation IDs | Cannot trace across services | Generate and propagate trace_id everywhere |
-| Alert storms | On-call fatigue, real issues buried | Grouping, inhibition, deduplication |
-| High-cardinality labels | Prometheus OOM, dashboard timeouts | Never use user/request ID as label |
-| Alerts without runbooks | Unactionable, trust erosion | Mandatory runbook link on every alert |
-| Logs-only observability | Blind to trends and flow | Add metrics and traces |
-| No sampling strategy | Trace storage costs explode | Probabilistic + tail-based sampling |
-
----
-
-## 11 · NEVER Do
+## NEVER Do
 
 1. **NEVER log passwords, tokens, API keys, or secrets** — even at DEBUG
 2. **NEVER use console.log / print in production** — use a structured logger
@@ -489,6 +579,8 @@ Every service must have:
 6. **NEVER log request/response bodies by default** — opt-in only with PII redaction
 7. **NEVER ignore log volume** — set budgets and alert on quota breach
 8. **NEVER skip context propagation in async flows** — broken traces are worse than none
+
+---
 
 ## Cross-Skill Integration
 
@@ -501,3 +593,29 @@ Every service must have:
 - **security** → security events surface in observability pipeline
 - **python-backend** → instrumentation patterns injected during development
 - **data-analysis** → metric analysis and statistical anomaly detection
+
+---
+
+## Quick Reference Card
+
+```
+MATURITY        L0 printf → L1 structured logs → L2 metrics+alerts → L3 traces → L4 SLOs
+INSTRUMENT      Golden signals first → business metrics → traces → SLOs
+THREE PILLARS   Logs (what happened) + Metrics (how much) + Traces (where)
+CORRELATION     trace_id in every log, exemplars in metrics, context in spans
+
+RED             Rate · Errors · Duration (for services)
+USE             Utilization · Saturation · Errors (for infrastructure)
+GOLDEN SIGNALS  Latency · Traffic · Errors · Saturation
+
+LOGGING         Structured JSON | INFO+ in prod | DEBUG configurable at runtime | Never log secrets
+TRACING         OTel SDK → Collector → Tempo | W3C traceparent | 100% sample errors
+METRICS         Prometheus scrape | No high-cardinality labels | Histograms for latency
+ALERTS          Symptoms not causes | Runbook link required | Review monthly | Burn-rate for SLOs
+
+STACK           OTel Collector → Prometheus + Loki + Tempo → Grafana
+DASHBOARDS      War Room · Per-Service · Infra · DB · SLO — delete the rest
+COST            Log budgets · Cardinality limits · Tail sampling · Retention tiers
+
+ANTI-PATTERNS   Log Tsunami · Dashboard Museum · Alert Storm · Metric Without Context · Trace Gap
+```
