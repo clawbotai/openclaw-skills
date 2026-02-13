@@ -1,127 +1,121 @@
 # N-th Order Effects Analysis Framework
 
-Every decision creates ripples. This framework forces structured evaluation of consequences beyond the immediate result.
+## Conceptual Foundation
 
-## The Three-Layer Model
+Every decision creates ripples. First-order effects are obvious — they're what you
+intended. Second-order effects are what your first-order effects cause. Third-order
+effects are what happens when the second-order effects interact with the broader system.
 
-| Order | Question | Time Horizon | Visibility |
-|---|---|---|---|
-| **1st** | What is the direct result of this action? | Immediate | Obvious |
-| **2nd** | What does that result cause? | Hours to days | Often missed |
-| **3rd** | What does *that* cause? | Days to weeks | Rarely considered |
+Most catastrophic software failures aren't caused by first-order effects. They're caused
+by second and third-order effects that nobody analyzed.
 
-Most planning stops at 1st order. Most failures originate at 2nd or 3rd.
+**Principle:** You cannot predict all downstream effects, but you can develop the discipline
+to look for them systematically. The goal is not omniscience — it's diligence.
 
-## Analysis Template
+## The Three-Layer Analysis
 
-For any significant decision, fill in this chain:
+For any significant decision, explicitly walk through three layers:
 
-```
-ACTION: [What you're about to do]
+### Layer 1: Direct Effects (What happens immediately)
 
-1st ORDER: [Direct, immediate consequence]
-  └─ 2nd ORDER: [What the 1st order consequence causes]
-       └─ 3rd ORDER: [What the 2nd order consequence causes]
+This is the easy part. What does this change do, directly?
 
-1st ORDER: [Another direct consequence]
-  └─ 2nd ORDER: ...
-       └─ 3rd ORDER: ...
-```
+- What state changes occur?
+- What becomes possible that wasn't before?
+- What becomes impossible that was possible before?
+- Who or what is directly affected?
 
-### Worked Example: Adding a Caching Layer
+### Layer 2: Consequential Effects (What the direct effects cause)
 
-```
-ACTION: Add Redis caching to API responses
+This is where most analysis stops — and where most problems begin.
 
-1st ORDER: API responses are faster (50ms → 5ms)
-  └─ 2nd ORDER: Stale data becomes possible (cache TTL window)
-       └─ 3rd ORDER: Users make decisions on outdated information
-                     Operations team needs cache invalidation strategy
-                     Bug reports increase for "data not updating"
+**Prompt questions:**
+- Now that [Layer 1 effect] exists, how does behavior change?
+- What systems consume the output of this change?
+- What assumptions do downstream systems make that this change might violate?
+- If someone relies on [Layer 1 effect], what new risks do they face?
+- What does this incentivize? What does it disincentivize?
 
-1st ORDER: Database load decreases by ~80%
-  └─ 2nd ORDER: DB performance issues are masked, not fixed
-       └─ 3rd ORDER: When cache fails, DB gets 5× expected load and crashes
-                     Team loses urgency to optimize slow queries
+**Common Layer 2 patterns:**
+| Layer 1 Effect | Common Layer 2 Effect |
+|---|---|
+| Added caching | Stale data problems |
+| Added automation | Loss of human oversight |
+| Improved speed | Increased demand / load |
+| Added a feature | Increased maintenance burden |
+| Changed a data format | Downstream parser failures |
+| Added a dependency | Supply chain vulnerability |
+| Simplified an interface | Lost power-user capabilities |
+| Added monitoring | Alert fatigue |
+| Changed permissions | Workflow disruption |
 
-1st ORDER: New infrastructure dependency (Redis)
-  └─ 2nd ORDER: Deployment complexity increases, new failure mode
-       └─ 3rd ORDER: On-call burden increases
-                     New team members need Redis knowledge
-```
+### Layer 3: Systemic Effects (What emerges from Layer 2 interactions)
 
-## Evaluation Dimensions
+This layer is speculative but important. It asks: what happens when Layer 2 effects
+interact with each other and with the broader environment?
 
-When analyzing effects, consider impact across these dimensions:
+**Prompt questions:**
+- If Layer 2 effects accumulate over time, what trend emerges?
+- What happens when this scales to 10x / 100x users/load/data?
+- If this becomes the standard approach, what pressure does that create?
+- What happens when someone copies this pattern without understanding the context?
+- Is there a "success disaster" — the plan works but creates a worse problem?
 
-### People
-- Who is affected beyond the immediate user?
-- Does this change anyone's workflow without their input?
-- Does this create work for someone who didn't ask for it?
-- Does this shift responsibility or blame?
+## Decision Framework
 
-### Systems
-- What systems are downstream of this change?
-- What happens to those systems under the new behavior?
-- Are there integration points that assume the old behavior?
-- What monitoring or alerting needs to change?
+After analyzing all three layers:
 
-### Incentives
-- What behavior does this encourage?
-- What behavior does this discourage?
-- If everyone adopted this pattern, what would happen?
-- Are the incentives aligned with the user's actual goals?
+| Finding | Action |
+|---|---|
+| All layers look clean | Proceed |
+| Layer 2 has manageable risks | Proceed with documentation of risks |
+| Layer 2 has significant risks | Surface to user, propose mitigations |
+| Layer 3 has concerning patterns | Flag to user as consideration, not blocker |
+| Any layer shows irreversible harm | Stop and discuss with user |
 
-### Failure Modes
-- What new ways can things break?
-- What existing safety mechanisms does this bypass or weaken?
-- What happens when this system is down?
-- What's the blast radius of a failure?
+## Practical Application
 
-## When to Run Full Analysis
+### For Code Changes
+1. What does this code do? (Layer 1)
+2. What calls this code? What consumes its output? (Layer 2)
+3. If this code has a bug or changes behavior, what's the blast radius? (Layer 3)
 
-**Full analysis (all three orders):**
-- Architecture decisions
-- New infrastructure or dependencies
-- Changes to data models or schemas
-- Anything affecting multiple teams or systems
-- Irreversible changes
+### For Architecture Decisions
+1. What does this architecture enable? (Layer 1)
+2. What constraints does it impose? What does it make hard? (Layer 2)
+3. If we're locked into this for 2 years, what problems emerge? (Layer 3)
 
-**Quick analysis (1st and 2nd order only):**
-- Code refactoring within a single module
-- Configuration changes
-- Adding a new feature to an existing system
-- Documentation changes
+### For Process Changes
+1. What does this process change improve? (Layer 1)
+2. How do people adapt their behavior? Do workarounds emerge? (Layer 2)
+3. What culture does this create long-term? (Layer 3)
 
-**Skip (1st order sufficient):**
-- Bug fixes with clear scope
-- Formatting or style changes
-- Adding tests
-- Updating dependencies (minor versions)
+### For Data Decisions
+1. What data is created, moved, or deleted? (Layer 1)
+2. Who else uses this data? What decisions depend on it? (Layer 2)
+3. If this data is wrong, stale, or missing — what cascade of failures occurs? (Layer 3)
 
-## The "Success Disaster" Test
+## The "Inversion" Technique
 
-Ask: **"If this works exactly as planned, what problems does success create?"**
+When standard forward analysis isn't revealing enough, invert:
 
-This catches the most dangerous category of n-th order effects — the ones where nothing goes wrong, but the outcome still causes harm.
+1. Imagine the worst outcome this decision could produce
+2. Work backwards: What chain of events leads to that outcome?
+3. Assess: Is any link in that chain plausible?
+4. If yes: What would prevent it?
 
-Examples:
-- A feature is so popular it overwhelms infrastructure → success disaster
-- Automation eliminates manual review that caught errors → success disaster
-- Cost optimization works so well that the team loses budget for the service → success disaster
+This is essentially a structured pre-mortem applied at each layer.
 
-## Communicating Effects to Users
+## When NOT to Over-Analyze
 
-When you identify significant 2nd or 3rd order effects, present them clearly:
+This framework is a tool, not a religion. Apply proportional effort:
 
-**Good format:**
-> This will [1st order effect], which is what you want. Two things to consider:
-> - [2nd order effect] — this means [practical consequence]
-> - [3rd order effect] — longer term, this could lead to [consequence]
-> 
-> Want to proceed as-is, or should we [mitigation]?
+| Task Type | Analysis Depth |
+|---|---|
+| Quick fix, low stakes | Layer 1 only (30 seconds) |
+| New feature, moderate stakes | Layers 1-2 (2-3 minutes) |
+| Architecture decision, high stakes | All three layers (5-10 minutes) |
+| Irreversible action | All three layers + user discussion |
 
-**Bad format:**
-> Here are all the possible consequences I can think of: [wall of text covering every conceivable outcome]
-
-Focus on effects that are **non-obvious AND actionable**. Skip effects that are obvious or that the user can't do anything about.
+Don't spend 10 minutes analyzing the second-order effects of fixing a typo.
+Do spend 10 minutes analyzing the second-order effects of changing a database schema.
