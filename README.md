@@ -1,82 +1,82 @@
-# OpenClaw Skills
+# OpenClaw Skills Workspace
 
-A curated library of skills for [OpenClaw](https://github.com/openclaw/openclaw) AI agents. Built for autonomous development, self-healing, and modern software engineering.
+Private skill library and workspace for OpenClaw AI agents. 25 skills across infrastructure, engineering, knowledge work, and domain expertise.
 
-## Skills
+## Skills (25)
 
-### Master Skills (Consolidated)
+### Infrastructure (8)
 | Skill | Description |
 |-------|-------------|
-| [master-api](master-api/) | REST/GraphQL API design, versioning, documentation, rate limiting |
-| [master-construction](master-construction/) | Construction project management, capacity planning, incident reporting |
-| [master-data](master-data/) | Database design, migrations, query optimization, data modeling |
-| [master-devops](master-devops/) | CI/CD, infrastructure as code, containers, Kubernetes, GitOps |
-| [master-docs](master-docs/) | Auto-generate documentation, CLI help, quality audits |
-| [master-growth](master-growth/) | Growth engineering, startup metrics, SaaS analytics |
-| [master-ml](master-ml/) | ML/MLOps, model development, experiment tracking, serving |
-| [master-observability](master-observability/) | OpenTelemetry, logging, tracing, metrics, Prometheus/Grafana |
-| [master-payments](master-payments/) | Payment integration, billing automation, subscription management |
-| [master-performance](master-performance/) | Performance engineering, load testing, cost optimization |
-| [master-qa](master-qa/) | QA engineering, test strategy, automation, coverage |
-| [master-security](master-security/) | AppSec, vulnerability management, compliance, zero-trust, DevSecOps |
+| `agent-guardrails` | Safety gate for agent actions — policy enforcement, rate limiting, approval workflows |
+| `agent-memory` | Shared brain — vector DB (SQLite + numpy), episodic/semantic/procedural memory |
+| `agent-orchestration` | Multi-agent coordination, task routing, handoff protocols |
+| `skill-creator-extended` | Autonomous skill generator — 4-phase pipeline (Research → Architecture → Implementation → Validation) + composition patterns |
+| `skill-lifecycle` | Unified lifecycle management — Research→Build→Reflect evo loop + AIOps monitoring, circuit breakers, self-healing |
+| `skill-scout` | Skill discovery, evaluation, and quarantine workflow |
+| `cloudflare-deploy` | Deploy static sites to Cloudflare Pages — project management, deployment, status (stdlib-only Python) |
+| `mailcow-manager` | Provision Hetzner VPS, install Mailcow, manage domains/mailboxes/DKIM, Cloudflare DNS (stdlib-only Python) |
 
-### Autonomous Agent Skills
+### Engineering (5)
 | Skill | Description |
 |-------|-------------|
-| [skill-evolutionary-loop](skill-evolutionary-loop/) | Research → Build → Reflect helix with backpressure gates |
-| [skill-runtime-monitor](skill-runtime-monitor/) | AIOps observability, circuit breakers, error classification, repair tickets |
-| [reflect-learn](reflect-learn/) | Self-improvement through conversation analysis |
-| [ralph-mode](ralph-mode/) | Autonomous development loops with iteration and completion criteria |
-| [planning-with-files](planning-with-files/) | Manus-style file-based planning for complex tasks |
-| [quarter-hour-updates](quarter-hour-updates/) | Structured 15-minute progress updates |
-| [natural-language-planner](natural-language-planner/) | Task and project management from natural language |
-| [project-cerebro](project-cerebro/) | Multi-brain execution dashboard |
+| `python-backend` | FastAPI, Django, Flask backend development |
+| `web-builder` | Full web dev lifecycle — SvelteKit PWAs, single-file HTML bundling, GitHub Pages/Vercel deploy |
+| `devops` | Complete DevOps — CI/CD, IaC, containers, Kubernetes, GitOps, progressive delivery |
+| `security` | Unified security — appsec, vuln management, compliance, zero-trust, incident response, DevSecOps, threat modeling |
+| `observability` | OpenTelemetry-first — structured logging, tracing, metrics, Prometheus/Grafana/Loki/Tempo, SLIs/SLOs, alert design |
 
-### Infrastructure & Standards
+### Knowledge Work (3)
 | Skill | Description |
 |-------|-------------|
-| [project-structure](project-structure/) | File/folder standards with validation and scaffolding |
-| [filesystem-standard](filesystem-standard/) | System-level filesystem organization for AI deployments |
-| [production-readiness](production-readiness/) | Pre-launch readiness checks across all dimensions |
-| [agent-control](agent-control/) | Restart or reconfigure agents from chat |
-| [agent-observability-dashboard](agent-observability-dashboard/) | Agent monitoring and observability |
+| `docs-engine` | Documentation engine — Diátaxis scaffolding, GitHub Gold Standard templates, quality scoring |
+| `email-manager` | Full IMAP/SMTP client for autonomous agents — structured JSON, priority detection, triage, threading |
+| `task-planner` | Natural language task/project management — Kanban dashboard, file-based planning, workplace memory, daily planning |
 
-### Domain Skills
+### Domain Expertise (9)
 | Skill | Description |
 |-------|-------------|
-| [auth](auth/) | Authentication system design and implementation |
-| [hipaa-compliance](hipaa-compliance/) | HIPAA-compliant software and infrastructure |
-| [hyperliquid-trading](hyperliquid-trading/) | Hyperliquid perpetual futures trading |
-| [business-development](business-development/) | Partnership outreach, market research, proposals |
-| [customer-support](customer-support/) | Issue resolution and customer communication |
-| [product-manager-toolkit](product-manager-toolkit/) | RICE prioritization, PRDs, discovery frameworks |
-| [pre-mortem-analyst](pre-mortem-analyst/) | Pre-mortem failure analysis and risk assessment |
+| `legal` | Contract review, NDA triage, compliance (GDPR/CCPA/HIPAA), risk assessment, meeting briefings |
+| `sales` | Prospecting, outreach, pipeline management, forecasting, battlecards, competitive analysis |
+| `customer-support` | Ticket triage, escalation packaging, response drafting, KB article authoring |
+| `product-management` | PRDs/feature specs, roadmaps, stakeholder updates, user research synthesis |
+| `marketing` | Content creation, campaign planning, brand voice, SEO audits, competitive intel |
+| `finance` | Journal entries, reconciliation, financial statements, variance analysis, close management |
+| `data-analysis` | SQL (any dialect), EDA, dashboards, statistical analysis, data quality validation |
+| `enterprise-search` | Unified cross-tool search — email, chat, docs, wikis with confidence scoring |
+| `bio-research` | Literature review, scRNA-seq, sequencing pipelines, drug discovery, target prioritization |
 
-### Development Skills
-| Skill | Description |
-|-------|-------------|
-| [sw-python-backend](sw-python-backend/) | FastAPI, Django, Flask backend development |
-| [sw-mobile-architect](sw-mobile-architect/) | React Native/Expo mobile architecture |
-| [sveltekit-webapp](sveltekit-webapp/) | SvelteKit PWA scaffold and deployment |
-| [web-bundling](web-bundling/) | Bundle web apps into single HTML files |
-| [web-deploy-github](web-deploy-github/) | Deploy static sites to GitHub Pages |
-| [evoweb-ai](evoweb-ai/) | AI-optimized website builder |
+## Cross-Skill Integration
 
-### Research & Data
-| Skill | Description |
-|-------|-------------|
-| [deep-research-pro](deep-research-pro/) | Multi-source deep research with cited reports |
-| [clawrag](clawrag/) | RAG (Retrieval-Augmented Generation) |
+9 integration pipelines connect skills into cross-functional workflows. See [docs/SKILL-INTEGRATION-ARCHITECTURE.md](docs/SKILL-INTEGRATION-ARCHITECTURE.md).
 
-## Installation
+Key patterns:
+- **Shared Brain**: `agent-memory` ↔ all skills (P0)
+- **Deal Review**: `legal` + `sales` + `finance` (parallel → merge)
+- **Product Launch**: `PM` → `marketing` → `sales` → `support` (sequential)
+- **Research Chain**: `support` → `enterprise-search` → `email-manager` (cascading)
 
-Install individual skills via [ClawHub](https://clawhub.com):
+## Projects
+
+| Project | Location | Status |
+|---------|----------|--------|
+| **TØrr Statics** | `torr-statics-site/` → [torrstatics.com](https://torrstatics.com) | Live (v3.5) |
+| **MPMP** | `mpmp/` → [github.com/clawbotai/mpmp](https://github.com/clawbotai/mpmp) | Phase 1-6 complete |
+
+## Shared Libraries
+
+| Library | Purpose |
+|---------|---------|
+| `lib/memory_client.py` | Subprocess wrapper for agent-memory |
+| `lib/guardrails_client.py` | Subprocess wrapper for agent-guardrails |
+
+## Monitored Execution
+
+All skill scripts route through `bin/skillrun` for error capture, classification, and self-healing:
+
 ```bash
-clawhub install <skill-name>
+bin/skillrun <skill-name> -- <command...>
 ```
 
-Or clone this repo and symlink the skills you need into your OpenClaw workspace.
+## Attribution
 
-## License
-
-MIT
+Domain expertise skills (legal, sales, customer-support, product-management, marketing, finance, data-analysis, enterprise-search, bio-research) derived from [Anthropic knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins) (Apache-2.0).
