@@ -1,90 +1,107 @@
 # Questioning Framework
 
-When the sanity check identifies a risk, ambiguity, or concern — the quality of your questions determines whether you help or annoy.
+## Philosophy
 
-## Core Principles
+The purpose of asking questions is not to slow the user down or demonstrate thoroughness.
+It is to prevent wasted work, catch dangerous assumptions, and ensure the user has
+considered consequences they may not have thought about.
 
-1. **Ask the question behind the question.** Don't ask what they want — ask what problem they're solving.
-2. **Be specific.** "What database are you using?" not "Can you tell me more about your setup?"
-3. **Explain WHY you're asking.** The user should understand the risk you've identified.
-4. **Max 2-3 questions at once.** More than that is an interrogation, not a conversation.
-5. **Frame around consequences, not preferences.** "What happens when X?" not "Do you want X?"
-6. **Prefer "What happens when..." over "Do you want..."** — the former reveals constraints; the latter gets surface answers.
+Every question should pass the **"So What" Test**: If the answer changes what you'd build
+or how you'd build it, the question is worth asking. If not, skip it.
 
-## Question Patterns
+## The Question Behind the Question
 
-### Risk-Revealing Questions
-Surface hidden risks the user may not have considered.
+Users often ask for solutions when they should be asking about problems. Your job is to
+identify when this is happening and gently redirect.
 
-| Pattern | Example |
+**Pattern Recognition:**
+- "Can you make me a [specific solution]?" → They've already decided the approach. But is it the right one?
+- "Fix this [symptom]" → The symptom might not be the disease.
+- "Add [feature]" → Why do they need this feature? What problem does it solve?
+
+**The Redirect:**
+Don't say: "Why do you want that?" (feels dismissive)
+Do say: "Just so I build the right thing — what's the situation this needs to handle?"
+
+## Question Categories
+
+### 1. Intent Clarification
+**When:** The request is ambiguous or could mean multiple things.
+**Goal:** Lock in exactly what "done" looks like.
+
+Templates:
+- "When this is finished, what should [user/system] be able to do that they can't now?"
+- "Is this for [audience A] or [audience B]? The approach differs."
+- "Should this handle [edge case], or is [main case] sufficient for now?"
+
+### 2. Constraint Discovery
+**When:** You're about to make design decisions and need to know the boundaries.
+**Goal:** Understand what's fixed vs. flexible.
+
+Templates:
+- "Are there any existing [systems/formats/tools] this needs to work with?"
+- "Is there a [time/size/complexity] constraint I should know about?"
+- "Does this need to handle [scale/volume]? That affects the approach."
+
+### 3. Risk Surfacing
+**When:** You've identified a risk the user may not have considered.
+**Goal:** Ensure informed consent before proceeding.
+
+Templates:
+- "I want to flag something: [risk]. If that's acceptable, I'll proceed. If not, we could [alternative]."
+- "This approach means [tradeoff]. Are you OK with that, or would you prefer [alternative]?"
+- "One thing to consider: if [condition], this would [consequence]. Is that a concern?"
+
+### 4. Consequence Verification
+**When:** The action has 2nd or 3rd order effects.
+**Goal:** Confirm the user has thought through downstream impacts.
+
+Templates:
+- "This will change how [downstream thing] works. Have you coordinated with [stakeholders]?"
+- "Once this is [deployed/sent/published], [consequence]. Should I proceed?"
+- "This approach optimizes for [thing A] at the cost of [thing B]. Is that the right priority?"
+
+### 5. Assumption Validation
+**When:** You're about to rely on an assumption that, if wrong, would invalidate your work.
+**Goal:** Verify before building on sand.
+
+Templates:
+- "I'm going to assume [assumption]. If that's wrong, the approach changes significantly. Can you confirm?"
+- "This depends on [dependency]. Is that available/stable/correct?"
+- "I need to make a choice here between [option A] and [option B]. My instinct is [choice] because [reason]. Sound right?"
+
+## Question Delivery Rules
+
+### Rule 1: Maximum 2-3 questions per message
+More than that overwhelms the user and signals that you haven't done your homework.
+If you have 7 questions, you probably need to do more research first to eliminate some.
+
+### Rule 2: Explain why you're asking
+Don't just ask "What database are you using?" — say "I need to know the database type
+because the query syntax and connection approach differ significantly between them."
+
+### Rule 3: Provide your best guess
+When possible, phrase questions as confirmations rather than open-ended queries:
+- Weak: "What format do you want?"
+- Strong: "I'll use markdown since that's most flexible — unless you need a DOCX?"
+
+### Rule 4: Front-load the most important question
+If you're asking 3 questions, put the one that most affects your approach first.
+The user might answer only the first one and say "go ahead" for the rest.
+
+### Rule 5: Never ask questions you could answer yourself
+If the answer is in the uploaded files, the conversation history, or verifiable with
+a quick check — don't ask. Look.
+
+## Questions You Should ALWAYS Ask (When Relevant)
+
+These questions address the most common sources of wasted work:
+
+| Situation | Question |
 |---|---|
-| "If [assumption] is wrong, this approach would [consequence]. Can you confirm [assumption]?" | "If the API rate-limits at 100 req/min, this batch approach would take 3 hours. Can you confirm the rate limit?" |
-| "This will work for [A], but do you also need it to handle [B]?" | "This will work for single-tenant, but do you also need it to handle multi-tenant?" |
-| "The fastest approach has a tradeoff: [tradeoff]. The alternative takes [time] but avoids [risk]. Which matters more?" | "The fastest approach stores credentials in env vars. The alternative uses a secret manager but needs 30 min setup. Which matters more?" |
-
-### Clarifying Questions
-Resolve ambiguity before it becomes wasted work.
-
-| Pattern | Example |
-|---|---|
-| "When you say [X], do you mean [A] or [B]? The approach differs significantly." | "When you say 'real-time', do you mean sub-second latency or updates within a few minutes? The architecture differs significantly." |
-| "What does 'done' look like for this? I want to make sure I'm building toward the right target." | Direct — calibrates the deliverable |
-| "Who is the audience for this? That affects [specific decision]." | "Who is the audience for this doc? That affects the technical depth and terminology." |
-
-### Chesterton's Fence Questions
-Understand existing systems before changing them.
-
-| Pattern | Example |
-|---|---|
-| "Before I change this — can you help me understand why it works this way?" | Non-judgmental. Doesn't assume the current way is wrong. |
-| "I notice [existing pattern]. Is that intentional, or is it something we should change?" | Gives the user a chance to explain before you break something. |
-| "What would break if we removed [X]?" | Forces enumeration of dependencies. |
-
-### Consequence Questions
-Make the user think through downstream effects.
-
-| Pattern | Example |
-|---|---|
-| "If this works perfectly, what new problem does it create?" | Forces 2nd-order thinking. |
-| "What happens to [downstream system] when this changes?" | Identifies integration points. |
-| "If we do this and it's wrong, how hard is it to undo?" | Reversibility assessment. |
-
-## Anti-Patterns
-
-### Questions That Waste Time
-- **Too vague:** "Can you tell me more?" → Ask about the specific thing you need.
-- **Already answerable:** Don't ask the user what you could look up yourself.
-- **Performative:** Don't ask questions just to seem thorough. Every question should serve a purpose.
-
-### Questions That Annoy
-- **Interrogation mode:** More than 3 questions in a row without doing any work.
-- **Obvious questions:** Asking things the user already stated in their request.
-- **Repeated questions:** Asking for info they already provided in this conversation.
-- **Permission-seeking:** "Is it okay if I...?" for routine, reversible actions. Just do it.
-
-### Questions That Mislead
-- **Leading questions:** "You probably want X, right?" → Let them decide.
-- **False binary:** "Should I do A or B?" when C exists and is better.
-- **Buried lede:** Asking a minor question when the real issue is a major risk you should state directly.
-
-## When NOT to Ask
-
-Not every uncertainty requires a question. Skip questions when:
-- You can verify the answer yourself (read a file, check a config, search the web)
-- The uncertainty is minor and doesn't materially affect the approach
-- You can make a reasonable default and state it: "I'm assuming X. Let me know if that's wrong."
-- The user has shown they prefer action over discussion
-
-## Delivery Format
-
-When you do ask, structure it for easy response:
-
-**Good:**
-> I want to check two things before building this:
-> 1. Are you targeting Node 18+ or do you need Node 16 compat? (Affects which APIs I can use)
-> 2. Should this handle concurrent writes? (If yes, I'll add locking — adds ~30 min)
-
-**Bad:**
-> Before I start, I have some questions. First, I was wondering about the Node version you're using because that affects API compatibility. Also, I'm curious about whether there might be concurrent writes because that would change the architecture. And while I'm asking, do you have a preference on the testing framework?
-
-The good version is scannable, numbered, and explains why each question matters.
+| Building something new | "Is there an existing [thing] I should be aware of or build on?" |
+| Modifying existing code | "Can you walk me through what this currently does and why?" |
+| Multiple valid approaches | "Priority check: [speed vs quality vs flexibility] — which matters most here?" |
+| Unclear audience | "Who is this for? Their technical level affects the approach." |
+| Potential for scope creep | "Should I focus strictly on [X], or do you also want me to address [Y]?" |
+| Irreversible action | "This can't be undone. Should I proceed, or do you want to review first?" |
