@@ -1,3 +1,8 @@
+---
+name: agent-guardrails
+description: Safety gate for agent actions — policy enforcement, PII detection, rate limiting, and approval workflows before external-facing operations.
+---
+
 # agent-guardrails — Self-Sovereign Safety Layer
 
 ## What This Is

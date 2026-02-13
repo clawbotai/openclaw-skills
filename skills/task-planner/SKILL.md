@@ -1,16 +1,6 @@
 ---
-slug: natural-language-planner
-displayName: Natural Language Planner
 name: natural-language-planner
-description: >
-  Natural language task and project management with file-based planning support.
-  Use when the user talks about things they need to do, projects they're working
-  on, tasks, deadlines, or asks for a project overview / dashboard. Also use for
-  complex multi-step tasks requiring Manus-style file-based planning with
-  task_plan.md, findings.md, and progress.md. Captures tasks from conversation,
-  organises them into projects, tracks progress, and serves a local Kanban
-  dashboard.
-license: Complete terms in LICENSE.txt
+description: Natural language task and project management with file-based planning support. Use when the user talks about things they need to do, projects they are working on, tasks, deadlines, or asks for a project overview / dashboard. Also use for complex multi-step tasks requiring file-based planning with task_plan.md, findings.md, and progress.md. Captures tasks from conversation, organises them into projects, tracks progress, and serves a local Kanban dashboard.
 ---
 
 # Natural Language Planner

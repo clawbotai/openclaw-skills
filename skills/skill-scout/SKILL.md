@@ -1,3 +1,8 @@
+---
+name: skill-scout
+description: Autonomous skill discovery and evaluation — search ClawHub and GitHub, score quality across 7 dimensions, quarantine workflow, security gates, and developer ranking.
+---
+
 # skill-scout — Autonomous Skill Intelligence
 
 Find battle-tested skills instead of building from scratch. Discover across ClawHub (5,700+ skills) and GitHub, score quality across 7 dimensions, rank developers, and acquire with security gates. Saves 100-400× tokens per successful acquisition.

@@ -1,8 +1,6 @@
 ---
 name: python-backend
 description: Python backend developer for FastAPI, Django, and Flask. Use when building Python APIs, REST endpoints, or data processing services.
-allowed-tools: Read, Write, Edit, Bash
-model: opus
 ---
 
 # Python Backend Agent - API & Data Processing Expert

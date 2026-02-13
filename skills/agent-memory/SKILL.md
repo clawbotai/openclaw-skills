@@ -1,3 +1,8 @@
+---
+name: agent-memory
+description: Shared brain for all skills — SQLite vector DB with episodic, semantic, and procedural memory. Store, search, and recall context across sessions.
+---
+
 # agent-memory — Hybrid Vector-Graph Memory System
 
 ## What This Is

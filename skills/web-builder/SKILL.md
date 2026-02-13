@@ -1,9 +1,6 @@
 ---
 name: web-builder
-description: "Full web development lifecycle — scaffold SvelteKit PWAs, bundle single-file HTML apps, and deploy to GitHub Pages or Vercel. Use when building any web application, static site, or HTML artifact."
-metadata:
-  author: clawbotai
-  version: "1.0.0"
+description: Full web development lifecycle — scaffold SvelteKit PWAs, bundle single-file HTML apps, and deploy to GitHub Pages or Vercel. Use when building any web application, static site, or HTML artifact.
 ---
 
 # Web Builder

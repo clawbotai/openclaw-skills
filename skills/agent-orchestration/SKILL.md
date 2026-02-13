@@ -1,3 +1,8 @@
+---
+name: agent-orchestration
+description: Multi-agent coordination — task routing, handoff protocols, fan-out/fan-in patterns, and supervisor workflows for complex multi-step operations.
+---
+
 # agent-orchestration — Multi-Agent Workflow Playbook
 
 ## What This Is

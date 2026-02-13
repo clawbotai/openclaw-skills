@@ -5,87 +5,129 @@ description: Full PM workflow — feature specs/PRDs, roadmaps, stakeholder comm
 
 # Product Management
 
-Full PM workflow: writing feature specs and PRDs, managing roadmaps, communicating with stakeholders, synthesizing user research, analyzing competitors, and tracking product metrics.
+Feature specs, roadmaps, stakeholder communication, user research synthesis, competitive analysis, and metrics tracking. Translates business problems into engineering-ready specifications.
 
 ## Activation Triggers
 
 Activate when the user's request involves:
-- Writing PRDs, feature specs, or requirements
-- Roadmap planning, prioritization, or sequencing
-- Stakeholder updates or status reports
-- User research synthesis or feedback analysis
-- Competitive analysis or market research
+- Writing PRDs, feature specs, or user stories
+- Roadmap planning or prioritization
+- Stakeholder updates or communication
+- User research synthesis or persona development
+- Competitive product analysis
 - Product metrics, KPIs, or OKRs
+- Feature prioritization frameworks
 
 ## Commands
 
 ### `/pm:write-spec`
-Generate structured PRD from problem statement or feature idea.
+Write a PRD or feature specification.
 
-**Structure:** Problem Statement (not solution statement) → User Stories (As a [user], I want [capability] so that [benefit]) → Requirements (MoSCoW: Must/Should/Could/Won't) → Success Metrics (measurable) → Scope (explicit in/out) → Technical Considerations (without prescribing implementation) → Dependencies → Open Questions
+**Template:**
+1. **Problem Statement** — what user pain are we solving? Evidence (support tickets, research, data).
+2. **Success Metrics** — how do we know this worked? Primary metric + guardrail metrics.
+3. **User Stories** — "As a [persona], I want [action] so that [outcome]"
+4. **Requirements** — must-have (P0), should-have (P1), nice-to-have (P2). Each with acceptance criteria.
+5. **Non-Requirements** — explicit scope boundaries (what we're NOT building)
+6. **Technical Considerations** — dependencies, API changes, data model impact, performance requirements
+7. **Design** — wireframes reference, key interaction flows, edge cases
+8. **Launch Plan** — rollout strategy (flag, %, full), monitoring, rollback criteria
+9. **Open Questions** — unresolved decisions with owners and deadlines
+10. **Timeline** — milestones with dates and dependencies
 
 ### `/pm:roadmap-update`
-Create/update/reprioritize roadmap. Formats: Now/Next/Later, Quarterly Themes, OKR-aligned.
+Update and communicate roadmap changes.
 
-**Prioritization frameworks:** RICE (Reach, Impact, Confidence, Effort), ICE (Impact, Confidence, Ease), Weighted Scoring, Kano Model (Must-have, Performance, Delighter).
+**Workflow:**
+1. **Current state** — what shipped, what's in progress, what's planned
+2. **Changes** — what moved, why (data-driven justification)
+3. **Impact assessment** — who's affected by changes? Dependencies broken?
+4. **Prioritization** — framework used (RICE, ICE, weighted scoring, opportunity sizing)
+5. **Communication** — tailored message per audience (exec: strategy, eng: scope, sales: timeline)
+
+**RICE scoring:**
+| Factor | Definition | Scale |
+|--------|-----------|-------|
+| Reach | Users affected per quarter | Actual number |
+| Impact | Effect per user | 3=massive, 2=high, 1=medium, 0.5=low, 0.25=minimal |
+| Confidence | Evidence level | 100%=high, 80%=medium, 50%=low |
+| Effort | Person-months | Actual estimate |
+
+Score = (Reach × Impact × Confidence) / Effort
 
 ### `/pm:stakeholder-update`
-Status updates tailored to audience:
-- **Executive**: Strategic impact, metrics, decisions needed, timeline
-- **Engineering**: Technical requirements, acceptance criteria, dependencies, priorities
-- **Sales**: Customer impact, competitive positioning, timeline, talking points
-- **Customer**: Benefits, timeline, migration plan if applicable
+Draft stakeholder communication.
 
-Formats: weekly, monthly, launch, ad-hoc.
+**Formats by audience:**
+- **Executive** — 3 bullets: progress, risk, ask. No details. Attach data.
+- **Engineering** — scope changes, priority shifts, new requirements. Be specific.
+- **Sales/CS** — timeline, customer-facing changes, talking points, FAQ
+- **Board** — narrative: market context, strategy, metrics, outlook
 
 ### `/pm:synthesize-research`
-Synthesize user research (interviews, surveys, feedback) into actionable insights.
+Synthesize user research into actionable insights.
 
-**Qualitative:** Affinity mapping, thematic analysis, pattern recognition.
-**Quantitative:** Survey analysis, NPS interpretation, usage analytics.
-**Combined:** Triangulation for high-confidence insights.
-**Output:** Insight statements, supporting evidence, confidence levels, prioritized recommendations.
+**Workflow:**
+1. **Data collection** — interviews, surveys, analytics, support tickets, session recordings
+2. **Coding** — tag themes, pain points, feature requests, workflows
+3. **Pattern identification** — frequency analysis, segment differences, severity ranking
+4. **Insights** — "We learned that [finding] because [evidence], which means [implication]"
+5. **Recommendations** — prioritized list of actions with confidence levels
+6. **Persona update** — refine personas based on new data
 
 ### `/pm:competitive-analysis`
-Research competitors: feature comparisons, positioning analysis, strategic implications.
+Product competitive analysis.
+
+**Framework:**
+1. **Feature matrix** — feature-by-feature comparison (✓/partial/✗)
+2. **Positioning map** — 2×2 matrix on key dimensions
+3. **Pricing comparison** — plans, pricing model, value per tier
+4. **User experience** — onboarding flow, key workflows, friction points
+5. **Technical** — architecture, integrations, API quality, performance
+6. **Market** — market share, growth trajectory, funding, team size
+7. **Strategy implications** — where to compete, where to differentiate, where to concede
 
 ## Auto-Firing Skills
 
 ### Spec Writing
-**Fires when:** User discusses features, requirements, or product planning.
+**Fires when:** User discusses features, requirements, or user problems.
+Every spec needs: clear problem statement (not solution), measurable success criteria, explicit non-requirements, edge cases enumerated, launch/rollback plan.
 
-### Roadmap Planning
-**Fires when:** User discusses roadmap, priorities, or strategic planning.
+### Roadmap Management
+**Fires when:** User discusses priorities, timelines, or what to build next.
+Maintain living roadmap. Challenge scope creep. Ensure every item has: owner, estimate, dependencies, success metric. Default to smaller scope shipped faster.
 
 ### Stakeholder Communication
-**Fires when:** User asks about updates, status reports, or presentations.
+**Fires when:** User needs to share updates or get alignment.
+Tailor depth to audience. Executives want "so what?" not "what." Engineers want precision. Sales wants customer impact and dates. Never surprise stakeholders.
 
-### User Research Synthesis
-**Fires when:** User mentions research, interviews, surveys, or feedback.
+### Research Synthesis
+**Fires when:** User shares interview notes, survey results, or usage data.
+Separate observation from interpretation. Quantify when possible. Identify conflicting signals. Flag small sample sizes. Connect to existing product strategy.
 
-### Metrics Analysis
-**Fires when:** User asks about product metrics, KPIs, or feature adoption.
-Framework: Acquisition (signups, activation) → Engagement (DAU/MAU, feature adoption) → Retention (cohort analysis, churn) → Revenue (ARPU, expansion). OKR formulation, leading vs. lagging indicators.
+### Metrics & OKRs
+**Fires when:** User discusses goals, KPIs, or success measurement.
+Good metrics: measurable, actionable, relevant, timely. Pair every vanity metric with a health metric. North Star metric + input metrics that drive it. Counter-metrics to prevent gaming.
 
 ## Configuration
 
 ```yaml
-product_name: ""       # Product name and details
-team_structure: {}     # Org chart with roles
-okrs: []               # Current OKRs and strategic priorities
-roadmap_format: "now-next-later"  # Preferred format
-spec_template: ""      # Organization's PRD template
-update_cadence: {}     # Stakeholder update schedule
+product_name: ""
+team_members: []              # Name, role, capacity
+roadmap_horizon: "quarter"    # quarter, half, year
+prioritization_framework: "RICE"  # RICE, ICE, weighted, opportunity
+sprint_length_weeks: 2
+okr_cycle: "quarterly"
+competitors: []               # Products to track
+personas: []                  # User personas with descriptions
 ```
 
 ## Connectors
 
 | Connector | Purpose | Degraded Behavior |
 |-----------|---------|-------------------|
-| Project Management (Linear/Jira) | Features, sprints, roadmap | User provides details |
-| Chat (Slack) | Team discussions, feedback | User provides context |
-| Knowledge Base (Notion) | Specs, research, notes | User provides docs |
-| Design (Figma) | Design files, prototypes | User describes designs |
-| Analytics (Amplitude) | Usage data, adoption metrics | User provides data |
-| Transcripts (Fireflies) | Interview recordings | User provides notes |
-| Ticketing (Intercom) | Customer feedback patterns | User provides feedback |
+| Project Tracker (Linear/Jira) | Issues, sprints, velocity | Markdown specs and task-planner |
+| Analytics (Amplitude/Mixpanel) | Usage data, funnels, retention | User provides data exports |
+| Research (Dovetail/UserTesting) | Interview notes, recordings | User provides research notes |
+| Design (Figma) | Wireframes, prototypes | Describe interactions in spec |
+| Docs (Notion/Confluence) | PRDs, roadmaps, meeting notes | Markdown files in workspace |

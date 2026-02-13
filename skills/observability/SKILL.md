@@ -1,12 +1,6 @@
 ---
 name: master-observability
-model: standard
-description: >
-  Complete observability engineering — OpenTelemetry-first instrumentation, structured logging,
-  distributed tracing, metrics (RED/USE/Four Golden Signals), Prometheus/Grafana/Loki/Tempo stack,
-  SLIs/SLOs/error budgets, alert design, dashboard patterns, and cost-aware operations.
-  Use for any logging, monitoring, tracing, alerting, or dashboard work.
-version: 2.0.0
+description: Complete observability engineering — OpenTelemetry-first instrumentation, structured logging, distributed tracing, metrics (RED/USE/Four Golden Signals), Prometheus/Grafana/Loki/Tempo stack, SLIs/SLOs/error budgets, alert design, dashboard patterns, and cost-aware operations. Use for any logging, monitoring, tracing, alerting, or dashboard work.
 ---
 
 # Master Observability

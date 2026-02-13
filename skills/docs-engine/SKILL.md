@@ -1,19 +1,6 @@
 ---
 name: master-docs
-version: 2.0.0
-description: "Documentation engine with Diátaxis scaffolding, GitHub Gold Standard templates, strict quality scoring, and active documentation generation."
-triggers:
-  - document
-  - docs
-  - scaffold docs
-  - score docs
-  - documentation audit
-  - readme
-  - changelog
-metadata:
-  openclaw:
-    emoji: "📚"
-    category: "documentation"
+description: Documentation engine with Diátaxis scaffolding, GitHub Gold Standard templates, strict quality scoring, and active documentation generation.
 ---
 
 # Master Documentation v2.0 📚

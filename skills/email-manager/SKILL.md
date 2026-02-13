@@ -1,18 +1,6 @@
 ---
 name: email-manager
-version: 1.0.0
-description: "Full IMAP/SMTP email client optimized for autonomous AI agents. Structured JSON output, priority detection, smart triage, threaded conversations, and batch operations."
-triggers:
-  - check email
-  - read email
-  - send email
-  - email
-  - inbox
-  - triage
-metadata:
-  openclaw:
-    emoji: "📧"
-    category: "communication"
+description: Full IMAP/SMTP email client optimized for autonomous AI agents. Structured JSON output, priority detection, smart triage, threaded conversations, and batch operations.
 ---
 
 # Email Manager 📧

@@ -1,25 +1,6 @@
 ---
 name: skill-lifecycle
-version: 1.0.0
-description: "Unified skill lifecycle management combining the Research→Build→Reflect evolutionary loop with AIOps runtime monitoring, error classification, circuit breakers, and self-healing repair tickets."
-triggers:
-  - evo loop
-  - evolutionary loop
-  - research and build
-  - ralph mode
-  - deep build
-  - autonomous build
-  - skill monitor
-  - skill health
-  - skill errors
-  - reliability report
-  - error report
-  - quarantined skills
-  - skill lifecycle
-metadata:
-  openclaw:
-    emoji: "🧬🔭"
-    category: "autonomous-development"
+description: Unified skill lifecycle management combining the Research→Build→Reflect evolutionary loop with AIOps runtime monitoring, error classification, circuit breakers, and self-healing repair tickets.
 ---
 
 # Skill Lifecycle 🧬🔭

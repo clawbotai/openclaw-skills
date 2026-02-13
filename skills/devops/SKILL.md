@@ -1,10 +1,6 @@
 ---
 name: Master DevOps
 description: Complete DevOps toolkit — CI/CD pipelines, infrastructure as code, containers, Kubernetes, GitOps, security, monitoring, progressive delivery, and pipeline monitoring across GitHub/GitLab.
-allowed-tools: Read, Write, Edit, Bash
-model: opus
-context: fork
-metadata: {"clawdbot":{"emoji":"⚙️","os":["linux","darwin","win32"]}}
 ---
 
 # Master DevOps — Infrastructure, Delivery & Operations

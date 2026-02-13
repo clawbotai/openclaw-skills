@@ -5,75 +5,127 @@ description: Sales productivity — prospecting, outreach, pipeline management, 
 
 # Sales
 
-Sales productivity skill for prospecting, outreach, pipeline management, call preparation, deal strategy, and competitive analysis. Works standalone with web search and user input, supercharged when connected to CRM, email, and enrichment tools.
+Prospecting, outreach drafting, pipeline management, call preparation, deal strategy, competitive battlecards, and forecasting. Optimized for B2B sales cycles.
 
 ## Activation Triggers
 
 Activate when the user's request involves:
-- Prospecting, account research, or lead qualification
-- Drafting sales emails, LinkedIn messages, or outreach
-- Pipeline review, deal strategy, or forecasting
-- Call preparation or meeting follow-up
+- Prospecting or lead research
+- Drafting outreach (cold email, follow-up, LinkedIn)
+- Pipeline review or deal strategy
+- Call preparation or debriefs
 - Competitive analysis or battlecards
-- Sales metrics or win/loss analysis
+- Revenue forecasting
 
 ## Commands
 
 ### `/sales:call-prep`
-Comprehensive call preparation: company research, attendee profiles, talking points, objections, recommended questions. Supports discovery, demo, negotiation, and executive briefings.
+Prepare for a sales call or meeting.
+
+**Workflow:**
+1. **Account research** — company size, industry, recent news, tech stack, funding
+2. **Contact research** — role, tenure, LinkedIn activity, mutual connections, past interactions
+3. **Deal context** — stage, history, open proposals, competitors mentioned
+4. **Talking points** — 3 key value props tailored to their pain points
+5. **Questions to ask** — discovery questions by stage (BANT/MEDDIC framework)
+6. **Objection prep** — likely pushbacks and responses
+7. **Goal** — specific outcome desired from this call
 
 ### `/sales:pipeline-review`
-Analyze pipeline health: deal prioritization, risk flags (stale deals, past close dates, single-threaded), weekly action plan. Accepts CSV, pasted data, or CRM connection.
+Review and clean pipeline.
 
-**Risk signals:** No next step, stage duration > 1.5× average, pushed close dates, champion departure, single-threaded.
+**Workflow:**
+1. **Snapshot** — total pipeline value by stage, weighted forecast
+2. **Stale deals** — flag anything with no activity >14 days
+3. **Stage accuracy** — verify deals are in correct stage (challenge optimism)
+4. **Coverage ratio** — pipeline vs quota (target: 3x for new business, 2x for renewal)
+5. **Risk assessment** — deals with single-threaded contacts, no next step, competitor present
+6. **Recommendations** — specific actions per deal (advance, nurture, or disqualify)
 
 ### `/sales:forecast`
-Weighted forecast: best/likely/worst scenarios, commit vs. upside breakdown, gap analysis. Coverage ratio target: 3-4× quota.
+Revenue forecast with confidence bands.
+
+**Workflow:**
+1. **Committed** — signed contracts, POs in hand (95% confidence)
+2. **Best case** — verbal commits, final negotiation (60-80%)
+3. **Pipeline** — qualified opportunities by weighted stage probability
+4. **Upside** — potential pull-forward from next quarter
+5. **Risk adjustments** — historical close rates by rep, segment, deal size
+6. **Gap analysis** — forecast vs quota, actions needed to close gap
 
 ### `/sales:call-debrief`
-Process call notes/transcript: extract action items, draft follow-up email, generate internal summary. Log to CRM if connected.
+Capture notes and next steps after a call.
+
+**Workflow:**
+1. **Outcome** — what happened? (advanced/stalled/lost/discovery)
+2. **Key learnings** — new information about pain, budget, timeline, decision process
+3. **Stakeholder map update** — who was there, roles, influence, sentiment
+4. **Objections raised** — and how they were handled
+5. **Next steps** — specific actions with owners and deadlines
+6. **Deal stage update** — should this move forward or back?
 
 ### `/sales:draft-outreach`
-Research prospect first, then generate personalized outreach with multiple angles. Supports cold email, LinkedIn, follow-up, re-engagement.
+Draft personalized outreach.
 
-**Best practices:** Personalize beyond first name, lead with insight not pitch, cold emails < 150 words, single CTA, no attachments on first touch. Email: subject < 50 chars, send Tue-Thu 8-10am recipient TZ. LinkedIn: connect request < 300 chars, no pitch in connection request.
+**Types:** Cold email, follow-up, breakup email, LinkedIn message, intro request.
+
+**Cold email framework:**
+1. **Subject** — specific, curiosity-driven, <50 chars, no spam triggers
+2. **Hook** — personalized observation (trigger event, mutual connection, specific insight)
+3. **Value** — one sentence on relevant outcome you deliver
+4. **Proof** — brief social proof (similar company, metric)
+5. **CTA** — single, low-friction ask ("worth a 15-min call?")
+6. **Length** — under 100 words. No attachments on first touch.
 
 ### `/sales:battlecard`
-Competitive battlecard: feature comparison, positioning, objection handling, win/loss themes.
+Competitive battlecard for a specific competitor.
+
+**Sections:**
+1. **Overview** — competitor positioning, target market, pricing model
+2. **Strengths** — what they genuinely do well (be honest)
+3. **Weaknesses** — validated gaps, not FUD
+4. **Landmines** — questions to ask that expose their weaknesses
+5. **Objection handling** — "Why not [competitor]?" responses
+6. **Win stories** — brief case studies of wins against this competitor
+7. **Trap plays** — requirements to include in RFPs that favor you
 
 ## Auto-Firing Skills
 
 ### Account Research
-**Fires when:** User asks to research a company/prospect.
-Methodology: company overview, key contacts, recent news (<90 days), tech stack, hiring signals, competitive landscape. Cross-reference multiple sources.
+**Fires when:** User mentions a company or prospect name.
+Pull: company website, LinkedIn, Crunchbase, recent news, job postings (signals growth/pain), tech stack (BuiltWith/Wappalyzer), financial data if public.
 
 ### Pipeline Analysis
-**Fires when:** User discusses pipeline, deals, or sales metrics.
-Health indicators: coverage ratio, velocity (avg days/stage), conversion rates, deal size trends, win/loss analysis.
+**Fires when:** User discusses deals, quota, or forecast.
+Apply MEDDIC (Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion) to assess deal health. Flag missing elements.
 
-### Sales Asset Generation
-**Fires when:** User asks for sales collateral.
-Generate custom assets: landing pages, decks, one-pagers, ROI calculators. Reference prospect's specific pain points and competitive differentiation.
+### Outreach Optimization
+**Fires when:** User drafts any external communication.
+Check: personalization (not generic), appropriate length, clear CTA, no spam trigger words, correct tone for relationship stage, follow-up timing (2-3 days for warm, 5-7 for cold).
 
 ## Configuration
 
 ```yaml
-name: ""              # Rep's name for outreach personalization
-title: ""             # Rep's title
-company: ""           # Organization name and details
-quota: {}             # Annual and quarterly quota numbers
-product: {}           # Product name, value props, competitor list
-messaging_framework: {} # Approved messaging, brand voice, positioning
-sales_stages: []      # Custom pipeline stages with duration and exit criteria
+quota_amount: 0                # Quarterly/annual quota
+pipeline_stages:
+  - { name: "Discovery", probability: 10 }
+  - { name: "Qualification", probability: 25 }
+  - { name: "Proposal", probability: 50 }
+  - { name: "Negotiation", probability: 75 }
+  - { name: "Closed Won", probability: 100 }
+  - { name: "Closed Lost", probability: 0 }
+stale_deal_days: 14            # Days without activity before flagging
+coverage_ratio_target: 3.0     # Pipeline/quota ratio
+competitors: []                # Known competitor names
+crm_connector: ""              # CRM system identifier
 ```
 
 ## Connectors
 
 | Connector | Purpose | Degraded Behavior |
 |-----------|---------|-------------------|
-| CRM (HubSpot/Salesforce) | Deal data, contacts, pipeline | User provides deal details |
-| Enrichment (Clay/ZoomInfo) | Company/contact enrichment | Web search for research |
-| Chat (Slack) | Deal discussions, competitive intel | User provides context |
-| Transcripts (Gong) | Call recordings and follow-up | User provides call notes |
-| Knowledge Base (Notion) | Playbooks, competitive intel, docs | Built-in frameworks |
-| Email/Calendar (M365) | Correspondence, scheduling | User provides details |
+| CRM (Salesforce/HubSpot) | Pipeline, accounts, contacts | Manual deal tracking in markdown |
+| Email (Gmail/Outlook) | Outreach, thread history | Use email-manager skill |
+| LinkedIn (Sales Navigator) | Prospect research, connections | Web search for prospects |
+| Enrichment (ZoomInfo/Apollo) | Contact and company data | Manual web research |
+| Calendar (Google/O365) | Meeting scheduling, call history | User provides schedule context |
