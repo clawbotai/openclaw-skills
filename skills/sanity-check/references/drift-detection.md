@@ -1,107 +1,125 @@
 # Drift Detection Protocol
 
-Drift is the gradual, unnoticed departure from the user's stated intent. It is the most common and insidious failure mode because it feels like progress.
+## What Is Drift?
 
-## How Drift Happens
+Drift is the gradual, often imperceptible divergence between what was asked and what is
+being built. Unlike a wrong turn (which is sudden and obvious), drift is incremental.
+Each individual step seems reasonable, but the cumulative effect is a destination nobody
+intended to reach.
 
-Drift follows a predictable pattern:
+Research on AI agent behavior identifies drift as one of the most pernicious failure modes
+because it evades both the agent's self-monitoring and the user's oversight. The output
+"looks right" — it just isn't what was needed.
 
-1. **Correct start** — You understand the request and begin working.
-2. **Minor interpretation** — A small ambiguity requires a judgment call. You pick a direction.
-3. **Compounding** — That judgment call shapes subsequent decisions, each drifting slightly further.
-4. **Entrenchment** — You've invested enough work that course-correcting feels wasteful.
-5. **Delivery gap** — The output serves the problem you solved, not the one the user stated.
+## The Mechanics of Drift
 
-## Drift Triggers
+Drift typically follows a predictable pattern:
 
-Watch for these situations — they are where drift begins:
+```
+Step 1: Clear intent established
+Step 2: Minor interpretation choice (reasonable)
+Step 3: Sub-problem discovered
+Step 4: Sub-problem becomes interesting → attention shifts
+Step 5: Solution to sub-problem requires new assumption
+Step 6: New assumption opens new design space
+Step 7: Agent is now solving a different problem entirely
+```
 
-| Trigger | Example | Risk |
-|---|---|---|
-| **Ambiguous request** | "Make it better" | You define "better" differently than the user |
-| **Interesting tangent** | Discovering a related optimization | You pursue the tangent instead of the task |
-| **Error recovery** | A tool call fails | You work around it in a way that changes the approach |
-| **Prior knowledge** | "I know a better way to do this" | You substitute your preference for their request |
-| **Complexity discovery** | The problem is harder than expected | You simplify in ways that change the deliverable |
+The critical transition happens between Steps 3 and 4. When a sub-problem captures
+attention, the agent begins optimizing for the sub-problem instead of the original goal.
 
-## The Anchor Technique
+## Drift Detection Checkpoints
 
-Maintain an **intent anchor** — a mental (or literal) one-sentence summary of what the user asked for. Compare against it regularly.
+### Checkpoint A: The Re-Read Test
 
-### Setting the Anchor
+Every 3-4 tool calls, re-read the user's original message. Not your summary — their
+actual words. Ask yourself:
 
-At Gate 1, formulate: **"The user wants [X] so that [Y]."**
+- If I showed the user what I'm doing right now, would they say "yes, that's what I wanted"?
+- Or would they say "wait, why are you doing that?"
 
-Examples:
-- "The user wants a Python script that converts CSV to JSON so they can import data into their API."
-- "The user wants to refactor the auth module so it supports OAuth2 in addition to JWT."
-- "The user wants a SKILL.md for a security scanning skill so it can be used in their OpenClaw workspace."
+If there's any doubt, you've drifted.
 
-### Checking the Anchor
+### Checkpoint B: The Scope Inventory
 
-Every 3-4 tool calls, ask:
-1. Is my current action directly serving the anchor?
-2. If I explained what I'm doing right now, would the user say "yes, that's what I asked for"?
-3. Am I solving the user's problem or a different problem that interests me more?
+List everything you've created, modified, or planned. For each item, answer:
 
-## Drift Severity Levels
+- Did the user ask for this? (Explicitly or clearly implied)
+- If not, why am I doing it?
+- If I removed this item, would the user's actual need still be met?
 
-| Level | Description | Action |
-|---|---|---|
-| **Green** | On track. Current work directly serves the anchor. | Continue |
-| **Yellow** | Adjacent. Current work is related but not directly requested. | Pause. Ask: is this necessary? If not, cut it. |
-| **Red** | Diverged. Current work serves a different goal than the anchor. | Stop. Re-read original request. Course-correct or ask user. |
+Anything that fails all three questions is scope creep, not drift — but scope creep
+is drift's cousin and equally dangerous.
 
-## Common Drift Patterns
+### Checkpoint C: The Complexity Ratio
 
-### The Improvement Drift
-You deliver what was asked, plus improvements nobody requested. The improvements add complexity and obscure the core deliverable.
+Compare the complexity of your solution to the complexity of the request.
 
-**Detection:** Ask "Did the user ask for this specific thing?"
-**Correction:** Remove the additions. Mention them as options in your response.
+| Request Complexity | Appropriate Solution Complexity |
+|---|---|
+| "Fix this typo" | 1 file change |
+| "Add a button" | Small component + integration |
+| "Build me a dashboard" | Multiple files, moderate architecture |
+| "Design a system" | Significant architecture, multiple components |
 
-### The Architecture Drift
-A simple request triggers you to redesign the architecture. The user asked for a function; you're building a framework.
+If your solution complexity significantly exceeds what the request warrants, either:
+- You've discovered genuine complexity (surface it to the user), or
+- You've drifted into over-engineering (pull back)
 
-**Detection:** Compare solution complexity to problem complexity. Are they proportional?
-**Correction:** Build the simple version first. Propose the architecture only if asked.
+### Checkpoint D: The Assumption Audit
 
-### The Perfectionism Drift
-You keep polishing instead of delivering. Edge cases, error handling, documentation — all good things that weren't asked for and delay the actual answer.
+List your current operating assumptions. Compare to the assumptions you identified at
+Gate 1 (intake). New assumptions that appeared during execution are drift indicators —
+they mean you've moved into territory the original analysis didn't cover.
 
-**Detection:** Ask "Is the user waiting for this, and am I making them wait for polish they didn't request?"
-**Correction:** Deliver the core. Offer to polish if they want it.
+For each new assumption: Is it necessary? Is it verified? Does the user know about it?
 
-### The Rabbit Hole Drift
-You encounter an interesting sub-problem and dive deep into it, losing sight of the main task.
-
-**Detection:** Ask "If I removed this sub-problem entirely, would the user's request still be answered?"
-**Correction:** Note the sub-problem for later. Return to the main task.
-
-## Recovery Protocol
+## Drift Correction Protocol
 
 When you detect drift:
 
-1. **Acknowledge internally** — "I've drifted from the original request."
-2. **Assess damage** — How much of current work is salvageable?
-3. **Re-anchor** — Re-read the user's original request verbatim.
-4. **Decide:**
-   - If drift is minor: course-correct silently.
-   - If drift is significant: inform the user. "I realized I started going in [direction]. Let me refocus on [original request]."
-   - If drift reveals a better approach: propose it. "While working on this, I realized [insight]. Would you like me to adjust the approach?"
-5. **Continue** from the corrected position.
+### Mild Drift (still aligned, just expanded)
+1. Acknowledge internally that you've expanded scope
+2. Complete the current atomic unit of work
+3. Return to the original intent
+4. Note the expansion — mention it to the user if relevant
 
-## Measuring Drift Risk
+### Moderate Drift (solving adjacent problem)
+1. Stop current work
+2. Re-anchor to original intent
+3. Evaluate whether the adjacent problem needs solving
+4. If yes → ask the user before proceeding
+5. If no → discard the tangent and return
 
-Higher drift risk when:
-- Task is complex (many steps)
-- Request is vague or open-ended
-- You have strong opinions about the "right" way to do it
-- Multiple valid approaches exist
-- You're working without user feedback for extended periods
+### Severe Drift (solving wrong problem entirely)
+1. Stop immediately
+2. Acknowledge to the user: "I want to make sure I'm on track with what you need."
+3. Restate your understanding of their goal
+4. Ask for confirmation before continuing
+5. If you've produced work product, assess whether any of it is salvageable
 
-Lower drift risk when:
-- Task is specific and well-defined
-- User provided examples of desired output
-- You're following an established pattern
-- Frequent user interaction provides course-correction
+## Drift-Prone Contexts
+
+Be especially vigilant in these situations:
+
+- **Long tasks** — More steps = more opportunities to drift
+- **Vague requirements** — Ambiguity is drift fuel
+- **Interesting sub-problems** — Intellectual curiosity is the enemy of focus
+- **Refactoring** — "While I'm here, I might as well..." is the drift mantra
+- **Error recovery** — Fixing one thing often leads to "fixing" adjacent things
+- **Multiple files/systems** — Each context switch is a drift opportunity
+
+## The Intent Anchor Pattern
+
+To combat drift, maintain an **intent anchor** — a one-sentence statement of the user's
+goal that you can reference at any point. Write it mentally at Gate 1 and check against
+it at every checkpoint.
+
+**Format:** "[User] needs [outcome] so that [purpose]."
+
+**Examples:**
+- "User needs a PPTX summarizing Q3 results so that they can present to the board."
+- "User needs a bug fix in the auth module so that login works on Safari."
+- "User needs a sanity-check skill so that Claude projects maintain quality under pressure."
+
+If your current work doesn't serve the intent anchor, you've drifted.
