@@ -2,8 +2,11 @@
 """
 Forge CLI — orchestrate code generation via the Antigravity Forge Daemon.
 
+GUARDRAIL-AWARE: Sends file PATHS (not content) to the daemon. Reads manifest
+from disk (not MCP response). The daemon handles all heavy I/O locally.
+
 Usage:
-    python3 scripts/forge.py mode1 "build a REST API for webhooks"
+    python3 scripts/forge.py mode1 "build a REST API for webhooks" path1 path2
     python3 scripts/forge.py mode2 lifecycle forge
 """
 
@@ -28,7 +31,6 @@ sys.path.insert(0, str(SCRIPT_DIR))
 from monitor_wrapper import (
     ForgeError,
     check_circuit_breaker,
-    classify_error,
     log_failure,
     log_success,
 )
@@ -58,43 +60,24 @@ def _find_skill_dir(name: str) -> Optional[Path]:
     return None
 
 
-def _read_skill_files(skill_dir: Path, max_bytes: int = 25000) -> str:
-    """Read a skill's key files into a context string."""
-    parts = []  # type: List[str]
-    total = 0
-
-    # SKILL.md first
+def _collect_skill_paths(skill_dir: Path) -> List[str]:
+    """Collect absolute paths of key files in a skill directory."""
+    paths = []  # type: List[str]
     skill_md = skill_dir / "SKILL.md"
     if skill_md.exists():
-        content = skill_md.read_text()
-        parts.append(f"=== {skill_md.name} ===\n{content}")
-        total += len(content)
+        paths.append(str(skill_md))
 
-    # Scripts
     scripts_dir = skill_dir / "scripts"
     if scripts_dir.is_dir():
-        for f in sorted(scripts_dir.iterdir()):
-            if total > max_bytes:
-                break
-            if f.is_file() and f.suffix in (".py", ".sh", ".js", ".ts"):
-                content = f.read_text()
-                parts.append(f"=== scripts/{f.name} ===\n{content}")
-                total += len(content)
+        paths.append(str(scripts_dir))
 
-    return "\n\n".join(parts)
+    # Include SPECIFICATION.md, templates, etc.
+    for extra in ["SPECIFICATION.md", "templates", "prompts"]:
+        p = skill_dir / extra
+        if p.exists():
+            paths.append(str(p))
 
-
-def _read_today_memory() -> str:
-    """Read today's memory file for usage context."""
-    today = time.strftime("%Y-%m-%d")
-    mem_file = MEMORY_DIR / f"{today}.md"
-    if mem_file.exists():
-        content = mem_file.read_text()
-        # Truncate to last 3000 chars if huge
-        if len(content) > 3000:
-            content = "...(truncated)...\n" + content[-3000:]
-        return content
-    return "(no memory file for today)"
+    return paths
 
 
 def _spawn_daemon() -> subprocess.Popen:
@@ -103,7 +86,6 @@ def _spawn_daemon() -> subprocess.Popen:
         raise DaemonError(f"Daemon binary not found: {DAEMON_BIN}")
 
     env = dict(os.environ)
-    # Try both env var names
     if "GEMINI_API_KEY" not in env:
         google_key = env.get("GOOGLE_API_KEY", "")
         if google_key:
@@ -150,7 +132,7 @@ def _extract_text(resp: Dict[str, Any]) -> Dict[str, Any]:
     text = content[0].get("text", "{}")
     parsed = json.loads(text)
     if resp.get("result", {}).get("isError"):
-        raise JobError(parsed.get("error", "Unknown daemon error"))
+        raise JobError(parsed.get("error", parsed.get("statusMessage", "Unknown daemon error")))
     return parsed
 
 
@@ -161,7 +143,7 @@ def _initialize(proc: subprocess.Popen) -> None:
         "params": {
             "protocolVersion": "2024-11-05",
             "capabilities": {},
-            "clientInfo": {"name": "forge-cli", "version": "1.0.0"},
+            "clientInfo": {"name": "forge-cli", "version": "2.0.0"},
         },
     })
     _recv(proc)  # init response
@@ -182,9 +164,12 @@ def _call_tool(
     return _extract_text(_recv(proc))
 
 
-def run_forge(prompt: str, local_context: str) -> Dict[str, Any]:
+def run_forge(prompt: str, target_paths: List[str]) -> Dict[str, Any]:
     """
-    Submit a forge job, poll until complete, return the manifest.
+    Submit a forge job, poll until complete, return the manifest pointer.
+
+    GUARDRAIL 1: Sends paths, not content.
+    GUARDRAIL 2: Returns manifest pointer (reads manifest from disk).
 
     Raises ForgeError on failure.
     """
@@ -192,10 +177,10 @@ def run_forge(prompt: str, local_context: str) -> Dict[str, Any]:
     try:
         _initialize(proc)
 
-        # Submit
+        # Submit with paths only (GUARDRAIL 1)
         result = _call_tool(proc, "submit_forge_job", {
             "prompt": prompt,
-            "localContext": local_context,
+            "targetPaths": target_paths,
         }, req_id=1)
         job_id = result.get("jobId")
         if not job_id:
@@ -225,11 +210,23 @@ def run_forge(prompt: str, local_context: str) -> Dict[str, Any]:
         else:
             raise JobError(f"Job timed out after {MAX_POLL_TIME}s")
 
-        # Pull manifest
-        manifest_resp = _call_tool(proc, "pull_integration_manifest", {
+        # Pull manifest pointer (GUARDRAIL 2)
+        pointer = _call_tool(proc, "pull_integration_manifest", {
             "jobId": job_id,
         }, req_id=req_id)
-        return manifest_resp.get("manifest", manifest_resp)
+
+        # Read the actual manifest from disk
+        manifest_path = pointer.get("manifestPath", "")
+        if manifest_path and os.path.exists(manifest_path):
+            with open(manifest_path, "r") as f:
+                manifest = json.load(f)
+            return {
+                "pointer": pointer,
+                "manifest": manifest,
+            }
+        else:
+            # Fallback: return pointer only
+            return {"pointer": pointer}
 
     finally:
         proc.terminate()
@@ -239,21 +236,30 @@ def run_forge(prompt: str, local_context: str) -> Dict[str, Any]:
             proc.kill()
 
 
-def build_mode1_prompt(user_prompt: str) -> tuple:
-    """Build prompt and context for Mode 1 (code gen)."""
-    # Gather workspace tree as context
-    context_parts = [f"Workspace: {WORKSPACE}"]
+def build_mode1(args: List[str]) -> tuple:
+    """Build prompt and target paths for Mode 1 (code gen)."""
+    # First arg is the prompt, remaining args are paths
+    if not args:
+        raise ForgeError("Mode 1 requires a prompt string.")
 
-    # Add today's memory for context
-    memory = _read_today_memory()
-    if memory != "(no memory file for today)":
-        context_parts.append(f"Today's context:\n{memory[:2000]}")
+    prompt = args[0]
+    # Any additional args are target paths
+    target_paths = [os.path.abspath(p) for p in args[1:]] if len(args) > 1 else []
 
-    return user_prompt, "\n\n".join(context_parts)
+    # If no paths given, default to workspace
+    if not target_paths:
+        target_paths = [str(WORKSPACE)]
+
+    return prompt, target_paths
 
 
-def build_mode2_prompt(operator_name: str, target_name: str) -> tuple:
-    """Build prompt and context for Mode 2 (skill × skill)."""
+def build_mode2(args: List[str]) -> tuple:
+    """Build prompt and target paths for Mode 2 (skill × skill)."""
+    if len(args) < 2:
+        raise ForgeError("Mode 2 requires: <operator-skill> <target-skill>")
+
+    operator_name, target_name = args[0], args[1]
+
     op_dir = _find_skill_dir(operator_name)
     if not op_dir:
         raise ForgeError(f"Operator skill not found: {operator_name}")
@@ -262,32 +268,46 @@ def build_mode2_prompt(operator_name: str, target_name: str) -> tuple:
     if not tgt_dir:
         raise ForgeError(f"Target skill not found: {target_name}")
 
-    operator_content = _read_skill_files(op_dir)
-    target_content = _read_skill_files(tgt_dir)
-    memory = _read_today_memory()
+    # Build target paths: operator SKILL.md + entire target skill directory
+    target_paths = []  # type: List[str]
+
+    # Operator's SKILL.md as context
+    op_skill_md = op_dir / "SKILL.md"
+    if op_skill_md.exists():
+        target_paths.append(str(op_skill_md))
+
+    # Full target skill directory
+    target_paths.append(str(tgt_dir))
+
+    # Today's memory for usage context
+    today = time.strftime("%Y-%m-%d")
+    mem_file = MEMORY_DIR / f"{today}.md"
+    if mem_file.exists():
+        target_paths.append(str(mem_file))
 
     prompt = (
         f'Apply the methodology of "{operator_name}" to improve "{target_name}".\n\n'
-        f"OPERATOR METHODOLOGY:\n{operator_content}\n\n"
-        f"USAGE CONTEXT (today):\n{memory}\n\n"
-        "YOUR TASK: Follow the operator's process against the target skill. "
-        "Produce concrete file changes — improved SKILL.md, new/updated scripts, fixes. "
-        "Do not produce abstract suggestions. Produce actual file content.\n\n"
-        "CONSTRAINTS:\n"
-        "- Python 3.9 compatible (typing.Optional[X] not X | None)\n"
-        "- stdlib-only (no pip dependencies)\n"
-        "- No sys.exit() in library functions\n"
-        "- Keep scripts under 300 lines\n"
+        f"The operator skill's SKILL.md describes the methodology to follow.\n"
+        f"The target skill's files are the subject of improvement.\n"
+        f"Today's memory file provides recent usage context.\n\n"
+        f"Follow the operator's process against the target skill. "
+        f"Produce concrete file changes — improved SKILL.md, new/updated scripts, fixes. "
+        f"Do not produce abstract suggestions. Produce actual complete file content.\n\n"
+        f"CONSTRAINTS:\n"
+        f"- Python 3.9 compatible (typing.Optional[X] not X | None)\n"
+        f"- stdlib-only (no pip dependencies)\n"
+        f"- No sys.exit() in library functions\n"
+        f"- Keep scripts under 300 lines\n"
     )
 
-    return prompt, target_content
+    return prompt, target_paths
 
 
 def main() -> None:
     """CLI entry point."""
     if len(sys.argv) < 3:
         print("Usage:", file=sys.stderr)
-        print("  forge.py mode1 \"prompt text\"", file=sys.stderr)
+        print("  forge.py mode1 \"prompt text\" [path1 path2 ...]", file=sys.stderr)
         print("  forge.py mode2 <operator-skill> <target-skill>", file=sys.stderr)
         sys.exit(1)
 
@@ -304,22 +324,19 @@ def main() -> None:
 
     try:
         if mode == "mode1":
-            prompt, context = build_mode1_prompt(" ".join(args))
+            prompt, target_paths = build_mode1(args)
         elif mode == "mode2":
-            if len(args) < 2:
-                print("Mode 2 requires: <operator-skill> <target-skill>", file=sys.stderr)
-                sys.exit(1)
-            prompt, context = build_mode2_prompt(args[0], args[1])
+            prompt, target_paths = build_mode2(args)
         else:
             print(f"Unknown mode: {mode}. Use mode1 or mode2.", file=sys.stderr)
             sys.exit(1)
 
-        manifest = run_forge(prompt, context)
+        result = run_forge(prompt, target_paths)
         elapsed = time.time() - start_time
         log_success(mode, args, elapsed)
 
-        # Output manifest as JSON
-        print(json.dumps(manifest, indent=2))
+        # Output result as JSON
+        print(json.dumps(result, indent=2))
 
     except Exception as exc:
         elapsed = time.time() - start_time
