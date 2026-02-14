@@ -164,12 +164,19 @@ def _call_tool(
     return _extract_text(_recv(proc))
 
 
-def run_forge(prompt: str, target_paths: List[str]) -> Dict[str, Any]:
+def run_forge(
+    prompt: str,
+    target_paths: List[str],
+    workspace_root: Optional[str] = None,
+) -> Dict[str, Any]:
     """
     Submit a forge job, poll until complete, return the manifest pointer.
 
     GUARDRAIL 1: Sends paths, not content.
     GUARDRAIL 2: Returns manifest pointer (reads manifest from disk).
+
+    If workspace_root is provided, the daemon applies all file operations
+    (CREATE/UPDATE/DELETE) to that directory automatically.
 
     Raises ForgeError on failure.
     """
@@ -178,10 +185,14 @@ def run_forge(prompt: str, target_paths: List[str]) -> Dict[str, Any]:
         _initialize(proc)
 
         # Submit with paths only (GUARDRAIL 1)
-        result = _call_tool(proc, "submit_forge_job", {
+        submit_args = {
             "prompt": prompt,
             "targetPaths": target_paths,
-        }, req_id=1)
+        }  # type: Dict[str, Any]
+        if workspace_root:
+            submit_args["workspaceRoot"] = workspace_root
+
+        result = _call_tool(proc, "submit_forge_job", submit_args, req_id=1)
         job_id = result.get("jobId")
         if not job_id:
             raise JobError(f"No jobId in response: {result}")
@@ -237,24 +248,32 @@ def run_forge(prompt: str, target_paths: List[str]) -> Dict[str, Any]:
 
 
 def build_mode1(args: List[str]) -> tuple:
-    """Build prompt and target paths for Mode 1 (code gen)."""
-    # First arg is the prompt, remaining args are paths
+    """Build prompt, target paths, and workspace root for Mode 1 (code gen).
+    Returns (prompt, target_paths, workspace_root).
+    """
     if not args:
         raise ForgeError("Mode 1 requires a prompt string.")
 
     prompt = args[0]
-    # Any additional args are target paths
     target_paths = [os.path.abspath(p) for p in args[1:]] if len(args) > 1 else []
 
-    # If no paths given, default to workspace
     if not target_paths:
         target_paths = [str(WORKSPACE)]
 
-    return prompt, target_paths
+    # workspace_root = first directory in target_paths, or WORKSPACE
+    workspace_root = str(WORKSPACE)
+    for p in target_paths:
+        if os.path.isdir(p):
+            workspace_root = p
+            break
+
+    return prompt, target_paths, workspace_root
 
 
 def build_mode2(args: List[str]) -> tuple:
-    """Build prompt and target paths for Mode 2 (skill × skill)."""
+    """Build prompt, target paths, and workspace root for Mode 2 (skill × skill).
+    Returns (prompt, target_paths, workspace_root).
+    """
     if len(args) < 2:
         raise ForgeError("Mode 2 requires: <operator-skill> <target-skill>")
 
@@ -268,7 +287,6 @@ def build_mode2(args: List[str]) -> tuple:
     if not tgt_dir:
         raise ForgeError(f"Target skill not found: {target_name}")
 
-    # Build target paths: operator SKILL.md + entire target skill directory
     target_paths = []  # type: List[str]
 
     # Operator's SKILL.md as context
@@ -300,7 +318,10 @@ def build_mode2(args: List[str]) -> tuple:
         f"- Keep scripts under 300 lines\n"
     )
 
-    return prompt, target_paths
+    # workspace_root = the target skill directory (where files get written)
+    workspace_root = str(tgt_dir)
+
+    return prompt, target_paths, workspace_root
 
 
 def main() -> None:
@@ -324,14 +345,14 @@ def main() -> None:
 
     try:
         if mode == "mode1":
-            prompt, target_paths = build_mode1(args)
+            prompt, target_paths, workspace_root = build_mode1(args)
         elif mode == "mode2":
-            prompt, target_paths = build_mode2(args)
+            prompt, target_paths, workspace_root = build_mode2(args)
         else:
             print(f"Unknown mode: {mode}. Use mode1 or mode2.", file=sys.stderr)
             sys.exit(1)
 
-        result = run_forge(prompt, target_paths)
+        result = run_forge(prompt, target_paths, workspace_root)
         elapsed = time.time() - start_time
         log_success(mode, args, elapsed)
 
