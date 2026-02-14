@@ -81,6 +81,19 @@ bin/skillrun <skill-name> [--timeout N] -- <command...>
 - **Radarr/Sonarr move quirk:** PUT with `moveFiles=true` alone doesn't move files — must also set `path` field explicitly to new location (e.g., `/kids-movies/Title (Year)`)
 - **Disney+ network filter:** Too broad for kids content — catches Marvel, Star Wars live-action. Filter by animation genre or curated title list instead.
 
+## Gemini CLI
+
+- **Install:** `npm install -g @google/gemini-cli`
+- **Auth:** `gemini auth login` (Google OAuth, one-time browser flow)
+- **Settings:** `~/.gemini/settings.json` — key is `selectedAuthType` (NOT `authMethod`)
+- **Gemini 3 access:** Requires `"previewFeatures": true` in settings.json AND toggled via `/settings` in interactive mode
+- **Model names:** `gemini-3-pro-preview`, `gemini-3-flash-preview`, `gemini-2.5-pro`, `gemini-2.5-flash`
+- **Headless mode:** `cat prompt.md | gemini --output-format json --model gemini-3-pro-preview`
+- **JSON output:** Response wrapped in `{ "response": "...", "stats": {...} }` — parse `.response` field
+- **Installed on:** Mac mini (clawaibot.local) + Steven's MacBook Pro
+- **Auth shared:** OAuth creds copied from MacBook → Mac mini via scp
+- **⚠️ antigravity-claude-proxy:** BANNED — Google actively banning accounts that use it. Do NOT use.
+
 ## TTS
 
 - Preferred voice: default (no custom TTS configured yet)

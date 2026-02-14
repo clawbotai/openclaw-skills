@@ -43,6 +43,10 @@ _Lessons encoded from real mistakes. Correct once, never again._
 
 **Log active tasks to memory files immediately.** Don't rely on context surviving compactions. When a user requests multi-step work, write it to `memory/YYYY-MM-DD.md` right away — even before starting. "Mental notes" die with compactions.
 
+**Break large LLM code-gen into chunks.** Never ask an LLM to generate 5+ complete files in one shot — it will truncate. Use PLAN→EXECUTE→MERGE: plan the work (no code), execute one chunk at a time (1-3 files), merge results. Apply each chunk to disk before the next so subsequent chunks read fresh state.
+
+**Explicit path-relativity in LLM prompts.** When an LLM writes file operations against a `workspaceRoot`, it will echo whatever path style it saw in context. Always state explicitly: "All paths must be relative to X directory" — or you get path doubling bugs.
+
 **Always request a restricted sub-account for SSH to user machines.** Never accept root/admin credentials to a user's personal desktop. Proactively suggest creating a limited `openclaw` user before connecting. Store credentials in Keychain, not plaintext. This is a security and trust boundary — treat their machine as their home.
 
 ## Continuity
