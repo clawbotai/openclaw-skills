@@ -190,6 +190,12 @@ Run through this after every generation. Do not skip items.
 
 ---
 
+## Sub-Agent Constraints
+
+- **Sandbox filesystem:** Sub-agents write to `/workspace/` sandbox, NOT the host filesystem. File-heavy skill creation should be done in the main session, or results must be copied from the sandbox after the sub-agent completes.
+- **Single depth only:** Sub-agents cannot spawn their own sub-agents. If a skill generation task needs sub-agent orchestration, the main session must coordinate it.
+- **Review before commit:** When a sub-agent generates a skill, the main session must review and correct paths/details against actual infrastructure before committing. Sub-agents don't have access to the real filesystem state and may use placeholder or incorrect paths.
+
 ## Skill Composition Patterns
 
 When combining generated skills:

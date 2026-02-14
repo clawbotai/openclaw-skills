@@ -369,6 +369,31 @@ BUNDLE:    npx html-inline dist/index.html -o bundle.html
            All assets base64-inlined. No CDN dependencies.
 ```
 
+## Platform-Specific Patterns
+
+### OpenClaw Control-UI Customization
+
+The `gateway.controlUi.root` config option copies the control-ui to `~/.openclaw/control-ui/` so customizations survive npm updates. To customize:
+
+1. Set `gateway.controlUi.root` in config to trigger the copy
+2. Add `custom.css` and `custom.js` to `~/.openclaw/control-ui/`
+3. Patch `index.html` to load them (`<link>` and `<script>` tags)
+4. Changes persist across OpenClaw updates since the files live outside `node_modules`
+
+### MutationObserver for Thinking Indicators
+
+When building UIs that need to detect agent processing state (e.g., showing an elapsed timer while the agent thinks):
+
+```js
+const observer = new MutationObserver((mutations) => {
+  // Watch for DOM changes that indicate agent is processing
+  // Show/hide elapsed timer based on state transitions
+});
+observer.observe(targetNode, { childList: true, subtree: true });
+```
+
+This pattern is useful for any real-time UI that wraps an async agent interaction.
+
 ## Cross-Skill Integration
 
 - **cloudflare-deploy** → Push static builds to CF Pages

@@ -267,6 +267,15 @@ A service without monitoring is a service you hope is working. Hope is not a str
 
 **Fix:** Every pipeline step must have an owner who can explain why it exists. Review pipelines quarterly — delete steps nobody can justify. Start minimal and add steps only when a real problem demands them.
 
+### Container Recreation Patterns
+
+When recreating containers with new volume mounts (e.g., migrating to unified mount points), follow this sequence:
+
+1. **Capture everything first:** `docker inspect <container>` to record ALL existing mounts, env vars, network settings, and labels. Don't rely on memory or docs — the running container is the source of truth.
+2. **Use standard flags for media stack:** `--network host --restart unless-stopped` with `PUID=0 PGID=0 TZ=America/Bogota`.
+3. **Unified mount strategy:** A single `/data` mount point (e.g., `-v /share/ZFS2_DATA/Public:/data`) enables hardlinks between download and library directories. Without this, downloads and libraries on separate mounts get copied instead of hardlinked.
+4. **Verify dependent services after recreation:** Recreating a container resets its internal state. Check that indexers are still connected, download clients are authenticated, and library scanners can reach their paths. Prowlarr fullSync, Radarr/Sonarr download client tests, and Plex library scans should all be verified.
+
 ### The Snowflake Server
 
 **Pattern:** SSHing into production to apply hotfixes, install packages, or tweak configs. "Just this once" becomes the norm.

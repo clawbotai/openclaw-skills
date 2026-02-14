@@ -532,6 +532,16 @@ Problem?
 
 6. **Docker not in PATH on QNAP:** Always use `/share/ZFS2_DATA/.qpkg/container-station/bin/docker`. Alias it in your SSH session or scripts.
 
+7. **Cross-seed setup:** Image `ghcr.io/cross-seed/cross-seed:6`, config at `/share/ZFS2_DATA/Public/Container/cross-seed/config/config.js`. Uses `linkDirs` not `savePath`.
+
+8. **PTP rate limit awareness:** Rapid API calls during container cycling can trigger indexer auto-disable (escalation). Space out bulk operations — don't restart multiple containers that all hit indexers simultaneously.
+
+9. **Hardlink verification after mount migration:** After migrating to unified `/data` mount, existing files keep link count=1 (were copied under different mounts). Only NEW downloads hardlink correctly. Verify with `stat` after first completed download.
+
+10. **Plex SQLite path migration:** Stop Plex, copy `com.plexapp.plugins.library.db`, update `section_locations` and `media_parts` tables with new paths, upload back, restart. Works for bulk path changes without re-scanning.
+
+11. **Jellyseerr init:** Use `mediaServerType=1` for Plex. Needs web UI login to verify Radarr/Sonarr connections after fresh setup — API-only init is insufficient.
+
 ---
 
 ## 9. Backup & Recovery

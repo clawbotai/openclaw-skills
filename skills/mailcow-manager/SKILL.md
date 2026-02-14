@@ -102,6 +102,12 @@ python scripts/mailcow.py logs postfix --count 20
 - TLS is enforced on all mailbox connections by default
 - The generated firewall only opens mail-related ports + SSH
 
+## Operational Notes
+
+- **Hetzner account verification:** Auto-verification can fail, requiring manual review. If rejected, create a new account with clearer business documentation (company name, use case, expected volume).
+- **DNS migration:** When switching email providers, update MX/SPF/DMARC records in Cloudflare. Old records pointing to the previous provider will cause mail delivery failures. Remove stale records before adding new ones.
+- **Multi-domain hosting:** Mailcow supports multiple domains (e.g., torrstatics.com, samvasquez.co) on a single instance. Add each domain via the API or web UI, then configure per-domain DKIM keys and DNS records.
+
 ## Cross-Skill Integration
 
 ### Safety Gate

@@ -170,9 +170,15 @@ With body containing `deployment_configs.production.d1_databases`, `kv_namespace
 
 ## Troubleshooting
 
+### D1 Binding + Pages Functions 405 Bug
+
+After adding D1 bindings, all Pages Functions may return 405 — not just the ones using D1. Debug with `wrangler pages functions tail` to see what's actually happening at the edge. May need a fresh deploy without `wrangler.toml` if using Direct Upload. This is a known platform behavior, not a code issue.
+
+**KV + D1 coexistence:** KV and D1 can coexist on the same Pages project, but any binding change requires redeployment for the new bindings to take effect.
+
 ### 405 on Pages Functions
 
-Most common cause: binding misconfiguration. See "The Binding Trap" above.
+Most common cause: binding misconfiguration. See "The Binding Trap" and "D1 Binding + Pages Functions 405 Bug" above.
 
 Other causes:
 - Function file not in `functions/` directory at project root

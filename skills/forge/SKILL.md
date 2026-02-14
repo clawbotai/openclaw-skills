@@ -95,6 +95,13 @@ skills/forge/
 └── manifest-<jobId>.json  # Output manifests (G2)
 ```
 
+## Troubleshooting
+
+- **Gemini free-tier rate limits:** The daemon retries 4x then fails. Check your quota before bulk operations (multiple forge jobs in sequence). If you hit limits, wait or switch to a paid tier.
+- **Env var naming:** The correct env var is `GEMINI_API_KEY` (not `GOOGLE_API_KEY`). Both are checked but `GEMINI_API_KEY` takes precedence.
+- **MCP transport:** `StreamableHTTPServerTransport` returns 406 for raw JSON-RPC POST requests. Use stdio mode for CLI usage — HTTP transport is for browser/MCP-client integrations only.
+- **First run after install:** Ensure `cd antigravity-forge-daemon && npm run build` succeeds and `GEMINI_API_KEY` is set in environment before testing. Missing build or missing key produces cryptic errors.
+
 ## Dependencies
 
 - Antigravity Forge Daemon: `workspace/antigravity-forge-daemon/dist/index.js`
