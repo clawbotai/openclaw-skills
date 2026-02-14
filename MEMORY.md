@@ -52,6 +52,7 @@
 - **KV**: `ORDERS` namespace (ID: `9fcb14464b6a4ee595e0226efa4eff97`)
 - **Crypto wallet**: `0xA010807fAeef36c957CA80F17bA01b3922f7901C`
 - **Hetzner**: New account active, VPS provisioned, Mailcow email hosting functional
+  - Domains: torrstatics.com, samvasquez.co
 - **Email**: clawaibot@icloud.com (iCloud requires BODY.PEEK[] not RFC822)
 - **QNAP NAS**: TBS-h574TX, QuTS Hero h6.0.0 Beta, IP 192.168.10.233, SSH enabled
   - Docker at `/share/ZFS2_DATA/.qpkg/container-station/bin/docker` (not in PATH)

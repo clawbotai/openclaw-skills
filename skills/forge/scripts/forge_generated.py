@@ -28,7 +28,7 @@ MEMORY_DIR = WORKSPACE / "memory"
 
 # Import monitor
 sys.path.insert(0, str(SCRIPT_DIR))
-from monitor_wrapper import (
+from monitor import (
     ForgeError,
     check_circuit_breaker,
     log_failure,
@@ -36,7 +36,7 @@ from monitor_wrapper import (
 )
 
 POLL_INTERVAL = 5
-MAX_POLL_TIME = 900  # 15 minutes (chunked jobs run multiple Gemini calls)
+MAX_POLL_TIME = 300  # 5 minutes
 
 
 class DaemonError(ForgeError):
@@ -301,10 +301,6 @@ def build_mode2(args: List[str]) -> tuple:
         f"Follow the operator's process against the target skill. "
         f"Produce concrete file changes — improved SKILL.md, new/updated scripts, fixes. "
         f"Do not produce abstract suggestions. Produce actual complete file content.\n\n"
-        f"CRITICAL PATH RULE: All file paths in your output MUST be relative to the "
-        f"target skill directory (e.g., 'scripts/monitor.py', 'tests/test_foo.py', "
-        f"'SKILL.md'). Do NOT prefix paths with 'skills/{target_name}/' — "
-        f"the file-writer already resolves paths against the skill directory.\n\n"
         f"CONSTRAINTS:\n"
         f"- Python 3.9 compatible (typing.Optional[X] not X | None)\n"
         f"- stdlib-only (no pip dependencies)\n"

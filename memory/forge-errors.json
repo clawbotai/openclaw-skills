@@ -1,0 +1,74 @@
+[
+  {
+    "timestamp": 1771045918.855822,
+    "mode": "mode2",
+    "args": [
+      "skill-lifecycle",
+      "skill-lifecycle"
+    ],
+    "error_type": "JobError",
+    "error_message": "Job failed: Job failed.",
+    "classification": "deterministic",
+    "elapsed_seconds": 25.8
+  },
+  {
+    "timestamp": 1771046089.085631,
+    "mode": "mode2",
+    "args": [
+      "skill-lifecycle",
+      "skill-lifecycle"
+    ],
+    "error_type": "JobError",
+    "error_message": "Job failed: Job failed.",
+    "classification": "deterministic",
+    "elapsed_seconds": 5.3
+  },
+  {
+    "timestamp": 1771050499.595794,
+    "mode": "mode2",
+    "args": [
+      "lifecycle",
+      "forge"
+    ],
+    "error_type": "ForgeError",
+    "error_message": "Operator skill not found: lifecycle",
+    "classification": "deterministic",
+    "elapsed_seconds": 0.0
+  },
+  {
+    "timestamp": 1771050594.231214,
+    "mode": "mode2",
+    "args": [
+      "skill-lifecycle",
+      "forge"
+    ],
+    "error_type": "JobError",
+    "error_message": "Job failed: Job failed: Gemini hallucinated truncated code. Please retry the job.",
+    "classification": "deterministic",
+    "elapsed_seconds": 87.2
+  },
+  {
+    "timestamp": 1771051103.1367922,
+    "mode": "mode2",
+    "args": [
+      "skill-lifecycle",
+      "forge"
+    ],
+    "error_type": "JobError",
+    "error_message": "Job timed out after 300s",
+    "classification": "deterministic",
+    "elapsed_seconds": 301.5
+  },
+  {
+    "timestamp": 1771051644.6672168,
+    "mode": "mode2",
+    "args": [
+      "skill-lifecycle",
+      "forge"
+    ],
+    "error_type": "JobError",
+    "error_message": "Job failed: Job failed: Truncation in chunk-4: skills/forge/SKILL.md: truncation pattern detected \u2192 \"// ...\"",
+    "classification": "deterministic",
+    "elapsed_seconds": 527.0
+  }
+]
