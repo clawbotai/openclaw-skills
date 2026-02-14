@@ -1,0 +1,31 @@
+{
+  "ban_version": "1.0.0",
+  "started": "2026-02-14T14:28:56.538442+00:00",
+  "finalized": "2026-02-14T14:28:57.328944+00:00",
+  "final_state": "ABORTED",
+  "events": [
+    {
+      "type": "state_transition",
+      "from": "DRESSED",
+      "to": "PEEPING",
+      "timestamp": "2026-02-14T14:28:56.941581+00:00"
+    },
+    {
+      "type": "state_transition",
+      "from": "PEEPING",
+      "to": "PINNED",
+      "timestamp": "2026-02-14T14:28:57.070285+00:00"
+    },
+    {
+      "type": "snapshot_created",
+      "snapshot_id": "2026-02-14-092857",
+      "timestamp": "2026-02-14T14:28:57.294235+00:00"
+    },
+    {
+      "type": "state_transition",
+      "from": "PINNED",
+      "to": "ABORTED",
+      "timestamp": "2026-02-14T14:28:57.327779+00:00"
+    }
+  ]
+}

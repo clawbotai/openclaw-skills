@@ -70,5 +70,29 @@
     "error_message": "Job failed: Job failed: Truncation in chunk-4: skills/forge/SKILL.md: truncation pattern detected \u2192 \"// ...\"",
     "classification": "deterministic",
     "elapsed_seconds": 527.0
+  },
+  {
+    "timestamp": 1771087215.966162,
+    "mode": "mode2",
+    "args": [
+      "lifecycle",
+      "ban"
+    ],
+    "error_type": "ForgeError",
+    "error_message": "Operator skill not found: lifecycle",
+    "classification": "deterministic",
+    "elapsed_seconds": 0.0
+  },
+  {
+    "timestamp": 1771087222.8304598,
+    "mode": "mode2",
+    "args": [
+      "skill-lifecycle",
+      "ban"
+    ],
+    "error_type": "ForgeError",
+    "error_message": "Target skill not found: ban",
+    "classification": "deterministic",
+    "elapsed_seconds": 0.0
   }
 ]

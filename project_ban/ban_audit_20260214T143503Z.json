@@ -1,0 +1,14 @@
+{
+  "ban_version": "1.0.0",
+  "started": "2026-02-14T14:35:03.011717+00:00",
+  "finalized": "2026-02-14T14:35:03.067587+00:00",
+  "final_state": "ABORTED",
+  "events": [
+    {
+      "type": "state_transition",
+      "from": "DRESSED",
+      "to": "ABORTED",
+      "timestamp": "2026-02-14T14:35:03.067361+00:00"
+    }
+  ]
+}

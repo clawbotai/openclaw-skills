@@ -1,0 +1,36 @@
+# ============================================================
+# Project B.A.N. — Bare-metal Autonomous Node Payload Config
+# ============================================================
+
+# --- Connection ---
+target_host: "192.168.10.251"      # IP or hostname of the macOS target
+ssh_user: "clawbotai"              # SSH username with sudo privileges
+# ssh_key_path: "~/.ssh/id_ed25519"  # Path to SSH private key (preferred)
+ssh_password: "ranger78"           # Password auth (used when no key_path)
+
+# --- Pre-Flight Parameters ---
+expected_os: "Darwin"              # Must be macOS (Darwin kernel)
+architecture: "arm64"              # Apple Silicon only
+min_version: "14.0.0"             # Minimum macOS version (Sonoma+)
+require_sip_disabled: true         # SIP must be disabled for launchctl control
+
+# --- Network ---
+use_wifi: true                     # Auto-protects full Wi-Fi daemon chain
+
+# --- Dead Man's Switch ---
+dead_mans_switch_timeout: 300      # 5 minutes (default, range: 60-3600)
+skip_snapshot: true                # tmutil failing on this target (exit 73)
+
+# --- Daemon Allowlist (user additions) ---
+# Core Survival daemons are ALWAYS merged automatically. Add here only
+# the ADDITIONAL daemons your workload requires beyond the essentials.
+permitted_garments:
+  # use_wifi: true handles the full Wi-Fi chain automatically
+  # - "com.apple.bluetoothd"       # Uncomment if Bluetooth needed
+  # - "com.apple.audio.coreaudiod" # Uncomment if audio needed
+  # - "com.apple.WindowServer"     # Uncomment if GUI needed
+  # - "com.apple.gpumemd"          # Uncomment for GPU/Metal compute
+
+# --- QoS / Execution ---
+# target_binary: "/opt/ban/core_engine"  # Omit for strip-only mode
+nice_value: -20                    # -20 = maximum CPU priority

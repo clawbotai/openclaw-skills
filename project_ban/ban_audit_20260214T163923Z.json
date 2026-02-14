@@ -1,0 +1,4736 @@
+{
+  "ban_version": "1.0.0",
+  "started": "2026-02-14T16:39:17.378862+00:00",
+  "finalized": "2026-02-14T16:39:23.027969+00:00",
+  "final_state": "NIRVANA",
+  "events": [
+    {
+      "type": "state_transition",
+      "from": "DRESSED",
+      "to": "PEEPING",
+      "timestamp": "2026-02-14T16:39:17.819009+00:00"
+    },
+    {
+      "type": "state_transition",
+      "from": "PEEPING",
+      "to": "PINNED",
+      "timestamp": "2026-02-14T16:39:17.932568+00:00"
+    },
+    {
+      "type": "dms_armed",
+      "pid": 904,
+      "timeout_seconds": 300,
+      "timestamp": "2026-02-14T16:39:19.788459+00:00"
+    },
+    {
+      "type": "state_transition",
+      "from": "PINNED",
+      "to": "STRIPPING",
+      "timestamp": "2026-02-14T16:39:19.791771+00:00"
+    },
+    {
+      "type": "daemons_disabled",
+      "count": 937,
+      "actions": [
+        {
+          "daemon": "com.apple.AXMediaUtilitiesService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AirPlayXPCHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AmbientDisplayAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AppSSOAgent.login",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AppSSODaemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AppStoreDaemon.StorePrivilegedODRService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AppStoreDaemon.StorePrivilegedTaskService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AppleCredentialManagerDaemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AppleQEMUGuestAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AskPermissionUI",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCache.builtin",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCacheLocatorService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCacheManagerService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCacheTetheratorService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AssistiveControl",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.BTServer.le",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.BlueTool",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.BluetoothUIService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CharacterPicker.FileService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CharacterPicker.RemoteGenerationViewService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CloudPhotosConfiguration",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CodeSigningHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ContainerMigrationService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CoreAuthentication.agent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CoreAuthentication.daemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CoreRoutine.helperservice",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CrashReporterSupportHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CryptoTokenKit.ahp",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.CryptoTokenKit.ahp.agent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DASDelegateService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DataDetectorsSourceAccess",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DesktopServicesHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DictationIM",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DictionaryServiceHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DistributionKit.DistributionHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DumpGPURestart",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DumpPanic",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DumpPanic.Accessory",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.DwellControl",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.FileCoordination",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.FollowUpUI",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.GSSCred",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.GameController.gamecontrollerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.IFCStart",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.IOAccelMemoryInfoCollector",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.IOUserBluetoothSerialDriver-0x100000c03",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.IOUserDockChannelSerial-0x1000009d1",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.InstallerDiagnostics.installerdiagd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.InstallerDiagnostics.installerdiagwatcher",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.InstallerProgress",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.digest-service",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kadmind",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kcm",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kdc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kpasswdd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.KernelEventAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.KeyboardAccessAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.LocalAuthentication.UIAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient.cloudconfigurationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient.enroll",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient.mechanism",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileAsset.ManifestStorageService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileFileIntegrity",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileInstallationHelperService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileSoftwareUpdate.CleanupPreparePathService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileSoftwareUpdate.CryptegraftService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.NetworkSharing",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.OSDUIHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.PerfPowerServices",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.PerfPowerServicesExtended",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.PerfPowerTelemetryClientRegistrationService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.PowerUIAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.RFBEventHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.RemoteDesktop.PrivilegeProxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.RemoteDesktop.agent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.RemotePairTool",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ReportCrash.Root",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ReportMemoryException",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ReportSystemMemory",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.RosettaUpdateService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.SCHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ScreenReaderUIServer",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.SetStoreUpdateService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.SoftwareUpdateNotificationManager",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.SpeechRecognitionCore.brokerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.SubmitDiagInfo",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.TrustEvaluationAgent.system",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.TrustedPeersHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.UpdateSettings",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.UserEventAgent-LoginWindow",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.UserEventAgent-System",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.UserNotificationCenter",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.UserNotificationCenterAgent-LoginWindow",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ViewBridgeAuxiliary",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.Virtualization.AppleVirtualPlatformHIDBridge",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.VoiceOver",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.WindowServer",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.WirelessRadioManager",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.XProtect.daemon.scan",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.XProtect.daemon.scan.startup",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.XprotectFramework.PluginService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.accessibility.AXVisualSupportAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.accessibility.mediaaccessibilityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.accessoryd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.accessoryupdaterd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.accounts.dom",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.adid",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.afpfs_afpLoad",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.afpfs_checkafp",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.airport.wps",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.akd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.alf",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.analyticsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.aned",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.aneuserd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.aonsensed",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.appinstalld",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.appkit.xpc.ColorSampler",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.appleh13camerad",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.appleh16camerad",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.applekeystored",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.appleseed.fbahelperd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.applessdstatistics",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.appstored",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.apsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.aslmanager",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.asr",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.attentionawarenessd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.AudioComponentRegistrar",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.coreaudiod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.isolated.historicalaudiod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.isolated.micactivityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.systemsoundserverd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audioanalyticsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.audiomxd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.autofsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.automountd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.avbdeviced",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.awdd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.backgroundtaskmanagementd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.backupd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.backupd-helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.bcmwlan-0x1000009f4",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.betaenrollmentd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.biomed",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.biometrickitd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.bluetoothd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.bootinstalld",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.bosreporter",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.boswatcher",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.bridgeOSUpdateProxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.bsd.dirhelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.btsa",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cameracaptured",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.captiveagent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.carboncore.csnameddata",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cfprefsd.xpc.daemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cloudd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.AVCAssistant",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.IIDCVideoAssistant",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.VDCAssistant",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.iOSScreenCaptureAssistant",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.registerassistantservice",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.uvcassistantextension",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.colorsync.displayservices",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.colorsyncd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.commerce",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.configureLocalKDC",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.containermanagerd.system",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.contextstored",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.controlstrip",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corebrightnessd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corecaptured",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreduetd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corekdld",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corercd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.UASharedPasteboardProgressUI",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.appleevents",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.launchservicesd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.sharedfilelistd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.useractivityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservicesd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corespeechd_system",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corestorage.corestoraged",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.corestorage.corestoragehelperd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.coresymbolicationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.countryd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.csrutil.report",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ctcategories.service",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ctkd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.cvmsServ",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dasd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.deleted_helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.deviceinterfaced",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.devicemanagementclient.managedeventsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.devicemanagementclient.teslad",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticextensions.osx.spotlight.helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticextensions.osx.timemachine.helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticservicesd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diskarbitrationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diskimagesiod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diskimagesiod.ram",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diskimagesiod.spb",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.diskmanagementstartup",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.distnoted.xpc.daemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dpdkswitchd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dprivacyd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.driverkit.AppleUserHIDDrivers-0x1000009d5",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dspluginhelperd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.AutomationModeUI",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.RemotePairingDataVaultHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.automationmode-writer",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.fetchsymbolsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dvdplayback.setregion",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.dynamic_pager",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.eapolcfg_auth",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ecosystemanalyticsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.efilogin-helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.eligibilityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.endpointsecurity.endpointsecurityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.eoshostd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.erasecontentsettingshelperd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.fairplayd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.fairplaydeviceidentityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.familycircled",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.familycontrols",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.familynotificationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.doubleagentd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.fskitd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.userfs_helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.userfsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.findmy.findmybeaconingd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.findmymacd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.findmymacmessenger",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.fontmover",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.fseventsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.fskit.fskit_helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.gamepolicyd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.geod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.gkreport",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.griddatad",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.gssd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.handwritingd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.hdiejectd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.hidd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.hiservices-xpcservice",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iCloudHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iCloudUserNotificationsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.icloud.findmydeviced",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.icloud.searchpartyd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iconservices.iconservicesagent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iconservices.iconservicesd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.idleassetsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ifdreader",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.imdpersistence.IMDPersistenceAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.imklaunchagent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.installandsetup.systemmigrationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.installcoordination_proxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.installcoordinationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.installd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.internal.aupbregistrarservice",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iokit.IOServiceAuthorizeAgent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iokit.ioserviceauthorized",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iomfb_bics_daemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.iomfb_fdr_loader",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ionodecache",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ioupsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.kcproxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.kernelmanager_helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.kernelmanagerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.kuncd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.liquiddetectiond",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.locationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.lockd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.logd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.logd_helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.logd_reporter",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.logind",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.loginwindow",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.loginwindow.375AC05A-EF44-465E-806C-15BE0A8A2C59",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.loginwindow.58D29AB8-B2E0-4707-BA0F-6E5E3134868F",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.logkextloadsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.lsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.lskdd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mbsystemadministration",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mbusertrampoline",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mdmclient.daemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mediaremoted",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.memory-maintenance",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.menuextra.battery.helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds.index",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds.scan",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds.spindump",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.misagent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.NRDUpdated",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.keybagd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.notification_proxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.obliteration",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.softwareupdated",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.storage_mounter",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.storage_mounter_proxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.usermanagerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobileactivationd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobileassetd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.mobilegestalt.xpc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.modelcatalogd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.modelmanagerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.lsarpc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.mdssvc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.netlogon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.srvsvc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.wkssvc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.multiversed",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nand.aspcarry",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nand_task_scheduler",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nearbyd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nehelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nesessionmanager",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.netauth.sys.auth",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.netauth.sys.gui",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.netauth.user.gui",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.netbiosd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.newsyslog",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nfcd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nfsconf",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nfsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nlcd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.noticeboard.agent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.noticeboard.state",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.notifyd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nowplayingtouchui",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.nsurlsessiond_privileged",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.oahd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.oahd-root-helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ocspd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.online-auth-agent.xpc",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.osanalytics.osanalyticshelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ospredictiond",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.package-script-service",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.pcapd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.pfctl",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.pfd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.pluginkit.pkd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.postfix.master",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.postfix.newaliases",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.powerchime",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.powerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.powerd.swd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.powerdatad",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.powerexperienced",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.powerlogHelperd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.preference.displays.MirrorDisplays",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.preferences.timezone.admintool",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.previewshellapp",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.previewshellmacapp",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.printtool.daemon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.quicklook",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.racoon",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.rapportd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.recoveryos-lockout-service",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.relatived",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.remoted",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.remotemanagementd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.replayd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.retimerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.revisiond",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.rpcbind",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.rtcreportingd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.runningboardd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.sandboxd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.screensharing.agent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.screensharing.menuextra",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.scrod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.scsid",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.secinitd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.XPCKeychainSandboxCheck",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.XPCTimeStampingService",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.agent.login",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.agent.login.00000000-0000-0000-0000-0000000186A3",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.agent.login.00000000-0000-0000-0000-0000000186EA",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.authhost",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.authhost.00000000-0000-0000-0000-0000000186A3",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.authtrampoline",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.cryptexd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.security.syspolicy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.securityd.system",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.seld",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.sessionlogoutd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.signpost.signpost_reporter",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.siri.acousticsignature",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.siri.context.service",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.smb.preferences",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.softwareupdate_firstrun_tasks",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.softwareupdated",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.speech.speechsynthesisd.arm64",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.speech.speechsynthesisd.x86_64",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.spindump",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.srp-mdns-proxy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.startupdiskhelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.statd.notify",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storagekitd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storeaccountd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storeassetd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storedownloadd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storelegacy",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storereceiptinstaller",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.storeuid",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.suhelperd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.symptomsd-diag",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.sysdiagnose",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.sysdiagnose_helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.sysextd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.sysmond",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.system_installd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systemadministration.writeconfig",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systemkeychain",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systempreferences.cacheAssistant",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstats.analysis",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstats.daily",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstats.microstackshot_periodic",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstatusd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.tailspind",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.taskgated",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.taskgated-helper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.tccd.system",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.testmanagerd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.testmanagerd.remote",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.thermald",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.thermalmonitord",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.threadradiod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.timed",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.timesync.audioclocksyncd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.timezoneupdates.tzd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.tmp_cleaner",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.tonelibraryd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.touchbarserver",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.tracd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.triald.system",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.trustd.agent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.trustdFileHelper",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.tzlinkd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.ucupdate.plist",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.uikitsystemapp",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.uninstalld",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.universalaccesscontrol",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.universalaccessd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.unmountassistant.sysagent",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.usbaudiod",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.usbctelemetryd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.usbd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.usbmuxd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.usbsmartcardreaderd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.vsdbutil",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.wallpaper.export",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.warmd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.watchdogd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.wifianalyticsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.wifip2pd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.wifivelocityd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.xartstorageremoted",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.xpc.roleaccountd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.xpc.smd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.xpc.uscwoap",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.openssh.sshd.D24B0D75-9D52-4F0B-84B5-D15DE4981ACC",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.vix.cron",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "org.cups.cupsd",
+          "action": "bootout+disable",
+          "timestamp": "2026-02-14T16:39:22.522201+00:00"
+        },
+        {
+          "daemon": "com.apple.AirPlayXPCHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AmbientDisplayAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AppSSOAgent.login",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AppSSODaemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AppStoreDaemon.StorePrivilegedODRService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AppStoreDaemon.StorePrivilegedTaskService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AppleCredentialManagerDaemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AppleQEMUGuestAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AskPermissionUI",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCache.builtin",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCacheLocatorService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCacheManagerService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AssetCacheTetheratorService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.AssistiveControl",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.BTServer.le",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.BlueTool",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.BluetoothUIService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CharacterPicker.FileService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CharacterPicker.RemoteGenerationViewService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CloudPhotosConfiguration",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CodeSigningHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ContainerMigrationService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CoreAuthentication.agent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CoreAuthentication.daemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CoreRoutine.helperservice",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CrashReporterSupportHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CryptoTokenKit.ahp",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.CryptoTokenKit.ahp.agent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DASDelegateService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DataDetectorsSourceAccess",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DesktopServicesHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DictationIM",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DictionaryServiceHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DistributionKit.DistributionHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DumpGPURestart",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DumpPanic",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DumpPanic.Accessory",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.DwellControl",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.FileCoordination",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.FollowUpUI",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.GSSCred",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.GameController.gamecontrollerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.IFCStart",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.IOAccelMemoryInfoCollector",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.IOUserBluetoothSerialDriver-0x100000c03",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.IOUserDockChannelSerial-0x1000009d1",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.InstallerDiagnostics.installerdiagd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.InstallerDiagnostics.installerdiagwatcher",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.InstallerProgress",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.digest-service",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kadmind",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kcm",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kdc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.Kerberos.kpasswdd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.KernelEventAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.KeyboardAccessAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.LocalAuthentication.UIAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient.cloudconfigurationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient.enroll",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ManagedClient.mechanism",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileAsset.ManifestStorageService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileFileIntegrity",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileInstallationHelperService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileSoftwareUpdate.CleanupPreparePathService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.MobileSoftwareUpdate.CryptegraftService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.NetworkSharing",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.OSDUIHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.PerfPowerServices",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.PerfPowerServicesExtended",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.PerfPowerTelemetryClientRegistrationService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.PowerUIAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.RFBEventHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.RemoteDesktop.PrivilegeProxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.RemoteDesktop.agent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.RemotePairTool",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ReportCrash.Root",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ReportMemoryException",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ReportSystemMemory",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.RosettaUpdateService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.SCHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ScreenReaderUIServer",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.SetStoreUpdateService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.SoftwareUpdateNotificationManager",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.SpeechRecognitionCore.brokerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.SubmitDiagInfo",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.TrustEvaluationAgent.system",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.TrustedPeersHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.UpdateSettings",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.UserEventAgent-LoginWindow",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.UserEventAgent-System",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.UserNotificationCenter",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.UserNotificationCenterAgent-LoginWindow",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ViewBridgeAuxiliary",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.Virtualization.AppleVirtualPlatformHIDBridge",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.VoiceOver",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.WindowServer",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.WirelessRadioManager",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.XProtect.daemon.scan",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.XProtect.daemon.scan.startup",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.XprotectFramework.PluginService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.accessibility.AXVisualSupportAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.accessibility.mediaaccessibilityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.accessoryd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.accessoryupdaterd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.accounts.dom",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.adid",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.afpfs_afpLoad",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.afpfs_checkafp",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.airport.wps",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.akd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.alf",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.analyticsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.aned",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.aneuserd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.aonsensed",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.appinstalld",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.appkit.xpc.ColorSampler",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.appleh13camerad",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.appleh16camerad",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.applekeystored",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.appleseed.fbahelperd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.applessdstatistics",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.appstored",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.apsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.aslmanager",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.asr",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.attentionawarenessd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.AudioComponentRegistrar",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.coreaudiod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.isolated.historicalaudiod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.isolated.micactivityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audio.systemsoundserverd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audioanalyticsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.audiomxd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.autofsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.automountd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.avbdeviced",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.awdd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.backgroundtaskmanagementd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.backupd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.backupd-helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.bcmwlan-0x1000009f4",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.betaenrollmentd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.biomed",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.biometrickitd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.bluetoothd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.bootinstalld",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.bosreporter",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.boswatcher",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.bridgeOSUpdateProxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.bsd.dirhelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.btsa",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cameracaptured",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.captiveagent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.carboncore.csnameddata",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cfprefsd.xpc.daemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cloudd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.AVCAssistant",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.IIDCVideoAssistant",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.VDCAssistant",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.iOSScreenCaptureAssistant",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.registerassistantservice",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cmio.uvcassistantextension",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.colorsync.displayservices",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.colorsyncd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.commerce",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.configureLocalKDC",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.containermanagerd.system",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.contextstored",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.controlstrip",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corebrightnessd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corecaptured",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreduetd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corekdld",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corercd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.UASharedPasteboardProgressUI",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.appleevents",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.launchservicesd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.sharedfilelistd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservices.useractivityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coreservicesd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corespeechd_system",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corestorage.corestoraged",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.corestorage.corestoragehelperd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.coresymbolicationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.countryd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.csrutil.report",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ctcategories.service",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ctkd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.cvmsServ",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dasd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.deleted_helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.deviceinterfaced",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.devicemanagementclient.managedeventsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.devicemanagementclient.teslad",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticextensions.osx.spotlight.helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticextensions.osx.timemachine.helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diagnosticservicesd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diskarbitrationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diskimagesiod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diskimagesiod.ram",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diskimagesiod.spb",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.diskmanagementstartup",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.distnoted.xpc.daemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dpdkswitchd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dprivacyd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.driverkit.AppleUserHIDDrivers-0x1000009d5",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dspluginhelperd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.AutomationModeUI",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.RemotePairingDataVaultHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.automationmode-writer",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dt.fetchsymbolsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dvdplayback.setregion",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.dynamic_pager",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.eapolcfg_auth",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ecosystemanalyticsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.efilogin-helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.eligibilityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.endpointsecurity.endpointsecurityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.eoshostd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.erasecontentsettingshelperd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.fairplayd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.fairplaydeviceidentityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.familycircled",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.familycontrols",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.familynotificationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.doubleagentd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.fskitd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.userfs_helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.filesystems.userfsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.findmy.findmybeaconingd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.findmymacd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.findmymacmessenger",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.fontmover",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.fseventsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.fskit.fskit_helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.gamepolicyd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.geod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.gkreport",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.griddatad",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.gssd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.handwritingd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.hdiejectd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.hidd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.hiservices-xpcservice",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iCloudHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iCloudUserNotificationsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.icloud.findmydeviced",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.icloud.searchpartyd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iconservices.iconservicesagent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iconservices.iconservicesd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.idleassetsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ifdreader",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.imdpersistence.IMDPersistenceAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.imklaunchagent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.installandsetup.systemmigrationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.installcoordination_proxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.installcoordinationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.installd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.internal.aupbregistrarservice",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iokit.IOServiceAuthorizeAgent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iokit.ioserviceauthorized",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iomfb_bics_daemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.iomfb_fdr_loader",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ionodecache",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ioupsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.kcproxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.kernelmanager_helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.kernelmanagerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.kuncd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.liquiddetectiond",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.locationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.lockd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.logd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.logd_helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.logd_reporter",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.logind",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.loginwindow",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.loginwindow.375AC05A-EF44-465E-806C-15BE0A8A2C59",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.loginwindow.58D29AB8-B2E0-4707-BA0F-6E5E3134868F",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.logkextloadsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.lsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.lskdd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mbsystemadministration",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mbusertrampoline",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mdmclient.daemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mediaremoted",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.memory-maintenance",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.menuextra.battery.helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds.index",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds.scan",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.metadata.mds.spindump",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.misagent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.NRDUpdated",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.keybagd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.notification_proxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.obliteration",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.softwareupdated",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.storage_mounter",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.storage_mounter_proxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobile.usermanagerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobileactivationd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobileassetd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.mobilegestalt.xpc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.modelcatalogd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.modelmanagerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.lsarpc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.mdssvc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.netlogon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.srvsvc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.msrpc.wkssvc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.multiversed",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nand.aspcarry",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nand_task_scheduler",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nearbyd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nehelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nesessionmanager",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.netauth.sys.auth",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.netauth.sys.gui",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.netauth.user.gui",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.netbiosd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.newsyslog",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nfcd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nfsconf",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nfsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nlcd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.noticeboard.agent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.noticeboard.state",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.notifyd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nowplayingtouchui",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.nsurlsessiond_privileged",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.oahd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.oahd-root-helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ocspd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.online-auth-agent.xpc",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.osanalytics.osanalyticshelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ospredictiond",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.package-script-service",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.pcapd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.pfctl",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.pfd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.pluginkit.pkd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.postfix.master",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.postfix.newaliases",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.powerchime",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.powerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.powerd.swd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.powerdatad",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.powerexperienced",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.powerlogHelperd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.preference.displays.MirrorDisplays",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.preferences.timezone.admintool",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.previewshellapp",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.previewshellmacapp",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.printtool.daemon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.quicklook",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.racoon",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.rapportd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.recoveryos-lockout-service",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.relatived",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.remoted",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.remotemanagementd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.replayd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.retimerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.revisiond",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.rpcbind",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.rtcreportingd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.runningboardd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.sandboxd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.screensharing.agent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.screensharing.menuextra",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.scrod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.scsid",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.secinitd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.XPCKeychainSandboxCheck",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.XPCTimeStampingService",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.agent.login",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.agent.login.00000000-0000-0000-0000-0000000186A3",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.agent.login.00000000-0000-0000-0000-0000000186EA",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.authhost",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.authhost.00000000-0000-0000-0000-0000000186A3",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.authtrampoline",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.cryptexd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.security.syspolicy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.securityd.system",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.seld",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.sessionlogoutd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.signpost.signpost_reporter",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.siri.acousticsignature",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.siri.context.service",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.smb.preferences",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.softwareupdate_firstrun_tasks",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.softwareupdated",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.speech.speechsynthesisd.arm64",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.speech.speechsynthesisd.x86_64",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.spindump",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.srp-mdns-proxy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.startupdiskhelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.statd.notify",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storagekitd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storeaccountd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storeassetd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storedownloadd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storelegacy",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storereceiptinstaller",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.storeuid",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.suhelperd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.symptomsd-diag",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.sysdiagnose",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.sysdiagnose_helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.sysextd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.sysmond",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.system_installd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systemadministration.writeconfig",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systemkeychain",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systempreferences.cacheAssistant",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstats.analysis",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstats.daily",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstats.microstackshot_periodic",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.systemstatusd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.tailspind",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.taskgated",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.taskgated-helper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.tccd.system",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.testmanagerd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.testmanagerd.remote",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.thermald",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.thermalmonitord",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.threadradiod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.timed",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.timesync.audioclocksyncd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.timezoneupdates.tzd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.tmp_cleaner",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.tonelibraryd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.touchbarserver",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.tracd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.triald.system",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.trustd.agent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.trustdFileHelper",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.tzlinkd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.ucupdate.plist",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.uikitsystemapp",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.uninstalld",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.universalaccesscontrol",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.universalaccessd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.unmountassistant.sysagent",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.usbaudiod",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.usbctelemetryd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.usbd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.usbmuxd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.usbsmartcardreaderd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.vsdbutil",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.wallpaper.export",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.warmd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.watchdogd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.wifianalyticsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.wifip2pd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.wifivelocityd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.xartstorageremoted",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.xpc.roleaccountd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.xpc.smd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.apple.xpc.uscwoap",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.openssh.sshd.D24B0D75-9D52-4F0B-84B5-D15DE4981ACC",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "com.vix.cron",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        },
+        {
+          "daemon": "org.cups.cupsd",
+          "action": "warning:still_active_after_strip",
+          "timestamp": "2026-02-14T16:39:22.692820+00:00"
+        }
+      ],
+      "timestamp": "2026-02-14T16:39:22.693666+00:00"
+    },
+    {
+      "type": "state_transition",
+      "from": "STRIPPING",
+      "to": "BARE_METAL",
+      "timestamp": "2026-02-14T16:39:22.697007+00:00"
+    },
+    {
+      "type": "state_transition",
+      "from": "BARE_METAL",
+      "to": "NIRVANA",
+      "timestamp": "2026-02-14T16:39:23.026300+00:00"
+    }
+  ]
+}
