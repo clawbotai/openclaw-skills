@@ -1,17 +1,30 @@
 # Forge Skill
 
-Invoke the Antigravity Forge Daemon to delegate heavy code-generation to Gemini.
+Meta-skill for code generation and skill composition.
 
 ## Trigger
 
-User says anything like `forge "build a REST API for ..."` or `forge 'description'`.
+Two modes based on invocation pattern:
 
-## Workflow
+### Mode 1: Code Generation
+> `forge "build a REST API for ..."`
+
+Single quoted/described prompt → delegates to Gemini via Antigravity Forge Daemon.
+
+### Mode 2: Skill Application
+> `forge <operator-skill> <target-skill>`
+> `forge lifecycle devops`
+> `forge reflect email-manager`
+
+Two skill names → applies the operator skill's methodology against the target skill.
+
+---
+
+## Mode 1: Code Generation (Gemini Forge)
 
 ### 1. Ensure the daemon is running
 
 ```bash
-# Check health
 curl -sf http://localhost:2468/health || \
   (cd /Users/clawai/openclaw/workspace/antigravity-forge-daemon && \
    node dist/index.js --http &)
@@ -21,92 +34,89 @@ Wait up to 5s for `/health` to return `{"status":"ok"}`.
 
 ### 2. Gather context
 
-Before submitting, gather relevant workspace context for the job:
+Before submitting, gather relevant workspace context:
 - File tree of the target directory (`find . -type f | head -200`)
 - Key files the user references or that are relevant
 - Any constraints from USER.md (Python 3.9, stdlib-only, etc.)
 
-Pack this into `localContext` (keep under ~30KB).
+Pack into `localContext` (keep under ~30KB).
 
-### 3. Submit the job
+### 3. Submit → Poll → Pull → Apply
 
-```bash
-curl -s http://localhost:2468/mcp -H 'Content-Type: application/json' -d '{
-  "jsonrpc": "2.0", "id": 1, "method": "tools/call",
-  "params": {
-    "name": "submit_forge_job",
-    "arguments": {
-      "prompt": "<user prompt>",
-      "localContext": "<gathered context>"
-    }
-  }
-}'
-```
+Use the daemon's 3 MCP tools via HTTP at `http://localhost:2468/mcp`:
 
-Extract `jobId` from the response.
+1. **submit_forge_job** — `{ "prompt": "<user prompt>", "localContext": "<context>" }` → get `jobId`
+2. **poll_job_status** — every 5s until `COMPLETED` or `FAILED`
+3. **pull_integration_manifest** — get the `IntegrationManifest`
 
-### 4. Poll until complete
+### 4. Apply the manifest
 
-Poll every 5 seconds:
-
-```bash
-curl -s http://localhost:2468/mcp -H 'Content-Type: application/json' -d '{
-  "jsonrpc": "2.0", "id": 2, "method": "tools/call",
-  "params": {
-    "name": "poll_job_status",
-    "arguments": { "jobId": "<jobId>" }
-  }
-}'
-```
-
-States: `QUEUED` → `ANALYZING_CONTEXT` → `GENERATING_CODE` → `COMPLETED` or `FAILED`.
-
-Tell the user the current state while waiting. If FAILED, show the error and stop.
-
-### 5. Pull the manifest
-
-```bash
-curl -s http://localhost:2468/mcp -H 'Content-Type: application/json' -d '{
-  "jsonrpc": "2.0", "id": 3, "method": "tools/call",
-  "params": {
-    "name": "pull_integration_manifest",
-    "arguments": { "jobId": "<jobId>" }
-  }
-}'
-```
-
-### 6. Apply the manifest
-
-The response contains an `IntegrationManifest`:
-
-```json
-{
-  "architecturalSummary": "...",
-  "operations": [
-    { "path": "src/foo.ts", "action": "CREATE", "content": "...", "rationale": "..." },
-    { "path": "src/bar.ts", "action": "UPDATE", "content": "...", "rationale": "..." },
-    { "path": "old.ts", "action": "DELETE", "rationale": "..." }
-  ],
-  "requiredCommands": ["npm install", "tsc --noEmit"]
-}
-```
-
-**Present the summary and operation list to the user first.** Then:
-
-- `CREATE` / `UPDATE`: Write file content using the `write` tool
+Present summary first, then:
+- `CREATE` / `UPDATE`: Write files with `write` tool
 - `DELETE`: Use `trash` (not `rm`)
-- Run each `requiredCommands` entry and report results
+- Run each `requiredCommands` entry
 
-### 7. Report
+---
 
-Show the user:
-- Architectural summary
-- Files created/updated/deleted with rationales
-- Command outputs (pass/fail)
+## Mode 2: Skill Application (Skill × Skill)
+
+### Detection
+
+If the user provides two tokens that match skill names/aliases in `<available_skills>`, this is Mode 2.
+
+Common operator skills and what they do:
+
+| Operator | Action |
+|----------|--------|
+| `lifecycle` | Research→Build→Reflect loop + AIOps analysis against target skill |
+| `reflect` | Analyze recent usage, extract learnings, encode improvements |
+| `sanity-check` | Run INTAKE/MIDPOINT/OUTPUT gates against target skill |
+| `skill-scout` | Evaluate target skill quality across 7 dimensions |
+| `security` | Security audit of target skill's scripts and patterns |
+| `docs-engine` | Generate/improve documentation for target skill |
+
+Any skill can be an operator — the pattern is general.
+
+### Workflow
+
+#### Step 1: Load the operator skill
+Read the operator skill's SKILL.md to understand its methodology, phases, and outputs.
+
+#### Step 2: Load the target skill
+Read the target skill's SKILL.md plus key files:
+- `scripts/` directory listing
+- Any `*.py`, `*.sh`, `*.js` implementation files
+- Recent error logs from `memory/skill-errors.json` if relevant
+
+#### Step 3: Gather usage context
+Read today's memory file (`memory/YYYY-MM-DD.md`) and recent files for:
+- Any mentions of the target skill being used today
+- Errors, corrections, or friction encountered
+- Decisions made or patterns discovered
+
+#### Step 4: Execute the operator's methodology
+Follow the operator skill's process, applying it to the target:
+- Use the operator's frameworks, checklists, and evaluation criteria
+- Feed in the target skill's code, docs, and usage context
+- Generate concrete improvements (not abstract suggestions)
+
+#### Step 5: Apply changes
+- Edit the target skill's SKILL.md, scripts, or create new files
+- Show a diff summary of what changed and why
+- Commit with message: `forge: apply <operator> to <target>`
+
+#### Step 6: Report
+Tell the user:
+- What the operator skill's process found
+- What was changed in the target skill
+- Any follow-up recommendations
+
+---
 
 ## Notes
 
-- The daemon runs in HTTP mode on port 2468 with in-memory job store (1h TTL)
-- Gemini API key is in the daemon's environment (inherited from OpenClaw)
-- The daemon must be built first: `cd antigravity-forge-daemon && npm run build`
-- If the daemon isn't built yet, run the build before starting
+- Daemon runs on port 2468 (HTTP mode), in-memory job store with 1h TTL
+- Gemini API key inherited from OpenClaw environment
+- Build daemon: `cd antigravity-forge-daemon && npm run build`
+- Mode 2 doesn't use the daemon — it's pure skill-on-skill orchestration within the main session
+- For heavy Mode 2 operations, consider spawning a sub-agent to avoid blocking
