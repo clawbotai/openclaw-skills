@@ -20,6 +20,18 @@
 - Brand assets: `assets/torr_hd_brandbook.pdf`, manufacturing PDFs in `assets/isobar/`, `assets/poise/`
 - GitHub: clawbotai/torr-statics (private)
 
+### Azoth (Salesforce → Standalone Migration)
+- Peptide/wellness platform currently on Salesforce (Agentforce dev org)
+- Manuel Velez's project (manuelvelez3223@gmail.com)
+- Org: orgfarm-b28044d04d-dev-ed.develop.lightning.force.com
+- Full export completed 2026-02-13 → `salesforce-export/` (12 MB, 358 files)
+- 5 custom objects: Doctor__c, Gold_Standard_Case__c, Inventory__c, Peer_Review__c, Wellness_Assessment__c
+- Key logic: peer review governance, peptide safety (hard deck limits), prescription entry, trust scores
+- Integrations: Stripe (payments), Experience Cloud (patient/doctor portals)
+- 57 Apex classes, 8 triggers, 82 flows, 35 LWC, 592 data records
+- Goal: recreate as standalone software (off Salesforce)
+- Architecture doc: `salesforce-export/ARCHITECTURE.md`
+
 ### MPMP
 - Medical Practice Management Platform — functional medicine / peptide therapy
 - HIPAA-compliant, Azoth OS integration (dual-mode: connected vs standalone)
@@ -40,6 +52,11 @@
 - **Crypto wallet**: `0xA010807fAeef36c957CA80F17bA01b3922f7901C`
 - **Hetzner**: Account created, manual verification pending
 - **Email**: clawaibot@icloud.com (iCloud requires BODY.PEEK[] not RFC822)
+- **QNAP NAS**: TBS-h574TX, QuTS Hero h6.0.0 Beta, IP 192.168.10.233, SSH enabled
+  - Docker at `/share/ZFS2_DATA/.qpkg/container-station/bin/docker` (not in PATH)
+  - Prowlarr key: `1b84ce72887243de80dee26c5daf61c7`, Plex token: `n1uheT35no4W9NJ5szFR`
+  - Indexers: BroadcasTheNet (TV), PassThePopcorn (Movies) via Prowlarr
+  - Kids libraries: 73 movies in /kids-movies, 46 shows in /kids-tv (Plex sections 5 & 6)
 
 ## Learned Behaviors (encoded in SOUL.md)
 1. Python 3.9 compat — `Optional[X]` not `X | None`

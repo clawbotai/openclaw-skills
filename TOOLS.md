@@ -57,6 +57,30 @@ bin/skillrun <skill-name> [--timeout N] -- <command...>
 - Errors auto-logged to `memory/skill-errors.json`
 - Check health: `OPENCLAW_WORKSPACE=. python3 skills/skill-lifecycle/scripts/monitor.py status`
 
+## Salesforce
+
+- **Auth quirk:** Agentforce/orgfarm dev orgs have SOAP API disabled by default — no headless login works
+- **Workaround:** Get browser cookie `sid=` value → use as `Authorization: Bearer <sid>` for REST API
+- **Anonymous Apex won't help:** `UserInfo.getSessionId()` returns `SESSION_ID_REMOVED` in debug logs
+- **SF CLI:** installed at `/opt/homebrew/bin/sf` (v2.122.6)
+- **simple_salesforce:** installed (`pip3`)
+
+## QNAP NAS (MediaCenter)
+
+- **Model:** TBS-h574TX, QuTS Hero h6.0.0 Build 20260122 Beta
+- **IP:** 192.168.10.233, login: admin / ranger2023
+- **SSH:** Enabled (must be toggled on via QTS web UI → Control Panel → Network & File Services → Telnet/SSH)
+- **Docker binary:** `/share/ZFS2_DATA/.qpkg/container-station/bin/docker` (NOT in PATH — must use full path)
+- **QTS auth:** POST to `/cgi-bin/authLogin.cgi` with `pwd=` **base64-encoded** — plaintext fails silently (`authPassed=0`)
+- **Container Station API:** v1 at `:8080/container-station/api/v1/` — login, list containers, list apps work; **inspect endpoints return 404** on QuTS Hero h6 (docs are for v2.4, doesn't match)
+- **Container config:** All containers use `--network host`, `--restart unless-stopped`, `PUID=0 PGID=0`
+- **Prowlarr API Key:** `1b84ce72887243de80dee26c5daf61c7`
+- **Plex Token:** `n1uheT35no4W9NJ5szFR`
+- **Plex sections:** 1=Movies(/movies), 2=TV(/tv), 5=Kids Movies(/kids-movies), 6=Kids TV(/kids-tv)
+- **Indexers:** BroadcasTheNet (TV/Sonarr), PassThePopcorn (Movies/Radarr) — synced via Prowlarr fullSync
+- **Radarr/Sonarr move quirk:** PUT with `moveFiles=true` alone doesn't move files — must also set `path` field explicitly to new location (e.g., `/kids-movies/Title (Year)`)
+- **Disney+ network filter:** Too broad for kids content — catches Marvel, Star Wars live-action. Filter by animation genre or curated title list instead.
+
 ## TTS
 
 - Preferred voice: default (no custom TTS configured yet)
