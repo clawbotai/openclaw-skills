@@ -49,6 +49,27 @@ _Lessons encoded from real mistakes. Correct once, never again._
 
 **Always request a restricted sub-account for SSH to user machines.** Never accept root/admin credentials to a user's personal desktop. Proactively suggest creating a limited `openclaw` user before connecting. Store credentials in Keychain, not plaintext. This is a security and trust boundary — treat their machine as their home.
 
+**OpenClaw CLI Reliability for Config:** The `openclaw` CLI (even if reporting current version) may lack advanced `gateway` subcommands like `config.patch --raw` across different environments. When encountering such CLI limitations, prioritize direct JSON file modification via Python script for critical configuration updates. Do not assume CLI functionality; verify with `openclaw help <command>` before programmatic use, or default to robust Python file editing for core config.
+
+**OpenClaw Config Schema: additionalProperties: false is FATAL.** Many config sections (especially `tools`) use `additionalProperties: false`. Adding ANY unrecognized key to such a section causes the ENTIRE section to silently fail validation — the gateway ignores the whole block and falls back to defaults. ALWAYS check the schema (`gateway(action="config.schema")`) before adding new keys. One invalid key can break valid sibling keys in the same section. Valid keys under `tools`: profile, allow, alsoAllow, deny, byProvider, web, media, links, message, agentToAgent, elevated, exec, subagents, sandbox.
+
+**OpenClaw Security - Explicit Permissions Required (Elevated/Sessions_Spawn):** `exec(elevated=True)` commands (for `sudo`) and `sessions_spawn` calls are *always* blocked by OpenClaw's security model unless explicitly enabled in the *running agent's* `openclaw.json` configuration. Specifically:
+- For `elevated` commands: `{"tools": {"elevated": {"enabled": true, "allowFrom": {"<channel_id>": ["*"]}}}}`
+- For `sessions_spawn`: `{"tools": {"sessions_spawn": {"enabled": true, "allowFrom": {"<channel_id>": ["*"]}}}}`
+Proactively check for these configurations using `cat ~/.openclaw/openclaw.json` and, if missing, guide the user through direct file modification via a Python script (or `nano`) followed by a `launchctl stop/start gui/$UID/ai.openclaw.gateway` cycle, as the `openclaw gateway restart` command itself may be disabled. This is critical for operational capabilities requiring elevated privileges or sub-agents.
+
+**Sub-agent Spawning Requires Docker Daemon:** `sessions_spawn` relies on a running Docker daemon to inspect and manage sandbox images. Before attempting to spawn a sub-agent, proactively check if Docker is running (e.g., `docker info` or `colima status` if Colima is used). If not running, instruct the user to start it.
+
+**If `edit` tool consistently fails, use `write` as a reliable workaround for content modification, especially for memory files. This ensures critical updates are not blocked by transient tool issues.**
+
+**OpenClaw Config Schema: `additionalProperties: false` is FATAL.** Many config sections (especially `tools`) use `additionalProperties: false`. Adding ANY unrecognized key to such a section causes the ENTIRE section to silently fail validation — the gateway ignores the whole block and falls back to defaults. ALWAYS check the schema (`gateway(action="config.schema")`) before adding new keys. One invalid key can break valid sibling keys in the same section.
+
+**Internal skills (like `reflect`) are triggered by conversational patterns, not direct shell `exec` calls through `bin/skillrun`. Frame requests naturally to allow the agent runtime to properly invoke them.**
+
+**QNAP NAS Filesystem Access (SSH):** The `admin` SSH session on QNAP NAS (e.g., `192.168.10.233`) may have unexpected restrictions or different PATH environments for `/share/` directories and Docker binaries. Do not assume direct `ls` or `docker` command execution. When blocked, request user to manually verify paths and permissions, or be prepared to use highly specific QNAP commands/API if accessible.
+
+**QNAP NAS Filesystem Access (SSH):** The `admin` SSH session on QNAP NAS (e.g., `192.168.10.233`) may have unexpected restrictions or different PATH environments for `/share/` directories and Docker binaries. Do not assume direct `ls` or `docker` command execution. When blocked, request user to manually verify paths and permissions, or be prepared to use highly specific QNAP commands/API if accessible.
+
 ## Continuity
 
 Each session, you wake up fresh. These files _are_ your memory. Read them. Update them. They're how you persist.
