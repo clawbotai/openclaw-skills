@@ -318,10 +318,41 @@ def build_mode2(args: List[str]) -> tuple:
     return prompt, target_paths, workspace_root
 
 
+def run_quick(
+    prompt: str,
+    context_paths: Optional[List[str]] = None,
+    model: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Submit a quick task to Gemini (single call, fast path).
+
+    Returns the structured response directly (no polling needed).
+    """
+    proc = _spawn_daemon()
+    try:
+        _initialize(proc)
+
+        arguments = {"prompt": prompt}  # type: Dict[str, Any]
+        if context_paths:
+            arguments["contextPaths"] = context_paths
+        if model:
+            arguments["model"] = model
+
+        result = _call_tool(proc, "submit_quick_task", arguments, req_id=1)
+        return result
+
+    finally:
+        proc.terminate()
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+
+
 def main() -> None:
     """CLI entry point."""
     if len(sys.argv) < 3:
         print("Usage:", file=sys.stderr)
+        print("  forge.py quick \"prompt\" [path1 path2 ...]", file=sys.stderr)
         print("  forge.py mode1 \"prompt text\" [path1 path2 ...]", file=sys.stderr)
         print("  forge.py mode2 <operator-skill> <target-skill>", file=sys.stderr)
         sys.exit(1)
@@ -338,20 +369,33 @@ def main() -> None:
     args = sys.argv[2:]
 
     try:
-        if mode == "mode1":
+        if mode == "quick":
+            if not args:
+                raise ForgeError("Quick mode requires a prompt string.")
+            prompt = args[0]
+            context_paths = [os.path.abspath(p) for p in args[1:]] if len(args) > 1 else None
+            result = run_quick(prompt, context_paths)
+            elapsed = time.time() - start_time
+            log_success(mode, args, elapsed)
+            print(json.dumps(result, indent=2))
+
+        elif mode == "mode1":
             prompt, target_paths, workspace_root = build_mode1(args)
+            result = run_forge(prompt, target_paths, workspace_root)
+            elapsed = time.time() - start_time
+            log_success(mode, args, elapsed)
+            print(json.dumps(result, indent=2))
+
         elif mode == "mode2":
             prompt, target_paths, workspace_root = build_mode2(args)
+            result = run_forge(prompt, target_paths, workspace_root)
+            elapsed = time.time() - start_time
+            log_success(mode, args, elapsed)
+            print(json.dumps(result, indent=2))
+
         else:
-            print(f"Unknown mode: {mode}. Use mode1 or mode2.", file=sys.stderr)
+            print(f"Unknown mode: {mode}. Use quick, mode1, or mode2.", file=sys.stderr)
             sys.exit(1)
-
-        result = run_forge(prompt, target_paths, workspace_root)
-        elapsed = time.time() - start_time
-        log_success(mode, args, elapsed)
-
-        # Output result as JSON
-        print(json.dumps(result, indent=2))
 
     except Exception as exc:
         elapsed = time.time() - start_time
