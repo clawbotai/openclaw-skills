@@ -1,137 +1,101 @@
 # Forge Skill
 
-Meta-skill for code generation and skill composition.
+Meta-skill for code generation and skill composition. Both modes delegate to Gemini via the Antigravity Forge Daemon.
 
 ## Trigger
 
 Two modes based on invocation pattern:
 
-### Mode 1: Code Generation
-> `forge "build a REST API for ..."`
+- **Mode 1:** `forge "build a REST API for ..."` — freeform code generation
+- **Mode 2:** `forge lifecycle devops` — apply one skill's methodology against another
 
-Single quoted/described prompt → delegates to Gemini via Antigravity Forge Daemon.
-
-### Mode 2: Skill Application
-> `forge <operator-skill> <target-skill>`
-> `forge lifecycle devops`
-> `forge reflect email-manager`
-
-Two skill names → applies the operator skill's methodology against the target skill.
-
----
-
-## Mode 1: Code Generation (Gemini Forge)
-
-### 1. Ensure the daemon is running
+## CLI
 
 ```bash
-curl -sf http://localhost:2468/health || \
-  (cd /Users/clawai/openclaw/workspace/antigravity-forge-daemon && \
-   node dist/index.js --http &)
+# Mode 1: Code generation
+python3 skills/forge/scripts/forge.py mode1 "build a webhook handler for Stripe"
+
+# Mode 2: Skill × Skill
+python3 skills/forge/scripts/forge.py mode2 lifecycle forge
+python3 skills/forge/scripts/forge.py mode2 reflect email-manager
+python3 skills/forge/scripts/forge.py mode2 security python-backend
 ```
 
-Wait up to 5s for `/health` to return `{"status":"ok"}`.
+Requires `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) in environment.
 
-### 2. Gather context
+Output: JSON `IntegrationManifest` to stdout.
 
-Before submitting, gather relevant workspace context:
-- File tree of the target directory (`find . -type f | head -200`)
-- Key files the user references or that are relevant
-- Any constraints from USER.md (Python 3.9, stdlib-only, etc.)
+## How It Works
 
-Pack into `localContext` (keep under ~30KB).
+### Mode 1: Code Generation
 
-### 3. Submit → Poll → Pull → Apply
+1. Takes the user's freeform prompt + today's memory as context
+2. Spawns the forge daemon (stdio mode)
+3. Submits a forge job via JSON-RPC
+4. Polls every 5s until COMPLETED or FAILED (5 min timeout)
+5. Returns the IntegrationManifest
 
-Use the daemon's 3 MCP tools via HTTP at `http://localhost:2468/mcp`:
+### Mode 2: Skill × Skill
 
-1. **submit_forge_job** — `{ "prompt": "<user prompt>", "localContext": "<context>" }` → get `jobId`
-2. **poll_job_status** — every 5s until `COMPLETED` or `FAILED`
-3. **pull_integration_manifest** — get the `IntegrationManifest`
+1. Reads the **operator** skill's SKILL.md + scripts (the methodology to apply)
+2. Reads the **target** skill's SKILL.md + scripts (what to improve)
+3. Reads today's memory for usage context
+4. Packs everything into a forge job prompt: "Apply operator methodology to target, produce concrete file changes"
+5. Same submit → poll → pull flow as Mode 1
 
-### 4. Apply the manifest
+Common operator skills:
 
-Present summary first, then:
-- `CREATE` / `UPDATE`: Write files with `write` tool
-- `DELETE`: Use `trash` (not `rm`)
-- Run each `requiredCommands` entry
-
----
-
-## Mode 2: Skill Application (Skill × Skill)
-
-### Detection
-
-If the user provides two tokens that match skill names/aliases in `<available_skills>`, this is Mode 2.
-
-Common operator skills and what they do:
-
-| Operator | Action |
-|----------|--------|
-| `lifecycle` | Research→Build→Reflect loop + AIOps analysis against target skill |
-| `reflect` | Analyze recent usage, extract learnings, encode improvements |
-| `sanity-check` | Run INTAKE/MIDPOINT/OUTPUT gates against target skill |
-| `skill-scout` | Evaluate target skill quality across 7 dimensions |
-| `security` | Security audit of target skill's scripts and patterns |
-| `docs-engine` | Generate/improve documentation for target skill |
+| Operator | What it does to the target |
+|----------|---------------------------|
+| `lifecycle` | Research→Build→Reflect evolutionary analysis |
+| `reflect` | Extract learnings from usage, encode improvements |
+| `sanity-check` | Run verification gates |
+| `security` | Security audit scripts and patterns |
+| `docs-engine` | Generate/improve documentation |
 
 Any skill can be an operator — the pattern is general.
 
-### Workflow
+## Applying the Manifest
 
-#### Step 1: Ensure the daemon is running (same as Mode 1)
+The returned `IntegrationManifest` contains:
 
-#### Step 2: Load the operator skill
-Read the operator skill's SKILL.md in full.
-
-#### Step 3: Load the target skill
-Read the target skill's SKILL.md plus key files:
-- `scripts/` directory listing and contents
-- Any `*.py`, `*.sh`, `*.js` implementation files
-- Recent error logs from `memory/skill-errors.json` if relevant
-
-#### Step 4: Gather usage context
-Read today's memory file (`memory/YYYY-MM-DD.md`) and recent files for:
-- Any mentions of the target skill being used today
-- Errors, corrections, or friction encountered
-- Decisions made or patterns discovered
-
-#### Step 5: Build the forge job prompt
-
-Construct the `prompt` as:
-```
-Apply the methodology of [operator skill] to improve [target skill].
-
-OPERATOR METHODOLOGY:
-<full SKILL.md of operator>
-
-USAGE CONTEXT:
-<relevant memory excerpts from today>
-
-Your task: Follow the operator's process against the target skill.
-Produce concrete file changes — improved SKILL.md, new/updated scripts, fixes.
-Do not produce abstract suggestions. Produce actual file content.
+```json
+{
+  "architecturalSummary": "What was done and why",
+  "operations": [
+    { "path": "SKILL.md", "action": "UPDATE", "content": "...", "rationale": "..." },
+    { "path": "scripts/new.py", "action": "CREATE", "content": "...", "rationale": "..." }
+  ],
+  "requiredCommands": ["python3 -m compileall scripts/"]
+}
 ```
 
-Set `localContext` to the target skill's full file contents (SKILL.md + scripts + implementation).
+After reviewing with the user:
+- `CREATE` / `UPDATE`: Write files using the `write` tool
+- `DELETE`: Use `trash` (not `rm`)
+- Run each command in `requiredCommands`
+- Commit: `forge: apply <operator> to <target>`
 
-#### Step 6: Submit → Poll → Pull (same as Mode 1)
+## Monitor Integration
 
-Submit to the forge daemon, poll until complete, pull the manifest.
+Failures are logged to `memory/forge-errors.json` with:
+- Error classification (transient vs deterministic)
+- Timestamps and elapsed time
+- Circuit breaker: 5 failures in 5 minutes = auto-skip
 
-#### Step 7: Apply the manifest
+## Files
 
-- `CREATE` / `UPDATE`: Write files into the target skill's directory
-- `DELETE`: Use `trash`
-- Run `requiredCommands`
-- Commit with message: `forge: apply <operator> to <target>`
+```
+skills/forge/
+├── SKILL.md              # This file
+├── SPECIFICATION.md      # Requirements doc
+└── scripts/
+    ├── forge.py           # Main CLI orchestrator
+    └── monitor_wrapper.py # Error logging + circuit breaker
+```
 
----
+## Dependencies
 
-## Notes
-
-- Daemon runs on port 2468 (HTTP mode), in-memory job store with 1h TTL
-- Gemini API key inherited from OpenClaw environment
-- Build daemon: `cd antigravity-forge-daemon && npm run build`
-- Both modes use the Antigravity Forge Daemon / Gemini for generation
-- For heavy jobs, consider spawning a sub-agent to avoid blocking
+- Antigravity Forge Daemon: `workspace/antigravity-forge-daemon/dist/index.js`
+- Build: `cd antigravity-forge-daemon && npm run build`
+- Env: `GEMINI_API_KEY` or `GOOGLE_API_KEY`
