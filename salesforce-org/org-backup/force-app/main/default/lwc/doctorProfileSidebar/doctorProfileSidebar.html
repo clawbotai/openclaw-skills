@@ -1,0 +1,56 @@
+<template>
+    <c-card_layout title="My Panel">
+        <template lwc:if={doctor}>
+            <div class="slds-text-align_center slds-m-bottom_medium">
+                <div class="slds-avatar slds-avatar_circle slds-avatar_large slds-m-bottom_small"
+                    style="width: 80px; height: 80px;">
+                    <span class="slds-avatar__initials slds-icon-standard-user">{initials}</span>
+                </div>
+                <h2 class="slds-text-heading_medium">{doctor.Name}</h2>
+                <p class="slds-text-color_weak">Doctor</p>
+            </div>
+
+            <div class="slds-border_bottom slds-m-vertical_small"></div>
+
+            <h3 class="slds-text-heading_small slds-m-bottom_small">Clinical Performance</h3>
+            <div class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">Trust Score</p>
+                    <p class="slds-text-heading_medium">{doctor.Trust_Score__c}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">Tier</p>
+                    <p class="slds-text-heading_medium">{doctor.Tier_Formula__c}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">Total Seals</p>
+                    <p class="slds-text-heading_medium">{doctor.Total_Seals__c} Active</p>
+                </div>
+            </div>
+
+            <div class="slds-border_bottom slds-m-vertical_small"></div>
+
+            <h3 class="slds-text-heading_small slds-m-bottom_small">Account Status</h3>
+            <div class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">Status</p>
+                    <p class="slds-text-heading_small">{doctor.Status__c}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">License</p>
+                    <p class="slds-text-body_regular">{doctor.Medical_License__c}</p>
+                </div>
+            </div>
+
+            <div class="slds-border_bottom slds-m-vertical_small"></div>
+
+            <div class="slds-text-caption slds-text-color_weak">
+                Joined: <lightning-formatted-date-time value={doctor.CreatedDate}></lightning-formatted-date-time>
+            </div>
+
+        </template>
+        <template lwc:else>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+    </c-card_layout>
+</template>

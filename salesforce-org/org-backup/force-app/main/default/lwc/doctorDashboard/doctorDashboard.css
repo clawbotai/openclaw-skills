@@ -1,0 +1,107 @@
+@import 'c/azothDesignSystem';
+
+:host {
+    display: block;
+    background: var(--azoth-dark-bg);
+    color: white;
+    font-family: var(--font-body);
+    padding: 2.5rem;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.metric-card {
+    text-align: center;
+}
+
+.gauge-container {
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    margin: 1.5rem auto;
+}
+
+.gauge-svg {
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: var(--azoth-border);
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: var(--azoth-blue);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-out;
+}
+
+.gauge-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--azoth-blue);
+}
+
+.ratio-value {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+    color: var(--azoth-blue);
+}
+
+.progress-bar {
+    background: var(--azoth-border);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    background: var(--azoth-blue);
+    height: 100%;
+}
+
+.azoth-btn-primary {
+    background: linear-gradient(135deg, var(--azoth-blue), #007ACC);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.azoth-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--azoth-blue-glow);
+}
+
+.review-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--azoth-border);
+}

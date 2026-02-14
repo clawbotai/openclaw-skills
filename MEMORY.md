@@ -17,6 +17,7 @@
 - Design: Industrial Brutalist. Void Black #212123, Titanium #b2b2b2, Signal White #FFFFFF. IBM Plex Mono + Asap.
 - Crypto payments: BIP-32 HD wallet, USDT/ETH, Etherscan verification. All prices $1 for testing.
 - **Blocker**: CF Pages Functions returning 405 after D1 binding work. Root cause unclear.
+- **Hardlink path migration DONE** (2026-02-13): 567 movies + 389 series migrated to `/data/Library/` paths; cross-seed image pulled, needs config
 - Brand assets: `assets/torr_hd_brandbook.pdf`, manufacturing PDFs in `assets/isobar/`, `assets/poise/`
 - GitHub: clawbotai/torr-statics (private)
 
@@ -50,7 +51,7 @@
 - **D1**: `torr-orders` database provisioned (ID: `6f241383-60fb-45d9-a75b-b0d4ead7ee2a`)
 - **KV**: `ORDERS` namespace (ID: `9fcb14464b6a4ee595e0226efa4eff97`)
 - **Crypto wallet**: `0xA010807fAeef36c957CA80F17bA01b3922f7901C`
-- **Hetzner**: Account created, manual verification pending
+- **Hetzner**: New account active, VPS provisioned, Mailcow email hosting functional
 - **Email**: clawaibot@icloud.com (iCloud requires BODY.PEEK[] not RFC822)
 - **QNAP NAS**: TBS-h574TX, QuTS Hero h6.0.0 Beta, IP 192.168.10.233, SSH enabled
   - Docker at `/share/ZFS2_DATA/.qpkg/container-station/bin/docker` (not in PATH)
@@ -67,6 +68,14 @@
 6. `bin/skillrun` for all skill invocations
 7. Back up before destructive replacements
 8. Debug image coordinates with red marker first
+
+### Antigravity Forge Daemon
+- CQRS async MCP server: submit→poll→pull pattern for Gemini code generation
+- Stack: Node.js ESM, strict TS, @modelcontextprotocol/sdk, @google/genai, zod
+- 3 MCP tools: submit_forge_job, poll_job_status, pull_integration_manifest
+- Gemini responseSchema forces structured JSON (IntegrationManifest with file operations)
+- GitHub: clawbotai/antigravity-forge (private), Manuel Velez has write access
+- Local: /workspace/antigravity-forge-daemon/
 
 ## Key Decisions
 - architect_skill.py is for scaffolding, not rebuilding complex systems

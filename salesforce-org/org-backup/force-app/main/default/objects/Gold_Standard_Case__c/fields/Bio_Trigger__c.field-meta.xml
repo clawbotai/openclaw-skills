@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bio_Trigger__c</fullName>
+    <externalId>false</externalId>
+    <label>Bio Trigger</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>UPON_WAKING</fullName>
+                <default>true</default>
+                <label>Upon Waking</label>
+            </value>
+            <value>
+                <fullName>PRE_BED</fullName>
+                <default>false</default>
+                <label>Pre-Bed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

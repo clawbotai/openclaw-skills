@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-card slds-p-around_medium">
+        <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium">
+            <h2 class="slds-text-heading_small">✅ Pending Patients for Activation ({taskCount})</h2>
+            <button class="slds-button slds-button_brand" onclick={handleViewAll}>View All</button>
+        </div>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error loading tasks: {error}</p>
+        </template>
+
+        <div style="height: 300px;">
+            <lightning-datatable key-field="Id" data={tasks} columns={columns} hide-checkbox-column
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </div>
+    </div>
+</template>

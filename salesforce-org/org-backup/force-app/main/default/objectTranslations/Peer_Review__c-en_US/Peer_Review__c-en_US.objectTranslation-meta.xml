@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Peer Review</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Peer_Review</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- This review verdict has been sealed and cannot be modified. --></errorMessage>
+        <name>Prevent_Update_on_Completed_Review</name>
+    </validationRules>
+</CustomObjectTranslation>

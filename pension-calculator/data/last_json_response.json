@@ -1,0 +1,3281 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "Desde": "01/06/1995",
+      "Hasta": "30/06/1995",
+      "Salario": 420000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/1995",
+      "Hasta": "31/07/1995",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/1995",
+      "Hasta": "31/08/1995",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/1995",
+      "Hasta": "30/09/1995",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/1995",
+      "Hasta": "31/10/1995",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/1995",
+      "Hasta": "30/11/1995",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/1995",
+      "Hasta": "31/12/1995",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/1996",
+      "Hasta": "31/01/1996",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/1996",
+      "Hasta": "29/02/1996",
+      "Salario": 0.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/1996",
+      "Hasta": "31/03/1996",
+      "Salario": 0.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/1996",
+      "Hasta": "30/04/1996",
+      "Salario": 0.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/1996",
+      "Hasta": "31/05/1996",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/1996",
+      "Hasta": "30/06/1996",
+      "Salario": 0.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/1996",
+      "Hasta": "31/07/1996",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/1996",
+      "Hasta": "31/08/1996",
+      "Salario": 200000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/1996",
+      "Hasta": "30/09/1996",
+      "Salario": 0.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/1996",
+      "Hasta": "31/10/1996",
+      "Salario": 0.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/1996",
+      "Hasta": "30/11/1996",
+      "Salario": 200000.0,
+      "Semanas": 3.14,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 3.14
+    },
+    {
+      "Desde": "01/12/1996",
+      "Hasta": "31/12/1996",
+      "Salario": 200000.0,
+      "Semanas": 0.0,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 0.0
+    },
+    {
+      "Desde": "01/01/1997",
+      "Hasta": "31/01/1997",
+      "Salario": 200000.0,
+      "Semanas": 0.0,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 0.0
+    },
+    {
+      "Desde": "01/02/1997",
+      "Hasta": "28/02/1997",
+      "Salario": 200000.0,
+      "Semanas": 0.0,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 0.0
+    },
+    {
+      "Desde": "01/03/1997",
+      "Hasta": "31/03/1997",
+      "Salario": 200000.0,
+      "Semanas": 0.0,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 0.0
+    },
+    {
+      "Desde": "01/04/1997",
+      "Hasta": "30/04/1997",
+      "Salario": 250000.0,
+      "Semanas": 0.0,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 0.0
+    },
+    {
+      "Desde": "01/05/1997",
+      "Hasta": "31/05/1997",
+      "Salario": 250000.0,
+      "Semanas": 0.0,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 0.0
+    },
+    {
+      "Desde": "01/09/1997",
+      "Hasta": "30/09/1997",
+      "Salario": 172005.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/1997",
+      "Hasta": "31/10/1997",
+      "Salario": 172005.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/1997",
+      "Hasta": "30/11/1997",
+      "Salario": 172005.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/1997",
+      "Hasta": "31/12/1997",
+      "Salario": 172005.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/1998",
+      "Hasta": "31/01/1998",
+      "Salario": 203826.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/1998",
+      "Hasta": "28/02/1998",
+      "Salario": 203826.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/1998",
+      "Hasta": "31/03/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/1998",
+      "Hasta": "30/04/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/1998",
+      "Hasta": "31/05/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/1998",
+      "Hasta": "30/06/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/1998",
+      "Hasta": "31/07/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/1998",
+      "Hasta": "31/08/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/1998",
+      "Hasta": "30/09/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/1998",
+      "Hasta": "31/10/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/1998",
+      "Hasta": "30/11/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/1998",
+      "Hasta": "31/12/1998",
+      "Salario": 204000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/1999",
+      "Hasta": "31/01/1999",
+      "Salario": 237000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/1999",
+      "Hasta": "28/02/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/1999",
+      "Hasta": "31/03/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/1999",
+      "Hasta": "30/04/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/1999",
+      "Hasta": "31/05/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/1999",
+      "Hasta": "30/06/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/1999",
+      "Hasta": "31/07/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/1999",
+      "Hasta": "31/08/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/1999",
+      "Hasta": "30/09/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/1999",
+      "Hasta": "31/10/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/1999",
+      "Hasta": "30/11/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/1999",
+      "Hasta": "31/12/1999",
+      "Salario": 245000.0,
+      "Semanas": 4.14,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.14
+    },
+    {
+      "Desde": "01/01/2000",
+      "Hasta": "31/01/2000",
+      "Salario": 260000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2000",
+      "Hasta": "29/02/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.14,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.14
+    },
+    {
+      "Desde": "01/03/2000",
+      "Hasta": "31/03/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2000",
+      "Hasta": "30/04/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2000",
+      "Hasta": "31/05/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2000",
+      "Hasta": "30/06/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2000",
+      "Hasta": "31/07/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2000",
+      "Hasta": "31/08/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2000",
+      "Hasta": "30/09/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2000",
+      "Hasta": "31/10/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2000",
+      "Hasta": "30/11/2000",
+      "Salario": 269050.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2000",
+      "Hasta": "31/12/2000",
+      "Salario": 269000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2001",
+      "Hasta": "31/01/2001",
+      "Salario": 286000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2001",
+      "Hasta": "28/02/2001",
+      "Salario": 323000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2001",
+      "Hasta": "31/03/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2001",
+      "Hasta": "30/04/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2001",
+      "Hasta": "31/05/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2001",
+      "Hasta": "30/06/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2001",
+      "Hasta": "31/07/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2001",
+      "Hasta": "31/08/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2001",
+      "Hasta": "30/09/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2001",
+      "Hasta": "31/10/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2001",
+      "Hasta": "30/11/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2001",
+      "Hasta": "31/12/2001",
+      "Salario": 296000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2002",
+      "Hasta": "31/01/2002",
+      "Salario": 309000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2002",
+      "Hasta": "28/02/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2002",
+      "Hasta": "31/03/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2002",
+      "Hasta": "30/04/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.14,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.14
+    },
+    {
+      "Desde": "01/05/2002",
+      "Hasta": "31/05/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2002",
+      "Hasta": "30/06/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2002",
+      "Hasta": "31/07/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2002",
+      "Hasta": "31/08/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2002",
+      "Hasta": "30/09/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2002",
+      "Hasta": "31/10/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2002",
+      "Hasta": "30/11/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2002",
+      "Hasta": "31/12/2002",
+      "Salario": 340000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2003",
+      "Hasta": "31/01/2003",
+      "Salario": 356000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2003",
+      "Hasta": "28/02/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2003",
+      "Hasta": "31/03/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2003",
+      "Hasta": "30/04/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2003",
+      "Hasta": "31/05/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2003",
+      "Hasta": "30/06/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2003",
+      "Hasta": "31/07/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2003",
+      "Hasta": "31/08/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2003",
+      "Hasta": "30/09/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2003",
+      "Hasta": "31/10/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2003",
+      "Hasta": "30/11/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2003",
+      "Hasta": "31/12/2003",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2004",
+      "Hasta": "31/01/2004",
+      "Salario": 367000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2004",
+      "Hasta": "29/02/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2004",
+      "Hasta": "31/03/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2004",
+      "Hasta": "30/04/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2004",
+      "Hasta": "31/05/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2004",
+      "Hasta": "30/06/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2004",
+      "Hasta": "31/07/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2004",
+      "Hasta": "31/08/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2004",
+      "Hasta": "30/09/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2004",
+      "Hasta": "31/10/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2004",
+      "Hasta": "30/11/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2004",
+      "Hasta": "31/12/2004",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2005",
+      "Hasta": "31/01/2005",
+      "Salario": 404000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2005",
+      "Hasta": "28/02/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2005",
+      "Hasta": "31/03/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2005",
+      "Hasta": "30/04/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2005",
+      "Hasta": "31/05/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2005",
+      "Hasta": "30/06/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2005",
+      "Hasta": "31/07/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2005",
+      "Hasta": "31/08/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2005",
+      "Hasta": "30/09/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2005",
+      "Hasta": "31/10/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2005",
+      "Hasta": "30/11/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2005",
+      "Hasta": "31/12/2005",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2006",
+      "Hasta": "31/01/2006",
+      "Salario": 430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2006",
+      "Hasta": "28/02/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2006",
+      "Hasta": "31/03/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2006",
+      "Hasta": "30/04/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2006",
+      "Hasta": "31/05/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2006",
+      "Hasta": "30/06/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2006",
+      "Hasta": "31/07/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2006",
+      "Hasta": "31/08/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2006",
+      "Hasta": "30/09/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2006",
+      "Hasta": "31/10/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2006",
+      "Hasta": "30/11/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2006",
+      "Hasta": "31/12/2006",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2007",
+      "Hasta": "31/01/2007",
+      "Salario": 500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2007",
+      "Hasta": "28/02/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2007",
+      "Hasta": "31/03/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2007",
+      "Hasta": "30/04/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2007",
+      "Hasta": "31/05/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2007",
+      "Hasta": "30/06/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2007",
+      "Hasta": "31/07/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2007",
+      "Hasta": "31/08/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2007",
+      "Hasta": "30/09/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2007",
+      "Hasta": "31/10/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2007",
+      "Hasta": "30/11/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2007",
+      "Hasta": "31/12/2007",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2008",
+      "Hasta": "31/01/2008",
+      "Salario": 550000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2008",
+      "Hasta": "29/02/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2008",
+      "Hasta": "31/03/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2008",
+      "Hasta": "30/04/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2008",
+      "Hasta": "31/05/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2008",
+      "Hasta": "30/06/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2008",
+      "Hasta": "31/07/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2008",
+      "Hasta": "31/08/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2008",
+      "Hasta": "30/09/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2008",
+      "Hasta": "31/10/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2008",
+      "Hasta": "30/11/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2008",
+      "Hasta": "31/12/2008",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2009",
+      "Hasta": "31/01/2009",
+      "Salario": 588000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2009",
+      "Hasta": "28/02/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2009",
+      "Hasta": "31/03/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2009",
+      "Hasta": "30/04/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2009",
+      "Hasta": "31/05/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2009",
+      "Hasta": "30/06/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2009",
+      "Hasta": "31/07/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2009",
+      "Hasta": "31/08/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2009",
+      "Hasta": "30/09/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2009",
+      "Hasta": "31/10/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2009",
+      "Hasta": "30/11/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2009",
+      "Hasta": "31/12/2009",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2010",
+      "Hasta": "31/01/2010",
+      "Salario": 636000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2010",
+      "Hasta": "28/02/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2010",
+      "Hasta": "31/03/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2010",
+      "Hasta": "30/04/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2010",
+      "Hasta": "31/05/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2010",
+      "Hasta": "30/06/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2010",
+      "Hasta": "31/07/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2010",
+      "Hasta": "31/08/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2010",
+      "Hasta": "30/09/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2010",
+      "Hasta": "31/10/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2010",
+      "Hasta": "30/11/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2010",
+      "Hasta": "31/12/2010",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2011",
+      "Hasta": "31/01/2011",
+      "Salario": 660000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2011",
+      "Hasta": "28/02/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2011",
+      "Hasta": "31/03/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2011",
+      "Hasta": "30/04/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2011",
+      "Hasta": "31/05/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2011",
+      "Hasta": "30/06/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2011",
+      "Hasta": "31/07/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2011",
+      "Hasta": "31/08/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2011",
+      "Hasta": "30/09/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2011",
+      "Hasta": "31/10/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2011",
+      "Hasta": "30/11/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2011",
+      "Hasta": "31/12/2011",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2012",
+      "Hasta": "31/01/2012",
+      "Salario": 693000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2012",
+      "Hasta": "29/02/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2012",
+      "Hasta": "31/03/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2012",
+      "Hasta": "30/04/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2012",
+      "Hasta": "31/05/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2012",
+      "Hasta": "30/06/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2012",
+      "Hasta": "31/07/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2012",
+      "Hasta": "31/08/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2012",
+      "Hasta": "30/09/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2012",
+      "Hasta": "31/10/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2012",
+      "Hasta": "30/11/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2012",
+      "Hasta": "31/12/2012",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2013",
+      "Hasta": "31/01/2013",
+      "Salario": 735000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2013",
+      "Hasta": "28/02/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2013",
+      "Hasta": "31/03/2013",
+      "Salario": 771250.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2013",
+      "Hasta": "30/04/2013",
+      "Salario": 771250.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2013",
+      "Hasta": "31/05/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2013",
+      "Hasta": "30/06/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2013",
+      "Hasta": "31/07/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2013",
+      "Hasta": "31/08/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2013",
+      "Hasta": "30/09/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2013",
+      "Hasta": "31/10/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2013",
+      "Hasta": "30/11/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2013",
+      "Hasta": "31/12/2013",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2014",
+      "Hasta": "31/01/2014",
+      "Salario": 771000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2014",
+      "Hasta": "28/02/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2014",
+      "Hasta": "31/03/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2014",
+      "Hasta": "30/04/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2014",
+      "Hasta": "31/05/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2014",
+      "Hasta": "30/06/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2014",
+      "Hasta": "31/07/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2014",
+      "Hasta": "31/08/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2014",
+      "Hasta": "30/09/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2014",
+      "Hasta": "31/10/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2014",
+      "Hasta": "30/11/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2014",
+      "Hasta": "31/12/2014",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2015",
+      "Hasta": "31/01/2015",
+      "Salario": 864000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2015",
+      "Hasta": "28/02/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2015",
+      "Hasta": "31/03/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2015",
+      "Hasta": "30/04/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2015",
+      "Hasta": "31/05/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2015",
+      "Hasta": "30/06/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2015",
+      "Hasta": "31/07/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2015",
+      "Hasta": "31/08/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2015",
+      "Hasta": "30/09/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2015",
+      "Hasta": "31/10/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2015",
+      "Hasta": "30/11/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2015",
+      "Hasta": "31/12/2015",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2016",
+      "Hasta": "31/01/2016",
+      "Salario": 898000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2016",
+      "Hasta": "29/02/2016",
+      "Salario": 961000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2016",
+      "Hasta": "31/03/2016",
+      "Salario": 961000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2016",
+      "Hasta": "30/04/2016",
+      "Salario": 961000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2016",
+      "Hasta": "31/05/2016",
+      "Salario": 961000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2016",
+      "Hasta": "30/06/2016",
+      "Salario": 961000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2016",
+      "Hasta": "31/07/2016",
+      "Salario": 961000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2016",
+      "Hasta": "31/08/2016",
+      "Salario": 1800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2016",
+      "Hasta": "30/09/2016",
+      "Salario": 1800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2016",
+      "Hasta": "31/10/2016",
+      "Salario": 1800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2016",
+      "Hasta": "30/11/2016",
+      "Salario": 1800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2016",
+      "Hasta": "31/12/2016",
+      "Salario": 1800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2017",
+      "Hasta": "31/01/2017",
+      "Salario": 1800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2017",
+      "Hasta": "28/02/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2017",
+      "Hasta": "31/03/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2017",
+      "Hasta": "30/04/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2017",
+      "Hasta": "31/05/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2017",
+      "Hasta": "30/06/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2017",
+      "Hasta": "31/07/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2017",
+      "Hasta": "31/08/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2017",
+      "Hasta": "30/09/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2017",
+      "Hasta": "31/10/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2017",
+      "Hasta": "30/11/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2017",
+      "Hasta": "31/12/2017",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2018",
+      "Hasta": "31/01/2018",
+      "Salario": 2500000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2018",
+      "Hasta": "28/02/2018",
+      "Salario": 3000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2018",
+      "Hasta": "31/03/2018",
+      "Salario": 3000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2018",
+      "Hasta": "30/04/2018",
+      "Salario": 3000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2018",
+      "Hasta": "31/05/2018",
+      "Salario": 3000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2018",
+      "Hasta": "30/06/2018",
+      "Salario": 3000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2018",
+      "Hasta": "31/07/2018",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2018",
+      "Hasta": "31/08/2018",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2018",
+      "Hasta": "30/09/2018",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2018",
+      "Hasta": "31/10/2018",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2018",
+      "Hasta": "30/11/2018",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2018",
+      "Hasta": "31/12/2018",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2019",
+      "Hasta": "31/01/2019",
+      "Salario": 4380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2019",
+      "Hasta": "28/02/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2019",
+      "Hasta": "31/03/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2019",
+      "Hasta": "30/04/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2019",
+      "Hasta": "31/05/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2019",
+      "Hasta": "30/06/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2019",
+      "Hasta": "31/07/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2019",
+      "Hasta": "31/08/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2019",
+      "Hasta": "30/09/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2019",
+      "Hasta": "31/10/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2019",
+      "Hasta": "30/11/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2019",
+      "Hasta": "31/12/2019",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2020",
+      "Hasta": "31/01/2020",
+      "Salario": 5380000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2020",
+      "Hasta": "29/02/2020",
+      "Salario": 5000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2020",
+      "Hasta": "31/03/2020",
+      "Salario": 5766667.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2020",
+      "Hasta": "30/04/2020",
+      "Salario": 3038902.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2020",
+      "Hasta": "31/05/2020",
+      "Salario": 877803.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2020",
+      "Hasta": "30/06/2020",
+      "Salario": 877803.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2020",
+      "Hasta": "31/07/2020",
+      "Salario": 877803.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2020",
+      "Hasta": "31/08/2020",
+      "Salario": 6000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2020",
+      "Hasta": "30/09/2020",
+      "Salario": 6000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2020",
+      "Hasta": "31/10/2020",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2020",
+      "Hasta": "30/11/2020",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2020",
+      "Hasta": "31/12/2020",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2021",
+      "Hasta": "31/01/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2021",
+      "Hasta": "28/02/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2021",
+      "Hasta": "31/03/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2021",
+      "Hasta": "30/04/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2021",
+      "Hasta": "31/05/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2021",
+      "Hasta": "30/06/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2021",
+      "Hasta": "31/07/2021",
+      "Salario": 8000001.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2021",
+      "Hasta": "31/08/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2021",
+      "Hasta": "30/09/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2021",
+      "Hasta": "31/10/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2021",
+      "Hasta": "30/11/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2021",
+      "Hasta": "31/12/2021",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2022",
+      "Hasta": "31/01/2022",
+      "Salario": 8000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2022",
+      "Hasta": "28/02/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2022",
+      "Hasta": "31/03/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2022",
+      "Hasta": "30/04/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2022",
+      "Hasta": "31/05/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2022",
+      "Hasta": "30/06/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2022",
+      "Hasta": "31/07/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2022",
+      "Hasta": "31/08/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2022",
+      "Hasta": "30/09/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2022",
+      "Hasta": "31/10/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2022",
+      "Hasta": "30/11/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2022",
+      "Hasta": "31/12/2022",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2023",
+      "Hasta": "31/01/2023",
+      "Salario": 9800000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2023",
+      "Hasta": "28/02/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2023",
+      "Hasta": "31/03/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2023",
+      "Hasta": "30/04/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2023",
+      "Hasta": "31/05/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2023",
+      "Hasta": "30/06/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2023",
+      "Hasta": "31/07/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2023",
+      "Hasta": "31/08/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2023",
+      "Hasta": "30/09/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2023",
+      "Hasta": "31/10/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2023",
+      "Hasta": "30/11/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2023",
+      "Hasta": "31/12/2023",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2024",
+      "Hasta": "31/01/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2024",
+      "Hasta": "29/02/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2024",
+      "Hasta": "31/03/2024",
+      "Salario": 11730000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2024",
+      "Hasta": "30/04/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2024",
+      "Hasta": "31/05/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2024",
+      "Hasta": "30/06/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2024",
+      "Hasta": "31/07/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2024",
+      "Hasta": "31/08/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2024",
+      "Hasta": "30/09/2024",
+      "Salario": 10780000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2024",
+      "Hasta": "31/10/2024",
+      "Salario": 12930000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2024",
+      "Hasta": "30/11/2024",
+      "Salario": 12430000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/12/2024",
+      "Hasta": "31/12/2024",
+      "Salario": 11730000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/01/2025",
+      "Hasta": "31/01/2025",
+      "Salario": 11730000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/02/2025",
+      "Hasta": "28/02/2025",
+      "Salario": 11730000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/03/2025",
+      "Hasta": "31/03/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/04/2025",
+      "Hasta": "30/04/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/05/2025",
+      "Hasta": "31/05/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/06/2025",
+      "Hasta": "30/06/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/07/2025",
+      "Hasta": "31/07/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/08/2025",
+      "Hasta": "31/08/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/09/2025",
+      "Hasta": "30/09/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/10/2025",
+      "Hasta": "31/10/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "01/11/2025",
+      "Hasta": "30/11/2025",
+      "Salario": 15000000.0,
+      "Semanas": 4.29,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 4.29
+    },
+    {
+      "Desde": "2024-12-31",
+      "Hasta": "2024-12-31",
+      "Salario": 0.0,
+      "Semanas": 293.5,
+      "Lic": 0,
+      "Sim": 0,
+      "Total": 293.5
+    }
+  ]
+}

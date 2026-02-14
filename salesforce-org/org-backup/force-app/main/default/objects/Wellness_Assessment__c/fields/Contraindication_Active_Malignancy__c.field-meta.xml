@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contraindication_Active_Malignancy__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Active Cancer or History of Malignancy in last 5 years?</description>
+    <externalId>false</externalId>
+    <label>Active Cancer / Malignancy History?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

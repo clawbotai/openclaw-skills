@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- On a scale of 1-10, how is your pain level? --></help>
+    <label><!-- Injury / Pain Level (1-10) --></label>
+    <name>Injury_Pain_Level__c</name>
+</CustomFieldTranslation>

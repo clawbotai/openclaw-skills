@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Bio Trigger --></label>
+    <name>Bio_Trigger__c</name>
+    <picklistValues>
+        <masterLabel>Pre-Bed</masterLabel>
+        <translation><!-- Pre-Bed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Upon Waking</masterLabel>
+        <translation><!-- Upon Waking --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

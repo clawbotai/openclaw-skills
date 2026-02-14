@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "d481c0e5-2c34-4c66-a16a-8ec8948410b2",
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "configurationTags" : [ ],
+  "devName" : "Peer_Review_Detail__c",
+  "id" : "beee6abd-e3ca-4bdc-9ee5-d15e5528ea26",
+  "label" : "Peer Review Detail",
+  "objectApiName" : "Peer_Review__c",
+  "routeType" : "detail-a02",
+  "type" : "route",
+  "urlPrefix" : "peer-review"
+}

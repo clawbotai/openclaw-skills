@@ -8,4 +8,4 @@
 ## Active Blockers
 
 - **CF Pages Functions 405** — All API endpoints returning 405 after D1 binding. Needs debug via `wrangler pages functions tail` or fresh deploy.
-- **Hetzner verification** — Manual review pending for VPS provisioning.
+- ~~**Hetzner verification**~~ — Resolved. New account, Mailcow running.

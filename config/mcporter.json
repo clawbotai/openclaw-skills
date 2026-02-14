@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "antigravity-forge": {
+      "command": "node",
+      "args": ["/Users/clawai/openclaw/workspace/antigravity-forge-daemon/dist/index.js"],
+      "env": {
+        "GEMINI_API_KEY": "AIzaSyCR0YsD0FDcWYATvwMq7gQHRPl8QXRHaYI"
+      },
+      "keepAlive": true
+    }
+  },
+  "imports": []
+}

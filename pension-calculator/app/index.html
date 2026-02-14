@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Pensión — Colombia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen">
+
+<!-- Error Toast -->
+<div id="error-toast" class="error-toast hidden"></div>
+
+<!-- Header -->
+<header class="bg-slate-900 border-b border-slate-700 py-4 px-6">
+  <div class="max-w-4xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">P</div>
+      <div>
+        <h1 class="text-white font-semibold text-lg leading-tight" data-i18n="app.title">Calculadora Pensional</h1>
+        <p class="text-slate-400 text-xs" data-i18n="app.subtitle">Régimen de Prima Media • Colombia</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="btn-lang" onclick="toggleLanguage()" class="text-slate-400 hover:text-white text-xs border border-slate-600 px-2 py-1 rounded">English</button>
+      <button id="btn-start-over" class="text-slate-400 hover:text-white text-sm hidden" data-i18n="app.startOver">← Inicio</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-8">
+
+  <!-- VISTA 1: Bienvenida -->
+  <div id="view-welcome" class="hidden">
+    <div class="text-center mb-12 mt-8">
+      <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6">P</div>
+      <h2 class="text-3xl font-bold text-white mb-3" data-i18n="welcome.title">Calcule su Pensión</h2>
+      <p class="text-slate-400 max-w-md mx-auto" data-i18n="welcome.desc">Analice su historia laboral de Colpensiones y conozca su proyección pensional bajo la Ley 797 de 2003</p>
+    </div>
+
+    <div class="max-w-md mx-auto">
+      <label class="block text-slate-300 text-sm font-medium mb-2" data-i18n="welcome.cedula">Número de Cédula</label>
+      <input type="text" id="input-cedula" placeholder="Ingrese su número de cédula" 
+             class="mb-4" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+      <button id="btn-cedula" 
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              data-i18n="welcome.continue">
+        Continuar
+      </button>
+      <p class="text-slate-500 text-xs text-center mt-4">
+        Su cédula se usa como contraseña para descifrar el PDF de Colpensiones.<br>
+        No almacenamos ningún dato — todo se procesa en su navegador.
+      </p>
+    </div>
+  </div>
+
+  <!-- VISTA 2: Carga de archivo -->
+  <div id="view-upload" class="hidden">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-white mb-2">Cargue su documento</h2>
+      <p class="text-slate-400">Suba el PDF o Excel de su historia laboral de Colpensiones</p>
+    </div>
+
+    <div id="drop-zone" class="drop-zone max-w-lg mx-auto rounded-xl p-12 text-center">
+      <div class="text-5xl mb-4">📄</div>
+      <p class="text-white font-medium mb-2">Arrastre su archivo aquí</p>
+      <p class="text-slate-400 text-sm mb-4">o haga clic para seleccionar</p>
+      <p class="text-slate-500 text-xs">PDF (protegido con cédula) o Excel • Máx. 20MB</p>
+      <input type="file" id="file-input" accept=".pdf,.xlsx,.xls,.csv" class="hidden">
+    </div>
+    <p id="file-name" class="text-center text-slate-400 text-sm mt-4"></p>
+
+    <div class="text-center mt-6">
+      <button id="btn-back-upload" class="text-slate-400 hover:text-white text-sm">← Cambiar cédula</button>
+    </div>
+  </div>
+
+  <!-- VISTA: Cargando -->
+  <div id="view-loading" class="hidden">
+    <div class="text-center py-20">
+      <div class="spinner mx-auto mb-6"></div>
+      <p id="loading-text" class="text-white text-lg">Procesando...</p>
+      <p class="text-slate-400 text-sm mt-2">Todo se procesa localmente en su navegador</p>
+    </div>
+  </div>
+
+  <!-- VISTA 3: Términos de Servicio -->
+  <div id="view-terms" class="hidden">
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h2 class="text-xl font-bold text-white mb-4">Términos de Servicio</h2>
+        
+        <div class="terms-content bg-slate-900 rounded-lg p-4 text-sm text-slate-300 leading-relaxed mb-6">
+          <p class="mb-3"><strong>AVISO LEGAL IMPORTANTE</strong></p>
+          <p class="mb-3">Esta herramienta es un <strong>estimador informativo</strong> y NO constituye asesoría legal, financiera ni pensional certificada.</p>
+          <p class="mb-3"><strong>1. Naturaleza del cálculo:</strong> Los resultados son estimaciones basadas en la información extraída de su documento de Colpensiones y las fórmulas establecidas en la Ley 797 de 2003 y normas concordantes. Los cálculos pueden diferir de la liquidación oficial de Colpensiones.</p>
+          <p class="mb-3"><strong>2. Sin almacenamiento de datos:</strong> Toda la información se procesa exclusivamente en su navegador. No almacenamos, transmitimos ni recopilamos su cédula, documento ni datos personales en ningún servidor.</p>
+          <p class="mb-3"><strong>3. Precisión:</strong> Los valores de IPC utilizados para indexación son aproximaciones. El cálculo oficial de Colpensiones puede usar valores diferentes. Los resultados deben tomarse como referencia, no como liquidación definitiva.</p>
+          <p class="mb-3"><strong>4. No reemplaza asesoría profesional:</strong> Para decisiones importantes sobre su pensión, consulte con un abogado laboralista o asesor pensional certificado.</p>
+          <p class="mb-3"><strong>5. Limitación de responsabilidad:</strong> No nos hacemos responsables por decisiones tomadas con base en los resultados de esta herramienta.</p>
+          <p><strong>6. Aceptación:</strong> Al continuar, usted acepta que comprende la naturaleza estimativa de esta herramienta y que la usa bajo su propia responsabilidad.</p>
+        </div>
+
+        <label class="flex items-center gap-3 mb-4 cursor-pointer">
+          <input type="checkbox" id="terms-checkbox" class="w-5 h-5 rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+          <span class="text-slate-300 text-sm">He leído y acepto los términos de servicio</span>
+        </label>
+
+        <button id="btn-accept-terms"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+          Acepto y Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISTA 4: Resultados Gratuitos -->
+  <div id="view-free" class="hidden">
+    <div class="mb-8">
+      <!-- Semanas totales -->
+      <div class="bg-slate-800 rounded-xl p-8 border border-slate-700 text-center mb-6">
+        <p class="text-slate-400 text-sm uppercase tracking-wider mb-2">Total Semanas Cotizadas</p>
+        <p id="total-weeks" class="text-6xl font-bold text-white mb-2">0</p>
+        <div id="verification-badge" class="text-sm"></div>
+      </div>
+
+      <!-- Edad y género -->
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-slate-400 text-sm mb-1">Su edad actual</label>
+          <input type="number" id="input-age" min="18" max="80" value="55" class="text-center">
+        </div>
+        <div>
+          <label class="block text-slate-400 text-sm mb-1">Género</label>
+          <select id="select-gender" class="w-full">
+            <option value="M">Masculino (62 años)</option>
+            <option value="F">Femenino (57 años)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Empleadores -->
+      <div class="mb-6">
+        <h3 class="text-white font-semibold text-lg mb-3">Historial de Empleadores</h3>
+        <div id="employer-list"></div>
+      </div>
+
+      <!-- Teaser de pensión -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 text-center relative overflow-hidden">
+        <p class="text-slate-400 text-sm mb-2">Mesada Pensional Estimada</p>
+        <p id="pension-teaser" class="text-4xl font-bold text-green-400 blur-teaser">$0</p>
+        <div class="absolute inset-0 flex items-center justify-center bg-slate-800/70 backdrop-blur-sm">
+          <div class="text-center">
+            <p class="text-white font-semibold mb-2">🔒 Contenido Premium</p>
+            <p class="text-slate-400 text-sm mb-4">Desbloquee el reporte completo</p>
+            <button id="btn-paywall" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+              Desbloquear Reporte • $350.000 COP
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISTA 5: Paywall -->
+  <div id="view-paywall" class="hidden">
+    <div class="max-w-lg mx-auto text-center py-8">
+      <div class="text-5xl mb-6">🔓</div>
+      <h2 class="text-2xl font-bold text-white mb-3">Desbloquear Reporte Completo</h2>
+      <p class="text-slate-400 mb-8">Acceda a todos los cálculos detallados de su pensión</p>
+
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6 text-left">
+        <h3 class="text-white font-semibold mb-4">Incluye:</h3>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-slate-300">
+            <span class="text-green-400">✓</span> Mesada pensional estimada (IBL detallado)
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <span class="text-green-400">✓</span> Tasa de reemplazo con desglose
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <span class="text-green-400">✓</span> Estado de elegibilidad y fecha proyectada
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <span class="text-green-400">✓</span> Buscador de Meta (pensión objetivo)
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <span class="text-green-400">✓</span> Calculadora de carga total (independientes)
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <span class="text-green-400">✓</span> Indemnización sustitutiva (si aplica)
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-blue-900/50 border border-blue-600 rounded-xl p-6 mb-6">
+        <p class="text-3xl font-bold text-white mb-1">$350.000 <span class="text-lg text-slate-400">COP</span></p>
+        <p class="text-slate-400 text-sm">Pago único — acceso inmediato</p>
+      </div>
+
+      <!-- MVP: Botón de pago simulado -->
+      <button id="btn-simulate-payment"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors mb-3">
+        💳 Pagar con MercadoPago
+      </button>
+      <p class="text-slate-500 text-xs">(MVP: el pago se simula al hacer clic)</p>
+
+      <div class="mt-6">
+        <button id="btn-back-free" class="text-slate-400 hover:text-white text-sm">← Volver a resultados gratuitos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISTA 6: Dashboard Premium -->
+  <div id="view-dashboard" class="hidden">
+    
+    <!-- Mesada Pensional -->
+    <div class="bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl p-8 border border-blue-700 text-center mb-6">
+      <p class="text-blue-300 text-sm uppercase tracking-wider mb-2">Su Mesada Pensional Estimada</p>
+      <p id="dash-pension" class="text-5xl font-bold text-white mb-2">$0</p>
+      <p class="text-blue-300 text-sm">mensual</p>
+    </div>
+
+    <!-- Grid de métricas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      
+      <!-- IBL -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-slate-400 text-sm uppercase tracking-wider mb-3">Ingreso Base de Liquidación</h3>
+        <p id="dash-ibl" class="text-2xl font-bold text-white mb-1">$0</p>
+        <p class="text-slate-400 text-sm">Método: <span id="dash-ibl-method" class="text-blue-400">—</span></p>
+        <div class="mt-3 pt-3 border-t border-slate-700 text-sm">
+          <div class="flex justify-between text-slate-400">
+            <span>Últimos 10 años:</span>
+            <span id="dash-ibl-last10" class="text-white">$0</span>
+          </div>
+          <div class="flex justify-between text-slate-400 mt-1">
+            <span>Vida laboral:</span>
+            <span id="dash-ibl-lifetime" class="text-white">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tasa de Reemplazo -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-slate-400 text-sm uppercase tracking-wider mb-3">Tasa de Reemplazo</h3>
+        <p id="dash-rate" class="text-2xl font-bold text-green-400 mb-1">0%</p>
+        <div class="mt-3 pt-3 border-t border-slate-700 text-sm">
+          <div class="flex justify-between text-slate-400">
+            <span>Tasa base:</span>
+            <span id="dash-rate-base" class="text-white">0%</span>
+          </div>
+          <div class="flex justify-between text-slate-400 mt-1">
+            <span>Bonificación semanas:</span>
+            <span id="dash-rate-bonus" class="text-white">+0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semanas -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-slate-400 text-sm uppercase tracking-wider mb-3">Cotización</h3>
+        <div class="flex justify-between items-end">
+          <div>
+            <p class="text-slate-400 text-sm">Semanas</p>
+            <p id="dash-weeks" class="text-2xl font-bold text-white">0</p>
+          </div>
+          <div class="text-right">
+            <p class="text-slate-400 text-sm">Meses con aportes</p>
+            <p id="dash-months" class="text-2xl font-bold text-white">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elegibilidad -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-slate-400 text-sm uppercase tracking-wider mb-3">Elegibilidad</h3>
+        <div id="dash-eligibility"></div>
+      </div>
+    </div>
+
+    <!-- Indemnización Sustitutiva -->
+    <div id="dash-indemnizacion" class="hidden bg-yellow-900/30 border border-yellow-700 rounded-xl p-6 mb-6">
+      <h3 class="text-yellow-400 font-semibold mb-2">⚠ Indemnización Sustitutiva</h3>
+      <p class="text-slate-300 text-sm mb-2">Si no alcanza las 1.300 semanas, puede solicitar una devolución por:</p>
+      <p id="dash-indemnizacion-value" class="text-2xl font-bold text-yellow-400">$0</p>
+    </div>
+
+    <!-- Herramientas Premium -->
+    <div class="space-y-6">
+
+      <!-- Goal Seeker -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-white font-semibold text-lg mb-1">🎯 Buscador de Meta</h3>
+        <p class="text-slate-400 text-sm mb-4">¿Cuánto debe cotizar para alcanzar su pensión objetivo?</p>
+        
+        <div class="flex gap-3 mb-4">
+          <div class="flex-1">
+            <label class="text-slate-400 text-xs block mb-1">Mesada objetivo (COP)</label>
+            <input type="text" id="goal-target" placeholder="2.000.000">
+          </div>
+          <button id="btn-goal-seek" 
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 rounded-lg self-end transition-colors">
+            Calcular
+          </button>
+        </div>
+        <div id="goal-results" class="space-y-3"></div>
+      </div>
+
+      <!-- Full Burden Calculator -->
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-white font-semibold text-lg mb-1">💰 Calculadora de Carga Total</h3>
+        <p class="text-slate-400 text-sm mb-4">Costo real mensual para independientes</p>
+        
+        <div class="flex gap-3 mb-4">
+          <div class="flex-1">
+            <label class="text-slate-400 text-xs block mb-1">IBC mensual (COP)</label>
+            <input type="text" id="burden-ibc" placeholder="1.423.500">
+          </div>
+          <button id="btn-burden"
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 rounded-lg self-end transition-colors">
+            Calcular
+          </button>
+        </div>
+        <div id="burden-results"></div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-slate-500 text-xs mt-8 pb-8">
+      <p>Estimación basada en Ley 797 de 2003 • No constituye asesoría legal</p>
+      <p class="mt-1">Todos los cálculos se realizan localmente en su navegador</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/optimizer.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+<script>applyTranslations();</script>
+
+</body>
+</html>

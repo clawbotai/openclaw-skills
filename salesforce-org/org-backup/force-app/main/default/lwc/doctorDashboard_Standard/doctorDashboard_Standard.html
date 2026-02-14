@@ -1,0 +1,58 @@
+<template>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <!-- LEFT SIDEBAR -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+            <!-- Profile Sidebar -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-profile-sidebar></c-doctor-profile-sidebar>
+            </div>
+
+            <!-- Doctor Prescription Entry Flow -->
+            <div class="slds-card slds-p-around_medium slds-m-bottom_medium">
+                <h2 class="slds-text-heading_small slds-m-bottom_medium">Doctor Prescription Entry</h2>
+                <lightning-flow flow-api-name="Doctor_Prescription_Dev"></lightning-flow>
+            </div>
+
+            <!-- Book Patient Appointment Flow -->
+            <div class="slds-card slds-p-around_medium">
+                <h2 class="slds-text-heading_small slds-m-bottom_medium">Book Patient Appointment</h2>
+                <lightning-flow flow-api-name="Book_Patient_Appointment"></lightning-flow>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12">
+
+            <!-- Related Patients -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-patient-list></c-doctor-patient-list>
+            </div>
+
+            <!-- Pending Peer Reviews -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-review-queue></c-doctor-review-queue>
+            </div>
+
+            <!-- Orders -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-order-list></c-doctor-order-list>
+            </div>
+
+            <!-- Wellness Assessments -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-wellness-list></c-doctor-wellness-list>
+            </div>
+
+            <!-- Upcoming Appointments -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-appointment-list></c-doctor-appointment-list>
+            </div>
+
+            <!-- Related Tasks / Pending Actions -->
+            <div class="slds-m-bottom_medium">
+                <c-doctor-task-list></c-doctor-task-list>
+            </div>
+
+        </div>
+    </div>
+</template>

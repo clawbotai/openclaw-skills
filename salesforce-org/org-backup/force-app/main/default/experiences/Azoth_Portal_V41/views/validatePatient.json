@@ -1,0 +1,38 @@
+{
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "28d27c72-f42b-4f70-a64b-375b93f2048b",
+  "label" : "Validate Patient",
+  "regions" : [ {
+    "id" : "f8ccb86a-cb1b-481d-85df-74c3c7d90ec2",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "80546b88-bc60-47e4-9d71-5f6faeb052aa",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "0db843bf-d697-4987-8029-e34ec4213af5",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Validate Patient"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "fc8595f7-9149-43b4-aac2-426ffea12dde",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "498a1b89-f013-45d2-ac33-b9e4df16e3e8",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-validate-patient"
+}

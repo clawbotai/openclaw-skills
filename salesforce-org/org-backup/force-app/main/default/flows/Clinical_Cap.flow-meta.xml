@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <assignments>
+        <name>Count_Orders</name>
+        <label>Count Orders</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>OrderCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Over_Intakes</targetReference>
+        </connector>
+    </assignments>
+    <customErrors>
+        <description>Monthly intake limit reached. You have created 95 New Intake orders this month. Maximum allowed is 95.</description>
+        <name>Block_Order_Creation</name>
+        <label>Block Order Creation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <customErrorMessages>
+            <errorMessage>Monthly intake limit reached. You have created 95 New Intake orders this month. Maximum allowed is 95.</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>Check_if_Over_Limit</name>
+        <label>Check if Over Limit</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Over_Limit</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>OrderCount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>95.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Block_Order_Creation</targetReference>
+            </connector>
+            <label>Over Limit</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>FirstDayOfMonth</name>
+        <dataType>Date</dataType>
+        <expression>DATE(YEAR(TODAY()), MONTH(TODAY()), 1)</expression>
+    </formulas>
+    <interviewLabel>Clinical Cap {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Clinical Cap</label>
+    <loops>
+        <name>Loop_Over_Intakes</name>
+        <label>Loop Over Intakes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Count_This_Month_s_Intakes</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Count_Orders</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Check_if_Over_Limit</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Count_This_Month_s_Intakes</name>
+        <label>Count This Month&apos;s Intakes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Over_Intakes</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Doctor__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Doctor__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Order_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>New Intake</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>CreatedDate</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>FirstDayOfMonth</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Order</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Count_This_Month_s_Intakes</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Order_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>New Intake</stringValue>
+            </value>
+        </filters>
+        <object>Order</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>OrderCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <scale>2</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+</Flow>

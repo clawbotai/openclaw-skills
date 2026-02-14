@@ -1,0 +1,306 @@
+:root {
+    --excel-green: #217346;
+    --excel-header-bg: #f3f2f1;
+    --excel-header-text: #444;
+    --excel-border: #d4d4d4;
+    --excel-selection: #107c41;
+    --excel-row-num-bg: #e6e6e6;
+
+    --font-family: 'Liberation Sans', 'Noto Sans', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-family: var(--font-family);
+    font-size: 13px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Toolbar (Green Strip) */
+.excel-toolbar {
+    background-color: var(--excel-green);
+    display: flex;
+    padding-left: 10px;
+    height: 35px;
+    align-items: flex-end;
+}
+
+.toolbar-tab {
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 13px;
+}
+
+.toolbar-tab.active {
+    background-color: white;
+    color: var(--excel-green);
+    font-weight: bold;
+}
+
+/* Ribbon (Icons) */
+.excel-ribbon {
+    background-color: #f3f2f1;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 90px;
+}
+
+.ribbon-group {
+    display: flex;
+    gap: 10px;
+}
+
+.ribbon-divider {
+    width: 1px;
+    height: 60px;
+    background-color: #d0d0d0;
+}
+
+.ribbon-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    min-width: 60px;
+    color: #444;
+}
+
+.ribbon-btn:hover {
+    background-color: #c5dbcc;
+}
+
+.ribbon-btn span {
+    margin-top: 5px;
+    font-size: 11px;
+}
+
+.ribbon-btn .icon {
+    font-size: 24px;
+}
+
+.ribbon-btn .icon-calc {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--excel-green);
+}
+
+/* Formula Bar */
+.formula-bar {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #fff;
+}
+
+.name-box {
+    width: 60px;
+    border: 1px solid #d4d4d4;
+    padding: 4px 8px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #444;
+    text-align: center;
+}
+
+.formula-icon {
+    color: #999;
+    margin-right: 10px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.input-bar {
+    flex-grow: 1;
+    border: 1px solid #d4d4d4;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+/* Grid Container */
+.spreadsheet-container {
+    flex-grow: 1;
+    overflow: auto;
+    position: relative;
+    background-color: #f8f8f8;
+    /* Background behind grid */
+}
+
+.excel-grid {
+    border-collapse: collapse;
+    background-color: white;
+    table-layout: fixed;
+    width: 1000px;
+    /* Or dynamic */
+    margin-left: 0;
+}
+
+/* Headers */
+.col-header {
+    background-color: var(--excel-header-bg);
+    border: 1px solid var(--excel-border);
+    border-top: none;
+    color: var(--excel-header-text);
+    font-weight: normal;
+    text-align: center;
+    padding: 4px;
+    width: 120px;
+    /* Standard col width */
+}
+
+.row-header {
+    width: 40px;
+    background-color: var(--excel-header-bg);
+    border: 1px solid var(--excel-border);
+    border-left: none;
+}
+
+.row-num {
+    background-color: var(--excel-header-bg);
+    border: 1px solid var(--excel-border);
+    color: var(--excel-header-text);
+    text-align: center;
+    font-size: 12px;
+    width: 40px;
+}
+
+/* Cells */
+.excel-grid td {
+    border: 1px solid var(--excel-border);
+    padding: 0;
+    /* No padding for cells to fit input */
+    height: 22px;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #333;
+    background-color: white;
+}
+
+/* Inputs within cells */
+.cell-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.cell-input input:focus {
+    border: 2px solid var(--excel-selection);
+    z-index: 10;
+    position: relative;
+}
+
+.cell-center {
+    text-align: center;
+    padding: 0 5px !important;
+}
+
+.cell-value {
+    padding: 0 5px !important;
+    text-align: right;
+}
+
+.cell-result {
+    padding: 0 5px !important;
+    text-align: right;
+    font-weight: bold;
+}
+
+.cell-label {
+    padding: 0 5px !important;
+    background-color: #fdfdfd;
+}
+
+.cell-label-bold {
+    padding: 0 5px !important;
+    background-color: #fdfdfd;
+    font-weight: bold;
+}
+
+/* Merged / Titles */
+.cell-merged {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px !important;
+}
+
+.title-cell {
+    background-color: #217346;
+    color: white;
+    font-size: 14px;
+}
+
+.title-cell-result {
+    background-color: #4472c4;
+    color: white;
+    font-size: 14px;
+}
+
+.section-header {
+    height: 30px !important;
+}
+
+.header-cell {
+    background-color: #e2efda;
+    /* Light green excel */
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #bfbfbf !important;
+    padding: 5px !important;
+}
+
+/* Specific Utilities */
+.btn-xs {
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    cursor: pointer;
+    font-size: 10px;
+    height: 18px;
+    line-height: 1;
+}
+
+.btn-xs:hover {
+    background-color: #e0e0e0;
+}
+
+.highlight-yellow {
+    background-color: #ffff00;
+}
+
+.highlight-green {
+    background-color: #c6efce;
+    color: #006100;
+}
+
+/* Hide rows/cols via JS or Classes */
+.empty-row {
+    background-color: #fff;
+    border-right: 1px solid var(--excel-border);
+}
+
+.date-start,
+.date-end {
+    text-align: center;
+}
+
+.salary {
+    text-align: right;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="viewMode" type="String" default="Auto" label="View Mode" description="Select 'Auto' to detect profile, or force 'Doctor'/'Patient' view for testing/configuration." datasource="Auto,Doctor,Patient"/>
+            <property name="patientFlowApiName" type="String" default="Request_Doctor_Appointment" label="Patient Appointment Flow API Name" description="API Name of the flow to use in the Patient Dashboard appointment request section."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

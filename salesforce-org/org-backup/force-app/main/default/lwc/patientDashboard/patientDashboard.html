@@ -1,0 +1,36 @@
+<template>
+    <div class="patient-dashboard glass-card">
+        <header class="header">
+            <h1 class="glow-text">Treatment History</h1>
+            <p>Monitored and verified by the Sovereign Physician network.</p>
+        </header>
+
+        <template if:true={orders.length}>
+            <section class="treatment-history">
+                <div class="history-list">
+                    <template for:each={orders} for:item="order">
+                        <div key={order.Id} class="history-item glass-card">
+                            <div class="order-id">Prescription #{order.OrderNumber}</div>
+                            <div class="order-status">
+                                <span class="badge" data-status={order.Status}>{order.Status}</span>
+                            </div>
+                            <div class="order-amount">${order.TotalAmount}</div>
+                        </div>
+                    </template>
+                </div>
+            </section>
+        </template>
+
+        <template if:false={orders.length}>
+            <div class="empty-state glass-card">
+                <p>No treatment history found or insufficient permissions.</p>
+            </div>
+        </template>
+
+        <template if:true={orders.error}>
+            <div class="error-state">
+                <p>Failed to retrieve treatment history.</p>
+            </div>
+        </template>
+    </div>
+</template>

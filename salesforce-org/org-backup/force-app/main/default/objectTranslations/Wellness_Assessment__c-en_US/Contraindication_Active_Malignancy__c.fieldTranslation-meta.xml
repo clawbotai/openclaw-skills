@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Active Cancer / Malignancy History? --></label>
+    <name>Contraindication_Active_Malignancy__c</name>
+</CustomFieldTranslation>

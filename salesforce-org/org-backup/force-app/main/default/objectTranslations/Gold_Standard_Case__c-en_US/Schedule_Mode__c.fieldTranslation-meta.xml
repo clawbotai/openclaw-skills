@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Schedule Mode --></label>
+    <name>Schedule_Mode__c</name>
+    <picklistValues>
+        <masterLabel>Fixed Days</masterLabel>
+        <translation><!-- Fixed Days --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rolling Interval</masterLabel>
+        <translation><!-- Rolling Interval --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Titration</masterLabel>
+        <translation><!-- Titration --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

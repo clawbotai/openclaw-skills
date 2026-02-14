@@ -1,0 +1,53 @@
+<template>
+    <c-card_layout title="My Panel">
+        <template lwc:if={patient}>
+            <div class="slds-text-align_center slds-m-bottom_medium">
+                <div class="slds-avatar slds-avatar_circle slds-avatar_large slds-m-bottom_small"
+                    style="width: 80px; height: 80px;">
+                    <span class="slds-avatar__initials slds-icon-standard-user">{initials}</span>
+                </div>
+                <h2 class="slds-text-heading_medium">{patient.Name}</h2>
+                <p class="slds-text-color_weak">Patient</p>
+            </div>
+
+            <div class="slds-border_bottom slds-m-vertical_small"></div>
+
+            <h3 class="slds-text-heading_small slds-m-bottom_small">Contact Info</h3>
+            <div class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">Email</p>
+                    <p class="slds-text-body_regular slds-truncate" title={patient.Email}>{patient.Email}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">Phone</p>
+                    <p class="slds-text-body_regular">{patient.Phone}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                    <p class="slds-text-title_caps slds-text-color_weak">City</p>
+                    <p class="slds-text-body_regular">{patient.MailingCity}</p>
+                </div>
+            </div>
+
+            <div class="slds-border_bottom slds-m-vertical_small"></div>
+
+            <template lwc:if={patient.Account.Doctor__c}>
+                <h3 class="slds-text-heading_small slds-m-bottom_small">My Provider</h3>
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure">
+                        <span class="slds-avatar slds-avatar_circle slds-avatar_medium">
+                            <span class="slds-avatar__initials slds-icon-standard-user">DR</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <p class="slds-text-heading_small">{doctorName}</p>
+                        <p class="slds-text-body_small slds-text-color_weak">{doctorLicense}</p>
+                    </div>
+                </div>
+            </template>
+
+        </template>
+        <template lwc:else>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+    </c-card_layout>
+</template>

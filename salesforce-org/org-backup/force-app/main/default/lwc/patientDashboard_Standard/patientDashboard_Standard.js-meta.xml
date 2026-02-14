@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Patient Dashboard (Standard)</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="flowApiName" type="String" default="Request_Doctor_Appointment" label="Appointment Flow API Name" description="The API name of the flow to display in the Request Appointment section."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

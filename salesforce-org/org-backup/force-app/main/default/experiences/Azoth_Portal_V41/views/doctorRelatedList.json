@@ -1,0 +1,39 @@
+{
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "485e47c6-b06a-4e99-8d15-3201021c1ca9",
+  "label" : "Doctor Related List",
+  "regions" : [ {
+    "id" : "ed570a6f-2c0a-4d6c-9c2d-40bd8f3b7080",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customTitle" : "",
+        "parentRecordId" : "{!recordId}",
+        "relatedListName" : "{!relationshipApiName}",
+        "showBreadCrumbs" : true,
+        "showCustomTitle" : false,
+        "showManualRefreshButton" : true,
+        "showRowNumbers" : true
+      },
+      "componentName" : "forceCommunity:relatedList",
+      "id" : "15c94798-b59d-4674-855f-5c44e133b541",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f832ba4e-7af0-4dbf-a99f-bf2e83fee8bd",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "95ebeea5-754b-4e73-8392-9231f4118957",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "relatedlist-a00"
+}

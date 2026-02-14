@@ -1,0 +1,23 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="false" docType="html-5.0">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Doctor Registration</title>
+        <apex:includeLightning />
+    </head>
+
+    <body style="margin:0; padding:0; background-color:#F3F3F3;">
+        <div id="lightningComponent" style="width: 100%; max-width: 800px; margin: 0 auto; padding-top: 20px;"></div>
+
+        <script>
+            $Lightning.use("c:DoctorIntakeWrapper", function () {
+                $Lightning.createComponent("c:doctorIntakeForm",
+                    {},
+                    "lightningComponent",
+                    function (cmp) {
+                        console.log("Doctor Intake Form loaded.");
+                    });
+            });
+        </script>
+    </body>
+</apex:page>

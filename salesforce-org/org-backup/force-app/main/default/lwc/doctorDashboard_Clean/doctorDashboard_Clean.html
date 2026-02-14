@@ -1,0 +1,67 @@
+<template>
+    <div class="dashboard-container">
+        <!-- Main Content: Just the Tables -->
+        <div class="metrics-grid" style="grid-template-columns: 1fr; margin-top: 1rem;">
+
+            <!-- Protocol Governance Queue -->
+            <div class="glass-card">
+                <div class="header-flex" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2 class="section-title">✨ Protocol Governance Queue ({pendingCount})</h2>
+                    <button class="azoth-btn-primary" style="padding: 4px 12px; font-size: 0.8rem;">View All</button>
+                </div>
+                <div style="height: 300px; margin-top: 1rem;">
+                    <template if:true={reviews}>
+                        <lightning-datatable key-field="Id" data={reviews} columns={reviewColumns}
+                            hide-checkbox-column></lightning-datatable>
+                    </template>
+                    <template if:true={reviewError}>
+                        <p class="slds-text-color_error">Error loading reviews: {reviewError}</p>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Recent Prescriptions -->
+            <div class="glass-card">
+                <div class="header-flex" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2 class="section-title">📄 Recent Prescriptions</h2>
+                    <button class="azoth-btn-primary" style="padding: 4px 12px; font-size: 0.8rem;">New Rx</button>
+                </div>
+                <div style="height: 300px; margin-top: 1rem;">
+                    <lightning-datatable key-field="Id" data={rawOrders} columns={orderColumns} hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </div>
+
+            <!-- Upcoming Appointments -->
+            <div class="glass-card">
+                <div class="header-flex" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2 class="section-title">📅 Upcoming Appointments</h2>
+                </div>
+                <div style="height: 300px; margin-top: 1rem;">
+                    <lightning-datatable key-field="Id" data={rawAppointments} columns={apptColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </div>
+
+            <!-- Related Tasks (Validation Actions) -->
+            <div class="glass-card">
+                <div class="header-flex" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h2 class="section-title">✅ Pending Actions ({taskCount})</h2>
+                    <button class="azoth-btn-primary" style="padding: 4px 12px; font-size: 0.8rem;">View All</button>
+                </div>
+                <!-- Show error if any -->
+                <template if:true={taskError}>
+                    <p class="slds-text-color_error">Error loading tasks: {taskError}</p>
+                </template>
+
+                <div style="height: 300px; margin-top: 1rem;">
+                    <lightning-datatable key-field="Id" data={rawTasks} columns={taskColumns} hide-checkbox-column
+                        onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

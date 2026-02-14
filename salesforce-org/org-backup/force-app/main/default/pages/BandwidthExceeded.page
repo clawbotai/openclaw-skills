@@ -1,0 +1,3 @@
+<apex:page showHeader="false" sidebar="false">
+    <h1>Bandwidth Exceeded</h1>
+</apex:page>

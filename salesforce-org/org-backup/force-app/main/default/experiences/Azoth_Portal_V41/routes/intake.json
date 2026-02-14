@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "44d1f741-6586-4234-96cc-a18476a39e06",
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "configurationTags" : [ ],
+  "devName" : "Intake__c",
+  "id" : "02291843-85bd-4d91-94f7-96c669609cd0",
+  "label" : "Intake",
+  "pageAccess" : "Public",
+  "routeType" : "custom-intake",
+  "type" : "route",
+  "urlPrefix" : "intake"
+}

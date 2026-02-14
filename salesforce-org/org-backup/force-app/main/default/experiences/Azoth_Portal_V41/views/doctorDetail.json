@@ -1,0 +1,91 @@
+{
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "componentName" : "siteforce:sldsTwoCol84SidebarFeaturedLayout",
+  "dataProviders" : [ ],
+  "id" : "bbd6c1e9-9915-4b56-8cdf-831308231ac4",
+  "label" : "Doctor Detail",
+  "regions" : [ {
+    "id" : "6ec3205a-b00a-49ac-b724-ad243e5bece2",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "forceCommunity:recordHeadline",
+      "id" : "05dc2cba-8741-4a67-af2c-8f5ae98eb79b",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "forceCommunity:recordDetail",
+      "id" : "bff0ac34-e6e3-4cce-8039-d44c5129e108",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "flowArguments" : "",
+        "flowName" : "Doctor_Prescription_Entry"
+      },
+      "componentName" : "forceCommunity:flowCommunity",
+      "id" : "f2eb8633-2bc3-4fab-932c-4cc7ac6ab005",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "045481fd-e986-41fb-90cc-354b2f17c5c4",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "43bf3f40-cc80-4ce9-a113-b31697532492",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "c96a1fcd-c571-4197-8b49-3804734c1186",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "c963ab79-63f0-449c-bfae-30eb23a47579",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:patientOrderList",
+      "id" : "70d1f343-c7b2-4cfe-8987-bb9dcbaef444",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "351ac488-faac-4362-9056-4a77b32eff48",
+    "regionName" : "featured",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:patientWellnessHistory",
+      "id" : "8eb9ba43-2622-4904-bbe8-4d962c66f3f3",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "f43b5f10-0abd-4c3a-9c60-b0bee5be4173",
+    "regionName" : "sidebar",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-a00"
+}

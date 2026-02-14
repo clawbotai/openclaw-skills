@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "fac6b5fa-3355-4885-9fc3-5fbafa8ca9a6",
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "configurationTags" : [ ],
+  "devName" : "Doctor_List__c",
+  "id" : "1be9502c-2d42-4371-84f4-097559866bbb",
+  "label" : "Doctor List",
+  "objectApiName" : "Doctor__c",
+  "routeType" : "list-a00",
+  "type" : "route",
+  "urlPrefix" : "doctor"
+}

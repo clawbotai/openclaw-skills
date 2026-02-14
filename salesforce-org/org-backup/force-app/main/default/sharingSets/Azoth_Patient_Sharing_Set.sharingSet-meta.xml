@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessMappings>
+        <accessLevel>Read</accessLevel>
+        <object>Order</object>
+        <objectField>BillToContact</objectField>
+        <userField>Contact</userField>
+    </accessMappings>
+    <name>Azoth Patient Sharing Set</name>
+    <profiles>Azoth Patient Profile</profiles>
+</SharingSet>

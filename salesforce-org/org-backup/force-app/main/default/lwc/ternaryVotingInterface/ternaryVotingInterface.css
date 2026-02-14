@@ -1,0 +1,117 @@
+:host {
+    /* Azoth Core Palette (Inlined from Design System) */
+    --azoth-blue: #00A3FF;
+    --azoth-blue-glow: rgba(0, 163, 255, 0.3);
+    --azoth-card-bg: rgba(25, 25, 25, 0.8);
+    --azoth-border: rgba(255, 255, 255, 0.1);
+    --font-body: 'Outfit', sans-serif;
+
+    display: block;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.voting-container {
+    text-align: center;
+    padding: 3rem;
+}
+
+.instruction {
+    color: var(--azoth-blue);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.voting-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.vote-btn {
+    flex: 1;
+    background: var(--azoth-card-bg);
+    border: 1px solid var(--azoth-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vote-btn .icon {
+    font-size: 1.5rem;
+}
+
+.vote-btn .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.vote-btn .value {
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+/* Veto State */
+.vote-btn.veto:hover,
+.vote-btn.veto.active {
+    border-color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.4);
+    transform: scale(1.05);
+}
+
+/* Neutral State */
+.vote-btn.neutral:hover,
+.vote-btn.neutral.active {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Approve State */
+.vote-btn.approve:hover,
+.vote-btn.approve.active {
+    border-color: var(--azoth-blue);
+    background: rgba(0, 163, 255, 0.1);
+    box-shadow: 0 0 20px var(--azoth-blue-glow);
+    transform: scale(1.05);
+}
+
+.comment-section {
+    margin-bottom: 2rem;
+}
+
+.glass-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--azoth-border);
+    border-radius: 8px;
+    padding: 1rem;
+    color: white;
+    font-family: var(--font-body);
+    resize: none;
+    height: 100px;
+    transition: border-color 0.3s;
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: var(--azoth-blue);
+}
+
+.submit-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

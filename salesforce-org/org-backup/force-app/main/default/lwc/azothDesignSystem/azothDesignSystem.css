@@ -1,0 +1,41 @@
+:host {
+    /* Azoth Core Palette */
+    --azoth-blue: #00A3FF;
+    --azoth-blue-glow: rgba(0, 163, 255, 0.3);
+    --azoth-dark-bg: #121212;
+    --azoth-card-bg: rgba(25, 25, 25, 0.8);
+    --azoth-border: rgba(255, 255, 255, 0.1);
+    
+    /* Tier Colors */
+    --sovereign-gold: #FFD700;
+    --sovereign-glow: rgba(255, 215, 0, 0.2);
+    --practitioner-silver: #C0C0C0;
+    --probation-rust: #8B4513;
+
+    /* Typography */
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+}
+
+.glass-card {
+    background: var(--azoth-card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--azoth-border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glow-text {
+    text-shadow: 0 0 10px var(--azoth-blue-glow);
+}
+
+.sovereign-badge {
+    background: linear-gradient(135deg, var(--sovereign-gold), #b8860b);
+    color: black;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--sovereign-glow);
+}

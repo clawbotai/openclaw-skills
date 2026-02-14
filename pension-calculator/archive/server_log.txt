@@ -1,0 +1,606 @@
+﻿Starting Flask Server on port 8080 (Threaded)...
+ * Serving Flask app 'server'
+ * Debug mode: off
+INFO:werkzeug: [31m [1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead. [0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.40.45:8080
+INFO:werkzeug: [33mPress CTRL+C to quit [0m
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:02:43] "POST /upload_pdf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:18] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:18] " [36mGET / HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:18] "GET /data.js?v=20002 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:18] "GET /calculator.js?v=20002 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:18] "GET /app.js?v=20005 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:18] "GET /xlsx.full.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:19] " [36mGET /data.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:19] " [36mGET /xlsx.full.min.js HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:19] " [36mGET /calculator.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:19] " [36mGET /app.js?v=20005 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:19] " [33mGET /favicon.ico HTTP/1.1 [0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:19] " [33mGET /favicon.ico HTTP/1.1 [0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:32] "POST /upload_pdf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:41] " [36mGET / HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:41] " [36mGET /xlsx.full.min.js HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:41] " [36mGET /calculator.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:41] " [36mGET /data.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:41] " [36mGET /app.js?v=20005 HTTP/1.1 [0m" 304 -
+DEBUG: Received Request - Method: POST
+DEBUG: Saving file: Semanas Piedad.pdf
+DEBUG: Processing PDF at /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmp3y6gg4h3.pdf
+DEBUG: Opening PDF with pdfplumber...
+DEBUG: PDF has 17 pages
+DEBUG: Calling extract_labor_history...
+Opening PDF: /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmp3y6gg4h3.pdf
+Processing page 1...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 2...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 3...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 4...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 5...
+  -> Found Gran Total Candidate (Robust Match): 1501,29 -> 1501.29
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+  Headers found: [12]Identificación Empleador [13]Nombre o Razón Social
+RESUMEN DE TIEMPO [14]Desde
+S PÚBLICOS NO [15...
+  -> Matched Summary Table
+  Headers found: [22R]DEeSsUdeMEN TIEMPO PÚBLIC O SIMULTÁNEO C[2O3N]H TasRtAaDICIONAL (67 - 94) Y P[O24S]STe 9m4anas ...
+Processing page 6...
+  Headers found: [27] Identificación Empleador [28]
+Nombre o Razón Social [29]
+Ciclo Desde [30]
+Ciclo Hasta [31] Asig...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 7...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 8...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 9...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 10...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 11...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 12...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 13...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 14...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 15...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+  Headers found: [47]
+Identificación
+Empleador [48]
+Nombre o Razón Social [49]
+RA [50]Ciclo [51]
+Fecha de
+Pago [52] R...
+  -> Matched Detailed Table
+Processing page 16...
+Processing page 17...
+Extracted 217 summary rows.
+Extracted 391 detailed rows.
+Using Detailed Table with Monthly Grouping...
+DEBUG: Using Exact Target Weeks from Text: 1501.29
+DEBUG: [FINAL] target_weeks=1501.29, rounded_current_sum=1291.42
+Adding Adjustment Row (Historia Consolidada) for 209.87 weeks to match Official Total.
+DEBUG: Extraction complete. Rows found: 313
+DEBUG: Received Request - Method: POST
+DEBUG: Saving file: historiaLaboral_unlocked tia Yaneth.pdf
+DEBUG: Processing PDF at /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmpsk3pofy0.pdf
+DEBUG: Opening PDF with pdfplumber...
+DEBUG: PDF has 14 pages
+DEBUG: Calling extract_labor_history...
+Opening PDF: /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmpsk3pofy0.pdf
+Processing page 1...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 2...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 3...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+  Headers found: [12]Identificación Empleador [13]Nombre o Razón Social
+RESUMEN DE TIEMPO [14]Desde
+S PÚBLICOS NO [15...
+  -> Matched Summary Table
+Processing page 4...
+  -> Found Gran Total Candidate (Robust Match): 1420,00 -> 1420.0
+  Headers found: [22R]DEeSsUdeMEN TIEMPO PÚBLICO SIMULTÁNEO C[2O3N]H TasRtAaDICIONAL (67 - 94) Y P[O24S]STe 9m4anas S...
+  Headers found: [27] Identificación Empleador [28]
+Nombre o Razón Social [29]
+Ciclo Desde [30]
+Ciclo Hasta [31] Asig...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 5...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 6...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 7...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 8...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 9...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 10...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 11...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 12...
+  Headers found: [47]
+Identificación
+Empleador [48]
+Nombre o Razón Social [49]
+RA [50]Ciclo [51]
+Fecha de
+Pago [52] R...
+  -> Matched Detailed Table
+Processing page 13...
+Processing page 14...
+Extracted 126 summary rows.
+Extracted 309 detailed rows.
+Using Detailed Table with Monthly Grouping...
+DEBUG: Using Exact Target Weeks from Text: 1420.0
+DEBUG: [FINAL] target_weeks=1420.0, rounded_current_sum=1261.67
+Adding Adjustment Row (Historia Consolidada) for 158.33 weeks to match Official Total.
+DEBUG: Extraction complete. Rows found: 298
+DEBUG: Received Request - Method: POST
+DEBUG: Saving file: Semanas Piedad.pdf
+DEBUG: Processing PDF at /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmpxa50z0lu.pdf
+DEBUG: Opening PDF with pdfplumber...
+DEBUG: PDF has 17 pages
+DEBUG: Calling extract_labor_history...
+Opening PDF: /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmpxa50z0lu.pdf
+Processing page 1...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 2...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 3...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 4...
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:04:57] "POST /upload_pdf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:13:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:13:47] "GET /data.js?v=20002 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:13:47] "GET /xlsx.full.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:13:47] "GET /app.js?v=20006 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:13:47] "GET /calculator.js?v=20002 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:13:48] " [33mGET /favicon.ico HTTP/1.1 [0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:14:08] "POST /upload_pdf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:57] " [36mGET /data.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:57] " [36mGET /calculator.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:57] " [36mGET /xlsx.full.min.js HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:57] "GET /app.js?v=20007 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:58] "GET /app.js?v=20007 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:58] "GET /calculator.js?v=20002 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:58] "GET /xlsx.full.min.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:58] "GET /data.js?v=20002 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:18:58] " [33mGET /favicon.ico HTTP/1.1 [0m" 404 -
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 5...
+  -> Found Gran Total Candidate (Robust Match): 1501,29 -> 1501.29
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+  Headers found: [12]Identificación Empleador [13]Nombre o Razón Social
+RESUMEN DE TIEMPO [14]Desde
+S PÚBLICOS NO [15...
+  -> Matched Summary Table
+  Headers found: [22R]DEeSsUdeMEN TIEMPO PÚBLIC O SIMULTÁNEO C[2O3N]H TasRtAaDICIONAL (67 - 94) Y P[O24S]STe 9m4anas ...
+Processing page 6...
+  Headers found: [27] Identificación Empleador [28]
+Nombre o Razón Social [29]
+Ciclo Desde [30]
+Ciclo Hasta [31] Asig...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 7...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 8...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 9...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 10...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 11...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 12...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 13...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 14...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 15...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+  Headers found: [47]
+Identificación
+Empleador [48]
+Nombre o Razón Social [49]
+RA [50]Ciclo [51]
+Fecha de
+Pago [52] R...
+  -> Matched Detailed Table
+Processing page 16...
+Processing page 17...
+Extracted 217 summary rows.
+Extracted 391 detailed rows.
+Using Detailed Table with Monthly Grouping...
+DEBUG: Using Exact Target Weeks from Text: 1501.29
+DEBUG: [FINAL] target_weeks=1501.29, rounded_current_sum=1291.42
+Adding Adjustment Row (Historia Consolidada) for 209.87 weeks to match Official Total.
+DEBUG: Extraction complete. Rows found: 313
+DEBUG: Received Request - Method: POST
+DEBUG: Saving file: Semanas Piedad.pdf
+DEBUG: Processing PDF at /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmp6mvxhpqg.pdf
+DEBUG: Opening PDF with pdfplumber...
+DEBUG: PDF has 17 pages
+DEBUG: Calling extract_labor_history...
+Opening PDF: /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmp6mvxhpqg.pdf
+Processing page 1...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 2...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 3...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 4...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 5...
+  -> Found Gran Total Candidate (Robust Match): 1501,29 -> 1501.29
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+  Headers found: [12]Identificación Empleador [13]Nombre o Razón Social
+RESUMEN DE TIEMPO [14]Desde
+S PÚBLICOS NO [15...
+  -> Matched Summary Table
+  Headers found: [22R]DEeSsUdeMEN TIEMPO PÚBLIC O SIMULTÁNEO C[2O3N]H TasRtAaDICIONAL (67 - 94) Y P[O24S]STe 9m4anas ...
+Processing page 6...
+  Headers found: [27] Identificación Empleador [28]
+Nombre o Razón Social [29]
+Ciclo Desde [30]
+Ciclo Hasta [31] Asig...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 7...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 8...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 9...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 10...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 11...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 12...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 13...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 14...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+Processing page 15...
+  Headers found: [34]
+Identificación
+Aportante [35]
+Nombre o Razón Social [36]
+RA [37]
+Período [38]Fecha
+De Pago [39]...
+  -> Matched Detailed Table
+  Headers found: [47]
+Identificación
+Empleador [48]
+Nombre o Razón Social [49]
+RA [50]Ciclo [51]
+Fecha de
+Pago [52] R...
+  -> Matched Detailed Table
+Processing page 16...
+Processing page 17...
+Extracted 217 summary rows.
+Extracted 391 detailed rows.
+Using Detailed Table with Monthly Grouping...
+DEBUG: Using Exact Target Weeks from Text: 1501.29
+DEBUG: [FINAL] target_weeks=1501.29, rounded_current_sum=1291.42
+Adding Adjustment Row (Historia Consolidada) for 209.87 weeks to match Official Total.
+DEBUG: Extraction complete. Rows found: 313
+DEBUG: Received Request - Method: POST
+DEBUG: Saving file: Semanas Piedad.pdf
+DEBUG: Processing PDF at /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmpvp13rgwq.pdf
+DEBUG: Opening PDF with pdfplumber...
+DEBUG: PDF has 17 pages
+DEBUG: Calling extract_labor_history...
+Opening PDF: /var/folders/3v/9cds9zxs45j62m3fjhbwpscm0000gn/T/tmpvp13rgwq.pdf
+Processing page 1...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 2...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 3...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 4...
+  Headers found: [1]Identificación Aportante [2]Nombre o Razón Social [3]Desde [4]Hasta [5]Último Salario [6]Semanas ...
+  -> Matched Summary Table
+Processing page 5...
+  -> Found Gran Total Candidate (Robust Match): 1501,29 -> 1501.29
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2025 18:19:15] "POST /upload_pdf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Jan/2026 11:58:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Jan/2026 11:58:11] " [36mGET /data.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Jan/2026 11:58:11] " [36mGET /xlsx.full.min.js HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Jan/2026 11:58:11] " [36mGET /calculator.js?v=20002 HTTP/1.1 [0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Jan/2026 11:58:11] "GET /app.js?v=20007 HTTP/1.1" 200 -

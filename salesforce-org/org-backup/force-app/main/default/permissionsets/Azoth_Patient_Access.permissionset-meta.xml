@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>DoctorPortalController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Grants access to required Apex classes for the Patient Portal.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Azoth Patient Access</label>
+</PermissionSet>

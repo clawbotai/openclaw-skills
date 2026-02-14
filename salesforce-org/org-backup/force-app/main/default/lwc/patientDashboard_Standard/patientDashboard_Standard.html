@@ -1,0 +1,41 @@
+<template>
+    <lightning-layout class="layout-container" multiple-rows="true">
+
+        <!-- MAIN CONTENT (Profile + Flow) -->
+        <lightning-layout-item size="12" medium-device-size="8" class="main-column slds-p-right_medium">
+
+            <!-- Patient Profile -->
+            <div class="slds-m-bottom_medium">
+                <c-patient-profile-sidebar></c-patient-profile-sidebar>
+            </div>
+
+            <!-- Request Appointment (Flow) -->
+            <div class="slds-card slds-p-around_medium bg-white">
+                <h2 class="slds-text-heading_small slds-m-bottom_small">Request Doctor Appointment</h2>
+                <lightning-flow flow-api-name={flowApiName}></lightning-flow>
+            </div>
+
+        </lightning-layout-item>
+
+        <!-- SIDEBAR (Lists) -->
+        <lightning-layout-item size="12" medium-device-size="4" class="sidebar-column">
+
+            <!-- Appointments -->
+            <div class="slds-m-bottom_medium">
+                <c-patient-appointment-list></c-patient-appointment-list>
+            </div>
+
+            <!-- Orders -->
+            <div class="slds-m-bottom_medium">
+                <c-patient-order-list></c-patient-order-list>
+            </div>
+
+            <!-- Wellness Reports -->
+            <div class="slds-m-bottom_medium">
+                <c-patient-wellness-history></c-patient-wellness-history>
+            </div>
+
+        </lightning-layout-item>
+
+    </lightning-layout>
+</template>

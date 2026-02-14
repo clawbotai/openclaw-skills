@@ -1,0 +1,50 @@
+<template>
+    <div class="voting-container glass-card">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Sealing Verdict..." size="medium"
+                variant="inverse"></lightning-spinner>
+        </template>
+
+        <h2 class="glow-text">Clinical Peer Review</h2>
+        <p class="instruction">Review the prescription and execute your governance mandate.</p>
+
+        <div class="voting-actions">
+            <!-- Veto (-1) -->
+            <button class={buttonClassVeto} onclick={handleVeto} disabled={isLocked}>
+                <span class="icon">✖</span>
+                <span class="label">Veto</span>
+                <span class="value">-1</span>
+            </button>
+
+            <!-- Neutral (0) -->
+            <button class={buttonClassNeutral} onclick={handleNeutral} disabled={isLocked}>
+                <span class="icon">➖</span>
+                <span class="label">Neutral</span>
+                <span class="value">0</span>
+            </button>
+
+            <!-- Approve (+1) -->
+            <button class={buttonClassApprove} onclick={handleApprove} disabled={isLocked}>
+                <span class="icon">✔</span>
+                <span class="label">Approve</span>
+                <span class="value">+1</span>
+            </button>
+        </div>
+
+        <!-- Clinical Comments -->
+        <div class="comment-section">
+            <textarea placeholder="Provide clinical rationale for your verdict..." class="glass-input"
+                disabled={isLocked}></textarea>
+        </div>
+
+        <template if:true={isLocked}>
+            <div class="lock-info">
+                <p>VERDICT SEALED • RECORD LOCKED</p>
+            </div>
+        </template>
+
+        <button class="submit-btn azoth-btn-primary" onclick={handleSubmit} disabled={isLocked}>
+            Seal Verdict
+        </button>
+    </div>
+</template>

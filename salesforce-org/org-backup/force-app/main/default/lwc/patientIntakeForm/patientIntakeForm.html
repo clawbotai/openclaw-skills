@@ -1,0 +1,203 @@
+<template>
+    <div class="intake-container">
+        <!-- Background Decorative Glows -->
+        <div class="background-glows">
+            <div class="glow-1"></div>
+        </div>
+
+        <!-- Header -->
+        <header class="welcome-header">
+            <span class="sub-header-label">New Assessment</span>
+            <h1 class="glow-text">Patient Intake</h1>
+            <p>Complete your medical profile securely. Your data is encrypted end-to-end for clinical review.</p>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <template lwc:if={isFormVisible}>
+            <div class="dashboard-grid animate-fade">
+                <!-- LEFT COLUMN -->
+                <div class="main-column">
+
+                    <!-- Identity Card -->
+                    <section class="glass-panel card-spacing">
+                        <div class="section-header">
+                            <lightning-icon icon-name="utility:identity" size="small"
+                                class="icon-blue-fill"></lightning-icon>
+                            <h2>Identity Verification</h2>
+                        </div>
+                        <p class="section-subtitle">Personal information for your medical record.</p>
+
+                        <div class="form-grid">
+                            <div class="input-block">
+                                <label>First Name</label>
+                                <input type="text" data-field="firstName" value={firstName} oninput={handleInputChange}
+                                    placeholder="Enter first name" required>
+                            </div>
+                            <div class="input-block">
+                                <label>Last Name</label>
+                                <input type="text" data-field="lastName" value={lastName} oninput={handleInputChange}
+                                    placeholder="Enter last name" required>
+                            </div>
+                            <div class="input-block">
+                                <label>Email Address</label>
+                                <input type="email" data-field="email" value={email} oninput={handleInputChange}
+                                    placeholder="email@example.com" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required>
+                            </div>
+                            <div class="input-block">
+                                <label>Phone Number</label>
+                                <input type="tel" data-field="phone" value={phone} oninput={handleInputChange}
+                                    placeholder="+1...">
+                            </div>
+                            <div class="input-block">
+                                <label>ID Type</label>
+                                <select data-field="idType" onchange={handleInputChange}>
+                                    <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+                                    <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+                                    <option value="Pasaporte">Pasaporte</option>
+                                </select>
+                            </div>
+                            <div class="input-block">
+                                <label>ID Number</label>
+                                <input type="text" data-field="idNumber" value={idNumber} oninput={handleInputChange}
+                                    placeholder="ID Number" required>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Clinical Safety Card -->
+                    <section class="glass-panel card-spacing">
+                        <div class="section-header">
+                            <lightning-icon icon-name="utility:favorite" size="small"
+                                class="icon-blue-fill"></lightning-icon>
+                            <h2>Clinical Safety</h2>
+                        </div>
+                        <p class="section-subtitle">Biometrics and safety screening.</p>
+
+                        <div class="biometrics-grid">
+                            <div class="input-block">
+                                <label>Weight (kg)</label>
+                                <input type="number" step="0.1" data-field="weight" value={weight}
+                                    oninput={handleInputChange} placeholder="0">
+                            </div>
+                            <div class="input-block">
+                                <label>Height (cm)</label>
+                                <input type="number" step="0.1" data-field="height" value={height}
+                                    oninput={handleInputChange} placeholder="0">
+                            </div>
+                            <div class="input-block">
+                                <label>Waist (cm)</label>
+                                <input type="number" step="0.1" data-field="waist" value={waist}
+                                    oninput={handleInputChange} placeholder="0">
+                            </div>
+                        </div>
+
+                        <div class="safety-checks">
+                            <h3 class="subsection-title">CONTRAINDICATIONS</h3>
+                            <p class="subsection-desc">Please indicate if any of the following conditions apply.</p>
+
+                            <div class="contraindications-grid">
+                                <label class="checkbox-card">
+                                    <input type="checkbox" class="custom-cb" data-field="isPregnancy"
+                                        checked={isPregnancy} onchange={handleInputChange}>
+                                    <span class="label-text">Pregnancy or Lactation</span>
+                                </label>
+                                <label class="checkbox-card">
+                                    <input type="checkbox" class="custom-cb" data-field="isCancer" checked={isCancer}
+                                        onchange={handleInputChange}>
+                                    <span class="label-text">History of Cancer</span>
+                                </label>
+                                <label class="checkbox-card">
+                                    <input type="checkbox" class="custom-cb" data-field="isPancreatitis"
+                                        checked={isPancreatitis} onchange={handleInputChange}>
+                                    <span class="label-text">Pancreatitis</span>
+                                </label>
+                                <label class="checkbox-card">
+                                    <input type="checkbox" class="custom-cb" data-field="isInsulin" checked={isInsulin}
+                                        onchange={handleInputChange}>
+                                    <span class="label-text">Insulin Usage</span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="sidebar-column">
+                    <!-- Legal Card -->
+                    <section class="glass-panel card-spacing">
+                        <div class="section-header">
+                            <lightning-icon icon-name="utility:shield" size="small"
+                                class="icon-blue-fill"></lightning-icon>
+                            <h2>Legal Consents</h2>
+                        </div>
+                        <div class="legal-stack">
+                            <label class="checkbox-card small-card">
+                                <input type="checkbox" class="custom-cb" data-field="habeasData" checked={habeasData}
+                                    onchange={handleInputChange}>
+                                <div>
+                                    <span class="label-text block">Habeas Data & Privacy</span>
+                                    <span class="helper-text">I authorize data processing per Privacy Policy.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card small-card">
+                                <input type="checkbox" class="custom-cb" data-field="magistralConsent"
+                                    checked={magistralConsent} onchange={handleInputChange}>
+                                <div>
+                                    <span class="label-text block">Magistral Preparation</span>
+                                    <span class="helper-text">I understand medication is compounded for me.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card small-card">
+                                <input type="checkbox" class="custom-cb" data-field="coldChainAuth"
+                                    checked={coldChainAuth} onchange={handleInputChange}>
+                                <div>
+                                    <span class="label-text block">Delivery Auth</span>
+                                    <span class="helper-text">Authorize cold chain delivery.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </section>
+
+                    <!-- Actions -->
+                    <div class="actions-stack">
+                        <button class="btn-primary full-width large-btn" onclick={handleSubmit}>
+                            Submit Assessment
+                            <lightning-icon icon-name="utility:forward" size="small" variant="inverse"
+                                style="margin-left:0.5rem"></lightning-icon>
+                        </button>
+                        <p class="disclaimer-text">By submitting, you certify that the information provided is accurate
+                            and true.</p>
+                    </div>
+
+                    <!-- Debug Error Section (Only visible on error) -->
+                    <template lwc:if={debugError}>
+                        <div class="glass-panel"
+                            style="margin-top: 1rem; border: 1px solid red; background: rgba(50,0,0,0.5);">
+                            <h3 style="color: #ffcccc; margin-bottom: 0.5rem;">Debug Information</h3>
+                            <pre
+                                style="color: #ffcccc; overflow-x: auto; white-space: pre-wrap; font-size: 0.75rem;">{debugError}</pre>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <!-- Success Screen -->
+        <template lwc:if={isSuccess}>
+            <div class="glass-panel success-container animate-fade">
+                <div class="success-icon">
+                    <span style="font-size: 2.5rem;">✓</span>
+                </div>
+                <h2>Assessment Received</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    Thank you for moving forward. Your professional will contact you with more information soon.
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">
+                    Please wait for your account to be activated.
+                </p>
+            </div>
+        </template>
+    </div>
+</template>

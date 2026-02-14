@@ -1,0 +1,63 @@
+<template>
+    <div class="intake-container">
+
+        <template if:true={isSuccess}>
+            <div class="slds-box slds-theme_default slds-container_small section-container slds-text-align_center">
+                <div class="slds-m-bottom_medium">
+                    <lightning-icon icon-name="action:approval" alternative-text="Success" title="Success"
+                        size="large"></lightning-icon>
+                </div>
+                <h2 class="slds-text-heading_medium slds-m-bottom_small">Registration Successful!</h2>
+                <p class="slds-text-body_regular slds-m-bottom_large">Your application has been received. Please verify
+                    your email to complete the setup.</p>
+                <div class="slds-notify slds-notify_alert slds-theme_success" role="alert" style="border-radius: 4px;">
+                    <h2>Welcome to the Doctor Portal</h2>
+                </div>
+            </div>
+        </template>
+
+        <template if:false={isSuccess}>
+            <div class="slds-box slds-theme_default slds-container_small section-container">
+                <h2 class="slds-text-heading_medium slds-text-align_center slds-m-bottom_medium">Doctor Registration
+                </h2>
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input label="First Name" value={firstName} onchange={handleInputChange}
+                            data-field="firstName" required></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input label="Last Name" value={lastName} onchange={handleInputChange}
+                            data-field="lastName" required></lightning-input>
+                    </div>
+                </div>
+
+                <lightning-input type="email" label="Email" value={email} onchange={handleInputChange}
+                    data-field="email" required></lightning-input>
+                <lightning-input type="tel" label="Phone" value={phone} onchange={handleInputChange}
+                    data-field="phone"></lightning-input>
+
+                <lightning-input label="Medical License Number" value={medicalLicense} onchange={handleInputChange}
+                    data-field="medicalLicense" required></lightning-input>
+
+                <div class="slds-m-top_medium">
+                    <lightning-input type="checkbox" label="I agree to the Terms and Conditions" checked={agreedToTerms}
+                        onchange={handleInputChange} data-field="agreedToTerms" required></lightning-input>
+                </div>
+
+                <template if:true={errorMessage}>
+                    <div class="slds-text-color_error slds-m-top_small">{errorMessage}</div>
+                </template>
+
+                <div class="slds-m-top_large slds-text-align_center">
+                    <lightning-button variant="brand" label="Register" onclick={handleSubmit}
+                        disabled={isLoading}></lightning-button>
+                </div>
+
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

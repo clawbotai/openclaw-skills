@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- How often do you think about food? --></help>
+    <label><!-- Food Noise Frequency --></label>
+    <name>Food_Noise_Frequency__c</name>
+    <picklistValues>
+        <masterLabel>Constantly</masterLabel>
+        <translation><!-- Constantly --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Never</masterLabel>
+        <translation><!-- Never --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sometimes</masterLabel>
+        <translation><!-- Sometimes --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

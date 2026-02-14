@@ -1,0 +1,70 @@
+{
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "componentName" : "siteforce:sldsTwoCol84Layout",
+  "dataProviders" : [ ],
+  "id" : "02b11ded-d510-4487-9451-275fdec0d658",
+  "label" : "Account Detail",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "forceCommunity:recordHeadline",
+      "id" : "3e9285c2-cc8f-40fc-b12c-6ab4b40b22f1",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "e0e0d0a9-a692-4c5f-8996-2bd9eb0bc55c",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "forceCommunity:recordDetail",
+      "id" : "bdd12bd9-4f9e-4962-97d0-68f27c698fbf",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "d907e2ec-5685-4929-bec9-9cbabf15f04a",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "1a16e2b5-42e5-446a-ac10-acc8d728c653",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "54170044-345c-4ef4-8c88-91ae9c5151f9",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "fc89e9e1-ecb1-4834-b078-48748ad4ba80",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:patientDashboard_Clean",
+      "id" : "3854daea-7a99-45d4-bd39-def981420058",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "68895216-3867-439b-9530-b6d06fd802aa",
+    "regionName" : "sidebar",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-001"
+}

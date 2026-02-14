@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "28d27c72-f42b-4f70-a64b-375b93f2048b",
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "configurationTags" : [ ],
+  "devName" : "Validate_Patient__c",
+  "id" : "e4dde7d5-bac0-45b9-91bc-10a083d8b810",
+  "label" : "Validate Patient",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-validate-patient",
+  "type" : "route",
+  "urlPrefix" : "validate-patient"
+}

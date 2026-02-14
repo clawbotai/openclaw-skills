@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hard_Deck_Safety_Stop</fullName>
+    <active>true</active>
+    <description>Prevents saving an assessment if any absolute contraindications are checked.</description>
+    <errorConditionFormula>OR(
+    Contraindication_Pregnancy__c,
+    Contraindication_Family_MTC_MEN2__c,
+    Contraindication_Active_Malignancy__c,
+    Contraindication_Pancreatitis__c,
+    Contraindication_Insulin_Use__c
+)</errorConditionFormula>
+    <errorMessage>Safety Contraindication Detected. This case cannot proceed through standard automated intake and requires manual clinical referral.</errorMessage>
+</ValidationRule>

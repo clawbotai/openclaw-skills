@@ -1,0 +1,68 @@
+{
+  "appPageId" : "7043ec3a-5cb7-40ec-a004-43fed2b873a4",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "44d1f741-6586-4234-96cc-a18476a39e06",
+  "label" : "Intake",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "59cff1b7-0d49-4a9d-aac2-3f28f7f937d3",
+          "columns" : [ {
+            "UUID" : "0afb112f-10d7-4ba5-9d68-769e5eac4796",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "59cff1b7-0d49-4a9d-aac2-3f28f7f937d3",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:patientIntakeForm",
+          "id" : "64dbaf5e-97b0-4bea-a101-448789390df8",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "0afb112f-10d7-4ba5-9d68-769e5eac4796",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "2700bd4e-ba67-4ada-a549-4571872d1b68",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Intake"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "1bb9cee6-3c0a-487e-843d-c05cf120b96f",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "3eb70881-ac64-48d0-8819-9e51bf4808f5",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-intake"
+}

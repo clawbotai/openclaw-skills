@@ -41,6 +41,8 @@ _Lessons encoded from real mistakes. Correct once, never again._
 
 **Back up before destructive operations.** Before replacing a working system with an AI-generated one, `cp -r` the original. The replacement may be 7× smaller and missing critical features.
 
+**Log active tasks to memory files immediately.** Don't rely on context surviving compactions. When a user requests multi-step work, write it to `memory/YYYY-MM-DD.md` right away — even before starting. "Mental notes" die with compactions.
+
 ## Continuity
 
 Each session, you wake up fresh. These files _are_ your memory. Read them. Update them. They're how you persist.
