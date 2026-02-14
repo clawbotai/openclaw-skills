@@ -79,37 +79,52 @@ Any skill can be an operator — the pattern is general.
 
 ### Workflow
 
-#### Step 1: Load the operator skill
-Read the operator skill's SKILL.md to understand its methodology, phases, and outputs.
+#### Step 1: Ensure the daemon is running (same as Mode 1)
 
-#### Step 2: Load the target skill
+#### Step 2: Load the operator skill
+Read the operator skill's SKILL.md in full.
+
+#### Step 3: Load the target skill
 Read the target skill's SKILL.md plus key files:
-- `scripts/` directory listing
+- `scripts/` directory listing and contents
 - Any `*.py`, `*.sh`, `*.js` implementation files
 - Recent error logs from `memory/skill-errors.json` if relevant
 
-#### Step 3: Gather usage context
+#### Step 4: Gather usage context
 Read today's memory file (`memory/YYYY-MM-DD.md`) and recent files for:
 - Any mentions of the target skill being used today
 - Errors, corrections, or friction encountered
 - Decisions made or patterns discovered
 
-#### Step 4: Execute the operator's methodology
-Follow the operator skill's process, applying it to the target:
-- Use the operator's frameworks, checklists, and evaluation criteria
-- Feed in the target skill's code, docs, and usage context
-- Generate concrete improvements (not abstract suggestions)
+#### Step 5: Build the forge job prompt
 
-#### Step 5: Apply changes
-- Edit the target skill's SKILL.md, scripts, or create new files
-- Show a diff summary of what changed and why
+Construct the `prompt` as:
+```
+Apply the methodology of [operator skill] to improve [target skill].
+
+OPERATOR METHODOLOGY:
+<full SKILL.md of operator>
+
+USAGE CONTEXT:
+<relevant memory excerpts from today>
+
+Your task: Follow the operator's process against the target skill.
+Produce concrete file changes — improved SKILL.md, new/updated scripts, fixes.
+Do not produce abstract suggestions. Produce actual file content.
+```
+
+Set `localContext` to the target skill's full file contents (SKILL.md + scripts + implementation).
+
+#### Step 6: Submit → Poll → Pull (same as Mode 1)
+
+Submit to the forge daemon, poll until complete, pull the manifest.
+
+#### Step 7: Apply the manifest
+
+- `CREATE` / `UPDATE`: Write files into the target skill's directory
+- `DELETE`: Use `trash`
+- Run `requiredCommands`
 - Commit with message: `forge: apply <operator> to <target>`
-
-#### Step 6: Report
-Tell the user:
-- What the operator skill's process found
-- What was changed in the target skill
-- Any follow-up recommendations
 
 ---
 
@@ -118,5 +133,5 @@ Tell the user:
 - Daemon runs on port 2468 (HTTP mode), in-memory job store with 1h TTL
 - Gemini API key inherited from OpenClaw environment
 - Build daemon: `cd antigravity-forge-daemon && npm run build`
-- Mode 2 doesn't use the daemon — it's pure skill-on-skill orchestration within the main session
-- For heavy Mode 2 operations, consider spawning a sub-agent to avoid blocking
+- Both modes use the Antigravity Forge Daemon / Gemini for generation
+- For heavy jobs, consider spawning a sub-agent to avoid blocking
