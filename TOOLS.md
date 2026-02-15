@@ -74,12 +74,19 @@ bin/skillrun <skill-name> [--timeout N] -- <command...>
 - **QTS auth:** POST to `/cgi-bin/authLogin.cgi` with `pwd=` **base64-encoded** — plaintext fails silently (`authPassed=0`)
 - **Container Station API:** v1 at `:8080/container-station/api/v1/` — login, list containers, list apps work; **inspect endpoints return 404** on QuTS Hero h6 (docs are for v2.4, doesn't match)
 - **Container config:** All containers use `--network host`, `--restart unless-stopped`, `PUID=0 PGID=0`
+- **Radarr API Key:** `6cc07f1ef5e24156b59de747e2dc846b`
+- **Sonarr API Key:** `d414af91f8a84cb8910082fc9300b60d`
 - **Prowlarr API Key:** `1b84ce72887243de80dee26c5daf61c7`
 - **Plex Token:** `n1uheT35no4W9NJ5szFR`
 - **Plex sections:** 1=Movies(/movies), 2=TV(/tv), 5=Kids Movies(/kids-movies), 6=Kids TV(/kids-tv)
 - **Indexers:** BroadcasTheNet (TV/Sonarr), PassThePopcorn (Movies/Radarr) — synced via Prowlarr fullSync
 - **Radarr/Sonarr move quirk:** PUT with `moveFiles=true` alone doesn't move files — must also set `path` field explicitly to new location (e.g., `/kids-movies/Title (Year)`)
 - **Disney+ network filter:** Too broad for kids content — catches Marvel, Star Wars live-action. Filter by animation genre or curated title list instead.
+- **qBittorrent WebUI**: port 8085 (env `WEBUI_PORT=8085`), password is custom PBKDF2 (not admin/admin, not ranger2023)
+- **qBit auth**: `LocalHostAuth=false` — localhost connections bypass auth (cross-seed uses this)
+- **qBit IP ban**: Bans after ~3 failed attempts; clear by restarting container
+- **Cross-seed**: v6.13.6, port 2468, config at `/share/ZFS2_DATA/Public/Container/cross-seed/config/config.js`, fully configured and running
+- **Cross-seed scan rate**: ~1 item/min against indexers, full library (1,645 items) takes ~1 day
 
 ## Gemini CLI
 

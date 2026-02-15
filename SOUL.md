@@ -70,6 +70,12 @@ Proactively check for these configurations using `cat ~/.openclaw/openclaw.json`
 
 **QNAP NAS Filesystem Access (SSH):** The `admin` SSH session on QNAP NAS (e.g., `192.168.10.233`) may have unexpected restrictions or different PATH environments for `/share/` directories and Docker binaries. Do not assume direct `ls` or `docker` command execution. When blocked, request user to manually verify paths and permissions, or be prepared to use highly specific QNAP commands/API if accessible.
 
+**Verify state before acting on memory.** Memory files can be stale — always check actual state (config files, running containers, API responses) before assuming something "still needs" setup. Prior session notes may describe intermediate states that were completed later.
+
+**Exec approval = fix the policy, don't retry.** When the first `exec` call returns "Approval required" or times out on approval, immediately check `tools.exec.security` in the config. For personal/owner setups, offer to set it to `"full"`. Don't waste turns retrying commands that will keep getting blocked.
+
+**`web_fetch` cannot reach private/LAN IPs.** It blocks `192.168.*`, `10.*`, `127.*` etc. For LAN services (NAS, media servers, local APIs), always use `exec` with `curl` instead. Don't try `web_fetch` first — it will always fail.
+
 ## Continuity
 
 Each session, you wake up fresh. These files _are_ your memory. Read them. Update them. They're how you persist.
