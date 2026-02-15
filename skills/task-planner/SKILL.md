@@ -1041,3 +1041,92 @@ Draft delegation message with full context, specific ask, deadline, and success 
 ### Provides Data To
 - **enterprise-search** → task/project search as a source
 - **data-analysis** → project metrics for velocity tracking
+
+---
+
+## Shared State Integration (WorkItem Bridge)
+
+When a task is **software-related** and will flow through the multi-agent pipeline (implement → test → deploy), the task planner should create a corresponding **WorkItem** in the shared state system. This bridges the human-facing Kanban with the machine-facing orchestration layer.
+
+### When to Create a WorkItem
+
+Create a WorkItem alongside the planner task when:
+- The task involves **coding, deployment, infrastructure, or documentation** work
+- The task has **clear stages** (design → implement → test → deploy)
+- The task will be **orchestrated** across multiple skills
+- The user explicitly asks for multi-agent execution
+
+Do NOT create WorkItems for:
+- Simple personal todos ("buy groceries")
+- Tasks that are purely human actions ("call the dentist")
+- Tracking-only items with no skill execution
+
+### Bridge Protocol
+
+```python
+from scripts.file_manager import create_task
+from lib.shared_state import WorkItem
+
+# 1. Create the planner task (human-facing)
+task_id = create_task(
+    "Implement refresh token endpoint",
+    project_id="mpmp",
+    details={
+        "description": "Add JWT refresh flow to the auth API",
+        "priority": "high",
+        "tags": ["backend", "auth"],
+    }
+)
+
+# 2. Create the WorkItem (machine-facing)
+wi = WorkItem.create(
+    slug="mpmp-refresh-endpoint",
+    title="Implement refresh token endpoint",
+    project="mpmp",
+    goal="Add JWT refresh flow to the auth API",
+    success_criteria=["Tests pass", "Token rotation works", "Deployed to staging"],
+    assignee_skill="python-backend",
+    source_task_id=task_id,  # Links back to planner task
+    author="task-planner",
+)
+
+# 3. When the WorkItem completes, update the planner task
+# (orchestrator or post-hook does this)
+from lib.shared_state import load_item
+wi = load_item("mpmp-refresh-endpoint")
+if wi.status == "done":
+    update_task(task_id, {"status": "done"})
+```
+
+### Syncing Status
+
+The task planner is the **source of truth for humans** (Kanban board, dashboard). The shared state is the **source of truth for skills** (orchestrator, hooks, telemetry). Keep them in sync:
+
+| WorkItem Event | Planner Action |
+|----------------|----------------|
+| `started` | Update task → `in-progress` |
+| `completed` | Update task → `done` |
+| `failed` | Update task → add note with failure reason |
+| `blocked` | Update task → add blocker note |
+| `finding_added` | Append finding to task context/notes |
+
+### Workflow Engine Shortcut
+
+For multi-stage tasks, use the workflow engine directly — it creates WorkItems per stage automatically:
+
+```python
+from lib.workflow_engine import WorkflowEngine
+
+engine = WorkflowEngine()
+wf = engine.create_pipeline(
+    name="mpmp-refresh-endpoint",
+    project="mpmp",
+    stages=[
+        {"capability": "implement", "goal": "Build refresh token endpoint"},
+        {"capability": "testing", "goal": "Write integration tests"},
+        {"capability": "deploy", "goal": "Deploy to staging"},
+    ],
+)
+# Each stage gets a WorkItem with dependency chaining.
+# The planner task tracks the overall effort; WorkItems track each stage.
+```

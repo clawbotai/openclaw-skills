@@ -1,0 +1,44 @@
+{
+  "name": "task-planner",
+  "skill_path": "skills/task-planner",
+  "description": "Natural language task and project management. Captures tasks, organizes projects, tracks progress, bridges to shared state for orchestration.",
+  "capabilities": [
+    "task_capture",
+    "project_management",
+    "planning",
+    "tracking",
+    "decomposition"
+  ],
+  "inputs": [
+    {"name": "user_request", "type": "text", "required": true, "description": "Natural language description of work to track"},
+    {"name": "project", "type": "string", "required": false, "description": "Project to assign the task to"}
+  ],
+  "outputs": [
+    {"name": "task_id", "type": "string", "description": "Created task ID in the planner"},
+    {"name": "work_item_slug", "type": "string", "description": "Created WorkItem slug (for software tasks)"},
+    {"name": "project_id", "type": "string", "description": "Project the task was assigned to"}
+  ],
+  "side_effects": [
+    "file_write"
+  ],
+  "triggers_hooks": [
+    "created"
+  ],
+  "subscribes_hooks": [
+    "completed",
+    "failed"
+  ],
+  "upstream": [
+    "product-management",
+    "customer-support"
+  ],
+  "downstream": [
+    "python-backend",
+    "devops",
+    "web-builder",
+    "docs-engine",
+    "agent-orchestration"
+  ],
+  "estimated_minutes": 2,
+  "model_preference": "flash"
+}

@@ -435,6 +435,56 @@ AFTER:   Does this match the request? Am I uncertain anywhere? Is anything irrev
 ALWAYS:  Would I bet money on this? If not, what would I need to verify?
 ```
 
+## Shared State Integration
+
+Sanity-check subscribes to `completed` and `artifact_added` hook events. When triggered as a post-stage hook in a workflow, it reads the WorkItem's artifacts, tests, and metrics to determine gating.
+
+### Hook-Driven Gating
+
+```python
+from lib.shared_state import load_item, pending_hooks
+
+# Read completed events since last check
+events = pending_hooks("completed", since="2026-02-14T00:00:00Z")
+for event in events:
+    slug = event["slug"]
+    wi = load_item(slug)
+
+    # OUTPUT gate: check artifacts and tests
+    issues = []
+
+    # 1. Must have at least one artifact
+    if not wi.artifacts:
+        issues.append("No artifacts recorded — was work actually done?")
+
+    # 2. Tests must all pass (if any recorded)
+    failed_tests = [t for t in wi.tests if t.get("status") != "pass"]
+    if failed_tests:
+        issues.append(f"{len(failed_tests)} test(s) failed: {[t['name'] for t in failed_tests]}")
+
+    # 3. Check metrics against thresholds
+    for m in wi.metrics:
+        if m["name"] == "test_coverage" and m["value"] < 70:
+            issues.append(f"Coverage {m['value']}% below 70% threshold")
+
+    # Record findings
+    if issues:
+        for issue in issues:
+            wi.add_followup(issue, author="sanity-check")
+        wi.set_status("blocked", author="sanity-check")
+    # If clean, no action needed — workflow advances
+```
+
+### Contract Reference
+
+Contract at `config/skill_contracts/sanity-check.json`:
+- **Subscribes to:** `completed`, `artifact_added`
+- **Triggers:** `finding_added`, `followup_added`
+- **Upstream:** python-backend, devops, web-builder, docs-engine
+- **Downstream:** reflect, skill-lifecycle
+
+---
+
 ## References
 
 - [references/drift-detection.md](references/drift-detection.md) — Deep protocol for detecting and correcting drift

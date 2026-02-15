@@ -354,3 +354,146 @@ WORKERS:  3-6 parallel max. Each 5-15 min. T2-max (no T3+ actions).
 COST:     Cheapest model that works. Prompt words × workers = total cost.
 RECOVER:  Partial results > no results. Report honestly what failed.
 ```
+
+---
+
+## Workflow Engine Integration
+
+The orchestrator now has a **workflow engine** (`lib/workflow_engine.py`) that bridges shared state, skill contracts, and this skill's coordination patterns into a unified system.
+
+### Creating a Workflow
+
+Instead of manually tracking subtasks in the orchestrator ledger, use the workflow engine to auto-create WorkItems with proper dependencies:
+
+```python
+from lib.workflow_engine import WorkflowEngine, load_workflow, list_workflows
+
+engine = WorkflowEngine()
+
+# Create a pipeline — each stage gets a WorkItem with dependency on the previous
+wf = engine.create_pipeline(
+    name="implement-auth-refresh",
+    project="mpmp",
+    stages=[
+        {"capability": "implement", "goal": "Build refresh token endpoint"},
+        {"capability": "testing", "goal": "Write integration tests"},
+        {"capability": "deploy", "goal": "Deploy to staging"},
+        {"capability": "verification", "goal": "Verify deployment health"},
+    ],
+)
+print(wf.summary())
+# Shows each stage with auto-resolved skill from contracts:
+#   ⏳ 0. [implement] Build refresh token endpoint → python-backend
+#   ⏳ 1. [testing] Write integration tests → python-backend
+#   ⏳ 2. [deploy] Deploy to staging → devops
+#   ⏳ 3. [verification] Verify deployment health → sanity-check
+```
+
+### Advancing Stages
+
+```python
+# Start the first unblocked stage
+stage = engine.advance(wf)
+# → Starts stage 0, sets WorkItem to in_progress
+
+# When a stage completes (sub-agent reports back, or inline work finishes):
+engine.complete_stage(wf, stage_index=0)
+
+# Get post-hook tasks to spawn (sanity-check, reflect, skill-lifecycle)
+hooks = engine.get_post_hook_tasks(wf, stage_index=0)
+for hook in hooks:
+    sessions_spawn(task=hook["description"], label=f"hook_{hook['skill']}")
+
+engine.mark_post_hooks_run(wf, stage_index=0)
+
+# Advance to next stage
+next_stage = engine.advance(wf)
+```
+
+### Skill Contracts for Routing
+
+Skills declare their capabilities in `config/skill_contracts/<name>.json`. The engine uses these to auto-route:
+
+```python
+from lib.skill_contract import find_skills_for, load_contract, build_pipeline
+
+# Find skills that can deploy
+deployers = find_skills_for(capability="deploy")
+# → [devops]
+
+# Find skills that can verify
+verifiers = find_skills_for(capability="verification")
+# → [sanity-check]
+
+# Build a full pipeline from capability names
+pipeline = build_pipeline(["implement", "deploy", "verification"])
+# → [python-backend, devops, sanity-check]
+
+# Read a specific contract
+contract = load_contract("python-backend")
+print(contract.inputs)       # What it needs
+print(contract.outputs)      # What it produces
+print(contract.downstream)   # Where work flows next
+```
+
+### Shared State for Tracking
+
+Every stage creates a WorkItem (`lib/shared_state.py`) that the assigned skill updates during execution:
+
+```python
+from lib.shared_state import load_item, list_items
+
+# Check progress on a stage
+wi = load_item("wf-implement-auth-refresh-stage-0")
+print(wi.status)      # in_progress / done / failed
+print(wi.artifacts)   # Files produced
+print(wi.tests)       # Test results
+print(wi.findings)    # Lessons learned
+
+# List all active work
+for wi in list_items(status="in_progress"):
+    print(wi.summary())
+```
+
+### Post-Stage Hooks (Evolution Loop)
+
+After each stage completes, the engine generates post-hook tasks:
+
+1. **sanity-check** — Runs OUTPUT gate on the completed WorkItem's artifacts and tests. Blocks promotion if issues found.
+2. **reflect** — If the WorkItem has findings, encodes them into SOUL.md/TOOLS.md so the lesson persists.
+3. **skill-lifecycle** — Monitors the executing skill's health metrics. Opens repair tickets if quality drifts.
+
+This is the **evolution loop**: every piece of work feeds back into the agent's knowledge and the skill system's health.
+
+### CLI Inspection
+
+```bash
+# List all work items
+bin/shared-state list
+bin/shared-state list --status in_progress
+
+# Show full state of a work item
+bin/shared-state show wf-implement-auth-refresh-stage-0
+
+# View recent events
+bin/shared-state tail wf-implement-auth-refresh-stage-0 --limit 5
+
+# Dependency graph
+bin/shared-state graph
+
+# Check hook events
+bin/shared-state hooks completed --since 2026-02-14
+
+# Aggregate stats
+bin/shared-state stats
+```
+
+### Decision: Workflow Engine vs Manual Orchestration
+
+| Scenario | Use |
+|----------|-----|
+| Multi-stage software task (implement → test → deploy) | **Workflow Engine** — auto-creates WorkItems, chains deps, generates hooks |
+| One-off parallel batch (document 30 skills) | **Manual Fan-Out** — overhead of contracts not worth it for homogeneous tasks |
+| Expert panel / consensus review | **Manual Expert Panel** — no linear dependency chain to model |
+| Recurring known pipeline (PR review → merge → deploy) | **Workflow Engine** — define once, reuse |
+| Ad-hoc exploration or research | **Inline** — no orchestration needed |

@@ -398,9 +398,80 @@ DEPLOY:     uvicorn app.main:app --host 0.0.0.0 --port 8000
             gunicorn -k uvicorn.workers.UvicornWorker (production)
 ```
 
+## Shared State Integration
+
+This skill participates in the multi-agent workflow system. When executing work as part of an orchestrated pipeline (or independently on a tracked task), emit structured state events so downstream skills (sanity-check, reflect, skill-lifecycle) can react automatically.
+
+### Lifecycle Protocol
+
+```python
+from lib.shared_state import WorkItem, load_item
+
+# At start of work (orchestrator creates the WorkItem; you load it)
+wi = load_item("backend-refresh-endpoint")  # slug from task assignment
+wi.start(assignee_skill="python-backend", author="python-backend")
+
+# During work — record artifacts as you produce them
+wi.add_artifact({"type": "file", "label": "auth.py", "path": "src/auth.py"})
+wi.add_artifact({"type": "file", "label": "test_auth.py", "path": "tests/test_auth.py"})
+
+# Record test results
+wi.record_test({"name": "test_refresh_flow", "status": "pass", "evidence": "14/14 passed"})
+wi.record_test({"name": "test_token_expiry", "status": "pass"})
+
+# Record metrics
+wi.record_metric({"name": "test_coverage", "value": 87, "unit": "%"})
+wi.record_metric({"name": "lines_of_code", "value": 340, "unit": "LOC"})
+
+# Record findings (lessons for reflect to encode)
+wi.add_finding("AsyncSession.begin() must wrap the full transaction — partial commits cause data corruption")
+
+# On completion
+wi.complete(author="python-backend")
+
+# On failure
+wi.fail(reason="Database migration broke foreign key constraint", author="python-backend")
+```
+
+### When to Emit Events
+
+| Moment | Event | Why |
+|--------|-------|-----|
+| Starting implementation | `wi.start()` | Orchestrator tracks progress; telemetry clock starts |
+| Each file created/modified | `wi.add_artifact()` | Sanity-check can inspect outputs; docs-engine knows what to document |
+| Tests run | `wi.record_test()` | Gating: sanity-check blocks promotion if tests fail |
+| Coverage/LOC/complexity measured | `wi.record_metric()` | Skill-lifecycle monitors quality drift over time |
+| Surprise behavior or gotcha found | `wi.add_finding()` | Reflect encodes it into SOUL/TOOLS so it's never forgotten |
+| Work done | `wi.complete()` | Triggers post-hook chain: sanity-check → reflect → skill-lifecycle |
+| Unrecoverable error | `wi.fail()` | Skill-lifecycle opens repair ticket; orchestrator halts pipeline |
+
+### Handoff to Downstream
+
+When your work is done and needs to flow to devops (deploy) or docs-engine (documentation):
+
+```python
+wi.handoff(to_skill="devops", author="python-backend")
+```
+
+The orchestrator reads handoff events to advance the pipeline. You don't need to spawn sub-agents — just emit the event and the workflow engine handles routing.
+
+### Contract Reference
+
+This skill's contract is at `config/skill_contracts/python-backend.json`. It declares:
+- **Capabilities:** api_design, database, authentication, background_processing, ml_serving, testing, implement, refactor
+- **Inputs:** spec (required), existing_code, constraints, test_requirements
+- **Outputs:** source_files, tests, api_docs, metrics
+- **Upstream:** product-management, task-planner
+- **Downstream:** devops, docs-engine, sanity-check
+
+---
+
 ## Cross-Skill Integration
 
 - **security** → Auth patterns, input validation, secrets management
 - **devops** → Dockerfile, CI/CD pipeline, deployment config
 - **data-analysis** → Database query patterns, ORM best practices
 - **skill-lifecycle** → Runtime monitoring of backend services
+- **shared-state** → WorkItem lifecycle events for orchestration + reflection
+- **sanity-check** → Post-stage gating (OUTPUT gate verifies artifacts + tests)
+- **reflect** → Findings auto-encoded into SOUL/TOOLS via hook subscription

@@ -1,0 +1,44 @@
+{
+  "name": "docs-engine",
+  "skill_path": "skills/docs-engine",
+  "description": "Documentation engine with Diátaxis scaffolding, quality scoring, and active documentation generation.",
+  "capabilities": [
+    "documentation",
+    "api_docs",
+    "tutorials",
+    "how_to_guides",
+    "reference_docs",
+    "changelog"
+  ],
+  "inputs": [
+    {"name": "source_files", "type": "file_paths", "required": true, "description": "Code or content to document"},
+    {"name": "existing_docs", "type": "file_paths", "required": false, "description": "Existing documentation to update"},
+    {"name": "doc_type", "type": "string", "required": false, "description": "Type: tutorial, how-to, reference, explanation"}
+  ],
+  "outputs": [
+    {"name": "docs", "type": "file_paths", "description": "Generated/updated documentation files"},
+    {"name": "quality_score", "type": "number", "description": "Documentation quality score (0-100)"},
+    {"name": "metrics", "type": "telemetry", "description": "Coverage %, completeness, freshness"}
+  ],
+  "side_effects": [
+    "file_write"
+  ],
+  "triggers_hooks": [
+    "artifact_added",
+    "metric_recorded"
+  ],
+  "subscribes_hooks": [
+    "completed",
+    "artifact_added"
+  ],
+  "upstream": [
+    "python-backend",
+    "devops",
+    "web-builder"
+  ],
+  "downstream": [
+    "sanity-check"
+  ],
+  "estimated_minutes": 10,
+  "model_preference": "flash"
+}
