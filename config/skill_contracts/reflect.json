@@ -1,0 +1,38 @@
+{
+  "name": "reflect",
+  "skill_path": "skills/reflect-learn",
+  "description": "Self-improvement through conversation analysis. Extracts learnings from corrections and encodes them into agent definitions.",
+  "capabilities": [
+    "learning",
+    "self_improvement",
+    "pattern_extraction",
+    "behavior_encoding"
+  ],
+  "inputs": [
+    {"name": "findings", "type": "list", "required": true, "description": "Lessons learned from work items or sanity checks"},
+    {"name": "conversation_context", "type": "text", "required": false, "description": "Conversation excerpt showing the correction/learning"},
+    {"name": "target_files", "type": "list", "required": false, "description": "Files to update (SOUL.md, TOOLS.md, skill configs)"}
+  ],
+  "outputs": [
+    {"name": "encoded_behaviors", "type": "list", "description": "New behaviors written to SOUL/TOOLS"},
+    {"name": "updated_files", "type": "file_paths", "description": "Files that were modified"}
+  ],
+  "side_effects": [
+    "file_write"
+  ],
+  "triggers_hooks": [
+    "completed"
+  ],
+  "subscribes_hooks": [
+    "finding_added",
+    "completed",
+    "failed"
+  ],
+  "upstream": [
+    "sanity-check",
+    "skill-lifecycle"
+  ],
+  "downstream": [],
+  "estimated_minutes": 5,
+  "model_preference": "opus"
+}

@@ -1,0 +1,1 @@
+{"slug": "shared-state-helper", "event": "metric_recorded", "timestamp": "2026-02-15T01:44:51.031635+00:00", "author": "agent", "payload": {"metric": {"name": "total_loc", "value": 1050, "unit": "LOC", "timestamp": "2026-02-15T01:44:51.031621+00:00"}}}

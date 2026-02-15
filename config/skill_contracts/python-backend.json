@@ -1,0 +1,51 @@
+{
+  "name": "python-backend",
+  "skill_path": "skills/python-backend",
+  "description": "Python backend development — API design, database operations, authentication, background processing, and ML serving.",
+  "capabilities": [
+    "api_design",
+    "database",
+    "authentication",
+    "background_processing",
+    "ml_serving",
+    "testing",
+    "implement",
+    "refactor"
+  ],
+  "inputs": [
+    {"name": "spec", "type": "markdown", "required": true, "description": "Feature specification or PRD describing what to build"},
+    {"name": "existing_code", "type": "file_paths", "required": false, "description": "Paths to existing codebase for context"},
+    {"name": "constraints", "type": "list", "required": false, "description": "Technical constraints (Python version, stdlib-only, etc.)"},
+    {"name": "test_requirements", "type": "markdown", "required": false, "description": "Specific test scenarios to cover"}
+  ],
+  "outputs": [
+    {"name": "source_files", "type": "file_paths", "description": "Created/modified Python source files"},
+    {"name": "tests", "type": "file_paths", "description": "Test files with pass/fail results"},
+    {"name": "api_docs", "type": "markdown", "description": "API endpoint documentation"},
+    {"name": "metrics", "type": "telemetry", "description": "Coverage %, LOC, complexity scores"}
+  ],
+  "side_effects": [
+    "file_write",
+    "database_migration"
+  ],
+  "triggers_hooks": [
+    "artifact_added",
+    "test_recorded",
+    "metric_recorded"
+  ],
+  "subscribes_hooks": [
+    "created",
+    "handoff"
+  ],
+  "upstream": [
+    "product-management",
+    "task-planner"
+  ],
+  "downstream": [
+    "devops",
+    "docs-engine",
+    "sanity-check"
+  ],
+  "estimated_minutes": 15,
+  "model_preference": "opus"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "skill-lifecycle",
+  "skill_path": "skills/skill-lifecycle",
+  "description": "Unified skill lifecycle: Research→Build→Reflect loop with AIOps monitoring, error classification, circuit breakers, and self-healing.",
+  "capabilities": [
+    "monitoring",
+    "error_classification",
+    "circuit_breaking",
+    "self_healing",
+    "research",
+    "evolution"
+  ],
+  "inputs": [
+    {"name": "skill_name", "type": "string", "required": true, "description": "Name of the skill to monitor/evolve"},
+    {"name": "error_logs", "type": "file_paths", "required": false, "description": "Error logs or telemetry from failed runs"},
+    {"name": "research_query", "type": "string", "required": false, "description": "Topic to research for skill improvement"}
+  ],
+  "outputs": [
+    {"name": "health_report", "type": "json", "description": "Skill health status and metrics"},
+    {"name": "repair_ticket", "type": "json", "description": "Auto-generated repair task if issues found"},
+    {"name": "research_findings", "type": "markdown", "description": "Research results for skill evolution"}
+  ],
+  "side_effects": [
+    "circuit_breaker_state",
+    "error_log_write"
+  ],
+  "triggers_hooks": [
+    "finding_added",
+    "followup_added"
+  ],
+  "subscribes_hooks": [
+    "failed",
+    "completed",
+    "metric_recorded",
+    "test_recorded"
+  ],
+  "upstream": [
+    "sanity-check",
+    "python-backend",
+    "devops"
+  ],
+  "downstream": [
+    "reflect"
+  ],
+  "estimated_minutes": 5,
+  "model_preference": "flash"
+}

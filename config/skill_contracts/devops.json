@@ -1,0 +1,52 @@
+{
+  "name": "devops",
+  "skill_path": "skills/devops",
+  "description": "CI/CD pipelines, infrastructure as code, containers, Kubernetes, GitOps, security, monitoring, progressive delivery.",
+  "capabilities": [
+    "ci_cd",
+    "infrastructure",
+    "containers",
+    "kubernetes",
+    "gitops",
+    "monitoring",
+    "deploy",
+    "security_scan"
+  ],
+  "inputs": [
+    {"name": "source_files", "type": "file_paths", "required": true, "description": "Application code to deploy/containerize"},
+    {"name": "deploy_target", "type": "string", "required": false, "description": "Target environment (cloudflare, docker, k8s, etc.)"},
+    {"name": "infra_config", "type": "file_paths", "required": false, "description": "Existing infrastructure configs (Dockerfile, terraform, etc.)"}
+  ],
+  "outputs": [
+    {"name": "pipeline_config", "type": "file_paths", "description": "CI/CD pipeline definitions"},
+    {"name": "container_config", "type": "file_paths", "description": "Dockerfiles, compose files"},
+    {"name": "deploy_logs", "type": "text", "description": "Deployment output/verification"},
+    {"name": "metrics", "type": "telemetry", "description": "Build time, deploy status, health checks"}
+  ],
+  "side_effects": [
+    "deployment",
+    "container_build",
+    "dns_update",
+    "secret_management"
+  ],
+  "triggers_hooks": [
+    "artifact_added",
+    "metric_recorded",
+    "completed"
+  ],
+  "subscribes_hooks": [
+    "completed",
+    "handoff"
+  ],
+  "upstream": [
+    "python-backend",
+    "web-builder"
+  ],
+  "downstream": [
+    "observability",
+    "sanity-check",
+    "docs-engine"
+  ],
+  "estimated_minutes": 10,
+  "model_preference": "flash"
+}

@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""
+shared-state — CLI for inspecting and managing multi-agent work items.
+
+Usage:
+    shared-state list [--status STATUS] [--project PROJECT] [--skill SKILL]
+    shared-state show SLUG
+    shared-state tail SLUG [--limit N]
+    shared-state graph
+    shared-state hooks EVENT_TYPE [--since ISO_DATE]
+    shared-state create --title TITLE [--project PROJECT] [--goal GOAL] [--skill SKILL]
+    shared-state start SLUG [--skill SKILL]
+    shared-state complete SLUG
+    shared-state fail SLUG [--reason REASON]
+    shared-state handoff SLUG --to SKILL
+    shared-state stats
+
+Examples:
+    shared-state list --status in_progress
+    shared-state show backend-refresh-endpoint
+    shared-state tail backend-refresh-endpoint --limit 5
+    shared-state graph
+    shared-state hooks completed --since 2026-02-14
+    shared-state create --title "Add refresh token" --project mpmp --skill python-backend
+    shared-state start backend-refresh-endpoint
+    shared-state complete backend-refresh-endpoint
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+
+# Add workspace root to path
+_WORKSPACE = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, _WORKSPACE)
+
+from lib.shared_state import (
+    WorkItem, load_item, list_items, dependency_graph, pending_hooks,
+    STATE_DIR, HOOKS_DIR,
+)
+
+
+def cmd_list(args: argparse.Namespace) -> None:
+    items = list_items(
+        status=args.status,
+        project=args.project,
+        skill=args.skill,
+    )
+    if not items:
+        print("No work items found.")
+        return
+    for wi in items:
+        print(wi.summary())
+
+
+def cmd_show(args: argparse.Namespace) -> None:
+    try:
+        wi = load_item(args.slug)
+    except FileNotFoundError as e:
+        print(str(e), file=sys.stderr)
+        sys.exit(1)
+    print(json.dumps(wi.to_dict(), indent=2, default=str))
+
+
+def cmd_tail(args: argparse.Namespace) -> None:
+    try:
+        wi = load_item(args.slug)
+    except FileNotFoundError as e:
+        print(str(e), file=sys.stderr)
+        sys.exit(1)
+    events = wi.history
+    if args.limit:
+        events = events[-args.limit:]
+    for ev in events:
+        ts = ev.get("timestamp", "?")[:19]
+        etype = ev.get("event", "?")
+        author = ev.get("author", "?")
+        payload_str = json.dumps(ev.get("payload", {}), default=str)
+        if len(payload_str) > 120:
+            payload_str = payload_str[:117] + "..."
+        print(f"  {ts}  {etype:20s}  by={author:10s}  {payload_str}")
+
+
+def cmd_graph(args: argparse.Namespace) -> None:
+    g = dependency_graph()
+    if not g:
+        print("No work items with dependencies.")
+        return
+    for slug, deps in sorted(g.items()):
+        blockers = deps.get("blockers", [])
+        dependents = deps.get("dependents", [])
+        parts = []
+        if blockers:
+            parts.append(f"blocked_by=[{', '.join(blockers)}]")
+        if dependents:
+            parts.append(f"unblocks=[{', '.join(dependents)}]")
+        if parts:
+            print(f"  {slug}: {' | '.join(parts)}")
+        else:
+            print(f"  {slug}: (no deps)")
+
+
+def cmd_hooks(args: argparse.Namespace) -> None:
+    events = pending_hooks(args.event_type, since=args.since)
+    if not events:
+        print(f"No '{args.event_type}' hook events.")
+        return
+    for ev in events:
+        ts = ev.get("timestamp", "?")[:19]
+        slug = ev.get("slug", "?")
+        print(f"  {ts}  {slug}")
+
+
+def cmd_create(args: argparse.Namespace) -> None:
+    wi = WorkItem.create(
+        title=args.title,
+        project=args.project or "",
+        goal=args.goal or "",
+        assignee_skill=args.skill,
+        author="cli",
+    )
+    print(f"Created: {wi.slug}")
+    print(f"  File: {wi._path}")
+
+
+def cmd_start(args: argparse.Namespace) -> None:
+    wi = load_item(args.slug)
+    wi.start(assignee_skill=args.skill, author="cli")
+    print(f"Started: {wi.slug} → in_progress")
+
+
+def cmd_complete(args: argparse.Namespace) -> None:
+    wi = load_item(args.slug)
+    wi.complete(author="cli")
+    print(f"Completed: {wi.slug} → done")
+
+
+def cmd_fail(args: argparse.Namespace) -> None:
+    wi = load_item(args.slug)
+    wi.fail(reason=args.reason or "", author="cli")
+    print(f"Failed: {wi.slug} → failed")
+
+
+def cmd_handoff(args: argparse.Namespace) -> None:
+    wi = load_item(args.slug)
+    wi.handoff(to_skill=args.to, author="cli")
+    print(f"Handed off: {wi.slug} → {args.to}")
+
+
+def cmd_stats(args: argparse.Namespace) -> None:
+    items = list_items()
+    by_status = {}
+    by_project = {}
+    by_skill = {}
+    for wi in items:
+        by_status[wi.status] = by_status.get(wi.status, 0) + 1
+        p = wi.project or "(none)"
+        by_project[p] = by_project.get(p, 0) + 1
+        s = wi.assignee_skill or "(unassigned)"
+        by_skill[s] = by_skill.get(s, 0) + 1
+
+    print(f"Total work items: {len(items)}")
+    print("\nBy status:")
+    for s, c in sorted(by_status.items()):
+        print(f"  {s}: {c}")
+    print("\nBy project:")
+    for p, c in sorted(by_project.items()):
+        print(f"  {p}: {c}")
+    print("\nBy skill:")
+    for s, c in sorted(by_skill.items()):
+        print(f"  {s}: {c}")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        prog="shared-state",
+        description="Inspect and manage multi-agent work items",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    # list
+    p = sub.add_parser("list", help="List work items")
+    p.add_argument("--status", help="Filter by status")
+    p.add_argument("--project", help="Filter by project")
+    p.add_argument("--skill", help="Filter by assignee skill")
+    p.set_defaults(func=cmd_list)
+
+    # show
+    p = sub.add_parser("show", help="Show full work item state")
+    p.add_argument("slug")
+    p.set_defaults(func=cmd_show)
+
+    # tail
+    p = sub.add_parser("tail", help="Show recent events for a work item")
+    p.add_argument("slug")
+    p.add_argument("--limit", type=int, default=10)
+    p.set_defaults(func=cmd_tail)
+
+    # graph
+    p = sub.add_parser("graph", help="Show dependency graph")
+    p.set_defaults(func=cmd_graph)
+
+    # hooks
+    p = sub.add_parser("hooks", help="Read hook events by type")
+    p.add_argument("event_type")
+    p.add_argument("--since", help="ISO date filter")
+    p.set_defaults(func=cmd_hooks)
+
+    # create
+    p = sub.add_parser("create", help="Create a new work item")
+    p.add_argument("--title", required=True)
+    p.add_argument("--project")
+    p.add_argument("--goal")
+    p.add_argument("--skill")
+    p.set_defaults(func=cmd_create)
+
+    # start
+    p = sub.add_parser("start", help="Start a work item")
+    p.add_argument("slug")
+    p.add_argument("--skill")
+    p.set_defaults(func=cmd_start)
+
+    # complete
+    p = sub.add_parser("complete", help="Complete a work item")
+    p.add_argument("slug")
+    p.set_defaults(func=cmd_complete)
+
+    # fail
+    p = sub.add_parser("fail", help="Fail a work item")
+    p.add_argument("slug")
+    p.add_argument("--reason", default="")
+    p.set_defaults(func=cmd_fail)
+
+    # handoff
+    p = sub.add_parser("handoff", help="Hand off to another skill")
+    p.add_argument("slug")
+    p.add_argument("--to", required=True)
+    p.set_defaults(func=cmd_handoff)
+
+    # stats
+    p = sub.add_parser("stats", help="Aggregate stats")
+    p.set_defaults(func=cmd_stats)
+
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()

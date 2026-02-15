@@ -1,0 +1,42 @@
+{
+  "name": "sanity-check",
+  "skill_path": "skills/sanity-check",
+  "description": "Verification co-processor. Prevents drift, hallucination, scope creep via INTAKE/MIDPOINT/OUTPUT gates.",
+  "capabilities": [
+    "verification",
+    "gating",
+    "drift_detection",
+    "quality_check"
+  ],
+  "inputs": [
+    {"name": "work_item_slug", "type": "string", "required": true, "description": "Slug of the work item to verify"},
+    {"name": "gate", "type": "enum", "required": true, "description": "Which gate: intake|midpoint|output"},
+    {"name": "artifacts", "type": "file_paths", "required": false, "description": "Files to inspect for the check"}
+  ],
+  "outputs": [
+    {"name": "verdict", "type": "enum", "description": "pass|warn|fail"},
+    {"name": "issues", "type": "list", "description": "List of issues found"},
+    {"name": "followups", "type": "list", "description": "Suggested follow-up actions"}
+  ],
+  "side_effects": [],
+  "triggers_hooks": [
+    "finding_added",
+    "followup_added"
+  ],
+  "subscribes_hooks": [
+    "completed",
+    "artifact_added"
+  ],
+  "upstream": [
+    "python-backend",
+    "devops",
+    "web-builder",
+    "docs-engine"
+  ],
+  "downstream": [
+    "reflect",
+    "skill-lifecycle"
+  ],
+  "estimated_minutes": 3,
+  "model_preference": "flash"
+}
